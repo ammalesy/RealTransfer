@@ -7,23 +7,49 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		521A7B241D05277700971B7B /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521A7B231D05277700971B7B /* UIViewExtension.swift */; };
+		521A7B261D05291900971B7B /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521A7B251D05291900971B7B /* UIColorExtension.swift */; };
+		521A7B281D05305200971B7B /* UIFontExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521A7B271D05305200971B7B /* UIFontExtention.swift */; };
+		521A7B2A1D0534FD00971B7B /* SukhumvitSet.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 521A7B291D05349B00971B7B /* SukhumvitSet.ttc */; };
+		521A7B311D05504C00971B7B /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521A7B301D05504C00971B7B /* Queue.swift */; };
+		521A7B331D0552B400971B7B /* ProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521A7B321D0552B400971B7B /* ProjectCollectionViewCell.swift */; };
+		5284FD5E1D0565AF006C5D1B /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5284FD5D1D0565AF006C5D1B /* ProjectModel.swift */; };
 		529055EE1D0518DE00B7D28C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529055ED1D0518DE00B7D28C /* AppDelegate.swift */; };
-		529055F01D0518DE00B7D28C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529055EF1D0518DE00B7D28C /* ViewController.swift */; };
 		529055F31D0518DE00B7D28C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 529055F11D0518DE00B7D28C /* Main.storyboard */; };
 		529055F61D0518DE00B7D28C /* RealTransfer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 529055F41D0518DE00B7D28C /* RealTransfer.xcdatamodeld */; };
 		529055F81D0518DE00B7D28C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 529055F71D0518DE00B7D28C /* Assets.xcassets */; };
 		529055FB1D0518DE00B7D28C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 529055F91D0518DE00B7D28C /* LaunchScreen.storyboard */; };
+		5290560A1D0519EE00B7D28C /* NZNav.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 529056041D0519EE00B7D28C /* NZNav.storyboard */; };
+		5290560B1D0519EE00B7D28C /* NZNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529056051D0519EE00B7D28C /* NZNavigationViewController.swift */; };
+		5290560C1D0519EE00B7D28C /* NZViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529056061D0519EE00B7D28C /* NZViewController.swift */; };
+		5290560D1D0519EE00B7D28C /* NZPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529056081D0519EE00B7D28C /* NZPopoverView.swift */; };
+		5290560E1D0519EE00B7D28C /* NZRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529056091D0519EE00B7D28C /* NZRow.swift */; };
+		529056111D051B3F00B7D28C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529056101D051B3F00B7D28C /* LoginViewController.swift */; };
+		529056141D051C6B00B7D28C /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529056131D051C6B00B7D28C /* ProjectViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		521A7B231D05277700971B7B /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		521A7B251D05291900971B7B /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		521A7B271D05305200971B7B /* UIFontExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFontExtention.swift; sourceTree = "<group>"; };
+		521A7B291D05349B00971B7B /* SukhumvitSet.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = SukhumvitSet.ttc; sourceTree = "<group>"; };
+		521A7B301D05504C00971B7B /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		521A7B321D0552B400971B7B /* ProjectCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectCollectionViewCell.swift; sourceTree = "<group>"; };
+		5284FD5D1D0565AF006C5D1B /* ProjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectModel.swift; sourceTree = "<group>"; };
 		529055EA1D0518DE00B7D28C /* RealTransfer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealTransfer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		529055ED1D0518DE00B7D28C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		529055EF1D0518DE00B7D28C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		529055F21D0518DE00B7D28C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		529055F51D0518DE00B7D28C /* RealTransfer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RealTransfer.xcdatamodel; sourceTree = "<group>"; };
 		529055F71D0518DE00B7D28C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		529055FA1D0518DE00B7D28C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		529055FC1D0518DE00B7D28C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		529056041D0519EE00B7D28C /* NZNav.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NZNav.storyboard; sourceTree = "<group>"; };
+		529056051D0519EE00B7D28C /* NZNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NZNavigationViewController.swift; sourceTree = "<group>"; };
+		529056061D0519EE00B7D28C /* NZViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NZViewController.swift; sourceTree = "<group>"; };
+		529056081D0519EE00B7D28C /* NZPopoverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NZPopoverView.swift; sourceTree = "<group>"; };
+		529056091D0519EE00B7D28C /* NZRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NZRow.swift; sourceTree = "<group>"; };
+		529056101D051B3F00B7D28C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		529056131D051C6B00B7D28C /* ProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +63,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		521A7B221D05274800971B7B /* Extention */ = {
+			isa = PBXGroup;
+			children = (
+				521A7B231D05277700971B7B /* UIViewExtension.swift */,
+				521A7B251D05291900971B7B /* UIColorExtension.swift */,
+				521A7B271D05305200971B7B /* UIFontExtention.swift */,
+			);
+			path = Extention;
+			sourceTree = "<group>";
+		};
+		521A7B2F1D05503100971B7B /* Queue */ = {
+			isa = PBXGroup;
+			children = (
+				521A7B301D05504C00971B7B /* Queue.swift */,
+			);
+			path = Queue;
+			sourceTree = "<group>";
+		};
+		5284FD5C1D056593006C5D1B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5284FD5D1D0565AF006C5D1B /* ProjectModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		529055E11D0518DE00B7D28C = {
 			isa = PBXGroup;
 			children = (
@@ -56,15 +108,66 @@
 		529055EC1D0518DE00B7D28C /* RealTransfer */ = {
 			isa = PBXGroup;
 			children = (
+				529056021D0519EE00B7D28C /* Libraries */,
+				521A7B221D05274800971B7B /* Extention */,
+				5290560F1D051B3200B7D28C /* Login */,
+				529056121D051C6000B7D28C /* Project */,
 				529055ED1D0518DE00B7D28C /* AppDelegate.swift */,
-				529055EF1D0518DE00B7D28C /* ViewController.swift */,
 				529055F11D0518DE00B7D28C /* Main.storyboard */,
 				529055F71D0518DE00B7D28C /* Assets.xcassets */,
 				529055F91D0518DE00B7D28C /* LaunchScreen.storyboard */,
 				529055FC1D0518DE00B7D28C /* Info.plist */,
 				529055F41D0518DE00B7D28C /* RealTransfer.xcdatamodeld */,
+				521A7B291D05349B00971B7B /* SukhumvitSet.ttc */,
 			);
 			path = RealTransfer;
+			sourceTree = "<group>";
+		};
+		529056021D0519EE00B7D28C /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				521A7B2F1D05503100971B7B /* Queue */,
+				529056031D0519EE00B7D28C /* NZNavigationController */,
+				529056071D0519EE00B7D28C /* NZPopover */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		529056031D0519EE00B7D28C /* NZNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				529056041D0519EE00B7D28C /* NZNav.storyboard */,
+				529056051D0519EE00B7D28C /* NZNavigationViewController.swift */,
+				529056061D0519EE00B7D28C /* NZViewController.swift */,
+			);
+			path = NZNavigationController;
+			sourceTree = "<group>";
+		};
+		529056071D0519EE00B7D28C /* NZPopover */ = {
+			isa = PBXGroup;
+			children = (
+				529056081D0519EE00B7D28C /* NZPopoverView.swift */,
+				529056091D0519EE00B7D28C /* NZRow.swift */,
+			);
+			path = NZPopover;
+			sourceTree = "<group>";
+		};
+		5290560F1D051B3200B7D28C /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				529056101D051B3F00B7D28C /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		529056121D051C6000B7D28C /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				5284FD5C1D056593006C5D1B /* Model */,
+				529056131D051C6B00B7D28C /* ProjectViewController.swift */,
+				521A7B321D0552B400971B7B /* ProjectCollectionViewCell.swift */,
+			);
+			path = Project;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,6 +229,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				521A7B2A1D0534FD00971B7B /* SukhumvitSet.ttc in Resources */,
+				5290560A1D0519EE00B7D28C /* NZNav.storyboard in Resources */,
 				529055FB1D0518DE00B7D28C /* LaunchScreen.storyboard in Resources */,
 				529055F81D0518DE00B7D28C /* Assets.xcassets in Resources */,
 				529055F31D0518DE00B7D28C /* Main.storyboard in Resources */,
@@ -139,8 +244,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				529055F01D0518DE00B7D28C /* ViewController.swift in Sources */,
+				5290560B1D0519EE00B7D28C /* NZNavigationViewController.swift in Sources */,
+				521A7B281D05305200971B7B /* UIFontExtention.swift in Sources */,
+				5290560D1D0519EE00B7D28C /* NZPopoverView.swift in Sources */,
+				5290560E1D0519EE00B7D28C /* NZRow.swift in Sources */,
+				529056111D051B3F00B7D28C /* LoginViewController.swift in Sources */,
+				529056141D051C6B00B7D28C /* ProjectViewController.swift in Sources */,
+				521A7B331D0552B400971B7B /* ProjectCollectionViewCell.swift in Sources */,
 				529055F61D0518DE00B7D28C /* RealTransfer.xcdatamodeld in Sources */,
+				521A7B311D05504C00971B7B /* Queue.swift in Sources */,
+				5284FD5E1D0565AF006C5D1B /* ProjectModel.swift in Sources */,
+				521A7B241D05277700971B7B /* UIViewExtension.swift in Sources */,
+				521A7B261D05291900971B7B /* UIColorExtension.swift in Sources */,
+				5290560C1D0519EE00B7D28C /* NZViewController.swift in Sources */,
 				529055EE1D0518DE00B7D28C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,6 +373,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mint.RealTransfer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -269,6 +386,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mint.RealTransfer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
@@ -291,6 +409,7 @@
 				529056011D0518DE00B7D28C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

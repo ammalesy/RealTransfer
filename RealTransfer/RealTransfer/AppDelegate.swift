@@ -9,6 +9,8 @@
 import UIKit
 import CoreData
 
+let ROOT_VIEW_CONTROLLER = "ProjectViewController" //<=== Root view is subclass from "NZViewController"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -17,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+
         return true
     }
 
