@@ -14,8 +14,7 @@ class NZViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("touchAnyWare"))
-        self.view.addGestureRecognizer(tap)
+
         self.configLayout()
         let viewSet:[UIView] = self.viewsNeedApplyFont()
         
@@ -60,23 +59,9 @@ class NZViewController: UIViewController {
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
-        if self.nzNavigationController != nil {
-        
-            if self.nzNavigationController!.popover != nil {
-                nzNavigationController!.popover.hide()
-                nzNavigationController!.popover = nil
-            }
-            
-        }
+        self.nzNavigationController?.hideMenuPopoverIfViewIsShowing()
     }
-    func touchAnyWare(){
-        if self.nzNavigationController != nil {
-            if self.nzNavigationController!.popover != nil {
-                self.nzNavigationController!.popover.hide()
-                self.nzNavigationController!.popover = nil
-            }
-        }
-    }
+    
     
 
     /*

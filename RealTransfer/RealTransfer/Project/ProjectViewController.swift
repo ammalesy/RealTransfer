@@ -21,7 +21,7 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
     }
     
     override func configLayout() {
-        
+
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
         
@@ -50,7 +50,7 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
     {
         let model:ProjectModel = projects.objectAtIndex(indexPath.row) as! ProjectModel
         let cell:ProjectCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! ProjectCollectionViewCell
-    
+        cell.selected = true
         cell.title.text = model.title!
         cell.subTitle.text = model.subTitle!
         cell.imageView.image = model.image!
@@ -62,6 +62,20 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
         let spacing:CGFloat = 165 + (rect.size.width - 1024) / 2
         return UIEdgeInsetsMake(20, spacing, 0, spacing)
         
+    }
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        self.nzNavigationController?.hideMenuPopoverIfViewIsShowing()
+        
+        let controller:DefectViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DefectViewController") as! DefectViewController
+        self.nzNavigationController?.showBackButton()
+        self.nzNavigationController?.pushViewController(controller, completion: { () -> Void in
+            
+        })
+        
+    }
+
+    func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

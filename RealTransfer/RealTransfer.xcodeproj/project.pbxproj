@@ -14,6 +14,7 @@
 		521A7B311D05504C00971B7B /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521A7B301D05504C00971B7B /* Queue.swift */; };
 		521A7B331D0552B400971B7B /* ProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521A7B321D0552B400971B7B /* ProjectCollectionViewCell.swift */; };
 		5284FD5E1D0565AF006C5D1B /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5284FD5D1D0565AF006C5D1B /* ProjectModel.swift */; };
+		5284FD611D05763D006C5D1B /* DefectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5284FD601D05763D006C5D1B /* DefectViewController.swift */; };
 		529055EE1D0518DE00B7D28C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529055ED1D0518DE00B7D28C /* AppDelegate.swift */; };
 		529055F31D0518DE00B7D28C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 529055F11D0518DE00B7D28C /* Main.storyboard */; };
 		529055F61D0518DE00B7D28C /* RealTransfer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 529055F41D0518DE00B7D28C /* RealTransfer.xcdatamodeld */; };
@@ -36,6 +37,7 @@
 		521A7B301D05504C00971B7B /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		521A7B321D0552B400971B7B /* ProjectCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectCollectionViewCell.swift; sourceTree = "<group>"; };
 		5284FD5D1D0565AF006C5D1B /* ProjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectModel.swift; sourceTree = "<group>"; };
+		5284FD601D05763D006C5D1B /* DefectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefectViewController.swift; sourceTree = "<group>"; };
 		529055EA1D0518DE00B7D28C /* RealTransfer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealTransfer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		529055ED1D0518DE00B7D28C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		529055F21D0518DE00B7D28C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -89,6 +91,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		5284FD5F1D05762A006C5D1B /* Defect */ = {
+			isa = PBXGroup;
+			children = (
+				5284FD601D05763D006C5D1B /* DefectViewController.swift */,
+			);
+			path = Defect;
+			sourceTree = "<group>";
+		};
 		529055E11D0518DE00B7D28C = {
 			isa = PBXGroup;
 			children = (
@@ -111,6 +121,7 @@
 				529056021D0519EE00B7D28C /* Libraries */,
 				521A7B221D05274800971B7B /* Extention */,
 				5290560F1D051B3200B7D28C /* Login */,
+				5284FD5F1D05762A006C5D1B /* Defect */,
 				529056121D051C6000B7D28C /* Project */,
 				529055ED1D0518DE00B7D28C /* AppDelegate.swift */,
 				529055F11D0518DE00B7D28C /* Main.storyboard */,
@@ -245,6 +256,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5290560B1D0519EE00B7D28C /* NZNavigationViewController.swift in Sources */,
+				5284FD611D05763D006C5D1B /* DefectViewController.swift in Sources */,
 				521A7B281D05305200971B7B /* UIFontExtention.swift in Sources */,
 				5290560D1D0519EE00B7D28C /* NZPopoverView.swift in Sources */,
 				5290560E1D0519EE00B7D28C /* NZRow.swift in Sources */,

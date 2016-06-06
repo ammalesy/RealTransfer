@@ -10,6 +10,10 @@ import UIKit
 
 class NZNavigationViewController: UIViewController {
     
+    @IBOutlet weak var logoView: UIView!
+    @IBOutlet weak var widthLogoView: NSLayoutConstraint!
+    @IBOutlet weak var leftMarginLogoView: NSLayoutConstraint!
+    @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var titleLb: UILabel!
     @IBOutlet weak var subTitleLb: UILabel!
@@ -26,7 +30,7 @@ class NZNavigationViewController: UIViewController {
         super.viewDidLoad()
         
         self.titleLb.font = UIFont.fontSemiBold(22)
-        self.subTitleLb.font = UIFont.fontNormal(14)
+        self.subTitleLb.font = UIFont.fontNormal(18)
         
         
     }
@@ -108,7 +112,7 @@ class NZNavigationViewController: UIViewController {
         
        
         self.containerView.addSubview(controller.view)
-        self.addChildViewController(controller)
+        //self.addChildViewController(controller)
     }
     private func removeViewOnContainer(controller:NZViewController!){
         
@@ -126,10 +130,7 @@ class NZNavigationViewController: UIViewController {
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if popover != nil {
-            popover.hide()
-            popover = nil
-        }
+        self.hideMenuPopoverIfViewIsShowing()
     }
     @IBAction func menuPopover(sender: AnyObject) {
         
@@ -145,5 +146,56 @@ class NZNavigationViewController: UIViewController {
             popover.showNearView(sender as! UIButton, addToView: self.view)
         }
         
+    }
+    func showBackButton() {
+        
+        UIView.animateWithDuration(1.0, animations: { () -> Void in
+            
+            self.widthLogoView.constant = 100
+            self.leftMarginLogoView.constant = 40
+            self.logoView.updateConstraints()
+            self.logoView.layoutIfNeeded()
+
+            
+        }) { (result) -> Void in
+                
+        }
+        
+        
+        
+    }
+    func hideBackButton() {
+        
+        
+        
+        UIView.animateWithDuration(1.0, animations: { () -> Void in
+            
+            self.widthLogoView.constant = 120
+            self.leftMarginLogoView.constant = 0
+            self.logoView.updateConstraints()
+            self.logoView.layoutIfNeeded()
+            
+        }) { (result) -> Void in
+                
+        }
+        
+        
+    }
+    @IBAction func backAction(sender: AnyObject) {
+        self.popViewController { () -> Void in
+            
+            let lastController:AnyObject = self.viewControllers.lastObject!
+            if lastController is ProjectViewController {
+                self.hideBackButton()
+            }
+            
+        }
+    }
+    
+    func hideMenuPopoverIfViewIsShowing(){
+        if popover != nil {
+            popover.hide()
+            popover = nil
+        }
     }
 }
