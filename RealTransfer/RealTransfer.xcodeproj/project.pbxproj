@@ -1,0 +1,311 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		529055EE1D0518DE00B7D28C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529055ED1D0518DE00B7D28C /* AppDelegate.swift */; };
+		529055F01D0518DE00B7D28C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529055EF1D0518DE00B7D28C /* ViewController.swift */; };
+		529055F31D0518DE00B7D28C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 529055F11D0518DE00B7D28C /* Main.storyboard */; };
+		529055F61D0518DE00B7D28C /* RealTransfer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 529055F41D0518DE00B7D28C /* RealTransfer.xcdatamodeld */; };
+		529055F81D0518DE00B7D28C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 529055F71D0518DE00B7D28C /* Assets.xcassets */; };
+		529055FB1D0518DE00B7D28C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 529055F91D0518DE00B7D28C /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		529055EA1D0518DE00B7D28C /* RealTransfer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealTransfer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		529055ED1D0518DE00B7D28C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		529055EF1D0518DE00B7D28C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		529055F21D0518DE00B7D28C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		529055F51D0518DE00B7D28C /* RealTransfer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RealTransfer.xcdatamodel; sourceTree = "<group>"; };
+		529055F71D0518DE00B7D28C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		529055FA1D0518DE00B7D28C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		529055FC1D0518DE00B7D28C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		529055E71D0518DE00B7D28C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		529055E11D0518DE00B7D28C = {
+			isa = PBXGroup;
+			children = (
+				529055EC1D0518DE00B7D28C /* RealTransfer */,
+				529055EB1D0518DE00B7D28C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		529055EB1D0518DE00B7D28C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				529055EA1D0518DE00B7D28C /* RealTransfer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		529055EC1D0518DE00B7D28C /* RealTransfer */ = {
+			isa = PBXGroup;
+			children = (
+				529055ED1D0518DE00B7D28C /* AppDelegate.swift */,
+				529055EF1D0518DE00B7D28C /* ViewController.swift */,
+				529055F11D0518DE00B7D28C /* Main.storyboard */,
+				529055F71D0518DE00B7D28C /* Assets.xcassets */,
+				529055F91D0518DE00B7D28C /* LaunchScreen.storyboard */,
+				529055FC1D0518DE00B7D28C /* Info.plist */,
+				529055F41D0518DE00B7D28C /* RealTransfer.xcdatamodeld */,
+			);
+			path = RealTransfer;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		529055E91D0518DE00B7D28C /* RealTransfer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 529055FF1D0518DE00B7D28C /* Build configuration list for PBXNativeTarget "RealTransfer" */;
+			buildPhases = (
+				529055E61D0518DE00B7D28C /* Sources */,
+				529055E71D0518DE00B7D28C /* Frameworks */,
+				529055E81D0518DE00B7D28C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RealTransfer;
+			productName = RealTransfer;
+			productReference = 529055EA1D0518DE00B7D28C /* RealTransfer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		529055E21D0518DE00B7D28C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = nuizoro;
+				TargetAttributes = {
+					529055E91D0518DE00B7D28C = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = T827QP7R38;
+					};
+				};
+			};
+			buildConfigurationList = 529055E51D0518DE00B7D28C /* Build configuration list for PBXProject "RealTransfer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 529055E11D0518DE00B7D28C;
+			productRefGroup = 529055EB1D0518DE00B7D28C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				529055E91D0518DE00B7D28C /* RealTransfer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		529055E81D0518DE00B7D28C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				529055FB1D0518DE00B7D28C /* LaunchScreen.storyboard in Resources */,
+				529055F81D0518DE00B7D28C /* Assets.xcassets in Resources */,
+				529055F31D0518DE00B7D28C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		529055E61D0518DE00B7D28C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				529055F01D0518DE00B7D28C /* ViewController.swift in Sources */,
+				529055F61D0518DE00B7D28C /* RealTransfer.xcdatamodeld in Sources */,
+				529055EE1D0518DE00B7D28C /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		529055F11D0518DE00B7D28C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				529055F21D0518DE00B7D28C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		529055F91D0518DE00B7D28C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				529055FA1D0518DE00B7D28C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		529055FD1D0518DE00B7D28C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		529055FE1D0518DE00B7D28C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		529056001D0518DE00B7D28C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = RealTransfer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mint.RealTransfer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		529056011D0518DE00B7D28C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = RealTransfer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mint.RealTransfer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		529055E51D0518DE00B7D28C /* Build configuration list for PBXProject "RealTransfer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				529055FD1D0518DE00B7D28C /* Debug */,
+				529055FE1D0518DE00B7D28C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		529055FF1D0518DE00B7D28C /* Build configuration list for PBXNativeTarget "RealTransfer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				529056001D0518DE00B7D28C /* Debug */,
+				529056011D0518DE00B7D28C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		529055F41D0518DE00B7D28C /* RealTransfer.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				529055F51D0518DE00B7D28C /* RealTransfer.xcdatamodel */,
+			);
+			currentVersion = 529055F51D0518DE00B7D28C /* RealTransfer.xcdatamodel */;
+			path = RealTransfer.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 529055E21D0518DE00B7D28C /* Project object */;
+}
