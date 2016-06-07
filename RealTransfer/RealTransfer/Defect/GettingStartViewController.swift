@@ -15,6 +15,8 @@ let CELL_TXT_SEARCH_IDENTIFIER = "CellTxtSearch"
 let CELL_INFO_LABEL_IDENTIFIER = "CellInfoLabel"
 
 class GettingStartViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+    
+    var nzNavigationController:NZNavigationViewController?
 
     @IBOutlet weak var exitBtn: UIButton!
     @IBOutlet weak var startBtn: UIButton!
@@ -146,6 +148,12 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
     }
 
     @IBAction func startAction(sender: AnyObject) {
+        
+        let split:NZSplitViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("NZSplitViewController") as! NZSplitViewController
+        self.nzNavigationController?.pushViewController(split, completion: { () -> Void in
+            
+        })
+        
     }
     @IBAction func exitAction(sender: AnyObject) {
         

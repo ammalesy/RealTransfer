@@ -1,20 +1,19 @@
 //
-//  NZViewController.swift
-//  NZNavigation
+//  NZSplitViewController.swift
+//  RealTransfer
 //
-//  Created by AmmalesPSC91 on 6/3/2559 BE.
-//  Copyright © 2559 dev.com. All rights reserved.
+//  Created by AmmalesPSC91 on 6/7/2559 BE.
+//  Copyright (c) 2559 nuizoro. All rights reserved.
 //
 
 import UIKit
 
-class NZViewController: UIViewController {
-    
+class NZSplitViewController: UISplitViewController {
     var nzNavigationController:NZNavigationViewController?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.configLayout()
         let viewSet:[UIView] = self.viewsNeedApplyFont()
         
@@ -40,13 +39,13 @@ class NZViewController: UIViewController {
         
     }
     internal func configLayout(){
-
+        
     }
     internal func viewsNeedApplyFont()->[UIView]{
         return []
     }
     internal func stateAfterSetfont() {
-    
+        
     }
     internal func stateConfigData() {
         
@@ -58,15 +57,14 @@ class NZViewController: UIViewController {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.nzNavigationController?.hideMenuPopoverIfViewIsShowing()
     }
-
+    
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
-
 }

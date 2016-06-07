@@ -40,8 +40,8 @@ class NZNavigationViewController: UIViewController {
     }
     func popViewController(completion: (() -> Void)?) {
         
-        let beforeController:NZViewController = viewControllers.objectAtIndex(viewControllers.count - 2) as! NZViewController
-        let lastController:NZViewController = viewControllers.lastObject as! NZViewController
+        let beforeController:UIViewController = viewControllers.objectAtIndex(viewControllers.count - 2) as! UIViewController
+        let lastController:UIViewController = viewControllers.lastObject as! UIViewController
         
         self.setX(-self.screenWidth(), controller: beforeController)
         
@@ -49,7 +49,11 @@ class NZNavigationViewController: UIViewController {
             
             self.setX(0, controller: beforeController)
             self.setX(+self.screenWidth(), controller: lastController)
-            beforeController.stateConfigData()
+            if beforeController is NZViewController {
+                (beforeController as! NZViewController).stateConfigData()
+            }else if beforeController is NZSplitViewController {
+                (beforeController as! NZSplitViewController).stateConfigData()
+            }
             
         }) { (result) -> Void in
             self.popStack(lastController)
@@ -59,9 +63,9 @@ class NZNavigationViewController: UIViewController {
             }
         }
     }
-    func pushViewController(newController:NZViewController, completion: (() -> Void)?){
+    func pushViewController(newController:UIViewController, completion: (() -> Void)?){
         
-        let oldController:NZViewController = self.viewControllers.lastObject as! NZViewController
+        let oldController:UIViewController = self.viewControllers.lastObject as! UIViewController
         
         self.setX(+self.screenWidth(), controller: newController)
         self.setHeight(self.containerView.frame.size.height, controller: newController)
@@ -70,7 +74,12 @@ class NZNavigationViewController: UIViewController {
             
             self.setX(-self.screenWidth(), controller: oldController)
             self.pushStack(newController)
-            newController.stateConfigData()
+            if newController is NZViewController {
+                (newController as! NZViewController).stateConfigData()
+            }else if newController is NZSplitViewController {
+                (newController as! NZSplitViewController).stateConfigData()
+            }
+            
         }) { (result) -> Void in
             
             self.setX(0, controller: oldController)
@@ -82,30 +91,36 @@ class NZNavigationViewController: UIViewController {
     }
     
     
-    private func pushStack(controller:NZViewController!){
-        controller.nzNavigationController = self
+    private func pushStack(controller:UIViewController!){
+        
+        if controller is NZViewController {
+            (controller as! NZViewController).nzNavigationController = self
+        }else if controller is NZSplitViewController {
+            (controller as! NZSplitViewController).nzNavigationController = self
+        }
+        
         self.viewControllers.addObject(controller)
         self.replaceViewToContainer(controller)
         self.setX(0, controller: controller)
     }
-    private func popStack(controller:NZViewController!){
+    private func popStack(controller:UIViewController!){
         self.removeViewOnContainer(controller)
         self.viewControllers.removeLastObject()
     }
-    private func setX(x:CGFloat, controller:NZViewController!){
+    private func setX(x:CGFloat, controller:UIViewController!){
         var oldViewFrmae:CGRect = controller.view.frame
         oldViewFrmae.origin.x = x
         controller.view.frame = oldViewFrmae
         controller.view.setNeedsDisplay()
     }
-    private func setHeight(height:CGFloat, controller:NZViewController!){
+    private func setHeight(height:CGFloat, controller:UIViewController!){
         var oldViewFrmae:CGRect = controller.view.frame
         oldViewFrmae.size.height = height
         controller.view.frame = oldViewFrmae
         controller.view.setNeedsDisplay()
     }
-    private func replaceViewToContainer(controller:NZViewController!){
-        self.removeViewOnContainer(viewControllers.lastObject as! NZViewController)
+    private func replaceViewToContainer(controller:UIViewController!){
+        self.removeViewOnContainer(viewControllers.lastObject as! UIViewController)
         controller.view.frame = CGRectMake(0, 0, self.containerView.frame.size.width, self.containerView.frame.size.height)
         controller.view.setNeedsDisplay()
         self.containerView.setNeedsDisplay()
@@ -114,17 +129,24 @@ class NZNavigationViewController: UIViewController {
         self.containerView.addSubview(controller.view)
         
     }
-    private func removeViewOnContainer(controller:NZViewController!){
+    private func removeViewOnContainer(controller:UIViewController!){
         
         controller.view.removeFromSuperview()
         
     }
-    func setRootViewController(controller:NZViewController!){
-        controller.nzNavigationController = self
+    func setRootViewController(controller:UIViewController!){
+        
         viewControllers.removeAllObjects()
         viewControllers.addObject(controller)
         self.replaceViewToContainer(controller)
-        controller.stateConfigData()
+        
+        if controller is NZViewController {
+            (controller as! NZViewController).nzNavigationController = self
+            (controller as! NZViewController).stateConfigData()
+        }else if controller is NZSplitViewController {
+            (controller as! NZSplitViewController).nzNavigationController = self
+            (controller as! NZSplitViewController).stateConfigData()
+        }
     }
     private func screenWidth() -> CGFloat {
         return UIScreen.mainScreen().bounds.size.width

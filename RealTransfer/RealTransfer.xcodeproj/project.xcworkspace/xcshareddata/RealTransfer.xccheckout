@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>5E70715C-6683-417F-A5CB-A2F335FEBC7A</string>
 	<key>IDESourceControlProjectName</key>
-	<string>RealTransfer</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>C3CC434082B29EEF6CE0C517702C849E06ED50DC</key>
 		<string>https://github.com/ammalesy/RealTransfer.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>RealTransfer/RealTransfer.xcodeproj</string>
+	<string>RealTransfer/RealTransfer.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>C3CC434082B29EEF6CE0C517702C849E06ED50DC</key>

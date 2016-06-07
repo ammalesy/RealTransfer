@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5204FF441D06D55E00A3991B /* NZSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5204FF431D06D55E00A3991B /* NZSplitViewController.swift */; };
 		521A7B241D05277700971B7B /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521A7B231D05277700971B7B /* UIViewExtension.swift */; };
 		521A7B261D05291900971B7B /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521A7B251D05291900971B7B /* UIColorExtension.swift */; };
 		521A7B281D05305200971B7B /* UIFontExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521A7B271D05305200971B7B /* UIFontExtention.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5204FF431D06D55E00A3991B /* NZSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NZSplitViewController.swift; sourceTree = "<group>"; };
 		521A7B231D05277700971B7B /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		521A7B251D05291900971B7B /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		521A7B271D05305200971B7B /* UIFontExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFontExtention.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				529056041D0519EE00B7D28C /* NZNav.storyboard */,
 				529056051D0519EE00B7D28C /* NZNavigationViewController.swift */,
 				529056061D0519EE00B7D28C /* NZViewController.swift */,
+				5204FF431D06D55E00A3991B /* NZSplitViewController.swift */,
 			);
 			path = NZNavigationController;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				521A7B281D05305200971B7B /* UIFontExtention.swift in Sources */,
 				5290560D1D0519EE00B7D28C /* NZPopoverView.swift in Sources */,
 				52499B0F1D06BA410003F6D5 /* CellDropDown.swift in Sources */,
+				5204FF441D06D55E00A3991B /* NZSplitViewController.swift in Sources */,
 				5299C3CE1D066C810021DD97 /* GettingStartViewController.swift in Sources */,
 				5290560E1D0519EE00B7D28C /* NZRow.swift in Sources */,
 				529056111D051B3F00B7D28C /* LoginViewController.swift in Sources */,
