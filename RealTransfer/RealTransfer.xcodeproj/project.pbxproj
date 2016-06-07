@@ -27,6 +27,7 @@
 		5290560E1D0519EE00B7D28C /* NZRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529056091D0519EE00B7D28C /* NZRow.swift */; };
 		529056111D051B3F00B7D28C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529056101D051B3F00B7D28C /* LoginViewController.swift */; };
 		529056141D051C6B00B7D28C /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529056131D051C6B00B7D28C /* ProjectViewController.swift */; };
+		5299C3CE1D066C810021DD97 /* GettingStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5299C3CD1D066C810021DD97 /* GettingStartViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		529056091D0519EE00B7D28C /* NZRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NZRow.swift; sourceTree = "<group>"; };
 		529056101D051B3F00B7D28C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		529056131D051C6B00B7D28C /* ProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
+		5299C3CD1D066C810021DD97 /* GettingStartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GettingStartViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				5284FD601D05763D006C5D1B /* DefectViewController.swift */,
+				5299C3CD1D066C810021DD97 /* GettingStartViewController.swift */,
 			);
 			path = Defect;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 				5284FD611D05763D006C5D1B /* DefectViewController.swift in Sources */,
 				521A7B281D05305200971B7B /* UIFontExtention.swift in Sources */,
 				5290560D1D0519EE00B7D28C /* NZPopoverView.swift in Sources */,
+				5299C3CE1D066C810021DD97 /* GettingStartViewController.swift in Sources */,
 				5290560E1D0519EE00B7D28C /* NZRow.swift in Sources */,
 				529056111D051B3F00B7D28C /* LoginViewController.swift in Sources */,
 				529056141D051C6B00B7D28C /* ProjectViewController.swift in Sources */,
@@ -382,6 +386,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = RealTransfer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mint.RealTransfer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -395,6 +400,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = RealTransfer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mint.RealTransfer;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -49,7 +49,7 @@ class NZNavigationViewController: UIViewController {
             
             self.setX(0, controller: beforeController)
             self.setX(+self.screenWidth(), controller: lastController)
-            
+            beforeController.stateConfigData()
             
         }) { (result) -> Void in
             self.popStack(lastController)
@@ -70,7 +70,7 @@ class NZNavigationViewController: UIViewController {
             
             self.setX(-self.screenWidth(), controller: oldController)
             self.pushStack(newController)
-            
+            newController.stateConfigData()
         }) { (result) -> Void in
             
             self.setX(0, controller: oldController)
@@ -124,6 +124,7 @@ class NZNavigationViewController: UIViewController {
         viewControllers.removeAllObjects()
         viewControllers.addObject(controller)
         self.replaceViewToContainer(controller)
+        controller.stateConfigData()
     }
     private func screenWidth() -> CGFloat {
         return UIScreen.mainScreen().bounds.size.width
@@ -156,18 +157,12 @@ class NZNavigationViewController: UIViewController {
             self.logoView.updateConstraints()
             self.logoView.layoutIfNeeded()
 
-            
         }) { (result) -> Void in
                 
         }
-        
-        
-        
     }
     func hideBackButton() {
-        
-        
-        
+    
         UIView.animateWithDuration(1.0, animations: { () -> Void in
             
             self.widthLogoView.constant = 120
@@ -178,7 +173,6 @@ class NZNavigationViewController: UIViewController {
         }) { (result) -> Void in
                 
         }
-        
         
     }
     @IBAction func backAction(sender: AnyObject) {

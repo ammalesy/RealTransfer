@@ -26,13 +26,12 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
         self.collectionView.delegate = self
         
     }
-    override func stateInitialData() {
-        
+    override func stateConfigData() {
         projects = ProjectModel.dummyData()
-        
-
+        self.nzNavigationController?.titleLb.text = "Dash Board"
+        self.nzNavigationController?.subTitleLb.text = "QC Checker : Ammales Yamsompong"
+        self.collectionView.reloadData()
     }
-    
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
 
         return Int(ceilf(Float(projects.count) / Float(NUMBER_OF_COLLUMN)))

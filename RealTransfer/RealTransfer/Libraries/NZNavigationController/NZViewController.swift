@@ -37,7 +37,7 @@ class NZViewController: UIViewController {
             }
         }
         self.stateAfterSetfont()
-        self.stateInitialData()
+        
     }
     internal func configLayout(){
 
@@ -48,15 +48,13 @@ class NZViewController: UIViewController {
     internal func stateAfterSetfont() {
     
     }
-    internal func stateInitialData() {
+    internal func stateConfigData() {
         
     }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
         self.nzNavigationController?.hideMenuPopoverIfViewIsShowing()

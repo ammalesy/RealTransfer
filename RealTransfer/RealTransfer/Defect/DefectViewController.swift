@@ -9,32 +9,34 @@
 import Foundation
 import UIKit
 
-class DefectViewController: NZViewController,UITableViewDataSource,UITableViewDelegate {
+class DefectViewController: NZViewController {
 
-    @IBOutlet weak var tableView: UITableView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
+
     }
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+    override func configLayout() {
+        
     }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+    override func viewsNeedApplyFont() -> [UIView] {
+        return []
     }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell:UITableViewCell = tableView.dequeueReusableCellWithIdentifier("Cell")!
+    override func stateConfigData() {
+        self.nzNavigationController?.titleLb.text = "The Capital Ekamai Thonglor"
+        self.nzNavigationController?.subTitleLb.text = ""
         
-        cell.textLabel?.text = "EOE"
         
-        return cell
     }
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        print("11")
-        
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.showGettingStartView()
+    }
+    func showGettingStartView(){
+        let controller:GettingStartViewController = self.storyboard?.instantiateViewControllerWithIdentifier("GettingStartViewController") as! GettingStartViewController
+        controller.view.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.7)
+        controller.view.frame = UIScreen.mainScreen().bounds
+        controller.view.layoutIfNeeded()
+        let window:UIWindow = ((UIApplication.sharedApplication().delegate?.window)!)!
+        window.addSubview(controller.view)
     }
 }
