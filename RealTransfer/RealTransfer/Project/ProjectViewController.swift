@@ -58,7 +58,15 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
 
         let rect:CGRect = UIScreen.mainScreen().bounds
-        let spacing:CGFloat = 165 + (rect.size.width - 1024) / 2
+        
+        var minusFac:CGFloat = 0
+        if rect.size.width > rect.size.height {
+            minusFac = rect.size.width
+        }else{
+            minusFac = rect.size.height
+        }
+        
+        let spacing:CGFloat = 165 + (minusFac - 1024) / 2
         return UIEdgeInsetsMake(20, spacing, 0, spacing)
         
     }

@@ -34,9 +34,11 @@ class DefectViewController: NZViewController {
     func showGettingStartView(){
         let controller:GettingStartViewController = self.storyboard?.instantiateViewControllerWithIdentifier("GettingStartViewController") as! GettingStartViewController
         controller.view.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.7)
-        controller.view.frame = UIScreen.mainScreen().bounds
+        controller.view.frame = (self.nzNavigationController?.view.frame)!
         controller.view.layoutIfNeeded()
-        let window:UIWindow = ((UIApplication.sharedApplication().delegate?.window)!)!
-        window.addSubview(controller.view)
+
+        self.nzNavigationController?.addChildViewController(controller)
+        self.nzNavigationController?.view.addSubview(controller.view)
+        controller.didMoveToParentViewController(self.nzNavigationController)
     }
 }

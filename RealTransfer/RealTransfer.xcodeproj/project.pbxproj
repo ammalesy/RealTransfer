@@ -13,6 +13,12 @@
 		521A7B2A1D0534FD00971B7B /* SukhumvitSet.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 521A7B291D05349B00971B7B /* SukhumvitSet.ttc */; };
 		521A7B311D05504C00971B7B /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521A7B301D05504C00971B7B /* Queue.swift */; };
 		521A7B331D0552B400971B7B /* ProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521A7B321D0552B400971B7B /* ProjectCollectionViewCell.swift */; };
+		52499B0A1D06A19F0003F6D5 /* CellLabelStatic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52499B091D06A19F0003F6D5 /* CellLabelStatic.swift */; };
+		52499B0D1D06B70C0003F6D5 /* RowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52499B0C1D06B70C0003F6D5 /* RowModel.swift */; };
+		52499B0F1D06BA410003F6D5 /* CellDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52499B0E1D06BA410003F6D5 /* CellDropDown.swift */; };
+		52499B111D06BD110003F6D5 /* CellTxtSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52499B101D06BD110003F6D5 /* CellTxtSearch.swift */; };
+		52499B131D06C70C0003F6D5 /* CellInfoLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52499B121D06C70C0003F6D5 /* CellInfoLabel.swift */; };
+		52499B151D06C7CF0003F6D5 /* RowInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52499B141D06C7CF0003F6D5 /* RowInfoModel.swift */; };
 		5284FD5E1D0565AF006C5D1B /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5284FD5D1D0565AF006C5D1B /* ProjectModel.swift */; };
 		5284FD611D05763D006C5D1B /* DefectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5284FD601D05763D006C5D1B /* DefectViewController.swift */; };
 		529055EE1D0518DE00B7D28C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529055ED1D0518DE00B7D28C /* AppDelegate.swift */; };
@@ -37,6 +43,12 @@
 		521A7B291D05349B00971B7B /* SukhumvitSet.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = SukhumvitSet.ttc; sourceTree = "<group>"; };
 		521A7B301D05504C00971B7B /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		521A7B321D0552B400971B7B /* ProjectCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectCollectionViewCell.swift; sourceTree = "<group>"; };
+		52499B091D06A19F0003F6D5 /* CellLabelStatic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellLabelStatic.swift; sourceTree = "<group>"; };
+		52499B0C1D06B70C0003F6D5 /* RowModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowModel.swift; sourceTree = "<group>"; };
+		52499B0E1D06BA410003F6D5 /* CellDropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellDropDown.swift; sourceTree = "<group>"; };
+		52499B101D06BD110003F6D5 /* CellTxtSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellTxtSearch.swift; sourceTree = "<group>"; };
+		52499B121D06C70C0003F6D5 /* CellInfoLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellInfoLabel.swift; sourceTree = "<group>"; };
+		52499B141D06C7CF0003F6D5 /* RowInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowInfoModel.swift; sourceTree = "<group>"; };
 		5284FD5D1D0565AF006C5D1B /* ProjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectModel.swift; sourceTree = "<group>"; };
 		5284FD601D05763D006C5D1B /* DefectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefectViewController.swift; sourceTree = "<group>"; };
 		529055EA1D0518DE00B7D28C /* RealTransfer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealTransfer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,6 +97,34 @@
 			path = Queue;
 			sourceTree = "<group>";
 		};
+		52499B071D06A17D0003F6D5 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		52499B081D06A1890003F6D5 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				52499B0B1D06B6F60003F6D5 /* Model */,
+				52499B091D06A19F0003F6D5 /* CellLabelStatic.swift */,
+				52499B0E1D06BA410003F6D5 /* CellDropDown.swift */,
+				52499B101D06BD110003F6D5 /* CellTxtSearch.swift */,
+				52499B121D06C70C0003F6D5 /* CellInfoLabel.swift */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
+		52499B0B1D06B6F60003F6D5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				52499B0C1D06B70C0003F6D5 /* RowModel.swift */,
+				52499B141D06C7CF0003F6D5 /* RowInfoModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		5284FD5C1D056593006C5D1B /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +136,8 @@
 		5284FD5F1D05762A006C5D1B /* Defect */ = {
 			isa = PBXGroup;
 			children = (
+				52499B081D06A1890003F6D5 /* cell */,
+				52499B071D06A17D0003F6D5 /* model */,
 				5284FD601D05763D006C5D1B /* DefectViewController.swift */,
 				5299C3CD1D066C810021DD97 /* GettingStartViewController.swift */,
 			);
@@ -216,7 +258,7 @@
 				TargetAttributes = {
 					529055E91D0518DE00B7D28C = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = T827QP7R38;
+						DevelopmentTeam = M6F53MQES3;
 					};
 				};
 			};
@@ -262,13 +304,19 @@
 				5284FD611D05763D006C5D1B /* DefectViewController.swift in Sources */,
 				521A7B281D05305200971B7B /* UIFontExtention.swift in Sources */,
 				5290560D1D0519EE00B7D28C /* NZPopoverView.swift in Sources */,
+				52499B0F1D06BA410003F6D5 /* CellDropDown.swift in Sources */,
 				5299C3CE1D066C810021DD97 /* GettingStartViewController.swift in Sources */,
 				5290560E1D0519EE00B7D28C /* NZRow.swift in Sources */,
 				529056111D051B3F00B7D28C /* LoginViewController.swift in Sources */,
+				52499B111D06BD110003F6D5 /* CellTxtSearch.swift in Sources */,
 				529056141D051C6B00B7D28C /* ProjectViewController.swift in Sources */,
+				52499B0D1D06B70C0003F6D5 /* RowModel.swift in Sources */,
+				52499B131D06C70C0003F6D5 /* CellInfoLabel.swift in Sources */,
+				52499B0A1D06A19F0003F6D5 /* CellLabelStatic.swift in Sources */,
 				521A7B331D0552B400971B7B /* ProjectCollectionViewCell.swift in Sources */,
 				529055F61D0518DE00B7D28C /* RealTransfer.xcdatamodeld in Sources */,
 				521A7B311D05504C00971B7B /* Queue.swift in Sources */,
+				52499B151D06C7CF0003F6D5 /* RowInfoModel.swift in Sources */,
 				5284FD5E1D0565AF006C5D1B /* ProjectModel.swift in Sources */,
 				521A7B241D05277700971B7B /* UIViewExtension.swift in Sources */,
 				521A7B261D05291900971B7B /* UIColorExtension.swift in Sources */,

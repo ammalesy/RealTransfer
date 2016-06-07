@@ -110,9 +110,9 @@ class NZNavigationViewController: UIViewController {
         controller.view.setNeedsDisplay()
         self.containerView.setNeedsDisplay()
         
-       
+        self.addChildViewController(controller)
         self.containerView.addSubview(controller.view)
-        //self.addChildViewController(controller)
+        
     }
     private func removeViewOnContainer(controller:NZViewController!){
         
