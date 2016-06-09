@@ -8,12 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		5204FF441D06D55E00A3991B /* NZSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5204FF431D06D55E00A3991B /* NZSplitViewController.swift */; };
+		5218E5751D09123C008B5402 /* NZDropDowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5218E5741D09123C008B5402 /* NZDropDowCell.swift */; };
 		521A7B241D05277700971B7B /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521A7B231D05277700971B7B /* UIViewExtension.swift */; };
 		521A7B261D05291900971B7B /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521A7B251D05291900971B7B /* UIColorExtension.swift */; };
 		521A7B281D05305200971B7B /* UIFontExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521A7B271D05305200971B7B /* UIFontExtention.swift */; };
 		521A7B2A1D0534FD00971B7B /* SukhumvitSet.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 521A7B291D05349B00971B7B /* SukhumvitSet.ttc */; };
 		521A7B311D05504C00971B7B /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521A7B301D05504C00971B7B /* Queue.swift */; };
 		521A7B331D0552B400971B7B /* ProjectCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521A7B321D0552B400971B7B /* ProjectCollectionViewCell.swift */; };
+		5240D9FD1D07F6CC0071D287 /* DefectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5240D9FC1D07F6CC0071D287 /* DefectListViewController.swift */; };
+		5240D9FF1D07F7610071D287 /* DefectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5240D9FE1D07F7610071D287 /* DefectCell.swift */; };
+		5240DA041D0809F20071D287 /* NZDropDown.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5240DA031D0809F20071D287 /* NZDropDown.storyboard */; };
+		5240DA061D080A1E0071D287 /* NZDropDownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5240DA051D080A1E0071D287 /* NZDropDownViewController.swift */; };
+		5240DA091D081CA10071D287 /* AutoCompleteTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5240DA081D081CA10071D287 /* AutoCompleteTextField.swift */; };
 		52499B0A1D06A19F0003F6D5 /* CellLabelStatic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52499B091D06A19F0003F6D5 /* CellLabelStatic.swift */; };
 		52499B0D1D06B70C0003F6D5 /* RowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52499B0C1D06B70C0003F6D5 /* RowModel.swift */; };
 		52499B0F1D06BA410003F6D5 /* CellDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52499B0E1D06BA410003F6D5 /* CellDropDown.swift */; };
@@ -35,16 +41,23 @@
 		529056111D051B3F00B7D28C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529056101D051B3F00B7D28C /* LoginViewController.swift */; };
 		529056141D051C6B00B7D28C /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529056131D051C6B00B7D28C /* ProjectViewController.swift */; };
 		5299C3CE1D066C810021DD97 /* GettingStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5299C3CD1D066C810021DD97 /* GettingStartViewController.swift */; };
+		529F94761D0924A40089ED52 /* DropDownModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529F94751D0924A40089ED52 /* DropDownModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5204FF431D06D55E00A3991B /* NZSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NZSplitViewController.swift; sourceTree = "<group>"; };
+		5218E5741D09123C008B5402 /* NZDropDowCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NZDropDowCell.swift; sourceTree = "<group>"; };
 		521A7B231D05277700971B7B /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		521A7B251D05291900971B7B /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		521A7B271D05305200971B7B /* UIFontExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFontExtention.swift; sourceTree = "<group>"; };
 		521A7B291D05349B00971B7B /* SukhumvitSet.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = SukhumvitSet.ttc; sourceTree = "<group>"; };
 		521A7B301D05504C00971B7B /* Queue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		521A7B321D0552B400971B7B /* ProjectCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectCollectionViewCell.swift; sourceTree = "<group>"; };
+		5240D9FC1D07F6CC0071D287 /* DefectListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefectListViewController.swift; sourceTree = "<group>"; };
+		5240D9FE1D07F7610071D287 /* DefectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefectCell.swift; sourceTree = "<group>"; };
+		5240DA031D0809F20071D287 /* NZDropDown.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NZDropDown.storyboard; sourceTree = "<group>"; };
+		5240DA051D080A1E0071D287 /* NZDropDownViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NZDropDownViewController.swift; sourceTree = "<group>"; };
+		5240DA081D081CA10071D287 /* AutoCompleteTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoCompleteTextField.swift; sourceTree = "<group>"; };
 		52499B091D06A19F0003F6D5 /* CellLabelStatic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellLabelStatic.swift; sourceTree = "<group>"; };
 		52499B0C1D06B70C0003F6D5 /* RowModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowModel.swift; sourceTree = "<group>"; };
 		52499B0E1D06BA410003F6D5 /* CellDropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellDropDown.swift; sourceTree = "<group>"; };
@@ -68,6 +81,7 @@
 		529056101D051B3F00B7D28C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		529056131D051C6B00B7D28C /* ProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
 		5299C3CD1D066C810021DD97 /* GettingStartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GettingStartViewController.swift; sourceTree = "<group>"; };
+		529F94751D0924A40089ED52 /* DropDownModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +113,25 @@
 			path = Queue;
 			sourceTree = "<group>";
 		};
+		5240DA021D0809E20071D287 /* NZDropDown */ = {
+			isa = PBXGroup;
+			children = (
+				529F94741D0924930089ED52 /* model */,
+				5240DA031D0809F20071D287 /* NZDropDown.storyboard */,
+				5240DA051D080A1E0071D287 /* NZDropDownViewController.swift */,
+				5218E5741D09123C008B5402 /* NZDropDowCell.swift */,
+			);
+			path = NZDropDown;
+			sourceTree = "<group>";
+		};
+		5240DA071D081CA10071D287 /* AutoCompleteTextField */ = {
+			isa = PBXGroup;
+			children = (
+				5240DA081D081CA10071D287 /* AutoCompleteTextField.swift */,
+			);
+			path = AutoCompleteTextField;
+			sourceTree = "<group>";
+		};
 		52499B071D06A17D0003F6D5 /* model */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +147,7 @@
 				52499B0E1D06BA410003F6D5 /* CellDropDown.swift */,
 				52499B101D06BD110003F6D5 /* CellTxtSearch.swift */,
 				52499B121D06C70C0003F6D5 /* CellInfoLabel.swift */,
+				5240D9FE1D07F7610071D287 /* DefectCell.swift */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -142,6 +176,7 @@
 				52499B071D06A17D0003F6D5 /* model */,
 				5284FD601D05763D006C5D1B /* DefectViewController.swift */,
 				5299C3CD1D066C810021DD97 /* GettingStartViewController.swift */,
+				5240D9FC1D07F6CC0071D287 /* DefectListViewController.swift */,
 			);
 			path = Defect;
 			sourceTree = "<group>";
@@ -184,6 +219,8 @@
 		529056021D0519EE00B7D28C /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				5240DA071D081CA10071D287 /* AutoCompleteTextField */,
+				5240DA021D0809E20071D287 /* NZDropDown */,
 				521A7B2F1D05503100971B7B /* Queue */,
 				529056031D0519EE00B7D28C /* NZNavigationController */,
 				529056071D0519EE00B7D28C /* NZPopover */,
@@ -227,6 +264,14 @@
 				521A7B321D0552B400971B7B /* ProjectCollectionViewCell.swift */,
 			);
 			path = Project;
+			sourceTree = "<group>";
+		};
+		529F94741D0924930089ED52 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				529F94751D0924A40089ED52 /* DropDownModel.swift */,
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,6 +338,7 @@
 				529055FB1D0518DE00B7D28C /* LaunchScreen.storyboard in Resources */,
 				529055F81D0518DE00B7D28C /* Assets.xcassets in Resources */,
 				529055F31D0518DE00B7D28C /* Main.storyboard in Resources */,
+				5240DA041D0809F20071D287 /* NZDropDown.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,24 +352,30 @@
 				5290560B1D0519EE00B7D28C /* NZNavigationViewController.swift in Sources */,
 				5284FD611D05763D006C5D1B /* DefectViewController.swift in Sources */,
 				521A7B281D05305200971B7B /* UIFontExtention.swift in Sources */,
+				5240DA091D081CA10071D287 /* AutoCompleteTextField.swift in Sources */,
 				5290560D1D0519EE00B7D28C /* NZPopoverView.swift in Sources */,
+				5218E5751D09123C008B5402 /* NZDropDowCell.swift in Sources */,
 				52499B0F1D06BA410003F6D5 /* CellDropDown.swift in Sources */,
 				5204FF441D06D55E00A3991B /* NZSplitViewController.swift in Sources */,
 				5299C3CE1D066C810021DD97 /* GettingStartViewController.swift in Sources */,
+				5240D9FD1D07F6CC0071D287 /* DefectListViewController.swift in Sources */,
 				5290560E1D0519EE00B7D28C /* NZRow.swift in Sources */,
 				529056111D051B3F00B7D28C /* LoginViewController.swift in Sources */,
 				52499B111D06BD110003F6D5 /* CellTxtSearch.swift in Sources */,
+				529F94761D0924A40089ED52 /* DropDownModel.swift in Sources */,
 				529056141D051C6B00B7D28C /* ProjectViewController.swift in Sources */,
 				52499B0D1D06B70C0003F6D5 /* RowModel.swift in Sources */,
 				52499B131D06C70C0003F6D5 /* CellInfoLabel.swift in Sources */,
 				52499B0A1D06A19F0003F6D5 /* CellLabelStatic.swift in Sources */,
 				521A7B331D0552B400971B7B /* ProjectCollectionViewCell.swift in Sources */,
 				529055F61D0518DE00B7D28C /* RealTransfer.xcdatamodeld in Sources */,
+				5240DA061D080A1E0071D287 /* NZDropDownViewController.swift in Sources */,
 				521A7B311D05504C00971B7B /* Queue.swift in Sources */,
 				52499B151D06C7CF0003F6D5 /* RowInfoModel.swift in Sources */,
 				5284FD5E1D0565AF006C5D1B /* ProjectModel.swift in Sources */,
 				521A7B241D05277700971B7B /* UIViewExtension.swift in Sources */,
 				521A7B261D05291900971B7B /* UIColorExtension.swift in Sources */,
+				5240D9FF1D07F7610071D287 /* DefectCell.swift in Sources */,
 				5290560C1D0519EE00B7D28C /* NZViewController.swift in Sources */,
 				529055EE1D0518DE00B7D28C /* AppDelegate.swift in Sources */,
 			);

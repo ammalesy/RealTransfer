@@ -32,6 +32,10 @@
             <string>SukhumvitSet-Text</string>
             <string>SukhumvitSet-Text</string>
             <string>SukhumvitSet-Text</string>
+            <string>SukhumvitSet-SemiBold</string>
+            <string>SukhumvitSet-Bold</string>
+            <string>SukhumvitSet-Thin</string>
+            <string>SukhumvitSet-Medium</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -472,7 +476,7 @@
                                                                 <constraint firstAttribute="height" constant="1" id="e4T-7h-UIo"/>
                                                             </constraints>
                                                         </view>
-                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Szz-O5-rh5">
+                                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Szz-O5-rh5" customClass="AutoCompleteTextField" customModule="RealTransfer" customModuleProvider="target">
                                                             <rect key="frame" x="69" y="5" width="251" height="47"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="fcS-3F-bch"/>
@@ -842,6 +846,135 @@
             </objects>
             <point key="canvasLocation" x="1588" y="903"/>
         </scene>
+        <!--Defect List View Controller-->
+        <scene sceneID="0wp-D0-l95">
+            <objects>
+                <viewController storyboardIdentifier="DefectListViewController" id="Aag-dg-5CK" customClass="DefectListViewController" customModule="RealTransfer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qxs-yG-IJx"/>
+                        <viewControllerLayoutGuide type="bottom" id="g73-DC-q9X"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bpK-Fz-FJQ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="114" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="uLM-bV-lkD">
+                                <rect key="frame" x="0.0" y="70" width="600" height="530"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellDefect" rowHeight="114" id="xhI-kK-gb4" customClass="DefectCell" customModule="RealTransfer" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="49.5" width="600" height="114"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xhI-kK-gb4" id="uUC-pY-ykd">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="114"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defectImg" translatesAutoresizingMaskIntoConstraints="NO" id="QS2-1P-yuD">
+                                                    <rect key="frame" x="10" y="10" width="125" height="93"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="125" id="RFS-FO-kk4"/>
+                                                        <constraint firstAttribute="height" constant="93" id="cpX-fZ-ExI"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Tgw-mt-ex7">
+                                                    <rect key="frame" x="145" y="10" width="15" height="15"/>
+                                                    <color key="backgroundColor" red="0.50588235294117645" green="0.72156862745098038" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="15" id="4KG-O0-9po"/>
+                                                        <constraint firstAttribute="height" constant="15" id="Epe-sK-we4"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="พื้นที่ห้องนอน 1 Bed, 2 Bed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ac5-cq-HrY">
+                                                    <rect key="frame" x="165" y="5" width="435" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="25" id="KhU-Fl-vMF"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="SukhumvitSet-SemiBold" family="Sukhumvit Set" pointSize="13"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="งานกระจก-หน้าต่างอลูมิเนียม" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6rs-9P-hvZ">
+                                                    <rect key="frame" x="145" y="30" width="455" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="XrN-Mx-cqE"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="SukhumvitSet-Bold" family="Sukhumvit Set" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="เครื่องปรับอากาศมีปัณหาเรื่องการติดตั้งและอุณหภูมิไม่เย็น" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QoG-nS-NmY">
+                                                    <rect key="frame" x="145" y="60" width="455" height="43.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="ZeB-CP-cP0"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="SukhumvitSet-Thin" family="Sukhumvit Set" pointSize="13"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="QoG-nS-NmY" secondAttribute="trailing" id="BFg-Fk-ZYr"/>
+                                                <constraint firstItem="QS2-1P-yuD" firstAttribute="leading" secondItem="uUC-pY-ykd" secondAttribute="leading" constant="10" id="F9Z-RW-uvb"/>
+                                                <constraint firstItem="Ac5-cq-HrY" firstAttribute="leading" secondItem="Tgw-mt-ex7" secondAttribute="trailing" constant="5" id="HqD-eH-gFj"/>
+                                                <constraint firstItem="6rs-9P-hvZ" firstAttribute="top" secondItem="Ac5-cq-HrY" secondAttribute="bottom" id="MBF-YF-yBN"/>
+                                                <constraint firstItem="6rs-9P-hvZ" firstAttribute="leading" secondItem="QS2-1P-yuD" secondAttribute="trailing" constant="10" id="Od0-vA-tw0"/>
+                                                <constraint firstItem="QoG-nS-NmY" firstAttribute="top" secondItem="6rs-9P-hvZ" secondAttribute="bottom" id="Uf7-t2-U6N"/>
+                                                <constraint firstItem="QoG-nS-NmY" firstAttribute="leading" secondItem="QS2-1P-yuD" secondAttribute="trailing" constant="10" id="XXK-Vt-XuS"/>
+                                                <constraint firstItem="QS2-1P-yuD" firstAttribute="centerY" secondItem="uUC-pY-ykd" secondAttribute="centerY" id="ZQG-Lg-HiW"/>
+                                                <constraint firstItem="Tgw-mt-ex7" firstAttribute="leading" secondItem="QS2-1P-yuD" secondAttribute="trailing" constant="10" id="hGP-9L-nJc"/>
+                                                <constraint firstAttribute="trailing" secondItem="6rs-9P-hvZ" secondAttribute="trailing" id="i7z-ux-xxc"/>
+                                                <constraint firstAttribute="trailing" secondItem="Ac5-cq-HrY" secondAttribute="trailing" id="kpt-MN-mee"/>
+                                                <constraint firstItem="Ac5-cq-HrY" firstAttribute="centerY" secondItem="Tgw-mt-ex7" secondAttribute="centerY" id="oW5-D0-VHl"/>
+                                                <constraint firstItem="Tgw-mt-ex7" firstAttribute="top" secondItem="QS2-1P-yuD" secondAttribute="top" id="yiJ-w8-hbE"/>
+                                                <constraint firstAttribute="bottom" secondItem="QoG-nS-NmY" secondAttribute="bottom" constant="10" id="z5y-pW-P6u"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="defectImageView" destination="QS2-1P-yuD" id="eV8-fg-viP"/>
+                                            <outlet property="detailTextLb" destination="QoG-nS-NmY" id="ZKg-QS-h0a"/>
+                                            <outlet property="middleTextLb" destination="6rs-9P-hvZ" id="fnC-mC-uaS"/>
+                                            <outlet property="statusIconImageView" destination="Tgw-mt-ex7" id="Uq1-FF-wKH"/>
+                                            <outlet property="titleLb" destination="Ac5-cq-HrY" id="MhQ-e5-Rox"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Defect ทั้งหมด (22)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u2O-uP-Hll">
+                                <rect key="frame" x="20" y="30" width="580" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="qYl-s3-VRR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SukhumvitSet-Medium" family="Sukhumvit Set" pointSize="20"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="u2O-uP-Hll" firstAttribute="leading" secondItem="bpK-Fz-FJQ" secondAttribute="leading" constant="20" id="01q-Uc-1JI"/>
+                            <constraint firstItem="g73-DC-q9X" firstAttribute="top" secondItem="uLM-bV-lkD" secondAttribute="bottom" id="4oM-qD-pU7"/>
+                            <constraint firstItem="uLM-bV-lkD" firstAttribute="leading" secondItem="bpK-Fz-FJQ" secondAttribute="leading" id="Ge8-2H-hgr"/>
+                            <constraint firstItem="uLM-bV-lkD" firstAttribute="top" secondItem="u2O-uP-Hll" secondAttribute="bottom" constant="10" id="YUZ-Y6-6b5"/>
+                            <constraint firstItem="uLM-bV-lkD" firstAttribute="top" secondItem="bpK-Fz-FJQ" secondAttribute="top" id="cfq-Fx-YJi"/>
+                            <constraint firstAttribute="trailing" secondItem="u2O-uP-Hll" secondAttribute="trailing" id="j8E-Iu-FFp"/>
+                            <constraint firstItem="u2O-uP-Hll" firstAttribute="top" secondItem="qxs-yG-IJx" secondAttribute="bottom" constant="10" id="pic-7U-o3D"/>
+                            <constraint firstAttribute="trailing" secondItem="uLM-bV-lkD" secondAttribute="trailing" id="rpx-iC-YTm"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="cfq-Fx-YJi"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="countDefectLb" destination="u2O-uP-Hll" id="2hc-Mb-vb0"/>
+                        <outlet property="tableView" destination="uLM-bV-lkD" id="ah9-gf-qgD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mbx-4c-uhq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2956" y="-135"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="xxi-RL-90S">
             <objects>
@@ -858,68 +991,24 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="szK-c2-ONi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3178" y="561"/>
-        </scene>
-        <!--Root View Controller-->
-        <scene sceneID="6zn-KF-giY">
-            <objects>
-                <tableViewController clearsSelectionOnViewWillAppear="NO" id="I0H-Ak-uA6" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="h6w-ZG-57v">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="xuf-87-y9A">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xuf-87-y9A" id="Nmd-5S-HIR">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="I0H-Ak-uA6" id="dI8-vv-Fn2"/>
-                            <outlet property="delegate" destination="I0H-Ak-uA6" id="Mfj-Ug-WeW"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="yR2-0z-xWD"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZgY-uI-K9i" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3998" y="-99"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="9Lx-uD-2xF">
-            <objects>
-                <navigationController id="1IL-bC-lcR" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="iHM-tZ-DPE">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="I0H-Ak-uA6" kind="relationship" relationship="rootViewController" id="5xR-Zg-A1B"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gOe-oh-9gW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3178" y="-99"/>
+            <point key="canvasLocation" x="2956" y="573"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="rP0-Ff-MbJ">
             <objects>
                 <splitViewController restorationIdentifier="NZSplitViewController" storyboardIdentifier="NZSplitViewController" id="EQR-zn-cKB" customClass="NZSplitViewController" customModule="RealTransfer" customModuleProvider="target" sceneMemberID="viewController">
                     <connections>
-                        <segue destination="1IL-bC-lcR" kind="relationship" relationship="masterViewController" id="6IE-VB-PpL"/>
                         <segue destination="FWr-uf-zbs" kind="relationship" relationship="detailViewController" id="5QY-Cw-i9a"/>
+                        <segue destination="Aag-dg-5CK" kind="relationship" relationship="masterViewController" id="FP8-wi-A6y"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4ly-Gd-F7e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2424" y="246"/>
+            <point key="canvasLocation" x="2244" y="246"/>
         </scene>
     </scenes>
     <resources>
+        <image name="defectImg" width="206" height="154"/>
         <image name="dropDown" width="38" height="36"/>
         <image name="logo_large" width="414" height="244"/>
     </resources>

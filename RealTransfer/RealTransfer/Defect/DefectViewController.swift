@@ -36,6 +36,7 @@ class DefectViewController: NZViewController {
         controller.view.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.7)
         controller.view.frame = (self.nzNavigationController?.view.frame)!
         controller.view.layoutIfNeeded()
+        controller.nzNavigationController = self.nzNavigationController
 
         self.nzNavigationController?.addChildViewController(controller)
         self.nzNavigationController?.view.addSubview(controller.view)

@@ -7,14 +7,14 @@
 //
 
 import UIKit
-
-
 let CELL_LABEL_STATIC_IDENTIFIER = "CellLabelStatic"
 let CELL_DROUP_DOWN_IDENTIFIER = "CellDropDown"
 let CELL_TXT_SEARCH_IDENTIFIER = "CellTxtSearch"
 let CELL_INFO_LABEL_IDENTIFIER = "CellInfoLabel"
 
-class GettingStartViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class GettingStartViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,NZDropDownViewDelegate {
+    
+    var dropDownController:NZDropDownViewController?
     
     var nzNavigationController:NZNavigationViewController?
 
@@ -27,8 +27,6 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.tableView.estimatedRowHeight = 58
-//        self.tableView.rowHeight = UITableViewAutomaticDimension
         self.panelView.layer.shadowColor = UIColor.blackColor().CGColor
         self.panelView.layer.shadowOpacity = 0.3
         self.panelView.layer.shadowOffset = CGSizeMake(1, 1)
@@ -109,8 +107,11 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         }
         else if data.style == CELL_TXT_SEARCH_IDENTIFIER
         {
+            let rect:CGRect = tableView.rectForRowAtIndexPath(indexPath)
+            
             let cell:CellTxtSearch = tableView.dequeueReusableCellWithIdentifier(CELL_TXT_SEARCH_IDENTIFIER) as! CellTxtSearch
             cell.leftLabel.text = data.head
+            cell.textField.setupAutocompleteTable(self.tableView, y:rect.origin.y + rect.size.height)
             return cell
         }
         else if data.style == CELL_INFO_LABEL_IDENTIFIER
@@ -148,24 +149,86 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
     }
 
     @IBAction func startAction(sender: AnyObject) {
-        
-        let split:NZSplitViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("NZSplitViewController") as! NZSplitViewController
-        self.nzNavigationController?.pushViewController(split, completion: { () -> Void in
+        Queue.mainQueue { () -> Void in
             
-        })
-        
+            self.hideView()
+            
+            Queue.mainQueue({ () -> Void in
+                let split:NZSplitViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("NZSplitViewController") as! NZSplitViewController
+                split.minimumPrimaryColumnWidth = 400
+                split.maximumPrimaryColumnWidth = 400
+                self.nzNavigationController?.pushViewController(split, completion: { () -> Void in
+                    
+                })
+            })
+        }
     }
     @IBAction func exitAction(sender: AnyObject) {
         
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
+        self.hideView()
 
+    }
+    func hideView(){
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            
             self.view.alpha = 0
             
         }) { (result) -> Void in
-            self.view.removeFromSuperview()
-            self.removeFromParentViewController()
+                self.view.removeFromSuperview()
+                self.removeFromParentViewController()
         }
+    }
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+        let data:RowModel = components.objectAtIndex(indexPath.row) as! RowModel
+        if data.style == CELL_DROUP_DOWN_IDENTIFIER
+        {
+            if dropDownController != nil {
+                return
+            }
+            
+            let cell:CellDropDown = self.tableView.cellForRowAtIndexPath(indexPath) as! CellDropDown
+            
+            dropDownController = UIStoryboard(name: "NZDropDown", bundle: nil).instantiateViewControllerWithIdentifier("NZDropDownViewController") as? NZDropDownViewController
+            dropDownController?.labelReference = cell.rightLabel
+            
+            dropDownController!.rawObjects.addObject(DropDownModel(text: "1"))
+            dropDownController!.rawObjects.addObject(DropDownModel(text: "2"))
+            dropDownController!.rawObjects.addObject(DropDownModel(text: "3"))
+            dropDownController!.rawObjects.addObject(DropDownModel(text: "4"))
+            dropDownController!.rawObjects.addObject(DropDownModel(text: "5"))
+            dropDownController!.rawObjects.addObject(DropDownModel(text: "6"))
+            dropDownController!.rawObjects.addObject(DropDownModel(text: "7"))
+            dropDownController!.rawObjects.addObject(DropDownModel(text: "8"))
+            dropDownController!.rawObjects.addObject(DropDownModel(text: "9"))
+            dropDownController!.rawObjects.addObject(DropDownModel(text: "10"))
+            
+            dropDownController!.displayObjects = dropDownController!.rawObjects.mutableCopy() as! NSMutableArray
+            
+            dropDownController?.updatePositionAtView(self.tableView)
+            dropDownController!.delegate = self
+            self.addChildViewController(dropDownController!)
+            self.tableView.addSubview(dropDownController!.view)
+            self.tableView.scrollEnabled = false
+        }
+    }
+    func nzDropDown(contorller: NZDropDownViewController, didClickCell model: DropDownModel) {
         
+        self.closeDropDown()
+        
+    }
+    func dropDownViewDidClickClose(view: NZDropDownViewController) {
+        
+        self.tableView.scrollEnabled = true
+        
+    }
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.closeDropDown()
+    }
+    func closeDropDown() {
+        if dropDownController != nil {
+            dropDownController?.closeView()
+            dropDownController = nil
+        }
     }
 }

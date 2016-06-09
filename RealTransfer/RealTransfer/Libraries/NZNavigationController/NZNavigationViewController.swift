@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NZNavigationViewController: UIViewController {
+class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
     
     @IBOutlet weak var logoView: UIView!
     @IBOutlet weak var widthLogoView: NSLayoutConstraint!
@@ -162,9 +162,9 @@ class NZNavigationViewController: UIViewController {
             popover = nil
         }else{
             popover = NZPopoverView.standardSize()
-            //popover.delegate = self
-            popover.addRow(NZRow(text: "View info", imageName:"Info-97", tintColor: UIColor.darkGrayColor(),  identifier: "id1"))
-            popover.addRow(NZRow(text: "Sign out", imageName:"Enter-96", tintColor: UIColor(red: 223/255, green: 0/255, blue: 0/255, alpha: 1),  identifier: "id2"))
+            popover.delegate = self
+            popover.addRow(NZRow(text: "View info", imageName:"Info-97", tintColor: UIColor.darkGrayColor(),  identifier: "info"))
+            popover.addRow(NZRow(text: "Sign out", imageName:"Enter-96", tintColor: UIColor(red: 223/255, green: 0/255, blue: 0/255, alpha: 1),  identifier: "logout"))
             
             popover.showNearView(sender as! UIButton, addToView: self.view)
         }
@@ -213,5 +213,14 @@ class NZNavigationViewController: UIViewController {
             popover.hide()
             popover = nil
         }
+    }
+    func popoverView(view: NZPopoverView, didClickRow menu: NZRow) {
+        
+        if menu.identifier == "logout" {
+            self.dismissViewControllerAnimated(true, completion: { () -> Void in
+                
+            })
+        }
+        
     }
 }
