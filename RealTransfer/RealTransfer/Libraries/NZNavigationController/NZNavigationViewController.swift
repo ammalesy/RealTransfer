@@ -10,9 +10,16 @@ import UIKit
 
 class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
     
+    
+    @IBOutlet weak var cusNameLb: UILabel!
+    @IBOutlet weak var roomNoLb: UILabel!
+    @IBOutlet weak var roomNoCaptionLb: UILabel!
+    @IBOutlet weak var cusNameCaptionLb: UILabel!
+    
     @IBOutlet weak var logoView: UIView!
     @IBOutlet weak var widthLogoView: NSLayoutConstraint!
     @IBOutlet weak var leftMarginLogoView: NSLayoutConstraint!
+    @IBOutlet weak var titleCenterY: NSLayoutConstraint!
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var logoImageView: UIImageView!
     @IBOutlet weak var titleLb: UILabel!
@@ -222,5 +229,11 @@ class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
             })
         }
         
+    }
+    func hideRightInfo(flag:Bool){
+        self.cusNameLb.hidden = flag
+        self.roomNoLb.hidden = flag
+        self.roomNoCaptionLb.hidden = flag
+        self.cusNameCaptionLb.hidden = flag
     }
 }

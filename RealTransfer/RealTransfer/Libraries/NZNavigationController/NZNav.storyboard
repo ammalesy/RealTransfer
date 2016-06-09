@@ -4,6 +4,14 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="SukhumvitSet.ttc">
+            <string>SukhumvitSet-Text</string>
+            <string>SukhumvitSet-Text</string>
+            <string>SukhumvitSet-Text</string>
+            <string>SukhumvitSet-Text</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--Navigation View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -33,7 +41,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3hz-pJ-syU">
-                                        <rect key="frame" x="10" y="39.5" width="20" height="20"/>
+                                        <rect key="frame" x="10" y="40" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="OmP-HU-tCc"/>
                                             <constraint firstAttribute="width" constant="20" id="UCg-uI-pUR"/>
@@ -79,10 +87,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QfZ-4Y-20T">
-                                        <rect key="frame" x="120" y="0.0" width="420" height="99"/>
+                                        <rect key="frame" x="120" y="0.0" width="440" height="99"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dash Board" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wxz-vn-oto" userLabel="Title">
-                                                <rect key="frame" x="10" y="22" width="410" height="30"/>
+                                                <rect key="frame" x="10" y="22" width="94.5" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="P0V-h8-ubM"/>
                                                 </constraints>
@@ -91,7 +99,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="QC Checker : Ammales Yamsompong" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bqd-pT-lln" userLabel="SubTitle">
-                                                <rect key="frame" x="10" y="46" width="410" height="30"/>
+                                                <rect key="frame" x="10" y="46" width="253.5" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="xEF-TS-9od"/>
                                                 </constraints>
@@ -99,16 +107,60 @@
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ammales Hamsompong" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IiF-Km-JIo">
+                                                <rect key="frame" x="293.5" y="39" width="141.5" height="25"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="25" id="dpa-Ha-4Hx"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SukhumvitSet-Text" family="Sukhumvit Set" pointSize="14"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="201" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjA-pc-oze">
+                                                <rect key="frame" x="411" y="57" width="24" height="25"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="25" id="Cpj-lQ-6Zc"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SukhumvitSet-Text" family="Sukhumvit Set" pointSize="14"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Client : " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Zd-xO-FDf">
+                                                <rect key="frame" x="243" y="39" width="45.5" height="25"/>
+                                                <fontDescription key="fontDescription" name="SukhumvitSet-Text" family="Sukhumvit Set" pointSize="14"/>
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room No." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5i3-zw-iPS">
+                                                <rect key="frame" x="347" y="57" width="58.5" height="25"/>
+                                                <fontDescription key="fontDescription" name="SukhumvitSet-Text" family="Sukhumvit Set" pointSize="14"/>
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstItem="5i3-zw-iPS" firstAttribute="height" secondItem="cjA-pc-oze" secondAttribute="height" id="0tK-3j-gdf"/>
                                             <constraint firstAttribute="trailing" secondItem="wxz-vn-oto" secondAttribute="trailing" id="26v-td-bdV"/>
                                             <constraint firstItem="wxz-vn-oto" firstAttribute="centerY" secondItem="QfZ-4Y-20T" secondAttribute="centerY" constant="-12" id="CrF-NQ-xZ9"/>
                                             <constraint firstAttribute="trailing" secondItem="Bqd-pT-lln" secondAttribute="trailing" id="EP0-Yg-kYp"/>
+                                            <constraint firstItem="IiF-Km-JIo" firstAttribute="leading" secondItem="8Zd-xO-FDf" secondAttribute="trailing" constant="5" id="ICv-iB-aJZ"/>
                                             <constraint firstItem="Bqd-pT-lln" firstAttribute="centerY" secondItem="QfZ-4Y-20T" secondAttribute="centerY" constant="12" id="IlM-md-90j"/>
+                                            <constraint firstItem="cjA-pc-oze" firstAttribute="leading" secondItem="5i3-zw-iPS" secondAttribute="trailing" constant="5" id="SVm-bM-RxC"/>
+                                            <constraint firstItem="5i3-zw-iPS" firstAttribute="centerY" secondItem="cjA-pc-oze" secondAttribute="centerY" id="T8c-sa-9cs"/>
+                                            <constraint firstAttribute="trailing" secondItem="cjA-pc-oze" secondAttribute="trailing" constant="5" id="Uee-SU-XOw"/>
                                             <constraint firstItem="Bqd-pT-lln" firstAttribute="leading" secondItem="QfZ-4Y-20T" secondAttribute="leading" constant="10" id="XNr-NT-15d"/>
+                                            <constraint firstItem="8Zd-xO-FDf" firstAttribute="height" secondItem="IiF-Km-JIo" secondAttribute="height" id="cHf-qE-oSj"/>
                                             <constraint firstItem="wxz-vn-oto" firstAttribute="leading" secondItem="QfZ-4Y-20T" secondAttribute="leading" constant="10" id="e5f-QA-sk6"/>
+                                            <constraint firstAttribute="trailing" secondItem="IiF-Km-JIo" secondAttribute="trailing" constant="5" id="qD6-KJ-Q1C"/>
+                                            <constraint firstItem="8Zd-xO-FDf" firstAttribute="centerY" secondItem="IiF-Km-JIo" secondAttribute="centerY" id="wzx-a4-XGJ"/>
                                         </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="26v-td-bdV"/>
+                                                <exclude reference="EP0-Yg-kYp"/>
+                                            </mask>
+                                        </variation>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -117,11 +169,13 @@
                                     <constraint firstItem="4ni-yw-U8T" firstAttribute="top" secondItem="3hz-pJ-syU" secondAttribute="bottom" constant="10" id="0yc-t9-uCE"/>
                                     <constraint firstItem="4ni-yw-U8T" firstAttribute="top" secondItem="f7T-VD-zNc" secondAttribute="bottom" id="4wx-OL-JYJ"/>
                                     <constraint firstItem="4ni-yw-U8T" firstAttribute="top" secondItem="vY0-QC-2Ky" secondAttribute="bottom" constant="16" id="5sA-HI-nwI"/>
+                                    <constraint firstItem="IiF-Km-JIo" firstAttribute="centerY" secondItem="vY0-QC-2Ky" secondAttribute="centerY" constant="-9" id="69Y-M6-eOH"/>
                                     <constraint firstItem="QfZ-4Y-20T" firstAttribute="leading" secondItem="f7T-VD-zNc" secondAttribute="trailing" constant="8" id="C8N-aU-11z"/>
                                     <constraint firstItem="f7T-VD-zNc" firstAttribute="top" secondItem="tXH-bC-twC" secondAttribute="top" id="HeC-5C-UTh"/>
                                     <constraint firstAttribute="height" constant="100" id="Hqe-wV-GcX"/>
-                                    <constraint firstAttribute="trailing" secondItem="QfZ-4Y-20T" secondAttribute="trailing" constant="60" id="IKp-aY-j7v"/>
+                                    <constraint firstAttribute="trailing" secondItem="QfZ-4Y-20T" secondAttribute="trailing" constant="40" id="IKp-aY-j7v"/>
                                     <constraint firstItem="QfZ-4Y-20T" firstAttribute="top" secondItem="tXH-bC-twC" secondAttribute="top" id="SpE-fd-J3x"/>
+                                    <constraint firstItem="cjA-pc-oze" firstAttribute="centerY" secondItem="vY0-QC-2Ky" secondAttribute="centerY" constant="9" id="Tc7-pl-OQa"/>
                                     <constraint firstItem="3hz-pJ-syU" firstAttribute="centerY" secondItem="tXH-bC-twC" secondAttribute="centerY" id="Y1m-ao-HhI"/>
                                     <constraint firstItem="f7T-VD-zNc" firstAttribute="leading" secondItem="tXH-bC-twC" secondAttribute="leading" id="bJV-CK-4b4"/>
                                     <constraint firstItem="3hz-pJ-syU" firstAttribute="top" secondItem="tXH-bC-twC" secondAttribute="top" constant="10" id="fVo-So-Uu5"/>
@@ -212,11 +266,16 @@
                     <connections>
                         <outlet property="backBtn" destination="3hz-pJ-syU" id="Czn-fu-uCV"/>
                         <outlet property="containerView" destination="Q3Q-2z-EfJ" id="zuG-5t-WSz"/>
+                        <outlet property="cusNameCaptionLb" destination="8Zd-xO-FDf" id="TNr-zA-360"/>
+                        <outlet property="cusNameLb" destination="5i3-zw-iPS" id="pEV-7p-L6V"/>
                         <outlet property="leftMarginLogoView" destination="bJV-CK-4b4" id="7cB-fQ-xmA"/>
                         <outlet property="logoImageView" destination="yl4-am-tj8" id="QcY-Ys-LZk"/>
                         <outlet property="logoView" destination="f7T-VD-zNc" id="8YC-qU-MW0"/>
                         <outlet property="menuBtn" destination="vY0-QC-2Ky" id="J5u-vc-Ouh"/>
+                        <outlet property="roomNoCaptionLb" destination="5i3-zw-iPS" id="pJS-j9-TsT"/>
+                        <outlet property="roomNoLb" destination="cjA-pc-oze" id="sgl-nv-RpJ"/>
                         <outlet property="subTitleLb" destination="Bqd-pT-lln" id="6sb-UO-Ddo"/>
+                        <outlet property="titleCenterY" destination="CrF-NQ-xZ9" id="9aU-rK-lxv"/>
                         <outlet property="titleLb" destination="wxz-vn-oto" id="dKL-se-yOc"/>
                         <outlet property="widthLogoView" destination="7Ti-ch-dOS" id="ACD-XX-37s"/>
                     </connections>

@@ -1,33 +1,33 @@
 //
-//  NZDropDownViewController.swift
+//  NZAutoCompleteViewController.swift
 //  RealTransfer
 //
-//  Created by AmmalesPSC91 on 6/8/2559 BE.
+//  Created by AmmalesPSC91 on 6/9/2559 BE.
 //  Copyright © 2559 nuizoro. All rights reserved.
 //
-import Foundation
+
 import UIKit
 
-protocol NZDropDownViewDelegate{
-    func dropDownViewDidClickClose(view:NZDropDownViewController)
-    func nzDropDown(contorller:NZDropDownViewController, didClickCell model:DropDownModel)
+protocol NZAutoCompleteViewDelegate{
+    func autoCompleteViewWillClose(view:NZAutoCompleteViewController)
+    func nzAutoComplete(contorller:NZAutoCompleteViewController, didClickCell model:AutoCompleteModel)
 }
 
-class NZDropDownViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate {
+class NZAutoCompleteViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate {
 
-    var delegate:NZDropDownViewDelegate! = nil
+    @IBOutlet weak var tableView: UITableView!
     var rawObjects:NSMutableArray = NSMutableArray()
     var displayObjects:NSMutableArray = NSMutableArray()
-    var labelReference:UILabel?
+    var textFieldReference:UITextField?
     
-    @IBOutlet weak var searchTxt: UITextField!
-    @IBOutlet weak var tableView: UITableView!
+    var delegate:NZAutoCompleteViewDelegate! = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.tableView.dataSource = self
         self.tableView.delegate = self
+        self.tableView.dataSource = self
         self.tableView.reloadData()
+
         
         self.view.layer.borderColor = UIColor.RGB(246, G: 245, B: 251).CGColor
         self.view.layer.borderWidth = 1.0
@@ -35,10 +35,6 @@ class NZDropDownViewController: UIViewController,UITableViewDataSource,UITableVi
         self.view.layer.shadowOpacity = 0.3
         self.view.layer.shadowOffset = CGSizeMake(1, 1)
         self.view.layer.shadowRadius = 3
-        
-        self.searchTxt.delegate = self
-        
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,50 +42,52 @@ class NZDropDownViewController: UIViewController,UITableViewDataSource,UITableVi
         // Dispose of any resources that can be recreated.
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    {
         return 1
     }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
         return displayObjects.count
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let model:DropDownModel = displayObjects.objectAtIndex(indexPath.row) as! DropDownModel
-        let cell:NZDropDowCell = tableView.dequeueReusableCellWithIdentifier("Cell") as! NZDropDowCell
-        cell.nameLabel.text = model.text
-        
+        let model:AutoCompleteModel = displayObjects.objectAtIndex(indexPath.row) as! AutoCompleteModel
+        let cell:NZAutoCompleteCell = tableView.dequeueReusableCellWithIdentifier("Cell") as! NZAutoCompleteCell
+        cell.textLb.text = model.text
         return cell
-        
     }
     func closeView() {
-        
+        self.textFieldReference?.resignFirstResponder()
         self.view.removeFromSuperview()
         self.removeFromParentViewController()
         
         if self.delegate != nil {
-            self.delegate.dropDownViewDidClickClose(self)
+            self.delegate.autoCompleteViewWillClose(self)
         }
-    }
-    func updatePositionAtView(view:UIView){
-        let rows:Int = self.tableView(UITableView(), numberOfRowsInSection: 0)
-        var height:Int = 79 * rows
-        if CGFloat(height) > view.frame.size.height {
-            height = Int(view.frame.size.height) - 80
-        }
-        let y:CGFloat = (view.frame.size.height / 2) - CGFloat((height / 2))
         
+    }
+    func updatePositionAtView(view:UIView, positionRect:CGRect){
+        
+        let y:CGFloat = positionRect.origin.y + positionRect.size.height + 80
+
         let asjustWidthVal:CGFloat = 100
         var frameDP:CGRect = self.view.frame
-        frameDP.size.height = CGFloat(height)
+        frameDP.size.height = 130
         frameDP.size.width = view.frame.size.width - asjustWidthVal
         frameDP.origin.x += asjustWidthVal / 2
         frameDP.origin.y = y
         self.view.frame = frameDP
         self.view.setNeedsDisplay()
     }
-    @IBAction func searchAction(sender: AnyObject) {
-        let str:String = searchTxt.text!
-        self.searchWithString(str)
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        
+        let model:AutoCompleteModel = displayObjects.objectAtIndex(indexPath.row) as! AutoCompleteModel
+        self.textFieldReference?.text = model.text
+        if (self.delegate != nil) {
+            self.delegate.nzAutoComplete(self, didClickCell: model)
+        }
         
     }
     func searchWithString(str:String){
@@ -106,26 +104,9 @@ class NZDropDownViewController: UIViewController,UITableViewDataSource,UITableVi
             }
         }
         self.tableView.reloadData()
+        
+    }
     
-    }
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        
-        let realString:String = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string)
-        self.searchWithString(realString)
-        
-        return true
-        
-    }
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        
-        let model:DropDownModel = displayObjects.objectAtIndex(indexPath.row) as! DropDownModel
-        self.labelReference?.text = model.text
-        if (self.delegate != nil) {
-            self.delegate.nzDropDown(self, didClickCell: model)
-        }
-        
-    }
 
     /*
     // MARK: - Navigation
@@ -138,4 +119,3 @@ class NZDropDownViewController: UIViewController,UITableViewDataSource,UITableVi
     */
 
 }
-

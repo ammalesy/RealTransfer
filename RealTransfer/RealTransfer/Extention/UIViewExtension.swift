@@ -20,3 +20,19 @@ extension UIView{
     
 }
 
+//extension UIImagePickerController {
+//    override public func shouldAutorotate() -> Bool {
+//        
+//        if self.sourceType == UIImagePickerControllerSourceType.PhotoLibrary {
+//            return false
+//        }else{
+//            return true
+//        }
+//    }
+//    override public func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+//        
+//        return UIInterfaceOrientationMask.Portrait
+//        
+//    }
+//}
+

@@ -25,6 +25,8 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
         
+        self.nzNavigationController?.hideRightInfo(true)
+        
     }
     override func stateConfigData() {
         projects = ProjectModel.dummyData()
@@ -74,7 +76,6 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
         self.nzNavigationController?.hideMenuPopoverIfViewIsShowing()
         
         let controller:DefectViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DefectViewController") as! DefectViewController
-        self.nzNavigationController?.showBackButton()
         self.nzNavigationController?.pushViewController(controller, completion: { () -> Void in
             
         })

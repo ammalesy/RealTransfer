@@ -12,9 +12,10 @@ let CELL_DROUP_DOWN_IDENTIFIER = "CellDropDown"
 let CELL_TXT_SEARCH_IDENTIFIER = "CellTxtSearch"
 let CELL_INFO_LABEL_IDENTIFIER = "CellInfoLabel"
 
-class GettingStartViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,NZDropDownViewDelegate {
+class GettingStartViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,NZDropDownViewDelegate,CellTxtSearchDelegate,NZAutoCompleteViewDelegate,UITextFieldDelegate {
     
     var dropDownController:NZDropDownViewController?
+    var autoCompleteController:NZAutoCompleteViewController?
     
     var nzNavigationController:NZNavigationViewController?
 
@@ -50,8 +51,14 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         let row3:RowModel = RowModel()
         row3.head = "Room : "
         row3.style = CELL_TXT_SEARCH_IDENTIFIER
+        row3.colorNextbutton = UIColor.RGB(192, G: 193, B: 194)
         components.addObject(row3);
         
+        
+
+    }
+    func addInfo()
+    {
         let row4:RowInfoModel = RowInfoModel()
         row4.style = CELL_INFO_LABEL_IDENTIFIER
         row4.headInfo1 = "Name : "
@@ -78,7 +85,6 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         row5.detail = "Tanakarn Chinratana"
         row5.style = CELL_DROUP_DOWN_IDENTIFIER
         components.addObject(row5);
-
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -107,11 +113,10 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         }
         else if data.style == CELL_TXT_SEARCH_IDENTIFIER
         {
-            let rect:CGRect = tableView.rectForRowAtIndexPath(indexPath)
-            
-            let cell:CellTxtSearch = tableView.dequeueReusableCellWithIdentifier(CELL_TXT_SEARCH_IDENTIFIER) as! CellTxtSearch
+                        let cell:CellTxtSearch = tableView.dequeueReusableCellWithIdentifier(CELL_TXT_SEARCH_IDENTIFIER) as! CellTxtSearch
             cell.leftLabel.text = data.head
-            cell.textField.setupAutocompleteTable(self.tableView, y:rect.origin.y + rect.size.height)
+            cell.delegate = self
+            cell.nextBtn.setTitleColor(data.colorNextbutton, forState: UIControlState.Normal)
             return cell
         }
         else if data.style == CELL_INFO_LABEL_IDENTIFIER
@@ -186,35 +191,38 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             if dropDownController != nil {
                 return
             }
-            
             let cell:CellDropDown = self.tableView.cellForRowAtIndexPath(indexPath) as! CellDropDown
+            self.generateDropDownAndParseDataWithCell(cell)
             
-            dropDownController = UIStoryboard(name: "NZDropDown", bundle: nil).instantiateViewControllerWithIdentifier("NZDropDownViewController") as? NZDropDownViewController
-            dropDownController?.labelReference = cell.rightLabel
+        }else if data.style == CELL_TXT_SEARCH_IDENTIFIER
+        {
+            if autoCompleteController != nil {
+                return
+            }
+            let cell:CellTxtSearch = self.tableView.cellForRowAtIndexPath(indexPath) as! CellTxtSearch
+            self.generateAutoCompleteTextFieldAndParseDataWithCell(cell)
             
-            dropDownController!.rawObjects.addObject(DropDownModel(text: "1"))
-            dropDownController!.rawObjects.addObject(DropDownModel(text: "2"))
-            dropDownController!.rawObjects.addObject(DropDownModel(text: "3"))
-            dropDownController!.rawObjects.addObject(DropDownModel(text: "4"))
-            dropDownController!.rawObjects.addObject(DropDownModel(text: "5"))
-            dropDownController!.rawObjects.addObject(DropDownModel(text: "6"))
-            dropDownController!.rawObjects.addObject(DropDownModel(text: "7"))
-            dropDownController!.rawObjects.addObject(DropDownModel(text: "8"))
-            dropDownController!.rawObjects.addObject(DropDownModel(text: "9"))
-            dropDownController!.rawObjects.addObject(DropDownModel(text: "10"))
-            
-            dropDownController!.displayObjects = dropDownController!.rawObjects.mutableCopy() as! NSMutableArray
-            
-            dropDownController?.updatePositionAtView(self.tableView)
-            dropDownController!.delegate = self
-            self.addChildViewController(dropDownController!)
-            self.tableView.addSubview(dropDownController!.view)
-            self.tableView.scrollEnabled = false
         }
+    }
+    func cellTxtSearchBeginEditting(cell: CellTxtSearch, textField: UITextField) {
+        if autoCompleteController != nil {
+            return
+        }
+        self.generateAutoCompleteTextFieldAndParseDataWithCell(cell)
+    }
+    func cellTxtSearchTextChange(string: String) {
+        
+        autoCompleteController?.searchWithString(string)
+        
     }
     func nzDropDown(contorller: NZDropDownViewController, didClickCell model: DropDownModel) {
         
         self.closeDropDown()
+        
+    }
+    func nzAutoComplete(contorller: NZAutoCompleteViewController, didClickCell model: AutoCompleteModel) {
+        
+        self.closeAutoComplete()
         
     }
     func dropDownViewDidClickClose(view: NZDropDownViewController) {
@@ -222,8 +230,12 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         self.tableView.scrollEnabled = true
         
     }
+    func autoCompleteViewWillClose(view: NZAutoCompleteViewController) {
+        self.tableView.scrollEnabled = true
+    }
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.closeDropDown()
+        self.closeAutoComplete()
     }
     func closeDropDown() {
         if dropDownController != nil {
@@ -231,4 +243,74 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             dropDownController = nil
         }
     }
+    func closeAutoComplete() {
+        if autoCompleteController != nil {
+            autoCompleteController?.closeView()
+            autoCompleteController = nil
+        }
+    }
+    func cellTxtSearchDidClickNext(cell: CellTxtSearch) {
+        let indexPath:NSIndexPath =  self.tableView.indexPathForCell(cell)!
+        let model:RowModel = components.objectAtIndex(indexPath.row) as! RowModel
+        model.colorNextbutton = UIColor.blackColor()
+        self.addInfo()
+        self.tableView.reloadData()
+        
+        
+    }
+    func generateDropDownAndParseDataWithCell(cell:CellDropDown) {
+        dropDownController = UIStoryboard(name: "NZDropDown", bundle: nil).instantiateViewControllerWithIdentifier("NZDropDownViewController") as? NZDropDownViewController
+        dropDownController?.labelReference = cell.rightLabel
+        
+        dropDownController!.rawObjects.addObject(DropDownModel(text: "1"))
+        dropDownController!.rawObjects.addObject(DropDownModel(text: "2"))
+        dropDownController!.rawObjects.addObject(DropDownModel(text: "3"))
+        dropDownController!.rawObjects.addObject(DropDownModel(text: "4"))
+        dropDownController!.rawObjects.addObject(DropDownModel(text: "5"))
+        dropDownController!.rawObjects.addObject(DropDownModel(text: "6"))
+        dropDownController!.rawObjects.addObject(DropDownModel(text: "7"))
+        dropDownController!.rawObjects.addObject(DropDownModel(text: "8"))
+        dropDownController!.rawObjects.addObject(DropDownModel(text: "9"))
+        dropDownController!.rawObjects.addObject(DropDownModel(text: "10"))
+        
+        dropDownController!.displayObjects = dropDownController!.rawObjects.mutableCopy() as! NSMutableArray
+        
+        dropDownController?.updatePositionAtView(self.panelView)
+        dropDownController!.delegate = self
+        self.addChildViewController(dropDownController!)
+        self.panelView.addSubview(dropDownController!.view)
+        self.tableView.scrollEnabled = false
+    }
+    func generateAutoCompleteTextFieldAndParseDataWithCell(cell:CellTxtSearch) -> NZAutoCompleteViewController {
+        
+        
+        autoCompleteController = UIStoryboard(name: "NZAutoComplete", bundle: nil).instantiateViewControllerWithIdentifier("NZAutoCompleteViewController") as? NZAutoCompleteViewController
+        autoCompleteController?.textFieldReference = cell.textField
+        
+        autoCompleteController!.rawObjects.addObject(AutoCompleteModel(text: "101"))
+        autoCompleteController!.rawObjects.addObject(AutoCompleteModel(text: "201"))
+        autoCompleteController!.rawObjects.addObject(AutoCompleteModel(text: "301"))
+        autoCompleteController!.rawObjects.addObject(AutoCompleteModel(text: "401"))
+        autoCompleteController!.rawObjects.addObject(AutoCompleteModel(text: "501"))
+        autoCompleteController!.rawObjects.addObject(AutoCompleteModel(text: "601"))
+        autoCompleteController!.rawObjects.addObject(AutoCompleteModel(text: "701"))
+        autoCompleteController!.rawObjects.addObject(AutoCompleteModel(text: "801"))
+        autoCompleteController!.rawObjects.addObject(AutoCompleteModel(text: "901"))
+        autoCompleteController!.rawObjects.addObject(AutoCompleteModel(text: "111"))
+        
+        autoCompleteController!.displayObjects = autoCompleteController!.rawObjects.mutableCopy() as! NSMutableArray
+        
+        let indexPath:NSIndexPath = self.tableView.indexPathForCell(cell)!
+        let rect:CGRect = tableView.rectForRowAtIndexPath(indexPath)
+        autoCompleteController?.updatePositionAtView(self.panelView, positionRect: rect)
+        autoCompleteController!.delegate = self
+        self.addChildViewController(autoCompleteController!)
+        self.panelView.addSubview(autoCompleteController!.view)
+        self.tableView.scrollEnabled = false
+        self.didMoveToParentViewController(autoCompleteController)
+        
+        return autoCompleteController!
+    
+    }
+    
 }

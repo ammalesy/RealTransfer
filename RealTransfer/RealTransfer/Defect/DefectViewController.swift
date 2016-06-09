@@ -13,6 +13,8 @@ class DefectViewController: NZViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
 
     }
     override func configLayout() {
@@ -24,12 +26,21 @@ class DefectViewController: NZViewController {
     override func stateConfigData() {
         self.nzNavigationController?.titleLb.text = "The Capital Ekamai Thonglor"
         self.nzNavigationController?.subTitleLb.text = ""
+        self.nzNavigationController?.titleCenterY.constant = 0
+        self.nzNavigationController?.titleLb.updateConstraints()
+        
         
         
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        self.showGettingStartView()
+        
+        if (self.nzNavigationController?.viewControllers.lastObject is DefectViewController) {
+            Queue.mainQueue { () -> Void in
+                self.showGettingStartView()
+            }
+        }
+        
     }
     func showGettingStartView(){
         let controller:GettingStartViewController = self.storyboard?.instantiateViewControllerWithIdentifier("GettingStartViewController") as! GettingStartViewController

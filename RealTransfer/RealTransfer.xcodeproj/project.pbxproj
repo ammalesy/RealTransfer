@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		5204FF441D06D55E00A3991B /* NZSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5204FF431D06D55E00A3991B /* NZSplitViewController.swift */; };
+		520AC6731D094C3C000A8754 /* NZAutoComplete.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 520AC6721D094C3C000A8754 /* NZAutoComplete.storyboard */; };
+		520AC6751D094C6D000A8754 /* NZAutoCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520AC6741D094C6D000A8754 /* NZAutoCompleteViewController.swift */; };
+		520AC6781D094D49000A8754 /* AutoCompleteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520AC6771D094D49000A8754 /* AutoCompleteModel.swift */; };
+		520AC67A1D094D76000A8754 /* NZAutoCompleteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520AC6791D094D76000A8754 /* NZAutoCompleteCell.swift */; };
+		520AC67D1D096236000A8754 /* AddDefectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520AC67C1D096236000A8754 /* AddDefectViewController.swift */; };
 		5218E5751D09123C008B5402 /* NZDropDowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5218E5741D09123C008B5402 /* NZDropDowCell.swift */; };
 		521A7B241D05277700971B7B /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521A7B231D05277700971B7B /* UIViewExtension.swift */; };
 		521A7B261D05291900971B7B /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 521A7B251D05291900971B7B /* UIColorExtension.swift */; };
@@ -42,10 +47,16 @@
 		529056141D051C6B00B7D28C /* ProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529056131D051C6B00B7D28C /* ProjectViewController.swift */; };
 		5299C3CE1D066C810021DD97 /* GettingStartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5299C3CD1D066C810021DD97 /* GettingStartViewController.swift */; };
 		529F94761D0924A40089ED52 /* DropDownModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529F94751D0924A40089ED52 /* DropDownModel.swift */; };
+		52C09DE31D096E7C0094405D /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52C09DE21D096E7C0094405D /* MobileCoreServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5204FF431D06D55E00A3991B /* NZSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NZSplitViewController.swift; sourceTree = "<group>"; };
+		520AC6721D094C3C000A8754 /* NZAutoComplete.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NZAutoComplete.storyboard; sourceTree = "<group>"; };
+		520AC6741D094C6D000A8754 /* NZAutoCompleteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NZAutoCompleteViewController.swift; sourceTree = "<group>"; };
+		520AC6771D094D49000A8754 /* AutoCompleteModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoCompleteModel.swift; sourceTree = "<group>"; };
+		520AC6791D094D76000A8754 /* NZAutoCompleteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NZAutoCompleteCell.swift; sourceTree = "<group>"; };
+		520AC67C1D096236000A8754 /* AddDefectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDefectViewController.swift; sourceTree = "<group>"; };
 		5218E5741D09123C008B5402 /* NZDropDowCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NZDropDowCell.swift; sourceTree = "<group>"; };
 		521A7B231D05277700971B7B /* UIViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		521A7B251D05291900971B7B /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -82,6 +93,7 @@
 		529056131D051C6B00B7D28C /* ProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectViewController.swift; sourceTree = "<group>"; };
 		5299C3CD1D066C810021DD97 /* GettingStartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GettingStartViewController.swift; sourceTree = "<group>"; };
 		529F94751D0924A40089ED52 /* DropDownModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownModel.swift; sourceTree = "<group>"; };
+		52C09DE21D096E7C0094405D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,12 +101,40 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52C09DE31D096E7C0094405D /* MobileCoreServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		520AC6711D094C25000A8754 /* NZAutoCompleteTextField */ = {
+			isa = PBXGroup;
+			children = (
+				520AC6761D094D30000A8754 /* model */,
+				520AC6721D094C3C000A8754 /* NZAutoComplete.storyboard */,
+				520AC6741D094C6D000A8754 /* NZAutoCompleteViewController.swift */,
+				520AC6791D094D76000A8754 /* NZAutoCompleteCell.swift */,
+			);
+			path = NZAutoCompleteTextField;
+			sourceTree = "<group>";
+		};
+		520AC6761D094D30000A8754 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				520AC6771D094D49000A8754 /* AutoCompleteModel.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		520AC67B1D096226000A8754 /* AddDefect */ = {
+			isa = PBXGroup;
+			children = (
+				520AC67C1D096236000A8754 /* AddDefectViewController.swift */,
+			);
+			path = AddDefect;
+			sourceTree = "<group>";
+		};
 		521A7B221D05274800971B7B /* Extention */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +224,7 @@
 		529055E11D0518DE00B7D28C = {
 			isa = PBXGroup;
 			children = (
+				52C09DE21D096E7C0094405D /* MobileCoreServices.framework */,
 				529055EC1D0518DE00B7D28C /* RealTransfer */,
 				529055EB1D0518DE00B7D28C /* Products */,
 			);
@@ -204,6 +245,7 @@
 				521A7B221D05274800971B7B /* Extention */,
 				5290560F1D051B3200B7D28C /* Login */,
 				5284FD5F1D05762A006C5D1B /* Defect */,
+				520AC67B1D096226000A8754 /* AddDefect */,
 				529056121D051C6000B7D28C /* Project */,
 				529055ED1D0518DE00B7D28C /* AppDelegate.swift */,
 				529055F11D0518DE00B7D28C /* Main.storyboard */,
@@ -219,6 +261,7 @@
 		529056021D0519EE00B7D28C /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				520AC6711D094C25000A8754 /* NZAutoCompleteTextField */,
 				5240DA071D081CA10071D287 /* AutoCompleteTextField */,
 				5240DA021D0809E20071D287 /* NZDropDown */,
 				521A7B2F1D05503100971B7B /* Queue */,
@@ -333,6 +376,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				520AC6731D094C3C000A8754 /* NZAutoComplete.storyboard in Resources */,
 				521A7B2A1D0534FD00971B7B /* SukhumvitSet.ttc in Resources */,
 				5290560A1D0519EE00B7D28C /* NZNav.storyboard in Resources */,
 				529055FB1D0518DE00B7D28C /* LaunchScreen.storyboard in Resources */,
@@ -358,9 +402,12 @@
 				52499B0F1D06BA410003F6D5 /* CellDropDown.swift in Sources */,
 				5204FF441D06D55E00A3991B /* NZSplitViewController.swift in Sources */,
 				5299C3CE1D066C810021DD97 /* GettingStartViewController.swift in Sources */,
+				520AC67D1D096236000A8754 /* AddDefectViewController.swift in Sources */,
 				5240D9FD1D07F6CC0071D287 /* DefectListViewController.swift in Sources */,
 				5290560E1D0519EE00B7D28C /* NZRow.swift in Sources */,
 				529056111D051B3F00B7D28C /* LoginViewController.swift in Sources */,
+				520AC6781D094D49000A8754 /* AutoCompleteModel.swift in Sources */,
+				520AC67A1D094D76000A8754 /* NZAutoCompleteCell.swift in Sources */,
 				52499B111D06BD110003F6D5 /* CellTxtSearch.swift in Sources */,
 				529F94761D0924A40089ED52 /* DropDownModel.swift in Sources */,
 				529056141D051C6B00B7D28C /* ProjectViewController.swift in Sources */,
@@ -369,6 +416,7 @@
 				52499B0A1D06A19F0003F6D5 /* CellLabelStatic.swift in Sources */,
 				521A7B331D0552B400971B7B /* ProjectCollectionViewCell.swift in Sources */,
 				529055F61D0518DE00B7D28C /* RealTransfer.xcdatamodeld in Sources */,
+				520AC6751D094C6D000A8754 /* NZAutoCompleteViewController.swift in Sources */,
 				5240DA061D080A1E0071D287 /* NZDropDownViewController.swift in Sources */,
 				521A7B311D05504C00971B7B /* Queue.swift in Sources */,
 				52499B151D06C7CF0003F6D5 /* RowInfoModel.swift in Sources */,

@@ -13,5 +13,6 @@ class RowModel: NSObject {
     var head:String!
     var detail:String?
     var style:String!
+    var colorNextbutton:UIColor?
     
 }
