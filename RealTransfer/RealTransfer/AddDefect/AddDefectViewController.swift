@@ -22,6 +22,8 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
         splitController!.nzNavigationController?.hideRightInfo(false)
         
         // Do any additional setup after loading the view.
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,7 +51,7 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
                     imagePicker!.view.frame.size.height - 150,50,50)
                 )
                 
-                view.addTarget(self, action: Selector("tapImageGallery"), forControlEvents: UIControlEvents.TouchUpInside)
+                view.addTarget(self, action: #selector(AddDefectViewController.tapImageGallery), forControlEvents: UIControlEvents.TouchUpInside)
                 view.setImage(UIImage(named: "p1"), forState: UIControlState.Normal)
                 view.userInteractionEnabled = true
                 imagePicker!.cameraOverlayView = view
@@ -83,7 +85,21 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
         
         
     }
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        
+        let mediaType = info[UIImagePickerControllerMediaType] as! String
+        
+        if mediaType == (kUTTypeImage as String) {
+            let image = info[UIImagePickerControllerOriginalImage]
+                as! UIImage
+            
+            let detailController:AddDefectDetailViewController = self.storyboard?.instantiateViewControllerWithIdentifier("AddDefectDetailViewController") as! AddDefectDetailViewController
+            detailController.image = image
+            
+            self.navigationController?.pushViewController(detailController, animated: true)
+            
+            
+        }
         
         Queue.mainQueue { () -> Void in
             if self.imagePickerGallery != nil {
@@ -102,8 +118,8 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
             }
         }
         
-        
     }
+
     /*
     // MARK: - Navigation
 

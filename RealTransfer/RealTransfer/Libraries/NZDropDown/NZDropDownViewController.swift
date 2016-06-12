@@ -8,23 +8,31 @@
 import Foundation
 import UIKit
 
-protocol NZDropDownViewDelegate{
-    func dropDownViewDidClickClose(view:NZDropDownViewController)
-    func nzDropDown(contorller:NZDropDownViewController, didClickCell model:DropDownModel)
+@objc protocol NZDropDownViewDelegate{
+     optional func dropDownViewDidClose(view:NZDropDownViewController)
+     optional func nzDropDown(contorller:NZDropDownViewController, didClickCell model:DropDownModel)
+     optional func nzDropDownCustomPositon(contorller:NZDropDownViewController) -> CGRect
+     optional func nzDropDownHideSearchPanel(contorller:NZDropDownViewController) -> Bool
 }
 
 class NZDropDownViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate {
 
-    var delegate:NZDropDownViewDelegate! = nil
+    @IBOutlet weak var searchPanelView: UIView!
+    @IBOutlet weak var heightSearchPanel: NSLayoutConstraint!
+    var disableSearch:Bool = false
+    var identifier:String?
+    var delegate:NZDropDownViewDelegate? = nil
     var rawObjects:NSMutableArray = NSMutableArray()
     var displayObjects:NSMutableArray = NSMutableArray()
-    var labelReference:UILabel?
+    var labelReference:UIView?
     
+    @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var searchTxt: UITextField!
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.tableView.estimatedRowHeight = 62
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.tableView.reloadData()
@@ -37,6 +45,21 @@ class NZDropDownViewController: UIViewController,UITableViewDataSource,UITableVi
         self.view.layer.shadowRadius = 3
         
         self.searchTxt.delegate = self
+        
+        if ((self.delegate != nil) &&
+            (self.delegate as! NSObject).respondsToSelector(#selector(NZDropDownViewDelegate.nzDropDownHideSearchPanel(_:))))
+        {
+            
+            let flag:Bool = self.delegate!.nzDropDownHideSearchPanel!(self)
+            self.hideSearchPanel(flag)
+        }
+        
+        if disableSearch == true {
+            self.searchButton.hidden = true
+            self.searchTxt.userInteractionEnabled = false
+        }
+        
+        
         
         // Do any additional setup after loading the view.
     }
@@ -55,11 +78,21 @@ class NZDropDownViewController: UIViewController,UITableViewDataSource,UITableVi
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let model:DropDownModel = displayObjects.objectAtIndex(indexPath.row) as! DropDownModel
-        let cell:NZDropDowCell = tableView.dequeueReusableCellWithIdentifier("Cell") as! NZDropDowCell
-        cell.nameLabel.text = model.text
+        var cell:NZDropDowCell?
+        if model.iconColor == nil {
+            cell = tableView.dequeueReusableCellWithIdentifier("Cell") as? NZDropDowCell
+            cell!.nameLabel.text = model.text
+        }else{
+            cell = tableView.dequeueReusableCellWithIdentifier("CellIconColor") as? NZDropDownIconColorCell
+            (cell as! NZDropDownIconColorCell).nameLabel.text = model.text
+            (cell as! NZDropDownIconColorCell).iconView.backgroundColor = model.iconColor!
+        }
         
-        return cell
+        return cell!
         
+    }
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
     func closeView() {
         
@@ -67,10 +100,23 @@ class NZDropDownViewController: UIViewController,UITableViewDataSource,UITableVi
         self.removeFromParentViewController()
         
         if self.delegate != nil {
-            self.delegate.dropDownViewDidClickClose(self)
+            self.delegate!.dropDownViewDidClose!(self)
         }
     }
     func updatePositionAtView(view:UIView){
+        
+        if ((self.delegate != nil) &&
+            (self.delegate as! NSObject).respondsToSelector(#selector(NZDropDownViewDelegate.nzDropDownCustomPositon(_:))))
+        {
+        
+            let rect:CGRect = self.delegate!.nzDropDownCustomPositon!(self)
+            if rect != CGRectZero {
+                self.view.frame = rect
+                self.view.setNeedsDisplay()
+                return
+            }
+        }
+        
         let rows:Int = self.tableView(UITableView(), numberOfRowsInSection: 0)
         var height:Int = 79 * rows
         if CGFloat(height) > view.frame.size.height {
@@ -86,6 +132,7 @@ class NZDropDownViewController: UIViewController,UITableViewDataSource,UITableVi
         frameDP.origin.y = y
         self.view.frame = frameDP
         self.view.setNeedsDisplay()
+        
     }
     @IBAction func searchAction(sender: AnyObject) {
         let str:String = searchTxt.text!
@@ -120,11 +167,28 @@ class NZDropDownViewController: UIViewController,UITableViewDataSource,UITableVi
         
         
         let model:DropDownModel = displayObjects.objectAtIndex(indexPath.row) as! DropDownModel
-        self.labelReference?.text = model.text
-        if (self.delegate != nil) {
-            self.delegate.nzDropDown(self, didClickCell: model)
+        
+        if self.labelReference is UILabel {
+            (self.labelReference as! UILabel).text = model.text
+        }else if self.labelReference is UIButton {
+            (self.labelReference as! UIButton).setTitle(model.text, forState: UIControlState.Normal)
         }
         
+        if (self.delegate != nil) {
+            self.delegate!.nzDropDown!(self, didClickCell: model)
+        }
+        
+    }
+    private func hideSearchPanel(flag:Bool!){
+    
+        if flag == true {
+            self.disableSearch = true
+            heightSearchPanel.constant = 0
+        }else{
+            self.disableSearch = false
+            heightSearchPanel.constant = 60
+        }
+        searchPanelView.updateConstraints()
     }
 
     /*

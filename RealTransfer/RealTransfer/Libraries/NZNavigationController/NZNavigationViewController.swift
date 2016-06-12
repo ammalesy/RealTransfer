@@ -228,7 +228,21 @@ class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
                 
             })
         }
+        else if menu.identifier == "info" {
+            showCustomerInfoView()
+        }
         
+    }
+    func showCustomerInfoView(){
+        let sb:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller:CustomerInfoViewController = sb.instantiateViewControllerWithIdentifier("CustomerInfoViewController") as! CustomerInfoViewController
+        controller.view.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.7)
+        controller.view.frame = (self.view.frame)
+        controller.view.layoutIfNeeded()
+        
+        self.addChildViewController(controller)
+        self.view.addSubview(controller.view)
+        controller.didMoveToParentViewController(self)
     }
     func hideRightInfo(flag:Bool){
         self.cusNameLb.hidden = flag

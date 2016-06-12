@@ -225,7 +225,7 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         self.closeAutoComplete()
         
     }
-    func dropDownViewDidClickClose(view: NZDropDownViewController) {
+    func dropDownViewDidClose(view: NZDropDownViewController) {
         
         self.tableView.scrollEnabled = true
         

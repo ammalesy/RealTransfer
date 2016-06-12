@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		184E425E1D0C2EA20073CF60 /* AddDefectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184E425D1D0C2EA20073CF60 /* AddDefectDetailViewController.swift */; };
+		184E42601D0C4BFD0073CF60 /* NZDropDownIconColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184E425F1D0C4BFD0073CF60 /* NZDropDownIconColorCell.swift */; };
+		184E42621D0DA65B0073CF60 /* DefectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184E42611D0DA65B0073CF60 /* DefectModel.swift */; };
+		184E42661D0DB7DC0073CF60 /* CustomerInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184E42651D0DB7DC0073CF60 /* CustomerInfoViewController.swift */; };
 		5204FF441D06D55E00A3991B /* NZSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5204FF431D06D55E00A3991B /* NZSplitViewController.swift */; };
 		520AC6731D094C3C000A8754 /* NZAutoComplete.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 520AC6721D094C3C000A8754 /* NZAutoComplete.storyboard */; };
 		520AC6751D094C6D000A8754 /* NZAutoCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520AC6741D094C6D000A8754 /* NZAutoCompleteViewController.swift */; };
@@ -24,7 +28,6 @@
 		5240D9FF1D07F7610071D287 /* DefectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5240D9FE1D07F7610071D287 /* DefectCell.swift */; };
 		5240DA041D0809F20071D287 /* NZDropDown.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5240DA031D0809F20071D287 /* NZDropDown.storyboard */; };
 		5240DA061D080A1E0071D287 /* NZDropDownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5240DA051D080A1E0071D287 /* NZDropDownViewController.swift */; };
-		5240DA091D081CA10071D287 /* AutoCompleteTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5240DA081D081CA10071D287 /* AutoCompleteTextField.swift */; };
 		52499B0A1D06A19F0003F6D5 /* CellLabelStatic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52499B091D06A19F0003F6D5 /* CellLabelStatic.swift */; };
 		52499B0D1D06B70C0003F6D5 /* RowModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52499B0C1D06B70C0003F6D5 /* RowModel.swift */; };
 		52499B0F1D06BA410003F6D5 /* CellDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52499B0E1D06BA410003F6D5 /* CellDropDown.swift */; };
@@ -51,6 +54,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		184E425D1D0C2EA20073CF60 /* AddDefectDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDefectDetailViewController.swift; sourceTree = "<group>"; };
+		184E425F1D0C4BFD0073CF60 /* NZDropDownIconColorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NZDropDownIconColorCell.swift; sourceTree = "<group>"; };
+		184E42611D0DA65B0073CF60 /* DefectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DefectModel.swift; path = RealTransfer/Libraries/NZDropDown/DefectModel.swift; sourceTree = SOURCE_ROOT; };
+		184E42651D0DB7DC0073CF60 /* CustomerInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerInfoViewController.swift; sourceTree = "<group>"; };
 		5204FF431D06D55E00A3991B /* NZSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NZSplitViewController.swift; sourceTree = "<group>"; };
 		520AC6721D094C3C000A8754 /* NZAutoComplete.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NZAutoComplete.storyboard; sourceTree = "<group>"; };
 		520AC6741D094C6D000A8754 /* NZAutoCompleteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NZAutoCompleteViewController.swift; sourceTree = "<group>"; };
@@ -68,7 +75,6 @@
 		5240D9FE1D07F7610071D287 /* DefectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefectCell.swift; sourceTree = "<group>"; };
 		5240DA031D0809F20071D287 /* NZDropDown.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NZDropDown.storyboard; sourceTree = "<group>"; };
 		5240DA051D080A1E0071D287 /* NZDropDownViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NZDropDownViewController.swift; sourceTree = "<group>"; };
-		5240DA081D081CA10071D287 /* AutoCompleteTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoCompleteTextField.swift; sourceTree = "<group>"; };
 		52499B091D06A19F0003F6D5 /* CellLabelStatic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellLabelStatic.swift; sourceTree = "<group>"; };
 		52499B0C1D06B70C0003F6D5 /* RowModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowModel.swift; sourceTree = "<group>"; };
 		52499B0E1D06BA410003F6D5 /* CellDropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellDropDown.swift; sourceTree = "<group>"; };
@@ -131,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				520AC67C1D096236000A8754 /* AddDefectViewController.swift */,
+				184E425D1D0C2EA20073CF60 /* AddDefectDetailViewController.swift */,
 			);
 			path = AddDefect;
 			sourceTree = "<group>";
@@ -160,21 +167,15 @@
 				5240DA031D0809F20071D287 /* NZDropDown.storyboard */,
 				5240DA051D080A1E0071D287 /* NZDropDownViewController.swift */,
 				5218E5741D09123C008B5402 /* NZDropDowCell.swift */,
+				184E425F1D0C4BFD0073CF60 /* NZDropDownIconColorCell.swift */,
 			);
 			path = NZDropDown;
-			sourceTree = "<group>";
-		};
-		5240DA071D081CA10071D287 /* AutoCompleteTextField */ = {
-			isa = PBXGroup;
-			children = (
-				5240DA081D081CA10071D287 /* AutoCompleteTextField.swift */,
-			);
-			path = AutoCompleteTextField;
 			sourceTree = "<group>";
 		};
 		52499B071D06A17D0003F6D5 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				184E42611D0DA65B0073CF60 /* DefectModel.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -217,6 +218,7 @@
 				5284FD601D05763D006C5D1B /* DefectViewController.swift */,
 				5299C3CD1D066C810021DD97 /* GettingStartViewController.swift */,
 				5240D9FC1D07F6CC0071D287 /* DefectListViewController.swift */,
+				184E42651D0DB7DC0073CF60 /* CustomerInfoViewController.swift */,
 			);
 			path = Defect;
 			sourceTree = "<group>";
@@ -262,7 +264,6 @@
 			isa = PBXGroup;
 			children = (
 				520AC6711D094C25000A8754 /* NZAutoCompleteTextField */,
-				5240DA071D081CA10071D287 /* AutoCompleteTextField */,
 				5240DA021D0809E20071D287 /* NZDropDown */,
 				521A7B2F1D05503100971B7B /* Queue */,
 				529056031D0519EE00B7D28C /* NZNavigationController */,
@@ -349,7 +350,7 @@
 				TargetAttributes = {
 					529055E91D0518DE00B7D28C = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = M6F53MQES3;
+						DevelopmentTeam = T827QP7R38;
 					};
 				};
 			};
@@ -396,12 +397,13 @@
 				5290560B1D0519EE00B7D28C /* NZNavigationViewController.swift in Sources */,
 				5284FD611D05763D006C5D1B /* DefectViewController.swift in Sources */,
 				521A7B281D05305200971B7B /* UIFontExtention.swift in Sources */,
-				5240DA091D081CA10071D287 /* AutoCompleteTextField.swift in Sources */,
 				5290560D1D0519EE00B7D28C /* NZPopoverView.swift in Sources */,
 				5218E5751D09123C008B5402 /* NZDropDowCell.swift in Sources */,
 				52499B0F1D06BA410003F6D5 /* CellDropDown.swift in Sources */,
 				5204FF441D06D55E00A3991B /* NZSplitViewController.swift in Sources */,
 				5299C3CE1D066C810021DD97 /* GettingStartViewController.swift in Sources */,
+				184E42661D0DB7DC0073CF60 /* CustomerInfoViewController.swift in Sources */,
+				184E42621D0DA65B0073CF60 /* DefectModel.swift in Sources */,
 				520AC67D1D096236000A8754 /* AddDefectViewController.swift in Sources */,
 				5240D9FD1D07F6CC0071D287 /* DefectListViewController.swift in Sources */,
 				5290560E1D0519EE00B7D28C /* NZRow.swift in Sources */,
@@ -410,6 +412,7 @@
 				520AC67A1D094D76000A8754 /* NZAutoCompleteCell.swift in Sources */,
 				52499B111D06BD110003F6D5 /* CellTxtSearch.swift in Sources */,
 				529F94761D0924A40089ED52 /* DropDownModel.swift in Sources */,
+				184E425E1D0C2EA20073CF60 /* AddDefectDetailViewController.swift in Sources */,
 				529056141D051C6B00B7D28C /* ProjectViewController.swift in Sources */,
 				52499B0D1D06B70C0003F6D5 /* RowModel.swift in Sources */,
 				52499B131D06C70C0003F6D5 /* CellInfoLabel.swift in Sources */,
@@ -420,6 +423,7 @@
 				5240DA061D080A1E0071D287 /* NZDropDownViewController.swift in Sources */,
 				521A7B311D05504C00971B7B /* Queue.swift in Sources */,
 				52499B151D06C7CF0003F6D5 /* RowInfoModel.swift in Sources */,
+				184E42601D0C4BFD0073CF60 /* NZDropDownIconColorCell.swift in Sources */,
 				5284FD5E1D0565AF006C5D1B /* ProjectModel.swift in Sources */,
 				521A7B241D05277700971B7B /* UIViewExtension.swift in Sources */,
 				521A7B261D05291900971B7B /* UIColorExtension.swift in Sources */,
@@ -537,11 +541,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				INFOPLIST_FILE = RealTransfer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mint.RealTransfer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -551,11 +559,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				INFOPLIST_FILE = RealTransfer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mint.RealTransfer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;

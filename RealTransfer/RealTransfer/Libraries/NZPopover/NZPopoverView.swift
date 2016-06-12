@@ -82,7 +82,7 @@ class NZPopoverView: UIView {
             self.frame = frame
             self.setNeedsDisplay()
             
-            rowView.addTarget(self, action: Selector("clickRow:"), forControlEvents: UIControlEvents.TouchUpInside)
+            rowView.addTarget(self, action: #selector(NZPopoverView.clickRow(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             
             y = y + NZPopoverView.rowHeight
             index = index + 1

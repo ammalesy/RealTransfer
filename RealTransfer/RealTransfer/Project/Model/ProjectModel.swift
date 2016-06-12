@@ -17,7 +17,7 @@ class ProjectModel: NSObject {
     
     class func dummyData() -> NSMutableArray {
         let array:NSMutableArray = NSMutableArray()
-        for var i = 0; i < 10; i++ {
+        for _ in 0 ..< 10 {
             
             let model:ProjectModel = ProjectModel()
             model.title = "The Capital Ekamai-Thomglor"
