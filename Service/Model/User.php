@@ -50,7 +50,7 @@
 		                                   	AND   assign_user_id = '".$user_id."'
 										  ");
 			$return = array();
-			while ($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
+			while (@$row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
 				array_push($return, $row);
 			}
 
