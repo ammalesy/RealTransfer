@@ -12,7 +12,28 @@
 		{
 			# code...
 		}
+		public static function getUserByRole($role) {
 
+			$conn = Database::condo_common();
+			$result = mysqli_query($conn, "	SELECT pm_id, pm_name,user_id, user_permission, user_pers_fname, user_pers_lname,user_pers_user_id
+											FROM tb_permission JOIN
+												(SELECT user_id, user_permission, user_pers_fname, user_pers_lname,user_pers_user_id
+												 FROM tb_user JOIN tb_user_personal_info ON (user_id = user_pers_user_id)) tb_user_join
+												 ON (pm_id = user_permission) 
+											WHERE pm_name = '".$role."'
+									");
+			$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+
+			if($row){
+
+				return $row;
+
+			}else {
+				return FALSE;
+			}
+			mysqli_free_result($result);
+			mysqli_close($conn);
+		}
 		public static function login($username, $password) {
 
 			$conn = Database::condo_common();
@@ -50,7 +71,7 @@
 		                                   	AND   assign_user_id = '".$user_id."'
 										  ");
 			$return = array();
-			while (@$row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
+			while ($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
 				array_push($return, $row);
 			}
 
