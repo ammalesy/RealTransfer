@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0BC5982B12BA80B76DCC54AD /* Pods_RealTransfer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418BCD69E7A020F1D1E5839B /* Pods_RealTransfer.framework */; };
 		184E425E1D0C2EA20073CF60 /* AddDefectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184E425D1D0C2EA20073CF60 /* AddDefectDetailViewController.swift */; };
 		184E42601D0C4BFD0073CF60 /* NZDropDownIconColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184E425F1D0C4BFD0073CF60 /* NZDropDownIconColorCell.swift */; };
 		184E42621D0DA65B0073CF60 /* DefectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184E42611D0DA65B0073CF60 /* DefectModel.swift */; };
 		184E42661D0DB7DC0073CF60 /* CustomerInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184E42651D0DB7DC0073CF60 /* CustomerInfoViewController.swift */; };
+		1854F69C1D12FC54003B9FE0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1854F69B1D12FC54003B9FE0 /* User.swift */; };
+		1854F6AD1D130865003B9FE0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1854F6AC1D130865003B9FE0 /* Model.swift */; };
 		5204FF441D06D55E00A3991B /* NZSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5204FF431D06D55E00A3991B /* NZSplitViewController.swift */; };
 		520AC6731D094C3C000A8754 /* NZAutoComplete.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 520AC6721D094C3C000A8754 /* NZAutoComplete.storyboard */; };
 		520AC6751D094C6D000A8754 /* NZAutoCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520AC6741D094C6D000A8754 /* NZAutoCompleteViewController.swift */; };
@@ -58,6 +61,10 @@
 		184E425F1D0C4BFD0073CF60 /* NZDropDownIconColorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NZDropDownIconColorCell.swift; sourceTree = "<group>"; };
 		184E42611D0DA65B0073CF60 /* DefectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DefectModel.swift; path = RealTransfer/Libraries/NZDropDown/DefectModel.swift; sourceTree = SOURCE_ROOT; };
 		184E42651D0DB7DC0073CF60 /* CustomerInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerInfoViewController.swift; sourceTree = "<group>"; };
+		1854F69B1D12FC54003B9FE0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		1854F6AC1D130865003B9FE0 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		2B612F85474418356E01E084 /* Pods-RealTransfer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealTransfer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RealTransfer/Pods-RealTransfer.debug.xcconfig"; sourceTree = "<group>"; };
+		418BCD69E7A020F1D1E5839B /* Pods_RealTransfer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RealTransfer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5204FF431D06D55E00A3991B /* NZSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NZSplitViewController.swift; sourceTree = "<group>"; };
 		520AC6721D094C3C000A8754 /* NZAutoComplete.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NZAutoComplete.storyboard; sourceTree = "<group>"; };
 		520AC6741D094C6D000A8754 /* NZAutoCompleteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NZAutoCompleteViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +107,7 @@
 		5299C3CD1D066C810021DD97 /* GettingStartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GettingStartViewController.swift; sourceTree = "<group>"; };
 		529F94751D0924A40089ED52 /* DropDownModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownModel.swift; sourceTree = "<group>"; };
 		52C09DE21D096E7C0094405D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		E6C5D39B4B85C857D3B9D77F /* Pods-RealTransfer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealTransfer.release.xcconfig"; path = "Pods/Target Support Files/Pods-RealTransfer/Pods-RealTransfer.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,12 +116,39 @@
 			buildActionMask = 2147483647;
 			files = (
 				52C09DE31D096E7C0094405D /* MobileCoreServices.framework in Frameworks */,
+				0BC5982B12BA80B76DCC54AD /* Pods_RealTransfer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1854F69A1D12FC46003B9FE0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				1854F69B1D12FC54003B9FE0 /* User.swift */,
+				1854F6AC1D130865003B9FE0 /* Model.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		1EAD2F54B04E9A129DABE888 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2B612F85474418356E01E084 /* Pods-RealTransfer.debug.xcconfig */,
+				E6C5D39B4B85C857D3B9D77F /* Pods-RealTransfer.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		44444307A5AF2D6255AC4ADE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				418BCD69E7A020F1D1E5839B /* Pods_RealTransfer.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		520AC6711D094C25000A8754 /* NZAutoCompleteTextField */ = {
 			isa = PBXGroup;
 			children = (
@@ -229,6 +264,8 @@
 				52C09DE21D096E7C0094405D /* MobileCoreServices.framework */,
 				529055EC1D0518DE00B7D28C /* RealTransfer */,
 				529055EB1D0518DE00B7D28C /* Products */,
+				1EAD2F54B04E9A129DABE888 /* Pods */,
+				44444307A5AF2D6255AC4ADE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -243,6 +280,7 @@
 		529055EC1D0518DE00B7D28C /* RealTransfer */ = {
 			isa = PBXGroup;
 			children = (
+				1854F69A1D12FC46003B9FE0 /* Models */,
 				529056021D0519EE00B7D28C /* Libraries */,
 				521A7B221D05274800971B7B /* Extention */,
 				5290560F1D051B3200B7D28C /* Login */,
@@ -325,9 +363,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 529055FF1D0518DE00B7D28C /* Build configuration list for PBXNativeTarget "RealTransfer" */;
 			buildPhases = (
+				8B3B36D5C476EEB1F63DE56E /* Check Pods Manifest.lock */,
 				529055E61D0518DE00B7D28C /* Sources */,
 				529055E71D0518DE00B7D28C /* Frameworks */,
 				529055E81D0518DE00B7D28C /* Resources */,
+				306D828509B3C26AB0B44397 /* Embed Pods Frameworks */,
+				DDFD2E74F37D2763B16BD205 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -389,6 +430,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		306D828509B3C26AB0B44397 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RealTransfer/Pods-RealTransfer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8B3B36D5C476EEB1F63DE56E /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DDFD2E74F37D2763B16BD205 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RealTransfer/Pods-RealTransfer-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		529055E61D0518DE00B7D28C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -417,6 +506,7 @@
 				52499B0D1D06B70C0003F6D5 /* RowModel.swift in Sources */,
 				52499B131D06C70C0003F6D5 /* CellInfoLabel.swift in Sources */,
 				52499B0A1D06A19F0003F6D5 /* CellLabelStatic.swift in Sources */,
+				1854F69C1D12FC54003B9FE0 /* User.swift in Sources */,
 				521A7B331D0552B400971B7B /* ProjectCollectionViewCell.swift in Sources */,
 				529055F61D0518DE00B7D28C /* RealTransfer.xcdatamodeld in Sources */,
 				520AC6751D094C6D000A8754 /* NZAutoCompleteViewController.swift in Sources */,
@@ -428,6 +518,7 @@
 				521A7B241D05277700971B7B /* UIViewExtension.swift in Sources */,
 				521A7B261D05291900971B7B /* UIColorExtension.swift in Sources */,
 				5240D9FF1D07F7610071D287 /* DefectCell.swift in Sources */,
+				1854F6AD1D130865003B9FE0 /* Model.swift in Sources */,
 				5290560C1D0519EE00B7D28C /* NZViewController.swift in Sources */,
 				529055EE1D0518DE00B7D28C /* AppDelegate.swift in Sources */,
 			);
@@ -538,6 +629,7 @@
 		};
 		529056001D0518DE00B7D28C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B612F85474418356E01E084 /* Pods-RealTransfer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -550,12 +642,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mint.RealTransfer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_INCLUDE_PATHS = "";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
 		529056011D0518DE00B7D28C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E6C5D39B4B85C857D3B9D77F /* Pods-RealTransfer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -568,6 +662,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mint.RealTransfer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_INCLUDE_PATHS = "";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
