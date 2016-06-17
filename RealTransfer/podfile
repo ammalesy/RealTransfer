@@ -9,6 +9,7 @@ use_frameworks!
 
 target 'RealTransfer' do
 pod 'Alamofire', '~> 3.4'
-
+pod 'SwiftSpinner'
+pod 'SDWebImage', '~>3.8'
 end
 

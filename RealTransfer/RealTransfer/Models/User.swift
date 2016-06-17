@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Foundation
+import SwiftSpinner
 import Alamofire
 
 class User: Model,NSCoding {
@@ -69,6 +71,7 @@ class User: Model,NSCoding {
     
     func login(handler: (Bool?) -> Void){
         
+        SwiftSpinner.show("Loging in..", animated: true)
         
         Alamofire.request(.GET, "http://127.0.0.1/Service/User/login.php?username=\(self.username!)&password=\(self.password!)", parameters: [:])
             .responseJSON { response in
@@ -80,6 +83,7 @@ class User: Model,NSCoding {
                 if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
                     print("JSON: \(JSON)")
                     if JSON.objectForKey("status") as! String == "200" {
+                        self.user_id = JSON.objectForKey("user_id") as? String
                         self.user_permission = JSON.objectForKey("user_permission") as? String
                         self.user_pers_fname = JSON.objectForKey("user_pers_fname") as? String
                         self.user_pers_lname = JSON.objectForKey("user_pers_lname") as? String
@@ -89,8 +93,10 @@ class User: Model,NSCoding {
                         self.user_work_user_id = JSON.objectForKey("user_work_user_id") as? String
                         self.doCacheUSer()
                         handler(true)
+                        SwiftSpinner.hide()
                     }else{
                         handler(false)
+                        SwiftSpinner.hide()
                     }
                     
                 }

@@ -48,7 +48,7 @@ class LoginViewController: NZViewController {
         user?.username = self.usernameTxt.text
         user?.password = self.passwordTxt.text
         user?.login({ (result) in
-            
+    
             if result == true {
                 let nzNavController:NZNavigationViewController = UIStoryboard(name: "NZNav", bundle: nil).instantiateViewControllerWithIdentifier("NZNavigationViewController") as! NZNavigationViewController
                 let rootView:NZViewController = self.storyboard?.instantiateViewControllerWithIdentifier(ROOT_VIEW_CONTROLLER) as! NZViewController

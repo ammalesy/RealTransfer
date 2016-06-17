@@ -14,6 +14,10 @@
 		184E42661D0DB7DC0073CF60 /* CustomerInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184E42651D0DB7DC0073CF60 /* CustomerInfoViewController.swift */; };
 		1854F69C1D12FC54003B9FE0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1854F69B1D12FC54003B9FE0 /* User.swift */; };
 		1854F6AD1D130865003B9FE0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1854F6AC1D130865003B9FE0 /* Model.swift */; };
+		1889D9DE1D1450400095507F /* AlamofireNetworkActivityIndicator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1889D9DD1D1450400095507F /* AlamofireNetworkActivityIndicator.framework */; };
+		1889D9E11D1451FC0095507F /* SwiftSpinner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1889D9E01D1451FC0095507F /* SwiftSpinner.framework */; };
+		18AACE171D145ACA0098F5BA /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AACE161D145ACA0098F5BA /* ProjectModel.swift */; };
+		18DF98961D146280004BE990 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18DF98951D146280004BE990 /* SDWebImage.framework */; };
 		5204FF441D06D55E00A3991B /* NZSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5204FF431D06D55E00A3991B /* NZSplitViewController.swift */; };
 		520AC6731D094C3C000A8754 /* NZAutoComplete.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 520AC6721D094C3C000A8754 /* NZAutoComplete.storyboard */; };
 		520AC6751D094C6D000A8754 /* NZAutoCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520AC6741D094C6D000A8754 /* NZAutoCompleteViewController.swift */; };
@@ -37,7 +41,6 @@
 		52499B111D06BD110003F6D5 /* CellTxtSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52499B101D06BD110003F6D5 /* CellTxtSearch.swift */; };
 		52499B131D06C70C0003F6D5 /* CellInfoLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52499B121D06C70C0003F6D5 /* CellInfoLabel.swift */; };
 		52499B151D06C7CF0003F6D5 /* RowInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52499B141D06C7CF0003F6D5 /* RowInfoModel.swift */; };
-		5284FD5E1D0565AF006C5D1B /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5284FD5D1D0565AF006C5D1B /* ProjectModel.swift */; };
 		5284FD611D05763D006C5D1B /* DefectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5284FD601D05763D006C5D1B /* DefectViewController.swift */; };
 		529055EE1D0518DE00B7D28C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529055ED1D0518DE00B7D28C /* AppDelegate.swift */; };
 		529055F31D0518DE00B7D28C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 529055F11D0518DE00B7D28C /* Main.storyboard */; };
@@ -63,6 +66,11 @@
 		184E42651D0DB7DC0073CF60 /* CustomerInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerInfoViewController.swift; sourceTree = "<group>"; };
 		1854F69B1D12FC54003B9FE0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1854F6AC1D130865003B9FE0 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		1889D9DD1D1450400095507F /* AlamofireNetworkActivityIndicator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireNetworkActivityIndicator.framework; path = "../../../Library/Developer/Xcode/DerivedData/RealTransfer-dxjmravslvqqrxcfhswvgaqtusax/Build/Products/Debug-iphonesimulator/AlamofireNetworkActivityIndicator.framework"; sourceTree = "<group>"; };
+		1889D9E01D1451FC0095507F /* SwiftSpinner.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftSpinner.framework; path = "../../../Library/Developer/Xcode/DerivedData/RealTransfer-dxjmravslvqqrxcfhswvgaqtusax/Build/Products/Debug-iphonesimulator/SwiftSpinner.framework"; sourceTree = "<group>"; };
+		18AACE161D145ACA0098F5BA /* ProjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectModel.swift; sourceTree = "<group>"; };
+		18AACE181D1461880098F5BA /* RealTransfer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RealTransfer-Bridging-Header.h"; sourceTree = "<group>"; };
+		18DF98951D146280004BE990 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = "Pods/../build/Debug-iphoneos/SDWebImage.framework"; sourceTree = "<group>"; };
 		2B612F85474418356E01E084 /* Pods-RealTransfer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealTransfer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RealTransfer/Pods-RealTransfer.debug.xcconfig"; sourceTree = "<group>"; };
 		418BCD69E7A020F1D1E5839B /* Pods_RealTransfer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RealTransfer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5204FF431D06D55E00A3991B /* NZSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NZSplitViewController.swift; sourceTree = "<group>"; };
@@ -88,7 +96,6 @@
 		52499B101D06BD110003F6D5 /* CellTxtSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellTxtSearch.swift; sourceTree = "<group>"; };
 		52499B121D06C70C0003F6D5 /* CellInfoLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellInfoLabel.swift; sourceTree = "<group>"; };
 		52499B141D06C7CF0003F6D5 /* RowInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowInfoModel.swift; sourceTree = "<group>"; };
-		5284FD5D1D0565AF006C5D1B /* ProjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectModel.swift; sourceTree = "<group>"; };
 		5284FD601D05763D006C5D1B /* DefectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefectViewController.swift; sourceTree = "<group>"; };
 		529055EA1D0518DE00B7D28C /* RealTransfer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealTransfer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		529055ED1D0518DE00B7D28C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +122,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18DF98961D146280004BE990 /* SDWebImage.framework in Frameworks */,
+				1889D9E11D1451FC0095507F /* SwiftSpinner.framework in Frameworks */,
+				1889D9DE1D1450400095507F /* AlamofireNetworkActivityIndicator.framework in Frameworks */,
 				52C09DE31D096E7C0094405D /* MobileCoreServices.framework in Frameworks */,
 				0BC5982B12BA80B76DCC54AD /* Pods_RealTransfer.framework in Frameworks */,
 			);
@@ -126,6 +136,7 @@
 		1854F69A1D12FC46003B9FE0 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				18AACE161D145ACA0098F5BA /* ProjectModel.swift */,
 				1854F69B1D12FC54003B9FE0 /* User.swift */,
 				1854F6AC1D130865003B9FE0 /* Model.swift */,
 			);
@@ -144,6 +155,9 @@
 		44444307A5AF2D6255AC4ADE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				18DF98951D146280004BE990 /* SDWebImage.framework */,
+				1889D9E01D1451FC0095507F /* SwiftSpinner.framework */,
+				1889D9DD1D1450400095507F /* AlamofireNetworkActivityIndicator.framework */,
 				418BCD69E7A020F1D1E5839B /* Pods_RealTransfer.framework */,
 			);
 			name = Frameworks;
@@ -237,14 +251,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		5284FD5C1D056593006C5D1B /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				5284FD5D1D0565AF006C5D1B /* ProjectModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		5284FD5F1D05762A006C5D1B /* Defect */ = {
 			isa = PBXGroup;
 			children = (
@@ -261,6 +267,7 @@
 		529055E11D0518DE00B7D28C = {
 			isa = PBXGroup;
 			children = (
+				18AACE181D1461880098F5BA /* RealTransfer-Bridging-Header.h */,
 				52C09DE21D096E7C0094405D /* MobileCoreServices.framework */,
 				529055EC1D0518DE00B7D28C /* RealTransfer */,
 				529055EB1D0518DE00B7D28C /* Products */,
@@ -341,7 +348,6 @@
 		529056121D051C6000B7D28C /* Project */ = {
 			isa = PBXGroup;
 			children = (
-				5284FD5C1D056593006C5D1B /* Model */,
 				529056131D051C6B00B7D28C /* ProjectViewController.swift */,
 				521A7B321D0552B400971B7B /* ProjectCollectionViewCell.swift */,
 			);
@@ -509,12 +515,12 @@
 				1854F69C1D12FC54003B9FE0 /* User.swift in Sources */,
 				521A7B331D0552B400971B7B /* ProjectCollectionViewCell.swift in Sources */,
 				529055F61D0518DE00B7D28C /* RealTransfer.xcdatamodeld in Sources */,
+				18AACE171D145ACA0098F5BA /* ProjectModel.swift in Sources */,
 				520AC6751D094C6D000A8754 /* NZAutoCompleteViewController.swift in Sources */,
 				5240DA061D080A1E0071D287 /* NZDropDownViewController.swift in Sources */,
 				521A7B311D05504C00971B7B /* Queue.swift in Sources */,
 				52499B151D06C7CF0003F6D5 /* RowInfoModel.swift in Sources */,
 				184E42601D0C4BFD0073CF60 /* NZDropDownIconColorCell.swift in Sources */,
-				5284FD5E1D0565AF006C5D1B /* ProjectModel.swift in Sources */,
 				521A7B241D05277700971B7B /* UIViewExtension.swift in Sources */,
 				521A7B261D05291900971B7B /* UIColorExtension.swift in Sources */,
 				5240D9FF1D07F7610071D287 /* DefectCell.swift in Sources */,
@@ -636,6 +642,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = RealTransfer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -643,6 +653,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_INCLUDE_PATHS = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "RealTransfer-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -656,6 +667,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = RealTransfer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -663,6 +678,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_INCLUDE_PATHS = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "RealTransfer-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;

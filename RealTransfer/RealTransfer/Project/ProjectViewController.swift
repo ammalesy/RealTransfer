@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 let NUMBER_OF_COLLUMN = 3
 
@@ -29,10 +30,15 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
         
     }
     override func stateConfigData() {
-        projects = ProjectModel.dummyData()
+        ProjectModel().getProject({ (list) in
+            
+            self.projects = list!
+            self.collectionView.reloadData()
+            
+        })
         self.nzNavigationController?.titleLb.text = "Dash Board"
         self.nzNavigationController?.subTitleLb.text = "QC Checker : Ammales Yamsompong"
-        self.collectionView.reloadData()
+        
     }
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
 
@@ -52,9 +58,13 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
         let model:ProjectModel = projects.objectAtIndex(indexPath.row) as! ProjectModel
         let cell:ProjectCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as! ProjectCollectionViewCell
         cell.selected = true
-        cell.title.text = model.title!
-        cell.subTitle.text = model.subTitle!
-        cell.imageView.image = model.image!
+        cell.title.text = model.pj_name!
+        cell.subTitle.text = model.pj_detail!
+        
+        let url:NSURL = NSURL(string: "http://127.0.0.1/crm/\(model.pj_image!)")!
+        cell.imageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "p1")) { (imge, error, cacheType, url) in
+            
+        }
         return cell
     }
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {

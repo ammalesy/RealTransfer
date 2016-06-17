@@ -7,7 +7,9 @@
 //
 
 import UIKit
+import SwiftSpinner
 
 class Model: NSObject {
+    
 
 }

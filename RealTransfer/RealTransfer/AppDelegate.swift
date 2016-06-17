@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreData
+import Alamofire
+
 
 let ROOT_VIEW_CONTROLLER = "ProjectViewController" //<=== Root view is subclass from "NZViewController"
 
@@ -19,7 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-
+    
+        //NetworkActivityIndicatorManager.sharedManager.isEnabled = true
         return true
     }
 
