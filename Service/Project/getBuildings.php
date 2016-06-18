@@ -21,7 +21,9 @@
 			echo json_encode($return);
 		}else{
 
-
+			$return['message'] = "SUCCESS";
+			$return['status'] = "200";
+			$return['buildingList'] = $result;
 			echo json_encode($result);
 		}
 

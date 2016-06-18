@@ -22,8 +22,10 @@
 			echo json_encode($return);
 		}else{
 
-
-			echo json_encode($result);
+			$return['message'] = "SUCCESS";
+			$return['status'] = "200";
+			$return['roomList'] = $result;
+			echo json_encode($return);
 		}
 
 

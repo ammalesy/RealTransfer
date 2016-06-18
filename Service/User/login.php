@@ -12,7 +12,7 @@
 
 	}else{
 
-		$result = User::login($username, $password);
+		$result = User::login($username, md5($password));
 		if($result == FALSE) {
 
 			$return['message'] = "FAIL";
@@ -21,7 +21,8 @@
 			echo json_encode($return);
 		}else{
 
-
+			$result['message'] = "SUCCESS";
+			$result['status'] = "200";
 			echo json_encode($result);
 		}
 
