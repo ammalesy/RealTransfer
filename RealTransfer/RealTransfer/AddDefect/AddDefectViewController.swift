@@ -24,6 +24,32 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
         // Do any additional setup after loading the view.
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        Queue.mainQueue { () -> Void in
+            self.showGettingStartView()
+        }
+    }
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+    }
+    func showGettingStartView(){
+        let controller:GettingStartViewController = self.storyboard?.instantiateViewControllerWithIdentifier("GettingStartViewController") as! GettingStartViewController
+        controller.view.alpha = 0
+        UIView.animateWithDuration(1, animations: { 
+            controller.view.alpha = 1
+            controller.view.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.7)
+            controller.view.frame = (self.splitController!.nzNavigationController?.view.frame)!
+            controller.view.layoutIfNeeded()
+            controller.nzNavigationController = self.splitController!.nzNavigationController
+            
+            self.splitController!.nzNavigationController?.addChildViewController(controller)
+            self.splitController!.nzNavigationController?.view.addSubview(controller.view)
+            controller.didMoveToParentViewController(self.splitController!.nzNavigationController)
+        }) { (result) in
+                
+        }
+        
+
     }
 
     override func didReceiveMemoryWarning() {

@@ -18,6 +18,7 @@
 		1889D9E11D1451FC0095507F /* SwiftSpinner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1889D9E01D1451FC0095507F /* SwiftSpinner.framework */; };
 		18AACE171D145ACA0098F5BA /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AACE161D145ACA0098F5BA /* ProjectModel.swift */; };
 		18DF98961D146280004BE990 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18DF98951D146280004BE990 /* SDWebImage.framework */; };
+		18DF98981D14F31E004BE990 /* Building.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DF98971D14F31E004BE990 /* Building.swift */; };
 		5204FF441D06D55E00A3991B /* NZSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5204FF431D06D55E00A3991B /* NZSplitViewController.swift */; };
 		520AC6731D094C3C000A8754 /* NZAutoComplete.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 520AC6721D094C3C000A8754 /* NZAutoComplete.storyboard */; };
 		520AC6751D094C6D000A8754 /* NZAutoCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520AC6741D094C6D000A8754 /* NZAutoCompleteViewController.swift */; };
@@ -71,6 +72,7 @@
 		18AACE161D145ACA0098F5BA /* ProjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectModel.swift; sourceTree = "<group>"; };
 		18AACE181D1461880098F5BA /* RealTransfer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RealTransfer-Bridging-Header.h"; sourceTree = "<group>"; };
 		18DF98951D146280004BE990 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = "Pods/../build/Debug-iphoneos/SDWebImage.framework"; sourceTree = "<group>"; };
+		18DF98971D14F31E004BE990 /* Building.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Building.swift; sourceTree = "<group>"; };
 		2B612F85474418356E01E084 /* Pods-RealTransfer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealTransfer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RealTransfer/Pods-RealTransfer.debug.xcconfig"; sourceTree = "<group>"; };
 		418BCD69E7A020F1D1E5839B /* Pods_RealTransfer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RealTransfer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5204FF431D06D55E00A3991B /* NZSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NZSplitViewController.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				18AACE161D145ACA0098F5BA /* ProjectModel.swift */,
 				1854F69B1D12FC54003B9FE0 /* User.swift */,
 				1854F6AC1D130865003B9FE0 /* Model.swift */,
+				18DF98971D14F31E004BE990 /* Building.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -490,6 +493,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5290560B1D0519EE00B7D28C /* NZNavigationViewController.swift in Sources */,
+				18DF98981D14F31E004BE990 /* Building.swift in Sources */,
 				5284FD611D05763D006C5D1B /* DefectViewController.swift in Sources */,
 				521A7B281D05305200971B7B /* UIFontExtention.swift in Sources */,
 				5290560D1D0519EE00B7D28C /* NZPopoverView.swift in Sources */,

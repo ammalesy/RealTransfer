@@ -14,6 +14,7 @@ class RowModel: NSObject {
     var detail:String?
     var style:String!
     var colorNextbutton:UIColor?
+    var identifier:String?
     
     convenience init(head:String!, detail:String!) {
         self.init()

@@ -1,18 +1,20 @@
 //
-//  ProjectModel.swift
+//  Building.swift
 //  RealTransfer
 //
-//  Created by AmmalesPSC91 on 6/6/2559 BE.
-//  Copyright © 2559 nuizoro. All rights reserved.
+//  Created by Apple on 6/18/16.
+//  Copyright © 2016 nuizoro. All rights reserved.
 //
 
 import UIKit
-import Foundation
 import Alamofire
 import SwiftSpinner
 
-class ProjectModel: NSObject {
-
+class Building: Model {
+    
+    var image:UIImage?
+    
+    
     //DATA
     var assign_id:String?
     var assign_project_id:String?
@@ -33,7 +35,7 @@ class ProjectModel: NSObject {
         
         Alamofire.request(.GET, "http://127.0.0.1/Service/User/getProject.php?user_id=\(user.user_id!)", parameters: [:])
             .responseJSON { response in
-
+                
                 if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
                     print("JSON: \(JSON)")
                     if JSON.objectForKey("status") as! String == "200" {
@@ -50,6 +52,7 @@ class ProjectModel: NSObject {
                             pj.pj_image = project.objectForKey("pj_image") as? String
                             pj.pj_name = project.objectForKey("pj_name") as? String
                             
+
                             returnList.addObject(pj)
                         }
                         
@@ -66,5 +69,5 @@ class ProjectModel: NSObject {
                 }
         }
     }
-    
+
 }

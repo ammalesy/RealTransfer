@@ -55,6 +55,7 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
         self.countDefectLb.text = "Defect ทั้งหมด (\(list.count))"
         
     }
+    
     func createGroupListDataByListData() {
         groupList.removeAllObjects()
         for model:DefectModel in ((displayList as NSArray) as! [DefectModel]) {

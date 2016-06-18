@@ -21,6 +21,7 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
         super.viewDidLoad()
     }
     
+    
     override func configLayout() {
 
         self.collectionView.dataSource = self
@@ -62,9 +63,7 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
         cell.subTitle.text = model.pj_detail!
         
         let url:NSURL = NSURL(string: "http://127.0.0.1/crm/\(model.pj_image!)")!
-        cell.imageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "p1")) { (imge, error, cacheType, url) in
-            
-        }
+        cell.imageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "p1"), options: SDWebImageOptions.RefreshCached)
         return cell
     }
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
@@ -85,9 +84,13 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         self.nzNavigationController?.hideMenuPopoverIfViewIsShowing()
         
-        let controller:DefectViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DefectViewController") as! DefectViewController
-        self.nzNavigationController?.pushViewController(controller, completion: { () -> Void in
-            
+        Queue.mainQueue({ () -> Void in
+            let split:NZSplitViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("NZSplitViewController") as! NZSplitViewController
+            split.minimumPrimaryColumnWidth = 400
+            split.maximumPrimaryColumnWidth = 400
+            self.nzNavigationController?.pushViewController(split, completion: { () -> Void in
+                
+            })
         })
         
     }

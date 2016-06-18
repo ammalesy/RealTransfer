@@ -16,7 +16,6 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
     
     var dropDownController:NZDropDownViewController?
     var autoCompleteController:NZAutoCompleteViewController?
-    
     var nzNavigationController:NZNavigationViewController?
 
     @IBOutlet weak var exitBtn: UIButton!
@@ -25,6 +24,10 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
     @IBOutlet weak var tableView: UITableView!
     
     var components:NSMutableArray = NSMutableArray()
+    
+    
+    var listBuilding:NSMutableArray = NSMutableArray()
+    var listCS:NSMutableArray = NSMutableArray()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +49,7 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         let row2:RowModel = RowModel()
         row2.head = "Building : "
         row2.style = CELL_DROUP_DOWN_IDENTIFIER
+        row2.identifier = "BUILDING_LIST"
         components.addObject(row2);
         
         let row3:RowModel = RowModel()
@@ -84,6 +88,7 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         row5.head = "CS : "
         row5.detail = "Tanakarn Chinratana"
         row5.style = CELL_DROUP_DOWN_IDENTIFIER
+        row5.identifier = "CS_LIST"
         components.addObject(row5);
     }
     
@@ -158,14 +163,7 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             
             self.hideView()
             
-            Queue.mainQueue({ () -> Void in
-                let split:NZSplitViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("NZSplitViewController") as! NZSplitViewController
-                split.minimumPrimaryColumnWidth = 400
-                split.maximumPrimaryColumnWidth = 400
-                self.nzNavigationController?.pushViewController(split, completion: { () -> Void in
-                    
-                })
-            })
+            
         }
     }
     @IBAction func exitAction(sender: AnyObject) {
@@ -192,7 +190,15 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
                 return
             }
             let cell:CellDropDown = self.tableView.cellForRowAtIndexPath(indexPath) as! CellDropDown
-            self.generateDropDownAndParseDataWithCell(cell)
+            if data.identifier == "BUILDING_LIST"
+            {
+                self.generateDropDownAndParseDataWithCell(cell,dataList: listBuilding)
+            }
+            else if data.identifier == "CS_LIST"
+            {
+                self.generateDropDownAndParseDataWithCell(cell,dataList: listCS)
+            }
+            
             
         }else if data.style == CELL_TXT_SEARCH_IDENTIFIER
         {
@@ -258,20 +264,15 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         
         
     }
-    func generateDropDownAndParseDataWithCell(cell:CellDropDown) {
+    func generateDropDownAndParseDataWithCell(cell:CellDropDown, dataList:NSMutableArray!) {
+        
         dropDownController = UIStoryboard(name: "NZDropDown", bundle: nil).instantiateViewControllerWithIdentifier("NZDropDownViewController") as? NZDropDownViewController
         dropDownController?.labelReference = cell.rightLabel
         
-        dropDownController!.rawObjects.addObject(DropDownModel(text: "1"))
-        dropDownController!.rawObjects.addObject(DropDownModel(text: "2"))
-        dropDownController!.rawObjects.addObject(DropDownModel(text: "3"))
-        dropDownController!.rawObjects.addObject(DropDownModel(text: "4"))
-        dropDownController!.rawObjects.addObject(DropDownModel(text: "5"))
-        dropDownController!.rawObjects.addObject(DropDownModel(text: "6"))
-        dropDownController!.rawObjects.addObject(DropDownModel(text: "7"))
-        dropDownController!.rawObjects.addObject(DropDownModel(text: "8"))
-        dropDownController!.rawObjects.addObject(DropDownModel(text: "9"))
-        dropDownController!.rawObjects.addObject(DropDownModel(text: "10"))
+        for data:DropDownModel in ((dataList as NSArray) as! [DropDownModel])
+        {
+            dropDownController!.rawObjects.addObject(data)
+        }
         
         dropDownController!.displayObjects = dropDownController!.rawObjects.mutableCopy() as! NSMutableArray
         
