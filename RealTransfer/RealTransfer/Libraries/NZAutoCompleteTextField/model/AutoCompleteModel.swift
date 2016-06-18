@@ -12,6 +12,9 @@ class AutoCompleteModel: NSObject {
     
     var text:String!
     
+    var identifier:String?
+    var userInfo:AnyObject?
+    
     
     convenience init(text:String!) {
         self.init()

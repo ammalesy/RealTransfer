@@ -11,12 +11,15 @@
 		}
 
 		public static function condo_common() {
-
-			return mysqli_connect("localhost","root","","condo_common_real_transfer");
+			$connect = mysqli_connect("localhost","root","","condo_common");
+			mysqli_set_charset($connect ,"utf8");
+			return $connect;
 		}
 		public static function connect_db_by_dbName($dbName) {
 
-			return mysqli_connect("localhost","root","",$dbName);
+			$connect = mysqli_connect("localhost","root","",$dbName);
+			mysqli_set_charset($connect ,"utf8");
+			return $connect;
 		}
 	}
 

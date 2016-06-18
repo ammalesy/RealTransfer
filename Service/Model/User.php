@@ -22,15 +22,35 @@
 												 ON (pm_id = user_permission) 
 											WHERE pm_name = '".$role."'
 									");
-			$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-
-			if($row){
-
-				return $row;
-
-			}else {
-				return FALSE;
+			$return = array();
+			while ($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
+				array_push($return, $row);
 			}
+
+			return $return;
+
+			mysqli_free_result($result);
+			mysqli_close($conn);
+		}
+		public static function getUserByID($user_id) {
+
+			$conn = Database::condo_common();
+			$result = mysqli_query($conn, "	SELECT * FROM tb_user JOIN tb_user_personal_info ON (user_pers_user_id = user_id) WHERE user_id = ".$user_id."
+									");
+			$return = array();
+			while ($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
+				array_push($return, $row);
+			}
+
+			if(count($return) == 1){
+
+				$user = $return[0];
+
+				return $user;
+			}else{
+				return array();
+			}
+
 			mysqli_free_result($result);
 			mysqli_close($conn);
 		}

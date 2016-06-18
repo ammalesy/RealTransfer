@@ -10,6 +10,7 @@ import UIKit
 import SDWebImage
 
 let NUMBER_OF_COLLUMN = 3
+var PROJECT:ProjectModel?
 
 class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     
@@ -37,8 +38,10 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
             self.collectionView.reloadData()
             
         })
+        let user:User = User().getOnCache()!
+        
         self.nzNavigationController?.titleLb.text = "Dash Board"
-        self.nzNavigationController?.subTitleLb.text = "QC Checker : Ammales Yamsompong"
+        self.nzNavigationController?.subTitleLb.text = "\(user.user_work_position!) : \(user.user_pers_fname!) \(user.user_pers_lname!)"
         
     }
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -62,7 +65,7 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
         cell.title.text = model.pj_name!
         cell.subTitle.text = model.pj_detail!
         
-        let url:NSURL = NSURL(string: "http://127.0.0.1/crm/\(model.pj_image!)")!
+        let url:NSURL = NSURL(string: "http://\(DOMAIN_NAME)/crm/\(model.pj_image!)")!
         cell.imageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "p1"), options: SDWebImageOptions.RefreshCached)
         return cell
     }
@@ -83,9 +86,18 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
     }
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         self.nzNavigationController?.hideMenuPopoverIfViewIsShowing()
-        
+        let model:ProjectModel = projects.objectAtIndex(indexPath.row) as! ProjectModel
         Queue.mainQueue({ () -> Void in
             let split:NZSplitViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("NZSplitViewController") as! NZSplitViewController
+            let controllers:[UIViewController] = split.viewControllers;
+            let nav:UINavigationController = controllers[1] as! UINavigationController
+            let subsNav:[UIViewController] = nav.viewControllers
+            if subsNav[0] is AddDefectViewController {
+                let addDefectViewController:AddDefectViewController = subsNav[0] as! AddDefectViewController
+                addDefectViewController.project = model
+                PROJECT = model
+            }
+            
             split.minimumPrimaryColumnWidth = 400
             split.maximumPrimaryColumnWidth = 400
             self.nzNavigationController?.pushViewController(split, completion: { () -> Void in

@@ -13,10 +13,10 @@
 	}else{
 
 		$result = User::projects($user_id);
-		if($result == FALSE) {
+		if(count($result) == 0) {
 
-			$return['message'] = "FAIL";
-			$return['status'] = "304";
+			$return['message'] = "Empty";
+			$return['status'] = "999";
 
 			echo json_encode($return);
 		}else{

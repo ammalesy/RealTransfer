@@ -1,19 +1,22 @@
 <?php
 	
-
+	header('Content-Type: application/json; charset=utf-8');
+	
 	require_once('../bridge_file.php');
 
-	$result = User::getUserByRole("CS");
-	if($result == FALSE) {
+	$result = User::getUserByRole("Admin");
+	if(count($result) == 0) {
 
-			$return['message'] = "Empty";
-			$return['status'] = "999";
+		$return['message'] = "Empty";
+		$return['status'] = "999";
 
 			echo json_encode($return);
 	}else{
 
-
-			echo json_encode($result);
+		$return['message'] = "SUCCESS";
+		$return['status'] = "200";
+		$return['userList'] = $result;
+		echo json_encode($return);
 	}
 	
 

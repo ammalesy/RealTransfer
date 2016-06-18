@@ -73,7 +73,7 @@ class User: Model,NSCoding {
         
         SwiftSpinner.show("Loging in..", animated: true)
         
-        Alamofire.request(.GET, "http://127.0.0.1/Service/User/login.php?username=\(self.username!)&password=\(self.password!)", parameters: [:])
+        Alamofire.request(.GET, "http://\(DOMAIN_NAME)/Service/User/login.php?username=\(self.username!)&password=\(self.password!)", parameters: [:])
             .responseJSON { response in
                 print(response.request)  // original URL request
                 print(response.response) // URL response
@@ -99,6 +99,9 @@ class User: Model,NSCoding {
                         SwiftSpinner.hide()
                     }
                     
+                }else{
+                    handler(false)
+                    SwiftSpinner.hide()
                 }
         }
     }

@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftSpinner
+import SDWebImage
 
 let CELL_DEFECT_IDENTIFIER = "CellDefect"
 
@@ -33,27 +36,37 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
         let firstModel:DropDownModel = DropDownModel(text: "เลือกดูทั้งหมด")
         firstModel.identifier = "ALL"
         dropDownList.addObject(firstModel)
-        dropDownList.addObject(DropDownModel(text: "1", iconColor: UIColor.redColor()))
-        dropDownList.addObject(DropDownModel(text: "2", iconColor: UIColor.greenColor()))
-        dropDownList.addObject(DropDownModel(text: "3", iconColor: UIColor.blueColor()))
-        dropDownList.addObject(DropDownModel(text: "4", iconColor: UIColor.orangeColor()))
         
+        let categoryList:NSDictionary = Category.getCategory()
         
-        list.addObject(DefectModel(categoryName: "1", subCategoryName: "11", listSubCategory: "111"))
-        list.addObject(DefectModel(categoryName: "1", subCategoryName: "22", listSubCategory: "222"))
-        list.addObject(DefectModel(categoryName: "2", subCategoryName: "33", listSubCategory: "333"))
-        list.addObject(DefectModel(categoryName: "2", subCategoryName: "44", listSubCategory: "444"))
-        list.addObject(DefectModel(categoryName: "2", subCategoryName: "55", listSubCategory: "555"))
-        list.addObject(DefectModel(categoryName: "3", subCategoryName: "66", listSubCategory: "666"))
-        list.addObject(DefectModel(categoryName: "3", subCategoryName: "77", listSubCategory: "777"))
-        list.addObject(DefectModel(categoryName: "4", subCategoryName: "88", listSubCategory: "888"))
-        list.addObject(DefectModel(categoryName: "4", subCategoryName: "99", listSubCategory: "999"))
-        displayList = list.mutableCopy() as! NSMutableArray
-        
-        self.createGroupListDataByListData()
-        
+        for data:NSDictionary in categoryList.objectForKey("list") as! [NSDictionary] {
+            
+            let red:String = (data.objectForKey("color") as! NSDictionary).objectForKey("R") as! String
+            let green:String = (data.objectForKey("color") as! NSDictionary).objectForKey("G") as! String
+            let blue:String = (data.objectForKey("color") as! NSDictionary).objectForKey("B") as! String
+            let color:UIColor = UIColor.RGB(CGFloat((red as NSString).floatValue), G: CGFloat((green as NSString).floatValue), B: CGFloat((blue as NSString).floatValue))
+            
+            let dropDownModel = DropDownModel(text: data.objectForKey("title") as! String, iconColor: color)
+            dropDownModel.identifier = data.objectForKey("id") as! String
+            dropDownList.addObject(dropDownModel)
+        }
         self.countDefectLb.text = "Defect ทั้งหมด (\(list.count))"
-        
+    }
+    
+    func reloadData(defectRoom:DefectRoom!) {
+        Queue.mainQueue {
+            self.list.removeAllObjects()
+            for model:DefectModel in ((defectRoom.listDefect! as NSArray) as! [DefectModel]) {
+                model.needDisplayText()
+                self.list.addObject(model)
+            }
+            
+            self.displayList = self.list.mutableCopy() as! NSMutableArray
+            self.createGroupListDataByListData()
+            self.tableView.reloadData()
+            
+            self.countDefectLb.text = "Defect ทั้งหมด (\(self.list.count))"
+        }
     }
     
     func createGroupListDataByListData() {
@@ -67,7 +80,7 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
     func getDropDownModelFromCategoryName(categoryName:String!)->DropDownModel? {
     
         for model:DropDownModel in ((dropDownList as NSArray) as! [DropDownModel]) {
-            if model.text == categoryName {
+            if model.identifier == categoryName {
                 return model
             }
         }
@@ -125,7 +138,7 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
         
             displayList = list.mutableCopy() as! NSMutableArray
         }else{
-            let resultPredicate:NSPredicate = NSPredicate(format: "categoryName contains[c] %@", model.text)
+            let resultPredicate:NSPredicate = NSPredicate(format: "categoryName contains[c] %@", model.identifier)
             let resultArray:[AnyObject] = list.filteredArrayUsingPredicate(resultPredicate)
             
             for model in resultArray {
@@ -157,7 +170,7 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
         let dropDownModel:DropDownModel = self.getDropDownModelFromCategoryName(categoryName)!
         
         
-        let resultPredicate:NSPredicate = NSPredicate(format: "categoryName contains[c] %@", dropDownModel.text)
+        let resultPredicate:NSPredicate = NSPredicate(format: "categoryName contains[c] %@", dropDownModel.identifier)
         let resultArray:[AnyObject] = list.filteredArrayUsingPredicate(resultPredicate)
         return resultArray.count
     }
@@ -167,14 +180,40 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
         let categoryName:String = groupList.objectAtIndex(indexPath.section) as! String
         let dropDownModel:DropDownModel = self.getDropDownModelFromCategoryName(categoryName)!
         
-        let resultPredicate:NSPredicate = NSPredicate(format: "categoryName contains[c] %@", dropDownModel.text)
+        let resultPredicate:NSPredicate = NSPredicate(format: "categoryName contains[c] %@", dropDownModel.identifier)
         let resultArray:[AnyObject] = displayList.filteredArrayUsingPredicate(resultPredicate)
         let defectModel:DefectModel = resultArray[indexPath.row] as! DefectModel
         let cell:DefectCell = tableView.dequeueReusableCellWithIdentifier(CELL_DEFECT_IDENTIFIER) as! DefectCell
         
-        cell.titleLb.text = defectModel.categoryName
-        cell.middleTextLb.text = defectModel.subCategoryName
-        cell.detailTextLb.text = defectModel.listSubCategory
+        if defectModel.realImage != nil {
+            cell.defectImageView.image = defectModel.realImage
+        }else{
+            let url:NSURL = NSURL(string: "http://\(DOMAIN_NAME)/crm/\(PROJECT!.pj_image!)")! //HARDCODE
+            cell.defectImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "p1"), options: SDWebImageOptions.RefreshCached)
+        }
+        
+        if defectModel.categoryName_displayText == nil {
+            cell.titleLb.text = defectModel.categoryName
+        }else{
+             cell.titleLb.text = defectModel.categoryName_displayText
+        }
+        
+        if defectModel.subCategoryName_displayText == nil {
+            if defectModel.subCategoryName == kOTHER_IDENTIFIER {
+                cell.middleTextLb.text = "อื่นๆ"
+            }else{
+                cell.middleTextLb.text = defectModel.subCategoryName
+            }
+            
+        }else{
+            cell.middleTextLb.text = defectModel.subCategoryName_displayText
+        }
+        
+        if defectModel.listSubCategory_displayText == nil {
+            cell.detailTextLb.text = defectModel.listSubCategory
+        }else{
+            cell.detailTextLb.text = defectModel.listSubCategory_displayText
+        }
         cell.statusIconImageView.backgroundColor = dropDownModel.iconColor
         
         return cell

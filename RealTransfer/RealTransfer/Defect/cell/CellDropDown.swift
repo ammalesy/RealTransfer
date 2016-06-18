@@ -10,4 +10,5 @@ import UIKit
 
 class CellDropDown: CellLabelStatic {
 
+    @IBOutlet weak var dropDownImage: UIImageView!
 }

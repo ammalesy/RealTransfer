@@ -12,6 +12,7 @@ import Alamofire
 
 
 let ROOT_VIEW_CONTROLLER = "ProjectViewController" //<=== Root view is subclass from "NZViewController"
+let DOMAIN_NAME = "192.168.1.2"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

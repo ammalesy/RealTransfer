@@ -14,6 +14,8 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
     var splitController:NZSplitViewController?
     var imagePicker:UIImagePickerController?
     var imagePickerGallery:UIImagePickerController?
+    var defectRoom:DefectRoom?
+    var project:ProjectModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,12 +37,14 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
     func showGettingStartView(){
         let controller:GettingStartViewController = self.storyboard?.instantiateViewControllerWithIdentifier("GettingStartViewController") as! GettingStartViewController
         controller.view.alpha = 0
+        controller.project = self.project
         UIView.animateWithDuration(1, animations: { 
             controller.view.alpha = 1
             controller.view.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.7)
             controller.view.frame = (self.splitController!.nzNavigationController?.view.frame)!
             controller.view.layoutIfNeeded()
             controller.nzNavigationController = self.splitController!.nzNavigationController
+            controller.nzSplitViewController = self.splitController
             
             self.splitController!.nzNavigationController?.addChildViewController(controller)
             self.splitController!.nzNavigationController?.view.addSubview(controller.view)
@@ -121,6 +125,7 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
             
             let detailController:AddDefectDetailViewController = self.storyboard?.instantiateViewControllerWithIdentifier("AddDefectDetailViewController") as! AddDefectDetailViewController
             detailController.image = image
+            detailController.defectRoom = self.defectRoom
             
             self.navigationController?.pushViewController(detailController, animated: true)
             

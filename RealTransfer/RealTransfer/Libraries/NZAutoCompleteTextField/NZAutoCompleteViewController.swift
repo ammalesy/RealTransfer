@@ -22,6 +22,8 @@ class NZAutoCompleteViewController: UIViewController,UITableViewDataSource,UITab
     
     var delegate:NZAutoCompleteViewDelegate! = nil
     
+    var userInfo:AnyObject?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self

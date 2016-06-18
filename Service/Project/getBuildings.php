@@ -13,10 +13,10 @@
 	}else{
 
 		$result = Project::buildings($db_name);
-		if($result == FALSE) {
+		if(count($result) == 0) {
 
-			$return['message'] = "FAIL";
-			$return['status'] = "304";
+			$return['message'] = "Empty";
+			$return['status'] = "999";
 
 			echo json_encode($return);
 		}else{
@@ -24,7 +24,7 @@
 			$return['message'] = "SUCCESS";
 			$return['status'] = "200";
 			$return['buildingList'] = $result;
-			echo json_encode($result);
+			echo json_encode($return);
 		}
 
 

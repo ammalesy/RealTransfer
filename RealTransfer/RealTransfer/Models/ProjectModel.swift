@@ -31,7 +31,7 @@ class ProjectModel: NSObject {
         
         let user:User = User().getOnCache()!
         
-        Alamofire.request(.GET, "http://127.0.0.1/Service/User/getProject.php?user_id=\(user.user_id!)", parameters: [:])
+        Alamofire.request(.GET, "http://\(DOMAIN_NAME)/Service/User/getProject.php?user_id=\(user.user_id!)", parameters: [:])
             .responseJSON { response in
 
                 if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {

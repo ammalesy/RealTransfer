@@ -13,6 +13,8 @@ class DropDownModel: NSObject {
     var text:String!
     var iconColor:UIColor?
     var identifier:String = ""
+    var userInfo:AnyObject?
+    
     
     
     convenience init(text:String!) {
@@ -25,6 +27,19 @@ class DropDownModel: NSObject {
         
         self.text = text
         self.iconColor = iconColor
+    }
+    convenience init(text:String!,identifier:String!) {
+        self.init()
+        
+        self.text = text
+        self.identifier = identifier
+    }
+    convenience init(text:String!,iconColor:UIColor!, identifier:String!) {
+        self.init()
+        
+        self.text = text
+        self.iconColor = iconColor
+        self.identifier = identifier
     }
 
 }

@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftSpinner
+
 let CELL_LABEL_STATIC_IDENTIFIER = "CellLabelStatic"
 let CELL_DROUP_DOWN_IDENTIFIER = "CellDropDown"
 let CELL_TXT_SEARCH_IDENTIFIER = "CellTxtSearch"
@@ -14,9 +17,19 @@ let CELL_INFO_LABEL_IDENTIFIER = "CellInfoLabel"
 
 class GettingStartViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,NZDropDownViewDelegate,CellTxtSearchDelegate,NZAutoCompleteViewDelegate,UITextFieldDelegate {
     
+    
+    //DATA
+    var buldingSelected:Building?
+    var csSelected:User?
+    var roomSelected:Room?
+    //////
+    
+    var project:ProjectModel! = nil
+    
     var dropDownController:NZDropDownViewController?
     var autoCompleteController:NZAutoCompleteViewController?
     var nzNavigationController:NZNavigationViewController?
+    var nzSplitViewController:NZSplitViewController?
 
     @IBOutlet weak var exitBtn: UIButton!
     @IBOutlet weak var startBtn: UIButton!
@@ -24,11 +37,7 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
     @IBOutlet weak var tableView: UITableView!
     
     var components:NSMutableArray = NSMutableArray()
-    
-    
-    var listBuilding:NSMutableArray = NSMutableArray()
-    var listCS:NSMutableArray = NSMutableArray()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.panelView.layer.shadowColor = UIColor.blackColor().CGColor
@@ -38,14 +47,16 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.reloadData()
+    }
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
         let row1:RowModel = RowModel()
         row1.head = "Project : "
-        row1.detail = "Than living rama 9"
+        row1.detail = project.pj_name!
         row1.style = CELL_LABEL_STATIC_IDENTIFIER
         components.addObject(row1);
-
+        
         let row2:RowModel = RowModel()
         row2.head = "Building : "
         row2.style = CELL_DROUP_DOWN_IDENTIFIER
@@ -56,40 +67,52 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         row3.head = "Room : "
         row3.style = CELL_TXT_SEARCH_IDENTIFIER
         row3.colorNextbutton = UIColor.RGB(192, G: 193, B: 194)
+        row3.identifier = "ROOM_LIST"
         components.addObject(row3);
         
-        
-
+        self.tableView.reloadData()
     }
-    func addInfo()
+    func queryInfo(handler: (NSMutableDictionary?) -> Void)
     {
-        let row4:RowInfoModel = RowInfoModel()
-        row4.style = CELL_INFO_LABEL_IDENTIFIER
-        row4.headInfo1 = "Name : "
-        row4.headInfo2 = "Email : "
-        row4.headInfo3 = "Phone No.: "
-        row4.headInfo4 = "Room Type : "
-        row4.headInfo5 = "Unit Type : "
-        row4.headInfo6 = "Check Date : "
-        row4.headInfo7 = "Defect No : "
-        row4.headInfo8 = "QC Checker : "
         
-        row4.detailInfo1 = "Kaniga Mingsong"
-        row4.detailInfo2 = "phuncharat@mintedimages.com"
-        row4.detailInfo3 = "080-123-4567"
-        row4.detailInfo4 = "1 Bedroom"
-        row4.detailInfo5 = "1A-M"
-        row4.detailInfo6 = "25/4/2016"
-        row4.detailInfo7 = "01/2016"
-        row4.detailInfo8 = "Ammales Yamsompong"
-        components.addObject(row4);
-        
-        let row5:RowModel = RowModel()
-        row5.head = "CS : "
-        row5.detail = "Tanakarn Chinratana"
-        row5.style = CELL_DROUP_DOWN_IDENTIFIER
-        row5.identifier = "CS_LIST"
-        components.addObject(row5);
+        if self.roomSelected == nil || self.project == nil {
+            let alert = UIAlertController(title: "Waring", message: "กรุณาเลือกข้อมูลให้ครบถ้วน", preferredStyle: UIAlertControllerStyle.Alert)
+            let action:UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { (action) in
+                
+            })
+            alert.addAction(action)
+            
+            self.presentViewController(alert, animated: true, completion: {
+                
+            })
+            handler(nil)
+        }else{
+            SwiftSpinner.show("Retriving data..", animated: true)
+            
+            Alamofire.request(.GET, "http://\(DOMAIN_NAME)/Service/Defect/getDefectRoomInfo.php?db_name=\(self.project!.pj_datebase_name!)&un_id=\(self.roomSelected!.un_id!)", parameters: [:])
+                .responseJSON { response in
+                    
+                    if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
+                        print("JSON: \(JSON)")
+                        
+                        let status:String = JSON.objectForKey("status") as! String
+                        
+                        if status == "200" {
+                            handler(JSON)
+                            SwiftSpinner.hide()
+                        }else{
+                            handler(nil)
+                            SwiftSpinner.hide()
+                        }
+                        
+                    }else{
+                        handler(nil)
+                        SwiftSpinner.hide()
+                    }
+            }
+            
+            
+        }
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -114,6 +137,13 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             let cell:CellDropDown = tableView.dequeueReusableCellWithIdentifier(CELL_DROUP_DOWN_IDENTIFIER) as! CellDropDown
             cell.leftLabel.text = data.head
             cell.rightLabel.text = data.detail
+            cell.userInteractionEnabled = data.enable
+            if data.enable == false {
+                cell.dropDownImage.hidden = true
+            }else{
+                cell.dropDownImage.hidden = false
+            }
+            
             return cell
         }
         else if data.style == CELL_TXT_SEARCH_IDENTIFIER
@@ -160,10 +190,74 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
 
     @IBAction func startAction(sender: AnyObject) {
         Queue.mainQueue { () -> Void in
+            let user:User = User().getOnCache()!
             
-            self.hideView()
+            var isCsNil:Bool = true
+            if  self.csSelected == nil && (self.components.lastObject as! RowModel).enable == false {
+                isCsNil = false
+            }
+            if self.csSelected != nil {
+                isCsNil = false
+            }
             
-            
+            if(self.roomSelected == nil || self.project == nil || isCsNil) {
+                let alert = UIAlertController(title: "Warning", message: "กรุณากรอกข้อมูลให้ครบ", preferredStyle: UIAlertControllerStyle.Alert)
+                let action:UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { (action) in
+                    
+                })
+                alert.addAction(action)
+                
+                self.presentViewController(alert, animated: true, completion: {
+                    
+                })
+            }else{
+                
+                let defectRoom:DefectRoom = DefectRoom(room: self.roomSelected, user: user, userCS: self.csSelected, project: self.project)
+                defectRoom.checkDuplicate({ (defectRoomDup, isDuplicate) in
+                    
+                    if isDuplicate == false {
+                        
+                        defectRoom.add({ (resultFlag, message, status) in
+                            
+                            if resultFlag == true {
+                                self.hideView()
+                            }else{
+                                
+                                let alert = UIAlertController(title: "Fail", message: "Error code:\(status) \(message)", preferredStyle: UIAlertControllerStyle.Alert)
+                                let action:UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { (action) in
+                                    
+                                })
+                                alert.addAction(action)
+                                
+                                self.presentViewController(alert, animated: true, completion: {
+                                    
+                                })
+                            }
+                            
+                        })
+                        
+                    }else{
+                        
+                        //INITIALED & RELOAD DEFECT LIST
+                        defectRoomDup?.getListDefect({ 
+                            
+                            let defectListController:DefectListViewController = self.nzSplitViewController?.viewControllers.first as! DefectListViewController
+                            defectListController.reloadData(defectRoomDup)
+                            
+                            
+                            let nav:UINavigationController = self.nzSplitViewController?.viewControllers.last as! UINavigationController
+                            let addDefectViewController:AddDefectViewController = nav.viewControllers[0] as! AddDefectViewController
+                            addDefectViewController.defectRoom = defectRoomDup
+                            
+                        })
+                        self.hideView()
+                    }
+                    
+                })
+                
+                
+                
+            }
         }
     }
     @IBAction func exitAction(sender: AnyObject) {
@@ -192,11 +286,36 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             let cell:CellDropDown = self.tableView.cellForRowAtIndexPath(indexPath) as! CellDropDown
             if data.identifier == "BUILDING_LIST"
             {
-                self.generateDropDownAndParseDataWithCell(cell,dataList: listBuilding)
+                Building(project: self.project).getBuildings({ (list) in
+                    Queue.mainQueue({
+                        let listDropDown:NSMutableArray = NSMutableArray()
+                        for building:Building in ((list! as NSArray) as! [Building]) {
+                            let dropDown:DropDownModel = DropDownModel(text: building.building_name)
+                            dropDown.identifier = building.building_id!
+                            dropDown.userInfo = building
+                            listDropDown.addObject(dropDown)
+                        }
+                        self.generateDropDownAndParseDataWithCell(cell,dataList: listDropDown, rowModel: data)
+                    })
+
+                })
+                
             }
             else if data.identifier == "CS_LIST"
             {
-                self.generateDropDownAndParseDataWithCell(cell,dataList: listCS)
+                CSRoleModel().getCSUsers({ (list) in
+                    Queue.mainQueue({
+                        let listDropDown:NSMutableArray = NSMutableArray()
+                        for user:User in ((list! as NSArray) as! [User]) {
+                            let dropDown:DropDownModel = DropDownModel(text: "\(user.user_pers_fname!) \(user.user_pers_lname!)")
+                            dropDown.identifier = user.user_id!
+                            dropDown.userInfo = user
+                            listDropDown.addObject(dropDown)
+                        }
+                        self.generateDropDownAndParseDataWithCell(cell,dataList: listDropDown, rowModel: data)
+                    })
+                    
+                })
             }
             
             
@@ -206,15 +325,51 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
                 return
             }
             let cell:CellTxtSearch = self.tableView.cellForRowAtIndexPath(indexPath) as! CellTxtSearch
-            self.generateAutoCompleteTextFieldAndParseDataWithCell(cell)
+            
+            if data.identifier == "ROOM_LIST" && buldingSelected != nil
+            {
+                self.buldingSelected?.getRooms({ (listRoom) in
+                    let listDropDown:NSMutableArray = NSMutableArray()
+                    for room:Room in ((listRoom! as NSArray) as! [Room]) {
+                        let autoComplete:AutoCompleteModel = AutoCompleteModel(text: room.un_name)
+                        autoComplete.identifier = room.un_id!
+                        autoComplete.userInfo = room
+                        listDropDown.addObject(autoComplete)
+                    }
+                    Queue.mainQueue({
+                        self.generateAutoCompleteTextFieldAndParseDataWithCell(cell, dataList: listDropDown, rowModel: data)
+                    })
+                    
+                })
+                
+            }
             
         }
     }
     func cellTxtSearchBeginEditting(cell: CellTxtSearch, textField: UITextField) {
+        let indexPath:NSIndexPath = self.tableView.indexPathForCell(cell)!
+        let data:RowModel = components.objectAtIndex(indexPath.row) as! RowModel
+        
         if autoCompleteController != nil {
             return
         }
-        self.generateAutoCompleteTextFieldAndParseDataWithCell(cell)
+        if data.identifier == "ROOM_LIST" && buldingSelected != nil
+        {
+            self.buldingSelected?.getRooms({ (listRoom) in
+                let listDropDown:NSMutableArray = NSMutableArray()
+                for room:Room in ((listRoom! as NSArray) as! [Room]) {
+                    let autoComplete:AutoCompleteModel = AutoCompleteModel(text: room.un_name)
+                    autoComplete.identifier = room.un_id!
+                    autoComplete.userInfo = room
+                    listDropDown.addObject(autoComplete)
+                }
+                Queue.mainQueue({
+                    self.generateAutoCompleteTextFieldAndParseDataWithCell(cell, dataList: listDropDown, rowModel: data)
+                })
+                
+            })
+            
+        }
     }
     func cellTxtSearchTextChange(string: String) {
         
@@ -222,12 +377,30 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         
     }
     func nzDropDown(contorller: NZDropDownViewController, didClickCell model: DropDownModel) {
+        if contorller.userInfo is RowModel {
+            let rowModel:RowModel = contorller.userInfo as! RowModel
+            rowModel.detail = model.text
+        }
+        
+        if model.userInfo is Building
+        {
+            self.buldingSelected = model.userInfo as? Building
+        }
+        else if model.userInfo is User
+        {
+            self.csSelected = model.userInfo as? User
+        }
         
         self.closeDropDown()
         
     }
     func nzAutoComplete(contorller: NZAutoCompleteViewController, didClickCell model: AutoCompleteModel) {
         
+        if model.userInfo is Room
+        {
+            self.roomSelected = model.userInfo as? Room
+        }
+
         self.closeAutoComplete()
         
     }
@@ -255,50 +428,146 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             autoCompleteController = nil
         }
     }
+    func getRowInfoModel() -> RowInfoModel? {
+        for model:AnyObject in self.components {
+            if model is RowInfoModel {
+                return model as? RowInfoModel
+            }
+        }
+        return nil
+    }
+    func getRowByIdentifier(identifier:String!) -> RowModel? {
+        for model:RowModel in ((self.components as NSArray) as! [RowModel]) {
+            if model.identifier == identifier {
+                return model
+            }
+        }
+        return nil
+    }
     func cellTxtSearchDidClickNext(cell: CellTxtSearch) {
+        
+        if self.roomSelected == nil || self.buldingSelected == nil {
+            return
+        }
+        
         let indexPath:NSIndexPath =  self.tableView.indexPathForCell(cell)!
         let model:RowModel = components.objectAtIndex(indexPath.row) as! RowModel
         model.colorNextbutton = UIColor.blackColor()
-        self.addInfo()
-        self.tableView.reloadData()
+        
+        let row4:RowInfoModel = RowInfoModel()
+        let row5:RowModel = RowModel()
+        
+        if self.components.count > 3 {
+            self.components.removeLastObject()
+            self.components.removeLastObject()
+        }
+        
+        
+        self.queryInfo { (list) in
+            
+            
+            var defectInfo:NSMutableDictionary
+            var roomInfo:NSMutableDictionary
+            var qcCheckerInfo:NSMutableDictionary
+            var csInfo:NSMutableDictionary
+            
+            let userInfo:NSDictionary = (list?.objectForKey("userInfo")!)! as! NSDictionary
+            
+            if ((list?.objectForKey("roomInfo") as? NSMutableDictionary) != nil) {
+                roomInfo = (list?.objectForKey("roomInfo") as? NSMutableDictionary)!
+                
+                row4.headInfo4 = "Room Type : "
+                row4.headInfo5 = "Unit Type : "
+                row4.detailInfo4 = roomInfo.objectForKey("room_type_info") as? String
+                row4.detailInfo5 = roomInfo.objectForKey("unit_type_name") as? String
+                
+            }
+            
+            if ((list?.objectForKey("defectInfo") as? NSMutableDictionary) != nil) {
+                defectInfo = (list?.objectForKey("defectInfo") as? NSMutableDictionary)!
+                row4.headInfo6 = "Check Date : "
+                row4.headInfo7 = "Defect No : "
+                row4.detailInfo6 = defectInfo.objectForKey("df_check_date") as? String
+                row4.detailInfo7 = defectInfo.objectForKey("df_room_id") as? String
+            }
+            
+            if ((list?.objectForKey("qcCheckerInfo") as? NSMutableDictionary) != nil) {
+                qcCheckerInfo = (list?.objectForKey("qcCheckerInfo") as? NSMutableDictionary)!
+                row4.headInfo8 = "QC Checker : "
+                row4.detailInfo8 = "\(qcCheckerInfo.objectForKey("user_pers_fname") as! String) \(qcCheckerInfo.objectForKey("user_pers_lname") as! String)"
+            }
+            
+            
+            row4.style = CELL_INFO_LABEL_IDENTIFIER
+            row4.headInfo1 = "Name : "
+            row4.headInfo2 = "Email : "
+            row4.headInfo3 = "Phone No.: "
+            row4.detailInfo1 = userInfo.objectForKey("name") as? String
+            row4.detailInfo2 = userInfo.objectForKey("email") as? String
+            row4.detailInfo3 = userInfo.objectForKey("tel") as? String
+            
+            self.components.addObject(row4);
+            
+            
+            if ((list?.objectForKey("csInfo") as? NSMutableDictionary) != nil) {
+                csInfo = (list?.objectForKey("csInfo") as? NSMutableDictionary)!
+                row5.detail = "\(csInfo.objectForKey("user_pers_fname") as! String) \(csInfo.objectForKey("user_pers_lname") as! String)"
+                row5.enable = false
+            }else{
+                row5.detail = ""
+            }
+            
+            row5.head = "CS : "
+            row5.style = CELL_DROUP_DOWN_IDENTIFIER
+            row5.identifier = "CS_LIST"
+            self.components.addObject(row5);
+            
+            self.tableView.reloadData()
+            self.csSelected = nil
+            
+        }
+        
+        
+        
         
         
     }
-    func generateDropDownAndParseDataWithCell(cell:CellDropDown, dataList:NSMutableArray!) {
+    func generateDropDownAndParseDataWithCell(cell:CellDropDown, dataList:NSMutableArray!, rowModel:RowModel?) {
         
         dropDownController = UIStoryboard(name: "NZDropDown", bundle: nil).instantiateViewControllerWithIdentifier("NZDropDownViewController") as? NZDropDownViewController
         dropDownController?.labelReference = cell.rightLabel
-        
+        dropDownController?.identifier = rowModel?.identifier!
+        dropDownController?.userInfo = rowModel
         for data:DropDownModel in ((dataList as NSArray) as! [DropDownModel])
         {
             dropDownController!.rawObjects.addObject(data)
         }
         
         dropDownController!.displayObjects = dropDownController!.rawObjects.mutableCopy() as! NSMutableArray
-        
-        dropDownController?.updatePositionAtView(self.panelView)
         dropDownController!.delegate = self
+        dropDownController?.updatePositionAtView(self.panelView)
         self.addChildViewController(dropDownController!)
         self.panelView.addSubview(dropDownController!.view)
         self.tableView.scrollEnabled = false
+        dropDownController?.tableView.reloadData()
     }
-    func generateAutoCompleteTextFieldAndParseDataWithCell(cell:CellTxtSearch) -> NZAutoCompleteViewController {
+    func nzDropDownCustomYPositon(contorller: NZDropDownViewController) -> CGFloat {
+        if contorller.identifier == "BUILDING_LIST"{
+            return 180;
+        }
+        return NZ_DROPDOWN_NOT_NEED_CUSTOM_POSITION_Y
+    }
+    
+    func generateAutoCompleteTextFieldAndParseDataWithCell(cell:CellTxtSearch, dataList:NSMutableArray!, rowModel:RowModel?) -> NZAutoCompleteViewController {
         
         
         autoCompleteController = UIStoryboard(name: "NZAutoComplete", bundle: nil).instantiateViewControllerWithIdentifier("NZAutoCompleteViewController") as? NZAutoCompleteViewController
         autoCompleteController?.textFieldReference = cell.textField
-        
-        autoCompleteController!.rawObjects.addObject(AutoCompleteModel(text: "101"))
-        autoCompleteController!.rawObjects.addObject(AutoCompleteModel(text: "201"))
-        autoCompleteController!.rawObjects.addObject(AutoCompleteModel(text: "301"))
-        autoCompleteController!.rawObjects.addObject(AutoCompleteModel(text: "401"))
-        autoCompleteController!.rawObjects.addObject(AutoCompleteModel(text: "501"))
-        autoCompleteController!.rawObjects.addObject(AutoCompleteModel(text: "601"))
-        autoCompleteController!.rawObjects.addObject(AutoCompleteModel(text: "701"))
-        autoCompleteController!.rawObjects.addObject(AutoCompleteModel(text: "801"))
-        autoCompleteController!.rawObjects.addObject(AutoCompleteModel(text: "901"))
-        autoCompleteController!.rawObjects.addObject(AutoCompleteModel(text: "111"))
-        
+        autoCompleteController?.userInfo = rowModel
+        for data:AutoCompleteModel in ((dataList as NSArray) as! [AutoCompleteModel])
+        {
+            autoCompleteController!.rawObjects.addObject(data)
+        }
         autoCompleteController!.displayObjects = autoCompleteController!.rawObjects.mutableCopy() as! NSMutableArray
         
         let indexPath:NSIndexPath = self.tableView.indexPathForCell(cell)!

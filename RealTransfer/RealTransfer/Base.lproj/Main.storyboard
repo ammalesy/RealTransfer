@@ -81,7 +81,7 @@
                                     <action selector="loginAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gy7-CH-noN"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="piz-pq-a92">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="admin" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="piz-pq-a92">
                                 <rect key="frame" x="130" y="300" width="340" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="340" id="dmU-IV-12U"/>
@@ -90,7 +90,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uxr-AM-VPs">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1234" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uxr-AM-VPs">
                                 <rect key="frame" x="130" y="365" width="340" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="340" id="CRH-vw-lgV"/>
@@ -469,6 +469,7 @@
                                                     </variation>
                                                 </tableViewCellContentView>
                                                 <connections>
+                                                    <outlet property="dropDownImage" destination="Feu-6Z-h1y" id="15j-gb-VT7"/>
                                                     <outlet property="leftLabel" destination="ZSE-T3-7bh" id="GhA-dr-YoF"/>
                                                     <outlet property="rightLabel" destination="ABr-1i-C7I" id="1jc-Mg-age"/>
                                                 </connections>
@@ -1398,6 +1399,7 @@
                         <outlet property="listSubTypeBtn" destination="BzQ-ze-DnH" id="nCJ-Bf-0Rb"/>
                         <outlet property="listSubTypeCaptionLabel" destination="uWL-eM-eKm" id="2rg-00-3sC"/>
                         <outlet property="listSubtypeTextView" destination="NYx-vx-lkJ" id="Gxu-Iw-GH5"/>
+                        <outlet property="saveBtn" destination="ANI-Od-TT9" id="eFr-Sx-NcM"/>
                         <outlet property="subtypeBtn" destination="Ydg-rv-pgD" id="1OF-wa-BsE"/>
                         <outlet property="typeBtn" destination="Kid-rG-62k" id="12o-yY-W9b"/>
                     </connections>

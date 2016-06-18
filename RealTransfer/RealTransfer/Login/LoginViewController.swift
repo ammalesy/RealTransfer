@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class LoginViewController: NZViewController {
 
@@ -48,38 +49,43 @@ class LoginViewController: NZViewController {
         user?.username = self.usernameTxt.text
         user?.password = self.passwordTxt.text
         user?.login({ (result) in
-    
-            if result == true {
-                let nzNavController:NZNavigationViewController = UIStoryboard(name: "NZNav", bundle: nil).instantiateViewControllerWithIdentifier("NZNavigationViewController") as! NZNavigationViewController
-                let rootView:NZViewController = self.storyboard?.instantiateViewControllerWithIdentifier(ROOT_VIEW_CONTROLLER) as! NZViewController
-                
-                
-                self.presentViewController(nzNavController, animated: true) { () -> Void in
-                    
-                    nzNavController.setRootViewController(rootView)
-                    nzNavController.containerView.alpha = 0
-                    
-                    UIView.animateWithDuration(0.7, animations: { () -> Void in
-                        
-                        nzNavController.containerView.alpha = 1
-                        
-                        }, completion: { (result) -> Void in
-                            
-                    })
-                    
-                    
-                }
-            }else{
-                let alert = UIAlertController(title: "Fail", message: "Fail", preferredStyle: UIAlertControllerStyle.Alert)
-                let action:UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { (action) in
-                    
-                })
-                alert.addAction(action)
+            
+            Category.syncCategory({
 
-                self.presentViewController(alert, animated: true, completion: {
+                if result == true {
+                    let nzNavController:NZNavigationViewController = UIStoryboard(name: "NZNav", bundle: nil).instantiateViewControllerWithIdentifier("NZNavigationViewController") as! NZNavigationViewController
+                    let rootView:NZViewController = self.storyboard?.instantiateViewControllerWithIdentifier(ROOT_VIEW_CONTROLLER) as! NZViewController
                     
-                })
-            }
+                    
+                    self.presentViewController(nzNavController, animated: true) { () -> Void in
+                        
+                        nzNavController.setRootViewController(rootView)
+                        nzNavController.containerView.alpha = 0
+                        
+                        UIView.animateWithDuration(0.7, animations: { () -> Void in
+                            
+                            nzNavController.containerView.alpha = 1
+                            
+                            }, completion: { (result) -> Void in
+                                
+                        })
+                        
+                        
+                    }
+                }else{
+                    let alert = UIAlertController(title: "Fail", message: "Fail", preferredStyle: UIAlertControllerStyle.Alert)
+                    let action:UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { (action) in
+                        
+                    })
+                    alert.addAction(action)
+                    
+                    self.presentViewController(alert, animated: true, completion: {
+                        
+                    })
+                }
+            })
+    
+            
             
         })
         

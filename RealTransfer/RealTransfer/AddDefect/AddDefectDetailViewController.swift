@@ -8,6 +8,9 @@
 
 import UIKit
 import MobileCoreServices
+import Alamofire
+
+let kOTHER_IDENTIFIER = "99999999"
 
 class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,NZDropDownViewDelegate {
 
@@ -15,6 +18,13 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
     var imagePicker:UIImagePickerController?
     var splitController:NZSplitViewController?
     var dropDownController:NZDropDownViewController?
+    var categoryList:NSDictionary?
+    var defectRoom:DefectRoom?
+    @IBOutlet weak var saveBtn: UIButton!
+    
+    var categorySelected:String?
+    var subCategorySelected:String?
+    var listSubCategorySelected:String?
     
     @IBOutlet weak var heightListSubType: NSLayoutConstraint!
     @IBOutlet weak var listSubtypeTextView: UITextView!
@@ -62,6 +72,9 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
         splitController = (self.splitViewController as! NZSplitViewController)
         splitController!.nzNavigationController?.hideRightInfo(false)
         self.listSubTypeModeEnable(false)
+        
+        categoryList = Category.getCategory()
+
     }
 
     @IBAction func takePicture(sender: AnyObject) {
@@ -105,45 +118,55 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
             self.imagePicker?.dismissViewControllerAnimated(true, completion: { 
                 
             })
-            
-            
         }
-        
-        
     }
-    
     @IBAction func openTypeDropDown(sender: AnyObject) {
         
         let list:NSMutableArray = NSMutableArray()
-        list.addObject(DropDownModel(text: "1", iconColor: UIColor.redColor()))
-        list.addObject(DropDownModel(text: "2", iconColor: UIColor.redColor()))
-        list.addObject(DropDownModel(text: "3", iconColor: UIColor.redColor()))
-        list.addObject(DropDownModel(text: "4", iconColor: UIColor.redColor()))
-        list.addObject(DropDownModel(text: "5", iconColor: UIColor.redColor()))
-        list.addObject(DropDownModel(text: "6", iconColor: UIColor.redColor()))
-        list.addObject(DropDownModel(text: "7", iconColor: UIColor.redColor()))
+        
+        for data:NSDictionary in categoryList!.objectForKey("list") as! [NSDictionary] {
+            let red:String = (data.objectForKey("color") as! NSDictionary).objectForKey("R") as! String
+            let green:String = (data.objectForKey("color") as! NSDictionary).objectForKey("G") as! String
+            let blue:String = (data.objectForKey("color") as! NSDictionary).objectForKey("B") as! String
+            let color:UIColor = UIColor.RGB(CGFloat((red as NSString).floatValue), G: CGFloat((green as NSString).floatValue), B: CGFloat((blue as NSString).floatValue))
+            let identifier:String = data.objectForKey("id") as! String
+            let dropDownModel = DropDownModel(text: data.objectForKey("title") as! String, iconColor: color, identifier:identifier)
+            list.addObject(dropDownModel)
+        }
         self.generateDropDownWithDataList(list, identifier: "type")
     }
     @IBAction func openSubTypeDropDown(sender: AnyObject) {
         
+        if self.categorySelected == nil {
+            return;
+        }
         let list:NSMutableArray = NSMutableArray()
-        list.addObject(DropDownModel(text: "11"))
-        list.addObject(DropDownModel(text: "22"))
-        list.addObject(DropDownModel(text: "33"))
-        list.addObject(DropDownModel(text: "44"))
-        list.addObject(DropDownModel(text: "55"))
-        list.addObject(DropDownModel(text: "66"))
-        list.addObject(DropDownModel(text: "อื่นๆ"))
+        let subCate:[NSDictionary] = Category.getSubCategoryBycategoryID(self.categorySelected, dataList: self.categoryList!)
+        for data:NSDictionary in subCate {
+            
+            let identifier = data.objectForKey("id") as! String
+            let text = data.objectForKey("title") as! String
+            list.addObject(DropDownModel(text: text, identifier: identifier))
+            
+        }
+        list.addObject(DropDownModel(text: "อื่นๆ",identifier: kOTHER_IDENTIFIER))
         self.generateDropDownWithDataList(list, identifier: "subType")
     }
     @IBAction func openListSubTypeDropDown(sender: AnyObject) {
+        
+        if self.categorySelected == nil || self.subCategorySelected == nil {
+            return;
+        }
+        
         let list:NSMutableArray = NSMutableArray()
-        list.addObject(DropDownModel(text: "111"))
-        list.addObject(DropDownModel(text: "222"))
-        list.addObject(DropDownModel(text: "333"))
-        list.addObject(DropDownModel(text: "444"))
-        list.addObject(DropDownModel(text: "555"))
-        list.addObject(DropDownModel(text: "665"))
+        let listSubCate:[NSDictionary] = Category.getListSubCategoryBySubCategoryID(self.subCategorySelected, dataList: self.categoryList!)
+        for data:NSDictionary in listSubCate {
+            
+            let identifier = data.objectForKey("id") as! String
+            let text = data.objectForKey("title") as! String
+            list.addObject(DropDownModel(text: text, identifier: identifier))
+            
+        }
         self.generateDropDownWithDataList(list, identifier: "listSubType")
     }
     
@@ -151,7 +174,35 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
         self.navigationController?.popViewControllerAnimated(true)
     }
     @IBAction func save(sender: AnyObject) {
+        if self.subCategorySelected == kOTHER_IDENTIFIER
+        {
+            self.listSubCategorySelected = self.listSubtypeTextView.text
+        }
         
+         if self.categorySelected != nil && self.subCategorySelected != nil && self.listSubCategorySelected != nil
+         {
+            
+            let listDefect:NSMutableArray = (self.defectRoom?.listDefect)!
+            
+            let defect:DefectModel = DefectModel()
+            defect.categoryName = self.categorySelected
+            defect.df_date = NSDateFormatter.dateFormater().stringFromDate(NSDate())
+            defect.listSubCategory = self.listSubCategorySelected
+            defect.df_id = "waiting"
+            defect.df_image_path = "waiting"
+            defect.realImage = self.imageView.image
+            defect.df_room_id_ref = self.defectRoom?.df_room_id
+            defect.df_status = "0"
+            defect.subCategoryName = self.subCategorySelected
+            listDefect.addObject(defect)
+            
+            self.defectRoom?.doCache()
+            
+            let defectListController:DefectListViewController = self.splitController!.viewControllers.first as! DefectListViewController
+            defectListController.reloadData(self.defectRoom)
+            
+            self.navigationController?.popViewControllerAnimated(true)
+        }
     }
     
     
@@ -197,14 +248,22 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
         if contorller.identifier == "type"
         {
             self.typeBtn.setTitle(model.text, forState: UIControlState.Normal)
+            self.categorySelected = model.identifier
+            self.subCategorySelected = nil
+            self.listSubCategorySelected = nil
         }
         else if contorller.identifier == "subType"
         {
             self.subtypeBtn.setTitle(model.text, forState: UIControlState.Normal)
+            self.subCategorySelected = model.identifier
             
-            if model.text == "อื่นๆ" {
+            if model.identifier == kOTHER_IDENTIFIER
+            {
                 self.listSubTypeModeEnable(true)
-            }else{
+                self.listSubCategorySelected = nil
+            }
+            else
+            {
                 self.listSubTypeModeEnable(false)
             }
             
@@ -212,8 +271,9 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
         else if contorller.identifier == "listSubType"
         {
             self.listSubTypeBtn.setTitle(model.text, forState: UIControlState.Normal)
+            self.listSubCategorySelected = model.identifier
         }
-        
+        self.verifyButtonColor()
         self.closeDropDown()
     }
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -237,6 +297,25 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
         }
         
         
+    }
+    
+    func verifyButtonColor() {
+        if self.categorySelected != nil && self.subCategorySelected != nil
+        {
+            if self.listSubCategorySelected == nil && self.subCategorySelected == kOTHER_IDENTIFIER {
+                self.saveBtn.setTitleColor(UIColor.RGB(127, G: 191, B: 49), forState: UIControlState.Normal)
+            }else{
+                if self.listSubCategorySelected != nil {
+                    self.saveBtn.setTitleColor(UIColor.RGB(127, G: 191, B: 49), forState: UIControlState.Normal)
+                }else{
+                    self.saveBtn.setTitleColor(UIColor.RGB(199, G: 200, B: 201), forState: UIControlState.Normal)
+                }
+            }
+        }
+        else
+        {
+            self.saveBtn.setTitleColor(UIColor.RGB(199, G: 200, B: 201), forState: UIControlState.Normal)
+        }
     }
     
     /*
