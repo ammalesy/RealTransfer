@@ -225,7 +225,9 @@ class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
         
         if menu.identifier == "logout" {
             self.dismissViewControllerAnimated(true, completion: { () -> Void in
-                
+                PROJECT = nil
+                Building.buldings.removeAllObjects()
+                CSRoleModel.csUSers.removeAllObjects()
             })
         }
         else if menu.identifier == "info" {

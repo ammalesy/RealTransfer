@@ -30,6 +30,26 @@
 			mysqli_close($conn);
 
 		}
+
+		public static function sync($db_name,$data) {
+
+			$conn = Database::connect_db_by_dbName($db_name);
+			$result = mysqli_query($conn, "
+				INSERT INTO `".$db_name."`.`tb_defect` (`df_id`, `df_category`, `df_sub_category`, `df_detail`, `df_room_id_ref`, `df_date`, `df_image_path`, `df_status`) 
+				VALUES (NULL, 
+					'".$data->categoryName."', 
+					'".$data->subCategoryName."', 
+					'".$data->listSubCategory."', 
+					'".$data->df_room_id_ref."', 
+					'".$data->df_date."', 
+					'".$data->df_image_path."', 
+					'1');");
+			return $result;
+
+			mysqli_free_result($result);
+			mysqli_close($conn);
+
+		}
 	}
 
 ?>

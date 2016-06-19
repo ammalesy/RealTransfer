@@ -21,6 +21,8 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
     var dropDownList:NSMutableArray = NSMutableArray()
     var groupList:NSMutableArray = NSMutableArray()
     
+    var defectRoomRef:DefectRoom?
+    
     var dropDownController:NZDropDownViewController?
 
     @IBOutlet weak var filterButton: UIButton!
@@ -55,6 +57,9 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
     
     func reloadData(defectRoom:DefectRoom!) {
         Queue.mainQueue {
+            
+            self.defectRoomRef = defectRoom
+            
             self.list.removeAllObjects()
             for model:DefectModel in ((defectRoom.listDefect! as NSArray) as! [DefectModel]) {
                 model.needDisplayText()
@@ -188,7 +193,7 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
         if defectModel.realImage != nil {
             cell.defectImageView.image = defectModel.realImage
         }else{
-            let url:NSURL = NSURL(string: "http://\(DOMAIN_NAME)/crm/\(PROJECT!.pj_image!)")! //HARDCODE
+            let url:NSURL = NSURL(string: "http://\(DOMAIN_NAME)/Service/images/\(PROJECT!.pj_datebase_name!)/\(self.defectRoomRef!.df_un_id!)/\(defectModel.df_image_path!).jpg")! //
             cell.defectImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "p1"), options: SDWebImageOptions.RefreshCached)
         }
         

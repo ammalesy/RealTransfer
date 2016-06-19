@@ -8,6 +8,7 @@
 
 import UIKit
 import MobileCoreServices
+import SwiftSpinner
 
 class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 
@@ -151,6 +152,58 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
         
     }
 
+    @IBAction func sync(sender: AnyObject) {
+        SwiftSpinner.show("Uploading ..", animated: true)
+        let cache:DefectRoom = DefectRoom.getCache(self.defectRoom?.df_room_id)!
+        Sync.syncToServer(cache ,db_name: PROJECT?.pj_datebase_name!, timeStamp: NSDateFormatter.dateFormater().stringFromDate(NSDate()), defect: (defectRoom?.listDefect)!)
+        { (result) in
+            
+            if result == "TRUE" {
+                
+                cache.getListDefectOnServer({ 
+                    
+                    cache.doCache()
+                    self.defectRoom = cache
+                    self.refresh()
+                    
+                    SwiftSpinner.hide()
+                    
+                })
+                
+            }else if result == "FALSE"{
+                let alert = UIAlertController(title: "แจ้งเตือน", message: "รายการล่าสุดแล้ว", preferredStyle: UIAlertControllerStyle.Alert)
+                let action:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: { (action) in
+                    
+                })
+                alert.addAction(action)
+                
+                self.presentViewController(alert, animated: true, completion: {
+                    SwiftSpinner.hide()
+                })
+            }else {
+                let alert = UIAlertController(title: "แจ้งเตือน", message: "Image upload fail!", preferredStyle: UIAlertControllerStyle.Alert)
+                let action:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: { (action) in
+                    
+                })
+                alert.addAction(action)
+                
+                self.presentViewController(alert, animated: true, completion: {
+                    SwiftSpinner.hide()
+                })
+            }
+            
+        }
+        
+    }
+    
+    func refresh() {
+        let defectListController:DefectListViewController = self.splitController?.viewControllers.first as! DefectListViewController
+        defectListController.reloadData(self.defectRoom)
+        
+        let nav:UINavigationController = self.splitController?.viewControllers.last as! UINavigationController
+        let addDefectViewController:AddDefectViewController = nav.viewControllers[0] as! AddDefectViewController
+        addDefectViewController.defectRoom = self.defectRoom
+    }
     /*
     // MARK: - Navigation
 

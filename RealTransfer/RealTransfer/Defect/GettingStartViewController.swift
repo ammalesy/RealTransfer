@@ -189,7 +189,9 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
     }
 
     @IBAction func startAction(sender: AnyObject) {
-        Queue.mainQueue { () -> Void in
+        
+        
+        //Queue.mainQueue { () -> Void in
             let user:User = User().getOnCache()!
             
             var isCsNil:Bool = true
@@ -220,17 +222,18 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
                         defectRoom.add({ (resultFlag, message, status) in
                             
                             if resultFlag == true {
+                                SwiftSpinner.hide()
                                 self.hideView()
                             }else{
                                 
-                                let alert = UIAlertController(title: "Fail", message: "Error code:\(status) \(message)", preferredStyle: UIAlertControllerStyle.Alert)
+                                let alert = UIAlertController(title: "Fail", message: "Error code:\(status!) \(message!)", preferredStyle: UIAlertControllerStyle.Alert)
                                 let action:UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { (action) in
                                     
                                 })
                                 alert.addAction(action)
                                 
                                 self.presentViewController(alert, animated: true, completion: {
-                                    
+                                    SwiftSpinner.hide()
                                 })
                             }
                             
@@ -249,8 +252,10 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
                             let addDefectViewController:AddDefectViewController = nav.viewControllers[0] as! AddDefectViewController
                             addDefectViewController.defectRoom = defectRoomDup
                             
+                            SwiftSpinner.hide()
+                            self.hideView()
                         })
-                        self.hideView()
+                        
                     }
                     
                 })
@@ -258,7 +263,7 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
                 
                 
             }
-        }
+       // }
     }
     @IBAction func exitAction(sender: AnyObject) {
         

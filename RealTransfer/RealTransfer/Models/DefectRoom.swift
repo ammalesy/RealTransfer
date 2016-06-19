@@ -121,16 +121,35 @@ class DefectRoom: Model,NSCoding {
         if DefectRoom.getCache(self.df_room_id) != nil {
             
             let defectRoom:DefectRoom = DefectRoom.getCache(self.df_room_id)!
+            
             defectRoom.needSync({ (isNeedSync) in
                 
                 if (isNeedSync == true) {
-                    self.getListDefectOnServer({
-                        self.doCache()
-                        handler()
+                    
+                    Queue.mainQueue({ 
+                        //PUSH
+                        let timeStamp = NSDateFormatter.dateFormater().stringFromDate(NSDate())
+                        Sync.syncToServer(defectRoom,db_name: PROJECT!.pj_datebase_name!, timeStamp: timeStamp, defect: (defectRoom.listDefect)!)
+                        { (result) in
+                            
+                            Queue.mainQueue({
+                                if result == "TRUE" {
+                                    self.df_check_date = timeStamp
+                                }
+                                self.getListDefectOnServer({
+                                    self.doCache()
+                                    SwiftSpinner.hide()
+                                    handler()
+                                })
+                            })
+                            
+                        }
                     })
+                    
                 }else{
                     self.listDefect?.removeAllObjects()
                     self.listDefect? = defectRoom.listDefect!
+                    SwiftSpinner.hide()
                     handler()
                 }
             })
@@ -144,8 +163,6 @@ class DefectRoom: Model,NSCoding {
     }
     func needSync(handler: (Bool!) -> Void){
         
-        SwiftSpinner.show("Retrive defect data..", animated: true)
-        
         let url = "http://\(DOMAIN_NAME)/Service/Defect/isSync.php"
         Alamofire.request(.POST, url, parameters: ["db_name":PROJECT!.pj_datebase_name!,
                                                   "df_room_id":self.df_room_id!,
@@ -156,17 +173,19 @@ class DefectRoom: Model,NSCoding {
                     print("JSON: \(JSON)")
                     let status:String = JSON.objectForKey("status") as! String
                     if status == "200" {
-                        
+                    
                         handler(true)
-                        SwiftSpinner.hide()
+                        
                     }else{
+                     
                         handler(false)
-                        SwiftSpinner.hide()
+                        
                     }
                     
                 }else{
+                  
                     handler(false)
-                    SwiftSpinner.hide()
+                    
                 }
                 
         }
@@ -175,7 +194,7 @@ class DefectRoom: Model,NSCoding {
     func getListDefectOnServer(handler: () -> Void) {
         SwiftSpinner.show("Retrive defect data..", animated: true)
         
-        Alamofire.request(.GET, "http://\(DOMAIN_NAME)/Service/Defect/getListDefect.php?db_name=\(self.project!.pj_datebase_name!)&df_room_id=\(self.df_room_id!)", parameters: [:])
+        Alamofire.request(.GET, "http://\(DOMAIN_NAME)/Service/Defect/getListDefect.php?db_name=\(PROJECT!.pj_datebase_name!)&df_room_id=\(self.df_room_id!)", parameters: [:])
             .responseJSON { response in
                 
                 if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
@@ -230,17 +249,17 @@ class DefectRoom: Model,NSCoding {
                         defectRoom.project = self.project
                         
                         handler(defectRoom, isDuplicate: true)
-                        SwiftSpinner.hide()
+                    
                         
                     }else{
                         handler(nil, isDuplicate: false)
-                        SwiftSpinner.hide()
+                       
                     }
                     
                     
                 }else{
                     handler(nil, isDuplicate: false)
-                    SwiftSpinner.hide()
+                   
                 }
         }
         
@@ -249,8 +268,13 @@ class DefectRoom: Model,NSCoding {
     func add(handler: (Bool?, message:String? , status:String?) -> Void) {
         
         SwiftSpinner.show("Initialing..", animated: true)
-        
-        Alamofire.request(.GET, "http://\(DOMAIN_NAME)/Service/Defect/initialRoomDefect.php?un_id=\(self.room!.un_id!)&db_name=\(self.project!.pj_datebase_name!)&user_id=\(self.user!.user_id!)&user_id_cs=\(self.userCS!.user_id!)&df_check_Date\(NSDateFormatter.dateFormater().stringFromDate(NSDate()))", parameters: [:])
+        let path = "http://\(DOMAIN_NAME)/Service/Defect/initialRoomDefect.php"
+        let param = ["un_id":self.room!.un_id!,
+                     "db_name":PROJECT!.pj_datebase_name!,
+                     "user_id":self.user!.user_id!,
+                     "user_id_cs":self.userCS!.user_id!,
+                     "df_check_date":NSDateFormatter.dateFormater().stringFromDate(NSDate())]
+        Alamofire.request(.POST, path, parameters: param)
             .responseJSON { response in
                 
                 if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {

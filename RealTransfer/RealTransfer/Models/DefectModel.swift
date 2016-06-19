@@ -28,6 +28,20 @@ class DefectModel: NSObject,NSCoding {
     override init() {
         
     }
+    func toJson() -> AnyObject!{
+        
+        let json:NSMutableDictionary = NSMutableDictionary()
+        json.setObject(self.df_id!, forKey: "df_id")
+        json.setObject(self.categoryName, forKey: "categoryName")
+        json.setObject(self.subCategoryName, forKey: "subCategoryName")
+        json.setObject(self.listSubCategory, forKey: "listSubCategory")
+        json.setObject(self.df_room_id_ref!, forKey: "df_room_id_ref")
+        json.setObject(self.df_date!, forKey: "df_date")
+        json.setObject(self.df_image_path!, forKey: "df_image_path")
+        json.setObject(self.df_status!, forKey: "df_status")
+        return json
+        
+    }
     required init(coder aDecoder: NSCoder) {
         self.df_id  = aDecoder.decodeObjectForKey("df_id") as? String
         self.categoryName  = aDecoder.decodeObjectForKey("categoryName") as? String

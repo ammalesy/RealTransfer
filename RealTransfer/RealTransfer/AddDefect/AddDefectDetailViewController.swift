@@ -184,9 +184,10 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
             
             let listDefect:NSMutableArray = (self.defectRoom?.listDefect)!
             
+            let timeStamp  =  NSDateFormatter.dateFormater().stringFromDate(NSDate())
             let defect:DefectModel = DefectModel()
             defect.categoryName = self.categorySelected
-            defect.df_date = NSDateFormatter.dateFormater().stringFromDate(NSDate())
+            defect.df_date = timeStamp
             defect.listSubCategory = self.listSubCategorySelected
             defect.df_id = "waiting"
             defect.df_image_path = "waiting"
@@ -195,12 +196,16 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
             defect.df_status = "0"
             defect.subCategoryName = self.subCategorySelected
             listDefect.addObject(defect)
-            
+
             self.defectRoom?.doCache()
             
             let defectListController:DefectListViewController = self.splitController!.viewControllers.first as! DefectListViewController
             defectListController.reloadData(self.defectRoom)
             
+//            if(defectListController.displayList.count > 1){
+//                let indexPath:NSIndexPath = NSIndexPath(forRow: defectListController.displayList.count - 1, inSection: 0)
+//                defectListController.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+//            }
             self.navigationController?.popViewControllerAnimated(true)
         }
     }
