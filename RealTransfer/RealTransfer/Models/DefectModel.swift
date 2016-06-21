@@ -51,7 +51,7 @@ class DefectModel: NSObject,NSCoding {
         self.df_date  = aDecoder.decodeObjectForKey("df_date") as? String
         self.df_image_path  = aDecoder.decodeObjectForKey("df_image_path") as? String
         self.df_status  = aDecoder.decodeObjectForKey("df_status") as? String
-        self.realImage  = aDecoder.decodeObjectForKey("realImage") as? UIImage
+        //self.realImage  = aDecoder.decodeObjectForKey("realImage") as? UIImage
         
     }
     
@@ -80,9 +80,9 @@ class DefectModel: NSObject,NSCoding {
         if let val = self.df_status{
             aCoder.encodeObject(val, forKey: "df_status")
         }
-        if let val = self.realImage{
-            aCoder.encodeObject(val, forKey: "realImage")
-        }
+//        if let val = self.realImage{
+//            aCoder.encodeObject(val, forKey: "realImage")
+//        }
     }
     convenience init(categoryName:String!, subCategoryName:String!, listSubCategory:String!) {
         self.init()

@@ -12,7 +12,7 @@ import Alamofire
 
 
 let ROOT_VIEW_CONTROLLER = "ProjectViewController" //<=== Root view is subclass from "NZViewController"
-let DOMAIN_NAME = "192.168.1.2"
+let DOMAIN_NAME = "ec2-52-10-22-26.us-west-2.compute.amazonaws.com"//"192.168.1.2"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -35,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        ImageCaching.sharedInstance.save()
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
@@ -48,6 +49,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
+        
+        ImageCaching.sharedInstance.save()
         self.saveContext()
     }
 

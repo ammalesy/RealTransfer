@@ -11,6 +11,7 @@
 		1800981B1D157FE700BB11FD /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1800981A1D157FE700BB11FD /* Category.swift */; };
 		1800981F1D159DF700BB11FD /* NSDateFormaterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1800981E1D159DF700BB11FD /* NSDateFormaterExtension.swift */; };
 		180098211D164A4C00BB11FD /* Sync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180098201D164A4C00BB11FD /* Sync.swift */; };
+		180AD45E1D1953E5000D802B /* BuildingCaching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180AD45D1D1953E5000D802B /* BuildingCaching.swift */; };
 		184E425E1D0C2EA20073CF60 /* AddDefectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184E425D1D0C2EA20073CF60 /* AddDefectDetailViewController.swift */; };
 		184E42601D0C4BFD0073CF60 /* NZDropDownIconColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184E425F1D0C4BFD0073CF60 /* NZDropDownIconColorCell.swift */; };
 		184E42661D0DB7DC0073CF60 /* CustomerInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184E42651D0DB7DC0073CF60 /* CustomerInfoViewController.swift */; };
@@ -25,6 +26,9 @@
 		18DF989C1D15180B004BE990 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DF989B1D15180B004BE990 /* Room.swift */; };
 		18DF989E1D152F2C004BE990 /* DefectRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DF989D1D152F2C004BE990 /* DefectRoom.swift */; };
 		18DF98A01D155AFF004BE990 /* DefectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DF989F1D155AFF004BE990 /* DefectModel.swift */; };
+		18F589F71D1804AA00F06813 /* NSStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F589F61D1804AA00F06813 /* NSStringExtension.swift */; };
+		18F589FC1D183AC700F06813 /* CachingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F589FB1D183AC700F06813 /* CachingManager.swift */; };
+		18F589FE1D183AF400F06813 /* ImageCaching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F589FD1D183AF400F06813 /* ImageCaching.swift */; };
 		5204FF441D06D55E00A3991B /* NZSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5204FF431D06D55E00A3991B /* NZSplitViewController.swift */; };
 		520AC6731D094C3C000A8754 /* NZAutoComplete.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 520AC6721D094C3C000A8754 /* NZAutoComplete.storyboard */; };
 		520AC6751D094C6D000A8754 /* NZAutoCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520AC6741D094C6D000A8754 /* NZAutoCompleteViewController.swift */; };
@@ -70,6 +74,7 @@
 		1800981A1D157FE700BB11FD /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		1800981E1D159DF700BB11FD /* NSDateFormaterExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateFormaterExtension.swift; sourceTree = "<group>"; };
 		180098201D164A4C00BB11FD /* Sync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sync.swift; sourceTree = "<group>"; };
+		180AD45D1D1953E5000D802B /* BuildingCaching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildingCaching.swift; sourceTree = "<group>"; };
 		184E425D1D0C2EA20073CF60 /* AddDefectDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDefectDetailViewController.swift; sourceTree = "<group>"; };
 		184E425F1D0C4BFD0073CF60 /* NZDropDownIconColorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NZDropDownIconColorCell.swift; sourceTree = "<group>"; };
 		184E42651D0DB7DC0073CF60 /* CustomerInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerInfoViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +91,9 @@
 		18DF989B1D15180B004BE990 /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		18DF989D1D152F2C004BE990 /* DefectRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefectRoom.swift; sourceTree = "<group>"; };
 		18DF989F1D155AFF004BE990 /* DefectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefectModel.swift; sourceTree = "<group>"; };
+		18F589F61D1804AA00F06813 /* NSStringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSStringExtension.swift; sourceTree = "<group>"; };
+		18F589FB1D183AC700F06813 /* CachingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachingManager.swift; sourceTree = "<group>"; };
+		18F589FD1D183AF400F06813 /* ImageCaching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCaching.swift; sourceTree = "<group>"; };
 		2B612F85474418356E01E084 /* Pods-RealTransfer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealTransfer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RealTransfer/Pods-RealTransfer.debug.xcconfig"; sourceTree = "<group>"; };
 		418BCD69E7A020F1D1E5839B /* Pods_RealTransfer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RealTransfer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5204FF431D06D55E00A3991B /* NZSplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NZSplitViewController.swift; sourceTree = "<group>"; };
@@ -163,6 +171,16 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		18F589FA1D183ABF00F06813 /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				18F589FB1D183AC700F06813 /* CachingManager.swift */,
+				18F589FD1D183AF400F06813 /* ImageCaching.swift */,
+				180AD45D1D1953E5000D802B /* BuildingCaching.swift */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
 		1EAD2F54B04E9A129DABE888 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -219,6 +237,7 @@
 				521A7B271D05305200971B7B /* UIFontExtention.swift */,
 				1800981E1D159DF700BB11FD /* NSDateFormaterExtension.swift */,
 				18521DFC1D16B64D00B9622C /* UIImageExtension.swift */,
+				18F589F61D1804AA00F06813 /* NSStringExtension.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -300,6 +319,7 @@
 		529055EC1D0518DE00B7D28C /* RealTransfer */ = {
 			isa = PBXGroup;
 			children = (
+				18F589FA1D183ABF00F06813 /* Lib */,
 				1854F69A1D12FC46003B9FE0 /* Models */,
 				529056021D0519EE00B7D28C /* Libraries */,
 				521A7B221D05274800971B7B /* Extention */,
@@ -535,13 +555,17 @@
 				529055F61D0518DE00B7D28C /* RealTransfer.xcdatamodeld in Sources */,
 				18AACE171D145ACA0098F5BA /* ProjectModel.swift in Sources */,
 				520AC6751D094C6D000A8754 /* NZAutoCompleteViewController.swift in Sources */,
+				18F589FE1D183AF400F06813 /* ImageCaching.swift in Sources */,
+				180AD45E1D1953E5000D802B /* BuildingCaching.swift in Sources */,
 				5240DA061D080A1E0071D287 /* NZDropDownViewController.swift in Sources */,
 				521A7B311D05504C00971B7B /* Queue.swift in Sources */,
 				18DF98A01D155AFF004BE990 /* DefectModel.swift in Sources */,
+				18F589F71D1804AA00F06813 /* NSStringExtension.swift in Sources */,
 				52499B151D06C7CF0003F6D5 /* RowInfoModel.swift in Sources */,
 				184E42601D0C4BFD0073CF60 /* NZDropDownIconColorCell.swift in Sources */,
 				521A7B241D05277700971B7B /* UIViewExtension.swift in Sources */,
 				521A7B261D05291900971B7B /* UIColorExtension.swift in Sources */,
+				18F589FC1D183AC700F06813 /* CachingManager.swift in Sources */,
 				5240D9FF1D07F7610071D287 /* DefectCell.swift in Sources */,
 				1854F6AD1D130865003B9FE0 /* Model.swift in Sources */,
 				180098211D164A4C00BB11FD /* Sync.swift in Sources */,

@@ -43,6 +43,7 @@
             <string>SukhumvitSet-Text</string>
             <string>SukhumvitSet-Text</string>
             <string>SukhumvitSet-Text</string>
+            <string>SukhumvitSet-Text</string>
             <string>SukhumvitSet-Bold</string>
             <string>SukhumvitSet-Bold</string>
             <string>SukhumvitSet-Bold</string>
@@ -52,7 +53,6 @@
             <string>SukhumvitSet-Bold</string>
             <string>SukhumvitSet-Text</string>
             <string>SukhumvitSet-SemiBold</string>
-            <string>SukhumvitSet-Text</string>
         </mutableArray>
     </customFonts>
     <scenes>

@@ -190,12 +190,40 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
         let defectModel:DefectModel = resultArray[indexPath.row] as! DefectModel
         let cell:DefectCell = tableView.dequeueReusableCellWithIdentifier(CELL_DEFECT_IDENTIFIER) as! DefectCell
         
+        ///*===== IMAGE =======*//
+        cell.defectImageView.image = UIImage(named: "p1")
         if defectModel.realImage != nil {
             cell.defectImageView.image = defectModel.realImage
         }else{
-            let url:NSURL = NSURL(string: "http://\(DOMAIN_NAME)/Service/images/\(PROJECT!.pj_datebase_name!)/\(self.defectRoomRef!.df_un_id!)/\(defectModel.df_image_path!).jpg")! //
-            cell.defectImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "p1"), options: SDWebImageOptions.RefreshCached)
+            Queue.globalQueue({ 
+                let imageOnCache = ImageCaching.sharedInstance.getImageByName(defectModel.df_image_path)
+                
+                Queue.mainQueue({ 
+                    
+                    if imageOnCache != nil {
+                        cell.defectImageView.image = imageOnCache!
+                        defectModel.realImage = imageOnCache!
+                    }else{
+                        let url:NSURL = NSURL(string: "http://\(DOMAIN_NAME)/Service/images/\(PROJECT!.pj_datebase_name!)/\(self.defectRoomRef!.df_un_id!)/\(defectModel.df_image_path!).jpg")! //
+                        cell.defectImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "p1"), completed: { (imageReturn, error, sdImageCacheType, url) in
+                            if imageReturn != nil
+                            {
+                                defectModel.realImage = imageReturn
+                                ImageCaching.sharedInstance.setImageByName(defectModel.df_image_path!, image: imageReturn!)
+                            }
+                        })
+                        //                cell.defectImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "p1"), options: SDWebImageOptions.RefreshCached)
+                    }
+                    
+                })
+            })
+            
+            
+            
+            
+            
         }
+        //////////////////////////
         
         if defectModel.categoryName_displayText == nil {
             cell.titleLb.text = defectModel.categoryName

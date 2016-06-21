@@ -72,8 +72,10 @@ class User: Model,NSCoding {
     func login(handler: (Bool?) -> Void){
         
         SwiftSpinner.show("Loging in..", animated: true)
+        var path = "http://\(DOMAIN_NAME)/Service/User/login.php?username=\(self.username!)&password=\(self.password!)"
         
-        Alamofire.request(.GET, "http://\(DOMAIN_NAME)/Service/User/login.php?username=\(self.username!)&password=\(self.password!)", parameters: [:])
+        path = "\(path)&random=\(NSString.randomStringWithLength(10))"
+        Alamofire.request(.GET, path, parameters: [:])
             .responseJSON { response in
                 print(response.request)  // original URL request
                 print(response.response) // URL response
@@ -97,11 +99,13 @@ class User: Model,NSCoding {
                     }else{
                         handler(false)
                         SwiftSpinner.hide()
+                        debugPrint(response)
                     }
                     
                 }else{
                     handler(false)
                     SwiftSpinner.hide()
+                    debugPrint(response)
                 }
         }
     }

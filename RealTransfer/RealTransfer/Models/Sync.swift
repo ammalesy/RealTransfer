@@ -38,6 +38,7 @@ class Sync: Model {
                 images.addObject(ImageSync(image: sync.realImage!, imagePath: imagePathName))
                 param.addObject(sync.toJson())
                 
+                ImageCaching.sharedInstance.setImageByName(imagePathName, image: sync.realImage!)
                 i = i + 1
             }
         }
@@ -49,7 +50,7 @@ class Sync: Model {
         let postParam = ["data":param,"db_name":db_name,"timestamp":timeStamp,"df_room_id":defectRoom.df_room_id!]
         
         
-        Alamofire.request(.POST, "http://\(DOMAIN_NAME)/Service/Defect/syncDefect.php",
+        Alamofire.request(.POST, "http://\(DOMAIN_NAME)/Service/Defect/syncDefect.php?ransom=\(NSString.randomStringWithLength(10))",
             parameters: postParam,
             encoding: ParameterEncoding.JSON)
             .responseJSON { response in
@@ -66,7 +67,7 @@ class Sync: Model {
                         ////UPLOAD IMAGES
                         Alamofire.upload(
                             .POST,
-                            "http://\(DOMAIN_NAME)/Service/Defect/uploadImage.php",
+                            "http://\(DOMAIN_NAME)/Service/Defect/uploadImage.php?ransom=\(NSString.randomStringWithLength(10))",
                             headers: [
                                 "db_name":PROJECT!.pj_datebase_name!,
                                 "un_id":defectRoom.df_un_id!

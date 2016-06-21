@@ -163,7 +163,7 @@ class DefectRoom: Model,NSCoding {
     }
     func needSync(handler: (Bool!) -> Void){
         
-        let url = "http://\(DOMAIN_NAME)/Service/Defect/isSync.php"
+        let url = "http://\(DOMAIN_NAME)/Service/Defect/isSync.php?ransom=\(NSString.randomStringWithLength(10))"
         Alamofire.request(.POST, url, parameters: ["db_name":PROJECT!.pj_datebase_name!,
                                                   "df_room_id":self.df_room_id!,
                                                   "time_stamp":self.df_check_date!])
@@ -194,7 +194,7 @@ class DefectRoom: Model,NSCoding {
     func getListDefectOnServer(handler: () -> Void) {
         SwiftSpinner.show("Retrive defect data..", animated: true)
         
-        Alamofire.request(.GET, "http://\(DOMAIN_NAME)/Service/Defect/getListDefect.php?db_name=\(PROJECT!.pj_datebase_name!)&df_room_id=\(self.df_room_id!)", parameters: [:])
+        Alamofire.request(.GET, "http://\(DOMAIN_NAME)/Service/Defect/getListDefect.php?db_name=\(PROJECT!.pj_datebase_name!)&df_room_id=\(self.df_room_id!)&ransom=\(NSString.randomStringWithLength(10))", parameters: [:])
             .responseJSON { response in
                 
                 if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
@@ -229,7 +229,7 @@ class DefectRoom: Model,NSCoding {
         
         SwiftSpinner.show("Verify data..", animated: true)
         
-        Alamofire.request(.GET, "http://\(DOMAIN_NAME)/Service/Defect/isInitial.php?db_name=\(self.project!.pj_datebase_name!)&un_id=\(self.room!.un_id!)", parameters: [:])
+        Alamofire.request(.GET, "http://\(DOMAIN_NAME)/Service/Defect/isInitial.php?db_name=\(self.project!.pj_datebase_name!)&un_id=\(self.room!.un_id!)&ransom=\(NSString.randomStringWithLength(10))", parameters: [:])
             .responseJSON { response in
                 
                 if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {

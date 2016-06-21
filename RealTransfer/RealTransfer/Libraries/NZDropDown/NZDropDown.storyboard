@@ -6,8 +6,8 @@
     <customFonts key="customFonts">
         <mutableArray key="SukhumvitSet.ttc">
             <string>SukhumvitSet-Text</string>
-            <string>SukhumvitSet-Medium</string>
             <string>SukhumvitSet-Text</string>
+            <string>SukhumvitSet-Medium</string>
         </mutableArray>
     </customFonts>
     <scenes>

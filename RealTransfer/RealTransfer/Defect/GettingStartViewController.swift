@@ -47,7 +47,18 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
+        self.addGesture()
     }
+    func addGesture() {
+    
+        let gesture:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(GettingStartViewController.closeAllPopup))
+        gesture.cancelsTouchesInView = false
+        self.tableView.addGestureRecognizer(gesture)
+        
+    }
+    
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -89,7 +100,7 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         }else{
             SwiftSpinner.show("Retriving data..", animated: true)
             
-            Alamofire.request(.GET, "http://\(DOMAIN_NAME)/Service/Defect/getDefectRoomInfo.php?db_name=\(self.project!.pj_datebase_name!)&un_id=\(self.roomSelected!.un_id!)", parameters: [:])
+            Alamofire.request(.GET, "http://\(DOMAIN_NAME)/Service/Defect/getDefectRoomInfo.php?db_name=\(self.project!.pj_datebase_name!)&un_id=\(self.roomSelected!.un_id!)&ransom=\(NSString.randomStringWithLength(10))", parameters: [:])
                 .responseJSON { response in
                     
                     if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
@@ -148,7 +159,7 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         }
         else if data.style == CELL_TXT_SEARCH_IDENTIFIER
         {
-                        let cell:CellTxtSearch = tableView.dequeueReusableCellWithIdentifier(CELL_TXT_SEARCH_IDENTIFIER) as! CellTxtSearch
+            let cell:CellTxtSearch = tableView.dequeueReusableCellWithIdentifier(CELL_TXT_SEARCH_IDENTIFIER) as! CellTxtSearch
             cell.leftLabel.text = data.head
             cell.delegate = self
             cell.nextBtn.setTitleColor(data.colorNextbutton, forState: UIControlState.Normal)
@@ -282,6 +293,8 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+        self.closeAllPopup()
+        
         let data:RowModel = components.objectAtIndex(indexPath.row) as! RowModel
         if data.style == CELL_DROUP_DOWN_IDENTIFIER
         {
@@ -292,16 +305,21 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             if data.identifier == "BUILDING_LIST"
             {
                 Building(project: self.project).getBuildings({ (list) in
-                    Queue.mainQueue({
-                        let listDropDown:NSMutableArray = NSMutableArray()
-                        for building:Building in ((list! as NSArray) as! [Building]) {
-                            let dropDown:DropDownModel = DropDownModel(text: building.building_name)
-                            dropDown.identifier = building.building_id!
-                            dropDown.userInfo = building
-                            listDropDown.addObject(dropDown)
-                        }
-                        self.generateDropDownAndParseDataWithCell(cell,dataList: listDropDown, rowModel: data)
-                    })
+                    
+                    if list != nil {
+                        Queue.mainQueue({
+                            let listDropDown:NSMutableArray = NSMutableArray()
+                            for building:Building in ((list! as NSArray) as! [Building]) {
+                                let dropDown:DropDownModel = DropDownModel(text: building.building_name)
+                                dropDown.identifier = building.building_id!
+                                dropDown.userInfo = building
+                                listDropDown.addObject(dropDown)
+                            }
+                            self.generateDropDownAndParseDataWithCell(cell,dataList: listDropDown, rowModel: data)
+                        })
+                    }
+                    
+                    
 
                 })
                 
@@ -390,6 +408,10 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         if model.userInfo is Building
         {
             self.buldingSelected = model.userInfo as? Building
+            self.roomSelected = nil
+            let indexPAth:NSIndexPath = NSIndexPath(forRow: 2, inSection: 0)
+            let cell:CellTxtSearch = self.tableView.cellForRowAtIndexPath(indexPAth) as! CellTxtSearch
+            cell.textField.text = ""
         }
         else if model.userInfo is User
         {
@@ -418,6 +440,10 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         self.tableView.scrollEnabled = true
     }
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.closeDropDown()
+        self.closeAutoComplete()
+    }
+    func closeAllPopup(){
         self.closeDropDown()
         self.closeAutoComplete()
     }

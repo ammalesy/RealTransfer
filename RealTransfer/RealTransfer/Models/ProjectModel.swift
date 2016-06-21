@@ -31,7 +31,7 @@ class ProjectModel: NSObject {
         
         let user:User = User().getOnCache()!
         
-        Alamofire.request(.GET, "http://\(DOMAIN_NAME)/Service/User/getProject.php?user_id=\(user.user_id!)", parameters: [:])
+        Alamofire.request(.GET, "http://\(DOMAIN_NAME)/Service/User/getProject.php?user_id=\(user.user_id!)&ransom=\(NSString.randomStringWithLength(10))", parameters: [:])
             .responseJSON { response in
 
                 if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
@@ -52,17 +52,19 @@ class ProjectModel: NSObject {
                             
                             returnList.addObject(pj)
                         }
-                        
+                        SwiftSpinner.hide()
                         handler(returnList)
-                        SwiftSpinner.hide()
+                        
                     }else{
-                        handler(nil)
                         SwiftSpinner.hide()
+                        handler(nil)
+                        
                     }
                     
                 }else{
-                    handler(nil)
                     SwiftSpinner.hide()
+                    handler(nil)
+                    
                 }
         }
     }

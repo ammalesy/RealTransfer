@@ -9,6 +9,7 @@
 import UIKit
 import MobileCoreServices
 import Alamofire
+import SDWebImage
 
 let kOTHER_IDENTIFIER = "99999999"
 
@@ -190,8 +191,12 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
             defect.df_date = timeStamp
             defect.listSubCategory = self.listSubCategorySelected
             defect.df_id = "waiting"
-            defect.df_image_path = "waiting"
-            defect.realImage = self.imageView.image
+            defect.df_image_path = "before_sync_\(UIImage.uniqNameBySeq("0"))"
+            defect.realImage = UIImage(data: (self.imageView.image?.lowQualityJPEGNSData)!)
+            ImageCaching.sharedInstance.setImageByName("before_sync_\(UIImage.uniqNameBySeq("0"))", image: defect.realImage)
+            ImageCaching.sharedInstance.save()
+        
+            
             defect.df_room_id_ref = self.defectRoom?.df_room_id
             defect.df_status = "0"
             defect.subCategoryName = self.subCategorySelected

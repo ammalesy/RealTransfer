@@ -8,6 +8,8 @@
 
 import UIKit
 import SDWebImage
+import Alamofire
+import SwiftSpinner
 
 let NUMBER_OF_COLLUMN = 3
 var PROJECT:ProjectModel?
@@ -46,14 +48,30 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
     }
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
 
-        return Int(ceilf(Float(projects.count) / Float(NUMBER_OF_COLLUMN)))
+        if projects.count > NUMBER_OF_COLLUMN {
+            let section:Int = Int(ceilf(Float(projects.count) / Float(NUMBER_OF_COLLUMN)))
+            return section
+        }else{
+            if projects.count == 0 {
+                return 0
+            }else{
+                return 1
+            }
+            
+        }
+        
+        
     }
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        let val = (section + 1) * NUMBER_OF_COLLUMN
-        if val > projects.count {
-            let rowNum = val - projects.count
-            return rowNum
+        if projects.count < NUMBER_OF_COLLUMN {
+            return projects.count
+        }else{
+            let val = (section + 1) * NUMBER_OF_COLLUMN
+            if val > projects.count {
+                let rowNum = val - projects.count
+                return rowNum
+            }
         }
         return NUMBER_OF_COLLUMN
     }
@@ -88,23 +106,64 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
         self.nzNavigationController?.hideMenuPopoverIfViewIsShowing()
         let model:ProjectModel = projects.objectAtIndex(indexPath.row) as! ProjectModel
         Queue.mainQueue({ () -> Void in
-            let split:NZSplitViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("NZSplitViewController") as! NZSplitViewController
-            let controllers:[UIViewController] = split.viewControllers;
-            let nav:UINavigationController = controllers[1] as! UINavigationController
-            let subsNav:[UIViewController] = nav.viewControllers
-            if subsNav[0] is AddDefectViewController {
-                let addDefectViewController:AddDefectViewController = subsNav[0] as! AddDefectViewController
-                addDefectViewController.project = model
-                PROJECT = model
-            }
             
-            split.minimumPrimaryColumnWidth = 400
-            split.maximumPrimaryColumnWidth = 400
-            self.nzNavigationController?.pushViewController(split, completion: { () -> Void in
+
+            if(BuildingCaching.sharedInstance.isNeedUpdate()){
                 
-            })
+                SwiftSpinner.show("Retriving projects..", animated: true)
+                let path = "http://\(DOMAIN_NAME)/Service/Project/getAllBuildingAndRoom.php?db_name=\(model.pj_datebase_name!)&random=\(NSString.randomStringWithLength(10))"
+                Alamofire.request(.GET, path, parameters: [:])
+                    .responseJSON { response in
+                        
+                        if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
+                            //print("JSON: \(JSON)")
+                            if JSON.objectForKey("status") as! String == "200" {
+                                
+                                let buildings:NSMutableArray = JSON.objectForKey("buildingList") as! NSMutableArray
+                                
+                                BuildingCaching.sharedInstance.setBuildings(buildings)
+                                BuildingCaching.sharedInstance.save()
+                                
+                                SwiftSpinner.hide()
+                                self.showGettingStartByModel(model)
+                                
+                            }else{
+                                SwiftSpinner.hide()
+                                self.showGettingStartByModel(model)
+                                
+                            }
+                            
+                        }else{
+                            SwiftSpinner.hide()
+                            self.showGettingStartByModel(model)
+                            
+                        }
+                }
+                
+            }else{
+                
+                self.showGettingStartByModel(model)
+                
+            }
         })
+    }
+    
+    func showGettingStartByModel(model:ProjectModel){
+        let split:NZSplitViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("NZSplitViewController") as! NZSplitViewController
+        let controllers:[UIViewController] = split.viewControllers;
+        let nav:UINavigationController = controllers[1] as! UINavigationController
+        let subsNav:[UIViewController] = nav.viewControllers
+        if subsNav[0] is AddDefectViewController {
+            let addDefectViewController:AddDefectViewController = subsNav[0] as! AddDefectViewController
+            addDefectViewController.project = model
+            PROJECT = model
+        }
         
+        split.minimumPrimaryColumnWidth = 400
+        split.maximumPrimaryColumnWidth = 400
+        self.nzNavigationController?.pushViewController(split, completion: { () -> Void in
+            
+        })
     }
 
     func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
