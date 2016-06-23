@@ -13,7 +13,7 @@ import SDWebImage
 
 let CELL_DEFECT_IDENTIFIER = "CellDefect"
 
-class DefectListViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,NZDropDownViewDelegate {
+class DefectListViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,NZDropDownViewDelegate,DefectCellViewDelegate {
     
     @IBOutlet weak var countDefectLb: UILabel!
     var list:NSMutableArray = NSMutableArray()
@@ -22,6 +22,7 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
     var groupList:NSMutableArray = NSMutableArray()
     
     var defectRoomRef:DefectRoom?
+    
     
     var dropDownController:NZDropDownViewController?
 
@@ -39,7 +40,7 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
         firstModel.identifier = "ALL"
         dropDownList.addObject(firstModel)
         
-        let categoryList:NSDictionary = Category.getCategory()
+        let categoryList:NSDictionary = Category.sharedInstance.getCategory()
         
         for data:NSDictionary in categoryList.objectForKey("list") as! [NSDictionary] {
             
@@ -65,7 +66,6 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
                 model.needDisplayText()
                 self.list.addObject(model)
             }
-            
             self.displayList = self.list.mutableCopy() as! NSMutableArray
             self.createGroupListDataByListData()
             self.tableView.reloadData()
@@ -187,10 +187,12 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
         
         let resultPredicate:NSPredicate = NSPredicate(format: "categoryName contains[c] %@", dropDownModel.identifier)
         let resultArray:[AnyObject] = displayList.filteredArrayUsingPredicate(resultPredicate)
-        let defectModel:DefectModel = resultArray[indexPath.row] as! DefectModel
+        let index:Int = (resultArray.count - 1) - indexPath.row
+        let defectModel:DefectModel = resultArray[index] as! DefectModel
         let cell:DefectCell = tableView.dequeueReusableCellWithIdentifier(CELL_DEFECT_IDENTIFIER) as! DefectCell
-        
+        cell.delegate = self
         ///*===== IMAGE =======*//
+        print(defectModel.df_image_path)
         cell.defectImageView.image = UIImage(named: "p1")
         if defectModel.realImage != nil {
             cell.defectImageView.image = defectModel.realImage
@@ -209,7 +211,8 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
                             if imageReturn != nil
                             {
                                 defectModel.realImage = imageReturn
-                                ImageCaching.sharedInstance.setImageByName(defectModel.df_image_path!, image: imageReturn!)
+                                ImageCaching.sharedInstance.setImageByName(defectModel.df_image_path!, image: imageReturn!, isFromServer: true)
+                                ImageCaching.sharedInstance.save()
                             }
                         })
                         //                cell.defectImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "p1"), options: SDWebImageOptions.RefreshCached)
@@ -224,6 +227,12 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
             
         }
         //////////////////////////
+        
+        if defectModel.df_status == "1" {
+            cell.setHideEditting(true)
+        }else{
+            cell.setHideEditting(false)
+        }
         
         if defectModel.categoryName_displayText == nil {
             cell.titleLb.text = defectModel.categoryName
@@ -289,6 +298,45 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
+    }
+    func defectCellPopoverWillShow(cell: DefectCell) {
+        self.tableView.scrollEnabled = false
+    }
+    func defectCellPopoverWillHide(cell: DefectCell) {
+        self.tableView.scrollEnabled = true
+    }
+    
+    func defectCell(cell: DefectCell, didClickMenu model: NZRow, popover: NZPopoverView) {
+        
+        let indexPath:NSIndexPath = self.tableView.indexPathForCell(cell)!
+        let categoryName:String = groupList.objectAtIndex(indexPath.section) as! String
+        let dropDownModel:DropDownModel = self.getDropDownModelFromCategoryName(categoryName)!
+        let resultPredicate:NSPredicate = NSPredicate(format: "categoryName contains[c] %@", dropDownModel.identifier)
+        let resultArray:[AnyObject] = displayList.filteredArrayUsingPredicate(resultPredicate)
+        let index:Int = (resultArray.count - 1) - indexPath.row
+        let defectModel:DefectModel = resultArray[index] as! DefectModel
+        
+        if model.identifier == "delete" {
+            ImageCaching.sharedInstance.removeImageByName(defectModel.df_image_path)
+            self.defectRoomRef?.listDefect?.removeObject(defectModel)
+            self.defectRoomRef?.doCache()
+            self.reloadData(self.defectRoomRef!)
+            
+        }else{
+            let controllers:[UIViewController] = (self.splitViewController?.viewControllers)!
+            let nav:UINavigationController = controllers[1] as! UINavigationController
+            nav.popToRootViewControllerAnimated(true)
+            
+            let detailController:AddDefectDetailViewController = AddDefectDetailViewController.instance(cell.defectImageView.image!, defectRoom: self.defectRoomRef, state: DefectViewState.Edit)
+            detailController.defectModel = defectModel
+            detailController.textsForDisplayEditing = [cell.titleLb.text!,cell.middleTextLb.text!,cell.detailTextLb.text!]
+            nav.pushViewController(detailController, animated: true)
+        }
+        
+        
+        
+        cell.hideMenuPopoverIfViewIsShowing()
+        
     }
     
 }

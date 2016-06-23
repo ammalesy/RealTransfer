@@ -8,17 +8,85 @@
 
 import UIKit
 
-class DefectCell: UITableViewCell {
+@objc protocol DefectCellViewDelegate{
 
+    optional func defectCell(cell:DefectCell, didClickMenu model:NZRow, popover:NZPopoverView)
+    optional func defectCellPopoverWillShow(cell:DefectCell)
+    optional func defectCellPopoverWillHide(cell:DefectCell)
+
+}
+
+class DefectCell: UITableViewCell,NZPopoverViewDelegate {
+
+    var popover:NZPopoverView!
+    
     @IBOutlet weak var detailTextLb: UILabel!
     @IBOutlet weak var middleTextLb: UILabel!
     @IBOutlet weak var titleLb: UILabel!
     @IBOutlet weak var statusIconImageView: UIImageView!
     @IBOutlet weak var defectImageView: UIImageView!
+    @IBOutlet weak var editImageView: UIImageView!
+    @IBOutlet weak var pencilButton: UIButton!
+    var delegate:DefectCellViewDelegate? = nil
     
     override func awakeFromNib() {
         
         self.statusIconImageView.assignCornerRadius(self.statusIconImageView.frame.size.height / 2)
         
+    }
+    
+    func setHideEditting(hide:Bool){
+        pencilButton.hidden = false
+        editImageView.hidden = false
+        if hide {
+            pencilButton.hidden = true
+            editImageView.hidden = true
+        }
+    }
+    
+    @IBAction func editAction(sender: AnyObject) {
+        
+        if popover != nil {
+            popover.hide()
+            popover = nil
+        }else{
+            if (self.delegate != nil) {
+                
+                self.delegate?.defectCellPopoverWillShow!(self)
+                
+            }
+            
+            popover = NZPopoverView.standardSize()
+            popover.delegate = self
+            popover.addRow(NZRow(text: "Edit", imageName:nil, tintColor: UIColor.darkGrayColor(),  identifier: "edit"))
+            popover.addRow(NZRow(text: "Delete", imageName:nil, tintColor: UIColor(red: 223/255, green: 0/255, blue: 0/255, alpha: 1),  identifier: "delete"))
+            
+            popover.showNearView(self.editImageView, addToView: self)
+        }
+        
+    }
+    func hideMenuPopoverIfViewIsShowing(){
+        if popover != nil {
+            if (self.delegate != nil) {
+                
+                self.delegate?.defectCellPopoverWillHide!(self)
+                
+            }
+            popover.hide()
+            popover = nil
+        }
+    }
+    
+    func popoverView(view: NZPopoverView, didClickRow menu: NZRow) {
+        
+        if (self.delegate != nil) {
+            
+            self.delegate?.defectCell!(self, didClickMenu: menu, popover: view)
+            
+        }
+        
+    }
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.hideMenuPopoverIfViewIsShowing()
     }
 }

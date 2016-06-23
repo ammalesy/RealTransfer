@@ -15,7 +15,20 @@ let kCategoryVersion = "CategoryVersion"
 
 class Category: Model {
     
+    var category:NSDictionary = NSDictionary()
+    
     var version:String?
+    static let sharedInstance = Category()
+    
+    override init() {
+        super.init()
+        
+        let userDefault:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        if let data = userDefault.objectForKey(kCategory) {
+            self.category = NSKeyedUnarchiver.unarchiveObjectWithData(data as! NSData) as! NSDictionary
+        }
+        
+    }
     
     convenience init(version:String!) {
         self.init()
@@ -44,9 +57,8 @@ class Category: Model {
             handler()
         }
     }
-    class func getCategory()->NSDictionary {
-        let userDefault:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        return NSKeyedUnarchiver.unarchiveObjectWithData(userDefault.objectForKey(kCategory) as! NSData) as! NSDictionary
+    func getCategory()->NSDictionary {
+        return self.category
     }
     func update(handler: (NSMutableDictionary?) -> Void) {
         SwiftSpinner.show("Update category..", animated: true)

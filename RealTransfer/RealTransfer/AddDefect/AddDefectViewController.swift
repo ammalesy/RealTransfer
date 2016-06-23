@@ -10,7 +10,7 @@ import UIKit
 import MobileCoreServices
 import SwiftSpinner
 
-class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,NZNavigationViewControllerDelegate {
 
     var splitController:NZSplitViewController?
     var imagePicker:UIImagePickerController?
@@ -23,6 +23,7 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
         
         splitController = (self.splitViewController as! NZSplitViewController)
         splitController!.nzNavigationController?.hideRightInfo(false)
+        splitController!.nzNavigationController?.delegate = self
         
         // Do any additional setup after loading the view.
         
@@ -124,10 +125,7 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
             let image = info[UIImagePickerControllerOriginalImage]
                 as! UIImage
             
-            let detailController:AddDefectDetailViewController = self.storyboard?.instantiateViewControllerWithIdentifier("AddDefectDetailViewController") as! AddDefectDetailViewController
-            detailController.image = image
-            detailController.defectRoom = self.defectRoom
-            
+            let detailController:AddDefectDetailViewController = AddDefectDetailViewController.instance(image, defectRoom: self.defectRoom, state: DefectViewState.New)
             self.navigationController?.pushViewController(detailController, animated: true)
             
             
@@ -151,10 +149,17 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
         }
         
     }
-
-    @IBAction func sync(sender: AnyObject) {
+    func nzNavigation(controller: NZNavigationViewController, didClickMenu popover: NZPopoverView, menu: NZRow) {
+        
+        if self.defectRoom != nil && menu.identifier == "sync" {
+            self.sync()
+        }
+    }
+    func sync() {
         SwiftSpinner.show("Uploading ..", animated: true)
         let cache:DefectRoom = DefectRoom.getCache(self.defectRoom?.df_room_id)!
+        
+        Sync.controllerReferer = self
         Sync.syncToServer(cache ,db_name: PROJECT?.pj_datebase_name!, timeStamp: NSDateFormatter.dateFormater().stringFromDate(NSDate()), defect: (defectRoom?.listDefect)!)
         { (result) in
             
@@ -168,7 +173,7 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
                     
                     SwiftSpinner.hide()
                     
-                })
+                }) 
                 
             }else if result == "FALSE"{
                 let alert = UIAlertController(title: "แจ้งเตือน", message: "รายการล่าสุดแล้ว", preferredStyle: UIAlertControllerStyle.Alert)
@@ -181,15 +186,29 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
                     SwiftSpinner.hide()
                 })
             }else {
-                let alert = UIAlertController(title: "แจ้งเตือน", message: "Image upload fail!", preferredStyle: UIAlertControllerStyle.Alert)
-                let action:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: { (action) in
+                
+                cache.getListDefectOnServer({
+                    
+                    cache.doCache()
+                    self.defectRoom = cache
+                    self.refresh()
+                    
+                    SwiftSpinner.hide()
+                    let alert = UIAlertController(title: "แจ้งเตือน", message: "Image upload fail!", preferredStyle: UIAlertControllerStyle.Alert)
+                    let action:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: { (action) in
+                        
+                        
+                        
+                    })
+                    alert.addAction(action)
+                    
+                    self.presentViewController(alert, animated: true, completion: {
+                        
+                    })
                     
                 })
-                alert.addAction(action)
                 
-                self.presentViewController(alert, animated: true, completion: {
-                    SwiftSpinner.hide()
-                })
+                
             }
             
         }

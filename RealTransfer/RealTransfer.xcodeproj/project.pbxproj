@@ -12,6 +12,7 @@
 		1800981F1D159DF700BB11FD /* NSDateFormaterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1800981E1D159DF700BB11FD /* NSDateFormaterExtension.swift */; };
 		180098211D164A4C00BB11FD /* Sync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180098201D164A4C00BB11FD /* Sync.swift */; };
 		180AD45E1D1953E5000D802B /* BuildingCaching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180AD45D1D1953E5000D802B /* BuildingCaching.swift */; };
+		180AD4601D199E56000D802B /* KMPlaceholderTextView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180AD45F1D199E56000D802B /* KMPlaceholderTextView.framework */; };
 		184E425E1D0C2EA20073CF60 /* AddDefectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184E425D1D0C2EA20073CF60 /* AddDefectDetailViewController.swift */; };
 		184E42601D0C4BFD0073CF60 /* NZDropDownIconColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184E425F1D0C4BFD0073CF60 /* NZDropDownIconColorCell.swift */; };
 		184E42661D0DB7DC0073CF60 /* CustomerInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184E42651D0DB7DC0073CF60 /* CustomerInfoViewController.swift */; };
@@ -20,6 +21,7 @@
 		1854F6AD1D130865003B9FE0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1854F6AC1D130865003B9FE0 /* Model.swift */; };
 		1889D9E11D1451FC0095507F /* SwiftSpinner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1889D9E01D1451FC0095507F /* SwiftSpinner.framework */; };
 		18AACE171D145ACA0098F5BA /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AACE161D145ACA0098F5BA /* ProjectModel.swift */; };
+		18CA73111D1C13120021712B /* AlertUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CA73101D1C13120021712B /* AlertUtil.swift */; };
 		18DF98961D146280004BE990 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18DF98951D146280004BE990 /* SDWebImage.framework */; };
 		18DF98981D14F31E004BE990 /* Building.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DF98971D14F31E004BE990 /* Building.swift */; };
 		18DF989A1D150C76004BE990 /* CSRoleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DF98991D150C76004BE990 /* CSRoleModel.swift */; };
@@ -75,6 +77,7 @@
 		1800981E1D159DF700BB11FD /* NSDateFormaterExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateFormaterExtension.swift; sourceTree = "<group>"; };
 		180098201D164A4C00BB11FD /* Sync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sync.swift; sourceTree = "<group>"; };
 		180AD45D1D1953E5000D802B /* BuildingCaching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildingCaching.swift; sourceTree = "<group>"; };
+		180AD45F1D199E56000D802B /* KMPlaceholderTextView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KMPlaceholderTextView.framework; path = "../../../Library/Developer/Xcode/DerivedData/RealTransfer-dxjmravslvqqrxcfhswvgaqtusax/Build/Products/Debug-iphoneos/KMPlaceholderTextView.framework"; sourceTree = "<group>"; };
 		184E425D1D0C2EA20073CF60 /* AddDefectDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDefectDetailViewController.swift; sourceTree = "<group>"; };
 		184E425F1D0C4BFD0073CF60 /* NZDropDownIconColorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NZDropDownIconColorCell.swift; sourceTree = "<group>"; };
 		184E42651D0DB7DC0073CF60 /* CustomerInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerInfoViewController.swift; sourceTree = "<group>"; };
@@ -85,6 +88,7 @@
 		1889D9E01D1451FC0095507F /* SwiftSpinner.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftSpinner.framework; path = "../../../Library/Developer/Xcode/DerivedData/RealTransfer-dxjmravslvqqrxcfhswvgaqtusax/Build/Products/Debug-iphonesimulator/SwiftSpinner.framework"; sourceTree = "<group>"; };
 		18AACE161D145ACA0098F5BA /* ProjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectModel.swift; sourceTree = "<group>"; };
 		18AACE181D1461880098F5BA /* RealTransfer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RealTransfer-Bridging-Header.h"; sourceTree = "<group>"; };
+		18CA73101D1C13120021712B /* AlertUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertUtil.swift; sourceTree = "<group>"; };
 		18DF98951D146280004BE990 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = "Pods/../build/Debug-iphoneos/SDWebImage.framework"; sourceTree = "<group>"; };
 		18DF98971D14F31E004BE990 /* Building.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Building.swift; sourceTree = "<group>"; };
 		18DF98991D150C76004BE990 /* CSRoleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSRoleModel.swift; sourceTree = "<group>"; };
@@ -145,6 +149,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				180AD4601D199E56000D802B /* KMPlaceholderTextView.framework in Frameworks */,
 				18DF98961D146280004BE990 /* SDWebImage.framework in Frameworks */,
 				1889D9E11D1451FC0095507F /* SwiftSpinner.framework in Frameworks */,
 				52C09DE31D096E7C0094405D /* MobileCoreServices.framework in Frameworks */,
@@ -177,6 +182,7 @@
 				18F589FB1D183AC700F06813 /* CachingManager.swift */,
 				18F589FD1D183AF400F06813 /* ImageCaching.swift */,
 				180AD45D1D1953E5000D802B /* BuildingCaching.swift */,
+				18CA73101D1C13120021712B /* AlertUtil.swift */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -193,6 +199,7 @@
 		44444307A5AF2D6255AC4ADE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				180AD45F1D199E56000D802B /* KMPlaceholderTextView.framework */,
 				18DF98951D146280004BE990 /* SDWebImage.framework */,
 				1889D9E01D1451FC0095507F /* SwiftSpinner.framework */,
 				1889D9DD1D1450400095507F /* AlamofireNetworkActivityIndicator.framework */,
@@ -530,6 +537,7 @@
 				5290560D1D0519EE00B7D28C /* NZPopoverView.swift in Sources */,
 				18DF989C1D15180B004BE990 /* Room.swift in Sources */,
 				5218E5751D09123C008B5402 /* NZDropDowCell.swift in Sources */,
+				18CA73111D1C13120021712B /* AlertUtil.swift in Sources */,
 				52499B0F1D06BA410003F6D5 /* CellDropDown.swift in Sources */,
 				5204FF441D06D55E00A3991B /* NZSplitViewController.swift in Sources */,
 				5299C3CE1D066C810021DD97 /* GettingStartViewController.swift in Sources */,

@@ -10,17 +10,29 @@ import UIKit
 import MobileCoreServices
 import Alamofire
 import SDWebImage
+import KMPlaceholderTextView
 
 let kOTHER_IDENTIFIER = "99999999"
 
+public enum DefectViewState : Int {
+    
+    case New
+    case Edit
+
+}
+
 class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,NZDropDownViewDelegate {
 
+    var textsForDisplayEditing:[String]?
+    var state:DefectViewState?
+    
     var image:UIImage?
     var imagePicker:UIImagePickerController?
     var splitController:NZSplitViewController?
     var dropDownController:NZDropDownViewController?
     var categoryList:NSDictionary?
     var defectRoom:DefectRoom?
+    var defectModel:DefectModel?
     @IBOutlet weak var saveBtn: UIButton!
     
     var categorySelected:String?
@@ -28,7 +40,7 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
     var listSubCategorySelected:String?
     
     @IBOutlet weak var heightListSubType: NSLayoutConstraint!
-    @IBOutlet weak var listSubtypeTextView: UITextView!
+    @IBOutlet weak var listSubtypeTextView: KMPlaceholderTextView!
     @IBOutlet weak var listSubTypeBtn: UIButton!
     @IBOutlet weak var subtypeBtn: UIButton!
     @IBOutlet weak var typeBtn: UIButton!
@@ -74,8 +86,35 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
         splitController!.nzNavigationController?.hideRightInfo(false)
         self.listSubTypeModeEnable(false)
         
-        categoryList = Category.getCategory()
-
+        categoryList = Category.sharedInstance.getCategory()
+        
+        self.initialData()
+    }
+    func initialData(){
+        if self.state == DefectViewState.Edit {
+            
+            if self.defectModel != nil {
+                self.categorySelected = self.defectModel?.categoryName!
+                self.subCategorySelected = self.defectModel?.subCategoryName!
+                self.listSubCategorySelected = self.defectModel?.listSubCategory!
+                
+                if (self.textsForDisplayEditing != nil) {
+                    self.typeBtn.setTitle(self.textsForDisplayEditing![0], forState: UIControlState.Normal)
+                    self.subtypeBtn.setTitle(self.textsForDisplayEditing![1], forState: UIControlState.Normal)
+                    if self.subCategorySelected == kOTHER_IDENTIFIER {
+                        
+                        self.listSubTypeModeEnable(true)
+                        self.listSubtypeTextView.text = self.textsForDisplayEditing![2]
+                    }else{
+                        
+                        self.listSubTypeModeEnable(false)
+                        self.listSubTypeBtn.setTitle(self.textsForDisplayEditing![2], forState: UIControlState.Normal)
+                    }
+                    
+                }
+            }
+            
+        }
     }
 
     @IBAction func takePicture(sender: AnyObject) {
@@ -180,37 +219,55 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
             self.listSubCategorySelected = self.listSubtypeTextView.text
         }
         
-         if self.categorySelected != nil && self.subCategorySelected != nil && self.listSubCategorySelected != nil
-         {
-            
-            let listDefect:NSMutableArray = (self.defectRoom?.listDefect)!
-            
-            let timeStamp  =  NSDateFormatter.dateFormater().stringFromDate(NSDate())
+        let timeStamp  =  NSDateFormatter.dateFormater().stringFromDate(NSDate())
+        if self.state == DefectViewState.New {
             let defect:DefectModel = DefectModel()
             defect.categoryName = self.categorySelected
             defect.df_date = timeStamp
             defect.listSubCategory = self.listSubCategorySelected
             defect.df_id = "waiting"
-            defect.df_image_path = "before_sync_\(UIImage.uniqNameBySeq("0"))"
+            let imgName = UIImage.uniqNameBySeq("0")
+            defect.df_image_path = imgName
             defect.realImage = UIImage(data: (self.imageView.image?.lowQualityJPEGNSData)!)
-            ImageCaching.sharedInstance.setImageByName("before_sync_\(UIImage.uniqNameBySeq("0"))", image: defect.realImage)
+            ImageCaching.sharedInstance.setImageByName(imgName, image: defect.realImage, isFromServer: false)
+            SDImageCache.sharedImageCache().storeImage(defect.realImage, forKey: imgName, toDisk: true)
             ImageCaching.sharedInstance.save()
-        
-            
             defect.df_room_id_ref = self.defectRoom?.df_room_id
             defect.df_status = "0"
             defect.subCategoryName = self.subCategorySelected
-            listDefect.addObject(defect)
-
+            self.saveAndKeepToDisk(defect)
+        }else{
+            //EDIT
+            self.defectModel!.categoryName = self.categorySelected
+            self.defectModel!.df_date = timeStamp
+            self.defectModel!.listSubCategory = self.listSubCategorySelected
+            let imgName = UIImage.uniqNameBySeq("0")
+            self.defectModel!.df_image_path = imgName
+            self.defectModel!.realImage = UIImage(data: (self.imageView.image?.lowQualityJPEGNSData)!)
+            ImageCaching.sharedInstance.setImageByName(imgName, image: self.defectModel!.realImage, isFromServer: false)
+            SDImageCache.sharedImageCache().storeImage(self.defectModel!.realImage, forKey: imgName, toDisk: true)
+            ImageCaching.sharedInstance.save()
+            self.defectModel!.subCategoryName = self.subCategorySelected
+            self.saveAndKeepToDisk(self.defectModel!)
+            print(self.defectModel)
+        }
+    }
+    func saveAndKeepToDisk(defect:DefectModel!){
+        
+        
+        if self.categorySelected != nil && self.subCategorySelected != nil && self.listSubCategorySelected != nil
+        {
+            
+            if self.state == DefectViewState.New {
+                let listDefect:NSMutableArray = (self.defectRoom?.listDefect)!
+                listDefect.addObject(defect)
+            }
+            
             self.defectRoom?.doCache()
             
             let defectListController:DefectListViewController = self.splitController!.viewControllers.first as! DefectListViewController
-            defectListController.reloadData(self.defectRoom)
+            defectListController.reloadData(DefectRoom.getCache(self.defectRoom!.df_room_id!))
             
-//            if(defectListController.displayList.count > 1){
-//                let indexPath:NSIndexPath = NSIndexPath(forRow: defectListController.displayList.count - 1, inSection: 0)
-//                defectListController.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
-//            }
             self.navigationController?.popViewControllerAnimated(true)
         }
     }
@@ -326,6 +383,16 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
         {
             self.saveBtn.setTitleColor(UIColor.RGB(199, G: 200, B: 201), forState: UIControlState.Normal)
         }
+    }
+    
+    class func instance(image:UIImage!, defectRoom:DefectRoom!, state:DefectViewState!) -> AddDefectDetailViewController{
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let detailController:AddDefectDetailViewController = sb.instantiateViewControllerWithIdentifier("AddDefectDetailViewController") as! AddDefectDetailViewController
+        detailController.image = image
+        detailController.defectRoom = defectRoom
+        detailController.state = state
+        
+        return detailController
     }
     
     /*

@@ -72,7 +72,11 @@ class NZPopoverView: UIView {
             rowView.userInteractionEnabled = true
             rowView.setTitle(row.text, forState: UIControlState.Normal)
             rowView.backgroundColor = row.color
-            rowView.setImage(UIImage(named: row.imageName!)!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), forState: UIControlState.Normal)
+            if row.imageName != nil {
+                 rowView.setImage(UIImage(named: row.imageName!)!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), forState: UIControlState.Normal)
+            }
+           
+            
             rowView.setTitleColor(row.tintColor, forState: UIControlState.Normal)
             rowView.tintColor = row.tintColor!
         

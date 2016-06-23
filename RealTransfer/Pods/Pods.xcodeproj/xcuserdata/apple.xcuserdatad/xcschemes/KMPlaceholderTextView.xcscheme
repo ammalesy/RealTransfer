@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'D168595903651B413407C361'
-               BlueprintName = 'Pods-RealTransfer'
+               BlueprintIdentifier = 'AD0F698C3E808828FCB63393'
+               BlueprintName = 'KMPlaceholderTextView'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'Pods_RealTransfer.framework'>
+               BuildableName = 'KMPlaceholderTextView.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

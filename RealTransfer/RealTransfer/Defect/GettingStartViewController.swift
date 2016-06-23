@@ -399,6 +399,12 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         autoCompleteController?.searchWithString(string)
         
     }
+    func getCellRoom() -> CellTxtSearch {
+        
+        let indexPAth:NSIndexPath = NSIndexPath(forRow: 2, inSection: 0)
+        let cell:CellTxtSearch = self.tableView.cellForRowAtIndexPath(indexPAth) as! CellTxtSearch
+        return cell
+    }
     func nzDropDown(contorller: NZDropDownViewController, didClickCell model: DropDownModel) {
         if contorller.userInfo is RowModel {
             let rowModel:RowModel = contorller.userInfo as! RowModel
@@ -409,8 +415,7 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         {
             self.buldingSelected = model.userInfo as? Building
             self.roomSelected = nil
-            let indexPAth:NSIndexPath = NSIndexPath(forRow: 2, inSection: 0)
-            let cell:CellTxtSearch = self.tableView.cellForRowAtIndexPath(indexPAth) as! CellTxtSearch
+            let cell:CellTxtSearch = self.getCellRoom()
             cell.textField.text = ""
         }
         else if model.userInfo is User
@@ -419,6 +424,7 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         }
         
         self.closeDropDown()
+        self.verifyButtonColor()
         
     }
     func nzAutoComplete(contorller: NZAutoCompleteViewController, didClickCell model: AutoCompleteModel) {
@@ -429,6 +435,7 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         }
 
         self.closeAutoComplete()
+        self.verifyButtonColor()
         
     }
     func dropDownViewDidClose(view: NZDropDownViewController) {
@@ -556,6 +563,8 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             self.tableView.reloadData()
             self.csSelected = nil
             
+            self.verifyButtonColor()
+            
         }
         
         
@@ -612,6 +621,25 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         
         return autoCompleteController!
     
+    }
+    
+    func verifyButtonColor() {
+        if self.buldingSelected != nil && self.roomSelected != nil
+        {
+            let cell:CellTxtSearch = self.getCellRoom()
+            var row3Color = UIColor.RGB(127, G: 191, B: 49)
+            var startColor = UIColor.RGB(216, G: 216, B: 216)
+            if self.components.count > 3 {
+                row3Color = UIColor.blackColor()
+            }
+            cell.nextBtn.setTitleColor(row3Color, forState: UIControlState.Normal)
+            
+            let rowModel:RowModel? = self.getRowByIdentifier("CS_LIST")
+            if rowModel != nil && rowModel?.detail != "" {
+                startColor = UIColor.RGB(127, G: 191, B: 49)
+            }
+            self.startBtn.setTitleColor(startColor, forState: UIControlState.Normal)
+        }
     }
     
 }

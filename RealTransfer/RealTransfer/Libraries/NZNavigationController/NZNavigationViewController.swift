@@ -7,9 +7,16 @@
 //
 
 import UIKit
+import SwiftSpinner
+
+@objc protocol NZNavigationViewControllerDelegate{
+    optional func nzNavigation(controller:NZNavigationViewController, didClickMenu popover: NZPopoverView, menu: NZRow)
+
+}
 
 class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
     
+    var delegate:NZNavigationViewControllerDelegate? = nil
     
     @IBOutlet weak var cusNameLb: UILabel!
     @IBOutlet weak var roomNoLb: UILabel!
@@ -169,9 +176,12 @@ class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
             popover = nil
         }else{
             popover = NZPopoverView.standardSize()
+            
             popover.delegate = self
             popover.addRow(NZRow(text: "View info", imageName:"Info-97", tintColor: UIColor.darkGrayColor(),  identifier: "info"))
-            popover.addRow(NZRow(text: "Sign out", imageName:"Enter-96", tintColor: UIColor(red: 223/255, green: 0/255, blue: 0/255, alpha: 1),  identifier: "logout"))
+            popover.addRow(NZRow(text: "Sync", imageName:"sync", tintColor: UIColor.darkGrayColor(),  identifier: "sync"))
+            popover.addRow(NZRow(text: "Sign out", imageName:"Enter-96", tintColor: UIColor.RGB(223, G: 0, B: 0),  identifier: "logout"))
+            
             
             popover.showNearView(sender as! UIButton, addToView: self.view)
         }
@@ -223,15 +233,27 @@ class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
     }
     func popoverView(view: NZPopoverView, didClickRow menu: NZRow) {
         
+        
         if menu.identifier == "logout" {
             self.dismissViewControllerAnimated(true, completion: { () -> Void in
                 PROJECT = nil
                 Building.buldings.removeAllObjects()
                 CSRoleModel.csUSers.removeAllObjects()
+                
+            
             })
         }
-        else if menu.identifier == "info" {
+        else if menu.identifier == "sync" {
+            if PROJECT == nil {
+                AlertUtil.alert("Warning", message: "กรุณาเลือก Project/Room", cancleButton: "OK", atController: self)
+            }
+        }
+         else if menu.identifier == "info" {
             showCustomerInfoView()
+        }
+        
+        if self.delegate != nil {
+            self.delegate?.nzNavigation!(self, didClickMenu: view, menu: menu)
         }
         
     }

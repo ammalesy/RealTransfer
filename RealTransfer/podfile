@@ -11,5 +11,6 @@ target 'RealTransfer' do
 pod 'Alamofire', '~> 3.4'
 pod 'SwiftSpinner'
 pod 'SDWebImage', '~>3.8'
+pod 'KMPlaceholderTextView', '~> 1.2.0'
 end
 

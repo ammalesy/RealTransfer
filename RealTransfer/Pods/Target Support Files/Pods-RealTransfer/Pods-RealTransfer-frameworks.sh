@@ -85,11 +85,13 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-RealTransfer/Alamofire.framework"
+  install_framework "Pods-RealTransfer/KMPlaceholderTextView.framework"
   install_framework "Pods-RealTransfer/SDWebImage.framework"
   install_framework "Pods-RealTransfer/SwiftSpinner.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-RealTransfer/Alamofire.framework"
+  install_framework "Pods-RealTransfer/KMPlaceholderTextView.framework"
   install_framework "Pods-RealTransfer/SDWebImage.framework"
   install_framework "Pods-RealTransfer/SwiftSpinner.framework"
 fi

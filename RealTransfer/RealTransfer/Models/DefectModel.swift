@@ -94,7 +94,7 @@ class DefectModel: NSObject,NSCoding {
     
     func needDisplayText(){
         
-        let categoryList:NSDictionary = Category.getCategory()
+        let categoryList:NSDictionary = Category.sharedInstance.getCategory()
         
         //LEVEL1
         for data:NSDictionary in categoryList.objectForKey("list") as! [NSDictionary] {

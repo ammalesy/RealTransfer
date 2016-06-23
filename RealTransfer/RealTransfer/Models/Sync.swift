@@ -23,7 +23,7 @@ class ImageSync : Model {
 
 class Sync: Model {
 
-    
+    static var controllerReferer:UIViewController?
     
     class func syncToServer(defectRoom:DefectRoom!, db_name:String!, timeStamp:String! , defect:NSMutableArray!, handler: (String!) -> Void) {
         
@@ -34,15 +34,27 @@ class Sync: Model {
         for sync:DefectModel in ((defect as NSArray) as! [DefectModel]) {
             if sync.df_status == "0" {
                 let imagePathName = UIImage.uniqNameBySeq(String(i))
-                sync.df_image_path = imagePathName
-                images.addObject(ImageSync(image: sync.realImage!, imagePath: imagePathName))
-                param.addObject(sync.toJson())
-                
-                ImageCaching.sharedInstance.setImageByName(imagePathName, image: sync.realImage!)
+                if let img:UIImage = ImageCaching.sharedInstance.getImageByName(sync.df_image_path) {
+                    sync.realImage = img
+                    sync.df_image_path = imagePathName
+                    images.addObject(ImageSync(image: sync.realImage!, imagePath: imagePathName))
+                    ImageCaching.sharedInstance.setImageByName(imagePathName, image: sync.realImage!, isFromServer: false)
+                    ImageCaching.sharedInstance.save()
+                    param.addObject(sync.toJson())
+                }
                 i = i + 1
+               
+            }else{
+                if ImageCaching.sharedInstance.isImageDidSyncServer(sync.df_image_path!) == false {
+                    if let image:UIImage = ImageCaching.sharedInstance.getImageByName(sync.df_image_path!) {
+                        sync.realImage = image
+                        images.addObject(ImageSync(image: sync.realImage!, imagePath: sync.df_image_path!))
+                    }
+                    
+                }
             }
         }
-        if param.count <= 0 {
+        if param.count <= 0 && images.count == 0{
             handler("FALSE")
             return;
         }
@@ -76,7 +88,7 @@ class Sync: Model {
                                 
                                 for image:ImageSync in ((images as NSArray) as! [ImageSync]) {
                                     let imgData = image.image!.lowQualityJPEGNSData
-                                    multipartFormData.appendBodyPart(data: imgData, name: "imagefiles",
+                                    multipartFormData.appendBodyPart(data: imgData, name: "imagefiles[]",
                                         fileName: image.imagePath!, mimeType: "image/jpg")
                                     
                                 }
@@ -91,8 +103,22 @@ class Sync: Model {
                                             if JSON.objectForKey("status") as! String == "200" {
                                                 SwiftSpinner.hide()
                                                 debugPrint(response)
+                                                
+                                                //DID SYNC FLAG
+                                                for image:ImageSync in ((images as NSArray) as! [ImageSync]) {
+                                                    
+                                                    ImageCaching.sharedInstance.setDidImageSyncByName(image.imagePath!)
+                                                    
+                                                }
+                                                //////
                                                 handler("TRUE")
+                                            }else{
+                                                SwiftSpinner.hide()
+                                                handler("UPLOAD_IMAGE_FAIL")
                                             }
+                                        }else{
+                                            SwiftSpinner.hide()
+                                            handler("UPLOAD_IMAGE_FAIL")
                                         }
                                     }
                                     

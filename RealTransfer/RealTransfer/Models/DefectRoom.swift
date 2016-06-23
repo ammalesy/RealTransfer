@@ -54,14 +54,21 @@ class DefectRoom: Model,NSCoding {
             userDefault.setObject(NSKeyedArchiver.archivedDataWithRootObject(array), forKey: kLIST_DEFECT_ROOM)
             userDefault.synchronize()
         }else{
+            var addNew:Bool = true
             let array = NSKeyedUnarchiver.unarchiveObjectWithData(listData!) as! NSMutableArray
             for model:DefectRoom in ((array as NSArray) as! [DefectRoom]) {
                 if model.df_room_id == self.df_room_id {
                     array.removeObject(model)
                     array.addObject(self)
+                    addNew = false
                     break;
                 }
             }
+            if addNew {
+                array.addObject(self)
+            }
+            
+            
             userDefault.setObject(NSKeyedArchiver.archivedDataWithRootObject(array), forKey: kLIST_DEFECT_ROOM)
             userDefault.synchronize()
         }
