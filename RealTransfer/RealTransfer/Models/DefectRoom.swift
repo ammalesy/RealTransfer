@@ -259,6 +259,7 @@ class DefectRoom: Model,NSCoding {
                     
                         
                     }else{
+                        
                         handler(nil, isDuplicate: false)
                        
                     }
@@ -291,6 +292,21 @@ class DefectRoom: Model,NSCoding {
                     let message:String = JSON.objectForKey("message") as! String
                     
                     if JSON.objectForKey("status") as! String == "200" {
+                        
+                        if let unitDefect:NSDictionary = JSON.objectForKey("data") as? NSDictionary {
+                            
+                            let id:NSNumber = NSNumber(integer: (unitDefect.objectForKey("df_room_id") as? Int)!)
+                            
+                            self.df_check_date = unitDefect.objectForKey("df_check_date") as? String
+                            self.df_room_id = id.stringValue
+                            self.df_sync_status = unitDefect.objectForKey("df_sync_status") as? String
+                            self.df_un_id = unitDefect.objectForKey("df_un_id") as? String
+                            self.df_user_id = unitDefect.objectForKey("df_user_id") as? String
+                            self.df_user_id_cs = unitDefect.objectForKey("df_user_id_cs") as? String
+                            self.project = PROJECT
+                        }
+                        
+                        
                         handler(true,message: message,status: status)
                         SwiftSpinner.hide()
                     }else{

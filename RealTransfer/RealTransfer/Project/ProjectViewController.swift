@@ -22,6 +22,17 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        ProjectModel().getProject({ (list) in
+            
+            self.projects = list!
+            self.collectionView.reloadData()
+            
+        })
+        let user:User = User().getOnCache()!
+        
+        self.nzNavigationController?.titleLb.text = "Dash Board"
+        self.nzNavigationController?.subTitleLb.text = "\(user.user_work_position!) : \(user.user_pers_fname!) \(user.user_pers_lname!)"
     }
     
     
@@ -34,16 +45,7 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
         
     }
     override func stateConfigData() {
-        ProjectModel().getProject({ (list) in
-            
-            self.projects = list!
-            self.collectionView.reloadData()
-            
-        })
-        let user:User = User().getOnCache()!
-        
-        self.nzNavigationController?.titleLb.text = "Dash Board"
-        self.nzNavigationController?.subTitleLb.text = "\(user.user_work_position!) : \(user.user_pers_fname!) \(user.user_pers_lname!)"
+       
         
     }
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {

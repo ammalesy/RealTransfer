@@ -233,8 +233,14 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
                         defectRoom.add({ (resultFlag, message, status) in
                             
                             if resultFlag == true {
-                                SwiftSpinner.hide()
-                                self.hideView()
+                                //INITIALED & RELOAD DEFECT LIST
+                                defectRoom.getListDefect({
+                                    
+                                    self.initialRoom(defectRoom)
+                                    
+                                    SwiftSpinner.hide()
+                                    self.hideView()
+                                })
                             }else{
                                 
                                 let alert = UIAlertController(title: "Fail", message: "Error code:\(status!) \(message!)", preferredStyle: UIAlertControllerStyle.Alert)
@@ -255,13 +261,7 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
                         //INITIALED & RELOAD DEFECT LIST
                         defectRoomDup?.getListDefect({ 
                             
-                            let defectListController:DefectListViewController = self.nzSplitViewController?.viewControllers.first as! DefectListViewController
-                            defectListController.reloadData(defectRoomDup)
-                            
-                            
-                            let nav:UINavigationController = self.nzSplitViewController?.viewControllers.last as! UINavigationController
-                            let addDefectViewController:AddDefectViewController = nav.viewControllers[0] as! AddDefectViewController
-                            addDefectViewController.defectRoom = defectRoomDup
+                            self.initialRoom(defectRoomDup)
                             
                             SwiftSpinner.hide()
                             self.hideView()
@@ -276,9 +276,22 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             }
        // }
     }
+    func initialRoom(defectRoom:DefectRoom!){
+        let defectListController:DefectListViewController = self.nzSplitViewController?.viewControllers.first as! DefectListViewController
+        defectListController.reloadData(defectRoom)
+        
+        
+        let nav:UINavigationController = self.nzSplitViewController?.viewControllers.last as! UINavigationController
+        let addDefectViewController:AddDefectViewController = nav.viewControllers[0] as! AddDefectViewController
+        addDefectViewController.defectRoom = defectRoom
+    }
     @IBAction func exitAction(sender: AnyObject) {
         
         self.hideView()
+        self.nzSplitViewController?.nzNavigationController?.popViewController({ 
+            
+        })
+        
 
     }
     func hideView(){
