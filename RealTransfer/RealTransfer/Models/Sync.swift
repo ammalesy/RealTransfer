@@ -86,9 +86,13 @@ class Sync: Model {
                             ],
                             multipartFormData: { multipartFormData in
                                 
+                                let keyName = "imagefiles[]"
+//                                if images.count > 1 {
+//                                    keyName = "imagefiles[]"
+//                                }
                                 for image:ImageSync in ((images as NSArray) as! [ImageSync]) {
                                     let imgData = image.image!.lowQualityJPEGNSData
-                                    multipartFormData.appendBodyPart(data: imgData, name: "imagefiles[]",
+                                    multipartFormData.appendBodyPart(data: imgData, name: keyName,
                                         fileName: image.imagePath!, mimeType: "image/jpg")
                                     
                                 }

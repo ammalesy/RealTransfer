@@ -71,7 +71,20 @@
 			$conn = Database::condo_common();
 			$result = mysqli_query($conn, "INSERT INTO `".$db_name."`.`tb_unit_defect` (`df_room_id`, `df_un_id`, `df_check_date`, `df_user_id`, `df_user_id_cs`) 
 										   VALUES (NULL, '".$un_id."', '".$df_check_date."', '".$user_id."', '".$user_id_cs."');");
-			return $result;
+
+			if($result != FALSE){
+				$id = mysqli_insert_id($conn);
+				$data['df_room_id'] = $id;
+				$data['df_un_id'] = $un_id;
+				$data['df_check_date'] = $df_check_date;
+				$data['df_user_id'] = $user_id;
+				$data['df_user_id_cs'] = $user_id_cs;
+				$data['df_sync_status'] = "0";
+
+				return $data;
+			}else{
+				return FALSE;
+			}
 
 			mysqli_free_result($result);
 			mysqli_close($conn);

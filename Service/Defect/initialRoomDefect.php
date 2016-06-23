@@ -27,6 +27,7 @@
 
 			$return['message'] = "SUCCESS";
 			$return['status'] = "200";	
+			$return['data'] = $result;
 		}
 	}
 	echo json_encode($return);

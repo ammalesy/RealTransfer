@@ -26,24 +26,47 @@ header('Content-Type: application/json');
 	}
 
 	$result = FALSE;
-	$files = $_FILES; 
-	foreach ($files as $file) 
-	{ 
-	  	
-	  	$folderPath = $uploaddir.$db_name."/".$un_id."/";
-	  	$uploadfile = $folderPath.basename($file['name']).".jpg";
+	// $files = $_FILES["imagefiles"]; 
 
-	  	if(!is_dir($folderPath)) {
-   			 mkdir($folderPath);
-		}
-
-		if (move_uploaded_file($file['tmp_name'], $uploadfile)) 
+	for($i=0; $i<count($_FILES["imagefiles"]["name"]); $i++)
+	{
+		if($_FILES["imagefiles"]["name"][$i] != "")
 		{
-	   	   $result = TRUE; 
-		} else {
-		   $result = FALSE;
+
+				$folderPath = $uploaddir.$db_name."/".$un_id."/";
+			  	$uploadfile = $folderPath.basename($_FILES["imagefiles"]["name"][$i]).".jpg";
+
+			  	if(!is_dir($folderPath)) {
+		   			 mkdir($folderPath);
+				}
+
+				if (move_uploaded_file($_FILES["imagefiles"]["tmp_name"][$i], $uploadfile)) 
+				{
+			   	   $result = TRUE; 
+				} else {
+				   $result = FALSE;
+				}
+
 		}
-	} 
+	}
+
+	// foreach ($files as $file) 
+	// { 
+	  	
+	//   	$folderPath = $uploaddir.$db_name."/".$un_id."/";
+	//   	$uploadfile = $folderPath.basename($file['name']).".jpg";
+
+	//   	if(!is_dir($folderPath)) {
+ //   			 mkdir($folderPath);
+	// 	}
+
+	// 	if (move_uploaded_file($file['tmp_name'], $uploadfile)) 
+	// 	{
+	//    	   $result = TRUE; 
+	// 	} else {
+	// 	   $result = FALSE;
+	// 	}
+	// } 
 	if($result == FALSE) 
 	{
 		$return['message'] = "Upload Fail";

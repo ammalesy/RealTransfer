@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SwiftSpinner
 
 class LoginViewController: NZViewController {
 
@@ -50,7 +51,12 @@ class LoginViewController: NZViewController {
         user?.password = self.passwordTxt.text
         user?.login({ (result) in
             
+            //Queue.mainQueue({
+                SwiftSpinner.show("Retriving data..", animated: true)
+            //})
             Category.syncCategory({
+                
+                SwiftSpinner.hide()
 
                 if result == true {
 
@@ -59,6 +65,8 @@ class LoginViewController: NZViewController {
                     
                     
                     self.presentViewController(nzNavController, animated: true) { () -> Void in
+                        
+                        
                         
                         nzNavController.setRootViewController(rootView)
                         nzNavController.containerView.alpha = 0
