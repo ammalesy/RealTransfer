@@ -13,6 +13,7 @@
 		180098211D164A4C00BB11FD /* Sync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180098201D164A4C00BB11FD /* Sync.swift */; };
 		180AD45E1D1953E5000D802B /* BuildingCaching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180AD45D1D1953E5000D802B /* BuildingCaching.swift */; };
 		180AD4601D199E56000D802B /* KMPlaceholderTextView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180AD45F1D199E56000D802B /* KMPlaceholderTextView.framework */; };
+		181D5C531D1CE5D5000DD110 /* PathUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181D5C521D1CE5D5000DD110 /* PathUtil.swift */; };
 		184E425E1D0C2EA20073CF60 /* AddDefectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184E425D1D0C2EA20073CF60 /* AddDefectDetailViewController.swift */; };
 		184E42601D0C4BFD0073CF60 /* NZDropDownIconColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184E425F1D0C4BFD0073CF60 /* NZDropDownIconColorCell.swift */; };
 		184E42661D0DB7DC0073CF60 /* CustomerInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184E42651D0DB7DC0073CF60 /* CustomerInfoViewController.swift */; };
@@ -78,6 +79,7 @@
 		180098201D164A4C00BB11FD /* Sync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sync.swift; sourceTree = "<group>"; };
 		180AD45D1D1953E5000D802B /* BuildingCaching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildingCaching.swift; sourceTree = "<group>"; };
 		180AD45F1D199E56000D802B /* KMPlaceholderTextView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KMPlaceholderTextView.framework; path = "../../../Library/Developer/Xcode/DerivedData/RealTransfer-dxjmravslvqqrxcfhswvgaqtusax/Build/Products/Debug-iphoneos/KMPlaceholderTextView.framework"; sourceTree = "<group>"; };
+		181D5C521D1CE5D5000DD110 /* PathUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathUtil.swift; sourceTree = "<group>"; };
 		184E425D1D0C2EA20073CF60 /* AddDefectDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDefectDetailViewController.swift; sourceTree = "<group>"; };
 		184E425F1D0C4BFD0073CF60 /* NZDropDownIconColorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NZDropDownIconColorCell.swift; sourceTree = "<group>"; };
 		184E42651D0DB7DC0073CF60 /* CustomerInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerInfoViewController.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				18F589FD1D183AF400F06813 /* ImageCaching.swift */,
 				180AD45D1D1953E5000D802B /* BuildingCaching.swift */,
 				18CA73101D1C13120021712B /* AlertUtil.swift */,
+				181D5C521D1CE5D5000DD110 /* PathUtil.swift */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -570,6 +573,7 @@
 				18DF98A01D155AFF004BE990 /* DefectModel.swift in Sources */,
 				18F589F71D1804AA00F06813 /* NSStringExtension.swift in Sources */,
 				52499B151D06C7CF0003F6D5 /* RowInfoModel.swift in Sources */,
+				181D5C531D1CE5D5000DD110 /* PathUtil.swift in Sources */,
 				184E42601D0C4BFD0073CF60 /* NZDropDownIconColorCell.swift in Sources */,
 				521A7B241D05277700971B7B /* UIViewExtension.swift in Sources */,
 				521A7B261D05291900971B7B /* UIColorExtension.swift in Sources */,

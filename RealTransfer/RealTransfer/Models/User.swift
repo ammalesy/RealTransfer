@@ -72,7 +72,7 @@ class User: Model,NSCoding {
     func login(handler: (Bool?) -> Void){
         
         SwiftSpinner.show("Loging in..", animated: true)
-        var path = "http://\(DOMAIN_NAME)/Service/User/login.php?username=\(self.username!)&password=\(self.password!)"
+        var path = "http://\(DOMAIN_NAME)/User/login.php?username=\(self.username!)&password=\(self.password!)"
         
         path = "\(path)&random=\(NSString.randomStringWithLength(10))"
         Alamofire.request(.GET, path, parameters: [:])

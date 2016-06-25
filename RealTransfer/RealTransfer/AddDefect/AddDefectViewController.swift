@@ -152,15 +152,53 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
     func nzNavigation(controller: NZNavigationViewController, didClickMenu popover: NZPopoverView, menu: NZRow) {
         
         if self.defectRoom != nil && menu.identifier == "sync" {
-            self.sync()
+            
+            let alert = UIAlertController(title: "ตัวเลือก", message:"กรุณาเลือกประเภทการซิงค์", preferredStyle: UIAlertControllerStyle.Alert)
+            let noneCompleteAction:UIAlertAction = UIAlertAction(title: "ยังคงเหลือการตรวจสอบ", style: UIAlertActionStyle.Default, handler: { (action) in
+                
+                self.sync(false)
+                
+            })
+            let completedAction:UIAlertAction = UIAlertAction(title: "ตรวจสอบทั้งหมดแล้ว", style: UIAlertActionStyle.Default, handler: { (action) in
+                Queue.serialQueue({
+                    Queue.mainQueue({ 
+                         self.sync(true)
+                    })
+                })
+                
+                Queue.serialQueue({
+                    Queue.mainQueue({
+                        self.splitController?.nzNavigationController?.popViewController({
+                            
+                        })
+                    })
+                })
+                
+            })
+            alert.addAction(noneCompleteAction)
+            alert.addAction(completedAction)
+            
+            self.presentViewController(alert, animated: true, completion: {
+                
+            })
+            
+            popover.hide()
+            
         }
     }
-    func sync() {
+    func sync(isFinally:Bool!) {
+        
         SwiftSpinner.show("Uploading ..", animated: true)
         let cache:DefectRoom = DefectRoom.getCache(self.defectRoom?.df_room_id)!
         
+        if isFinally == true {
+            cache.df_sync_status = "1"
+        }else{
+            cache.df_sync_status = "0"
+        }
+        
         Sync.controllerReferer = self
-        Sync.syncToServer(cache ,db_name: PROJECT?.pj_datebase_name!, timeStamp: NSDateFormatter.dateFormater().stringFromDate(NSDate()), defect: (defectRoom?.listDefect)!)
+        Sync.syncToServer(cache ,db_name: PROJECT?.pj_datebase_name!, timeStamp: NSDateFormatter.dateFormater().stringFromDate(NSDate()), defect: (cache.listDefect)!)
         { (result) in
             
             if result == "TRUE" {

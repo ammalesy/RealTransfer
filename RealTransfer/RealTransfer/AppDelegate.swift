@@ -10,8 +10,10 @@ import UIKit
 import CoreData
 import Alamofire
 
+let SUPER_ADMIN_USERNAME = "superadmin"
+let SUPER_ADMIN_PASSWORD = "1234"
 let ROOT_VIEW_CONTROLLER = "ProjectViewController" //<=== Root view is subclass from "NZViewController"
-let DOMAIN_NAME = "ec2-52-10-22-26.us-west-2.compute.amazonaws.com"//"192.168.1.2"
+let DOMAIN_NAME = PathUtil.sharedInstance.path //"ec2-52-10-22-26.us-west-2.compute.amazonaws.com"//"192.168.1.2"
 //let DOMAIN_NAME = "192.168.1.6"//"192.168.1.2"
 
 @UIApplicationMain

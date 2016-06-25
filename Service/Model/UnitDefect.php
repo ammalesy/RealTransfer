@@ -12,14 +12,14 @@
 		{
 			# code...
 		}
-		public static function updateSyncDate($db_name,$df_room_id,$timestamp) {
+		public static function updateSyncDate($db_name,$df_room_id,$timestamp,$df_sync_status) {
 
 			$conn = Database::connect_db_by_dbName($db_name);
-			$result = mysqli_query($conn, "
-											UPDATE `".$db_name."`.`tb_unit_defect` 
-											SET `df_check_date` = '".$timestamp."' 
-											WHERE `tb_unit_defect`.`df_room_id` = ".$df_room_id.";");
-			return $result;
+			$sql  = "UPDATE ".$db_name.".tb_unit_defect 
+					SET df_check_date = '".$timestamp."', df_sync_status = '".$df_sync_status."'
+					WHERE tb_unit_defect.df_room_id = ".$df_room_id.";";
+			$result = mysqli_query($conn, $sql);
+			return $sql;
 			mysqli_free_result($result);
 			mysqli_close($conn);
 

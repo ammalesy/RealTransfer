@@ -63,7 +63,7 @@ class Category: Model {
     func update(handler: (NSMutableDictionary?) -> Void) {
         SwiftSpinner.show("Update category..", animated: true)
         
-        Alamofire.request(.GET, "http://\(DOMAIN_NAME)/Service/Category/read.php?version=\(self.version!)&ransom=\(NSString.randomStringWithLength(10))", parameters: [:])
+        Alamofire.request(.GET, "http://\(DOMAIN_NAME)/Category/read.php?version=\(self.version!)&ransom=\(NSString.randomStringWithLength(10))", parameters: [:])
             .responseJSON { response in
                 
                 if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {

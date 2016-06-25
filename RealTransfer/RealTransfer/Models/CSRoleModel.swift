@@ -26,7 +26,7 @@ class CSRoleModel: Model {
             let returnList:NSMutableArray = NSMutableArray()
             SwiftSpinner.show("Retriving CS..", animated: true)
             
-            Alamofire.request(.GET, "http://\(DOMAIN_NAME)/Service/User/getCSRole.php?ransom=\(NSString.randomStringWithLength(10))", parameters: [:])
+            Alamofire.request(.GET, "http://\(DOMAIN_NAME)/User/getCSRole.php?ransom=\(NSString.randomStringWithLength(10))", parameters: [:])
                 .responseJSON { response in
                     
                     if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {

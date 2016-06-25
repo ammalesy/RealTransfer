@@ -23,5 +23,18 @@ class AlertUtil: NSObject {
         })
         
     }
+    class func alert(title:String!, message:String!, cancleButton:String!, atController:UIViewController!, handler: ((UIAlertAction) -> Void)?) {
+        
+        let alert = UIAlertController(title: title, message:message, preferredStyle: UIAlertControllerStyle.Alert)
+        let action:UIAlertAction = UIAlertAction(title: cancleButton, style: UIAlertActionStyle.Cancel, handler: handler)
+        alert.addAction(action)
+        
+        atController.presentViewController(alert, animated: true, completion: {
+            
+        })
+        
+    }
+    
+    //
 
 }

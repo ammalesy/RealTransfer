@@ -54,15 +54,19 @@ class Sync: Model {
                 }
             }
         }
-        if param.count <= 0 && images.count == 0{
+        let path = "http://\(DOMAIN_NAME)/Defect/syncDefect.php?ransom=\(NSString.randomStringWithLength(10))"
+        var needUpdateFlagOnly = "0"
+        
+        if param.count <= 0 && images.count == 0 && defectRoom.df_sync_status! == "0"{
             handler("FALSE")
             return;
+        }else if param.count <= 0 && images.count == 0 && defectRoom.df_sync_status! == "1" {
+            needUpdateFlagOnly = "1"
         }
         
-        let postParam = ["data":param,"db_name":db_name,"timestamp":timeStamp,"df_room_id":defectRoom.df_room_id!]
-        
-        
-        Alamofire.request(.POST, "http://\(DOMAIN_NAME)/Service/Defect/syncDefect.php?ransom=\(NSString.randomStringWithLength(10))",
+        let postParam = ["data":param,"db_name":db_name,"timestamp":timeStamp,"df_room_id":defectRoom.df_room_id!, "df_sync_status":defectRoom.df_sync_status!, "needUpdateFlagOnly":needUpdateFlagOnly]
+
+        Alamofire.request(.POST, path,
             parameters: postParam,
             encoding: ParameterEncoding.JSON)
             .responseJSON { response in
@@ -76,65 +80,16 @@ class Sync: Model {
                         
                         defectRoom.df_check_date = timeStamp
                         
-                        ////UPLOAD IMAGES
-                        Alamofire.upload(
-                            .POST,
-                            "http://\(DOMAIN_NAME)/Service/Defect/uploadImage.php?ransom=\(NSString.randomStringWithLength(10))",
-                            headers: [
-                                "db_name":PROJECT!.pj_datebase_name!,
-                                "un_id":defectRoom.df_un_id!
-                            ],
-                            multipartFormData: { multipartFormData in
-                                
-                                let keyName = "imagefiles[]"
-//                                if images.count > 1 {
-//                                    keyName = "imagefiles[]"
-//                                }
-                                for image:ImageSync in ((images as NSArray) as! [ImageSync]) {
-                                    let imgData = image.image!.lowQualityJPEGNSData
-                                    multipartFormData.appendBodyPart(data: imgData, name: keyName,
-                                        fileName: image.imagePath!, mimeType: "image/jpg")
-                                    
-                                }
-                            },
-                            encodingCompletion: { encodingResult in
-                                switch encodingResult {
-                                case .Success(let upload, _, _):
-                                    
-                                    upload.responseJSON { response in
-                                        
-                                        if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
-                                            if JSON.objectForKey("status") as! String == "200" {
-                                                SwiftSpinner.hide()
-                                                debugPrint(response)
-                                                
-                                                //DID SYNC FLAG
-                                                for image:ImageSync in ((images as NSArray) as! [ImageSync]) {
-                                                    
-                                                    ImageCaching.sharedInstance.setDidImageSyncByName(image.imagePath!)
-                                                    
-                                                }
-                                                //////
-                                                handler("TRUE")
-                                            }else{
-                                                SwiftSpinner.hide()
-                                                handler("UPLOAD_IMAGE_FAIL")
-                                            }
-                                        }else{
-                                            SwiftSpinner.hide()
-                                            handler("UPLOAD_IMAGE_FAIL")
-                                        }
-                                    }
-                                    
-                                case .Failure(let encodingError):
-                                    print(encodingError)
-                                    SwiftSpinner.hide()
-                                    handler("UPLOAD_IMAGE_FAIL")
-                                }
-                            }
-                        )
-                        /////////////////
+                        if images.count > 0 {
                         
+                            self.uploadImages(images, defectRoom: defectRoom!, handler: { (flag) in
+                                handler(flag)
+                            })
+                            
+                        }else{
+                            SwiftSpinner.hide()
+                            handler("TRUE")
+                        }
                         
                     }else{
                         SwiftSpinner.hide()
@@ -148,8 +103,67 @@ class Sync: Model {
         }
     }
     
+    class func uploadImages(images:NSMutableArray, defectRoom:DefectRoom!, handler: (String!) -> Void){
+        ////UPLOAD IMAGES
+        Alamofire.upload(
+            .POST,
+            "http://\(DOMAIN_NAME)/Defect/uploadImage.php?ransom=\(NSString.randomStringWithLength(10))",
+            headers: [
+                "db_name":PROJECT!.pj_datebase_name!,
+                "un_id":defectRoom.df_un_id!
+            ],
+            multipartFormData: { multipartFormData in
+                
+                let keyName = "imagefiles[]"
+                
+                for image:ImageSync in ((images as NSArray) as! [ImageSync]) {
+                    let imgData = image.image!.lowQualityJPEGNSData
+                    multipartFormData.appendBodyPart(data: imgData, name: keyName,
+                        fileName: image.imagePath!, mimeType: "image/jpg")
+                    
+                }
+            },
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .Success(let upload, _, _):
+                    
+                    upload.responseJSON { response in
+                        
+                        if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
+                            if JSON.objectForKey("status") as! String == "200" {
+                                SwiftSpinner.hide()
+                                debugPrint(response)
+                                
+                                //DID SYNC FLAG
+                                for image:ImageSync in ((images as NSArray) as! [ImageSync]) {
+                                    
+                                    ImageCaching.sharedInstance.setDidImageSyncByName(image.imagePath!)
+                                    
+                                }
+                                //////
+                                handler("TRUE")
+                            }else{
+                                SwiftSpinner.hide()
+                                handler("UPLOAD_IMAGE_FAIL")
+                            }
+                        }else{
+                            SwiftSpinner.hide()
+                            handler("UPLOAD_IMAGE_FAIL")
+                        }
+                    }
+                    
+                case .Failure(let encodingError):
+                    print(encodingError)
+                    SwiftSpinner.hide()
+                    handler("UPLOAD_IMAGE_FAIL")
+                }
+            }
+        )
+        /////////////////
+    }
+    
     /*
-     Alamofire.request(.GET, "http://\(DOMAIN_NAME)/Service/User/getCSRole.php", parameters: [:])
+     Alamofire.request(.GET, "http://\(DOMAIN_NAME)/User/getCSRole.php", parameters: [:])
      .responseJSON { response in
      
      if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {

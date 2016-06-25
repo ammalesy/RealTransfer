@@ -239,17 +239,24 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
         }else{
             //EDIT
             self.defectModel!.categoryName = self.categorySelected
+            self.defectModel!.subCategoryName = self.subCategorySelected
             self.defectModel!.df_date = timeStamp
-            self.defectModel!.listSubCategory = self.listSubCategorySelected
+            if self.defectModel!.subCategoryName == kOTHER_IDENTIFIER
+            {
+                self.defectModel!.listSubCategory = self.listSubtypeTextView.text
+            }else{
+                self.defectModel!.listSubCategory = self.listSubCategorySelected
+            }
+            
             let imgName = UIImage.uniqNameBySeq("0")
             self.defectModel!.df_image_path = imgName
             self.defectModel!.realImage = UIImage(data: (self.imageView.image?.lowQualityJPEGNSData)!)
             ImageCaching.sharedInstance.setImageByName(imgName, image: self.defectModel!.realImage, isFromServer: false)
             SDImageCache.sharedImageCache().storeImage(self.defectModel!.realImage, forKey: imgName, toDisk: true)
             ImageCaching.sharedInstance.save()
-            self.defectModel!.subCategoryName = self.subCategorySelected
+            
             self.saveAndKeepToDisk(self.defectModel!)
-            print(self.defectModel)
+            print(self.defectRoom?.listDefect)
         }
     }
     func saveAndKeepToDisk(defect:DefectModel!){
@@ -263,10 +270,12 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
                 listDefect.addObject(defect)
             }
             
+            let roomID = self.defectRoom!.df_room_id!
             self.defectRoom?.doCache()
+            self.defectRoom = DefectRoom.getCache(roomID)
             
             let defectListController:DefectListViewController = self.splitController!.viewControllers.first as! DefectListViewController
-            defectListController.reloadData(DefectRoom.getCache(self.defectRoom!.df_room_id!))
+            defectListController.reloadData(self.defectRoom!)
             
             self.navigationController?.popViewControllerAnimated(true)
         }

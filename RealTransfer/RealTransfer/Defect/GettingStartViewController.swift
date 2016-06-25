@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftSpinner
+import Foundation
 
 let CELL_LABEL_STATIC_IDENTIFIER = "CellLabelStatic"
 let CELL_DROUP_DOWN_IDENTIFIER = "CellDropDown"
@@ -100,7 +101,7 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         }else{
             SwiftSpinner.show("Retriving data..", animated: true)
             
-            Alamofire.request(.GET, "http://\(DOMAIN_NAME)/Service/Defect/getDefectRoomInfo.php?db_name=\(self.project!.pj_datebase_name!)&un_id=\(self.roomSelected!.un_id!)&ransom=\(NSString.randomStringWithLength(10))", parameters: [:])
+            Alamofire.request(.GET, "http://\(DOMAIN_NAME)/Defect/getDefectRoomInfo.php?db_name=\(self.project!.pj_datebase_name!)&un_id=\(self.roomSelected!.un_id!)&ransom=\(NSString.randomStringWithLength(10))", parameters: [:])
                 .responseJSON { response in
                     
                     if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
@@ -162,6 +163,7 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             let cell:CellTxtSearch = tableView.dequeueReusableCellWithIdentifier(CELL_TXT_SEARCH_IDENTIFIER) as! CellTxtSearch
             cell.leftLabel.text = data.head
             cell.delegate = self
+            cell.textField.keyboardType = UIKeyboardType.NumberPad
             cell.nextBtn.setTitleColor(data.colorNextbutton, forState: UIControlState.Normal)
             return cell
         }
@@ -258,14 +260,21 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
                         
                     }else{
                         
-                        //INITIALED & RELOAD DEFECT LIST
-                        defectRoomDup?.getListDefect({ 
-                            
-                            self.initialRoom(defectRoomDup)
-                            
+                        if defectRoomDup?.df_sync_status == "0" {
+                            //INITIALED & RELOAD DEFECT LIST
+                            defectRoomDup?.getListDefect({
+                                
+                                self.initialRoom(defectRoomDup)
+                                
+                                SwiftSpinner.hide()
+                                self.hideView()
+                            })
+
+                        }else{
                             SwiftSpinner.hide()
-                            self.hideView()
-                        })
+                            AlertUtil.alert("Parse2", message: "Parse2", cancleButton: "OK", atController: self)
+                        }
+                        
                         
                     }
                     
@@ -538,7 +547,11 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
                 defectInfo = (list?.objectForKey("defectInfo") as? NSMutableDictionary)!
                 row4.headInfo6 = "Check Date : "
                 row4.headInfo7 = "Defect No : "
-                row4.detailInfo6 = defectInfo.objectForKey("df_check_date") as? String
+                if let date = defectInfo.objectForKey("df_check_date") as? String {
+                    
+                    let dateArr = date.componentsSeparatedByString("|")
+                    row4.detailInfo6 = "\(dateArr[0]) \(dateArr[1])"
+                }
                 row4.detailInfo7 = defectInfo.objectForKey("df_room_id") as? String
             }
             
@@ -642,6 +655,8 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             let cell:CellTxtSearch = self.getCellRoom()
             var row3Color = UIColor.RGB(127, G: 191, B: 49)
             var startColor = UIColor.RGB(216, G: 216, B: 216)
+            self.startBtn.enabled = false
+            
             if self.components.count > 3 {
                 row3Color = UIColor.blackColor()
             }
@@ -649,8 +664,10 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             
             let rowModel:RowModel? = self.getRowByIdentifier("CS_LIST")
             if rowModel != nil && rowModel?.detail != "" {
+                self.startBtn.enabled = true
                 startColor = UIColor.RGB(127, G: 191, B: 49)
             }
+
             self.startBtn.setTitleColor(startColor, forState: UIControlState.Normal)
         }
     }

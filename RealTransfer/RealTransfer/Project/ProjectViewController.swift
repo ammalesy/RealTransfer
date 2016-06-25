@@ -85,7 +85,7 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
         cell.title.text = model.pj_name!
         cell.subTitle.text = model.pj_detail!
         
-        let url:NSURL = NSURL(string: "http://\(DOMAIN_NAME)/crm/\(model.pj_image!)")!
+        let url:NSURL = NSURL(string: "http://\(domainName)/crm/\(model.pj_image!)")!
         cell.imageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "p1"), options: SDWebImageOptions.RefreshCached)
         return cell
     }
@@ -113,7 +113,7 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
             if(BuildingCaching.sharedInstance.isNeedUpdate()){
                 
                 SwiftSpinner.show("Retriving projects..", animated: true)
-                let path = "http://\(DOMAIN_NAME)/Service/Project/getAllBuildingAndRoom.php?db_name=\(model.pj_datebase_name!)&random=\(NSString.randomStringWithLength(10))"
+                let path = "http://\(DOMAIN_NAME)/Project/getAllBuildingAndRoom.php?db_name=\(model.pj_datebase_name!)&random=\(NSString.randomStringWithLength(10))"
                 Alamofire.request(.GET, path, parameters: [:])
                     .responseJSON { response in
                         

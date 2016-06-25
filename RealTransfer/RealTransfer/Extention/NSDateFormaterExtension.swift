@@ -14,6 +14,7 @@ extension NSDateFormatter {
     class func dateFormater()->NSDateFormatter {
     
         let format = NSDateFormatter()
+        format.locale = NSLocale(localeIdentifier: "en_US_POSIX")
         format.dateFormat = "dd/MM/yyyy|hh:mm:ss"
         return format
     }

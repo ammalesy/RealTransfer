@@ -43,17 +43,54 @@ class LoginViewController: NZViewController {
         super.didReceiveMemoryWarning()
     }
 
-
+    func isSuperAdmin(username:String!, password:String!)->Bool{
+    
+        if username == SUPER_ADMIN_USERNAME && password == SUPER_ADMIN_PASSWORD {
+            return true
+        }
+        return false
+    }
     @IBAction func loginAction(sender: AnyObject) {
         
         user = User();
         user?.username = self.usernameTxt.text
         user?.password = self.passwordTxt.text
+        
+        if self.isSuperAdmin(user?.username!, password: user?.password!) {
+         
+            let alert = UIAlertController(title: "Initial new baseurl", message:"", preferredStyle: UIAlertControllerStyle.Alert)
+            let cancleAction:UIAlertAction = UIAlertAction(title: "Cancle", style: UIAlertActionStyle.Cancel, handler: { (action) in
+                
+                let txts:[UITextField] = alert.textFields!
+                txts[0].resignFirstResponder()
+                
+            })
+            let okAction:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) in
+                
+                let txts:[UITextField] = alert.textFields!
+                PathUtil.sharedInstance.setServerPath(txts[0].text!)
+                txts[0].resignFirstResponder()
+                alert.dismissViewControllerAnimated(true, completion: { 
+                    
+                })
+                
+            })
+            alert.addTextFieldWithConfigurationHandler({ (txt1) in
+                (txt1 as UITextField).placeholder = "Ex.domainname.com/Service"
+            })
+            alert.addAction(cancleAction)
+            alert.addAction(okAction)
+            
+            self.presentViewController(alert, animated: true, completion: {
+                
+            })
+            
+            return
+        }
+        
         user?.login({ (result) in
             
-            //Queue.mainQueue({
-                SwiftSpinner.show("Retriving data..", animated: true)
-            //})
+            SwiftSpinner.show("Retriving data..", animated: true)
             Category.syncCategory({
                 
                 SwiftSpinner.hide()
@@ -82,15 +119,7 @@ class LoginViewController: NZViewController {
                         
                     }
                 }else{
-                    let alert = UIAlertController(title: "Fail", message: "Fail", preferredStyle: UIAlertControllerStyle.Alert)
-                    let action:UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { (action) in
-                        
-                    })
-                    alert.addAction(action)
-                    
-                    self.presentViewController(alert, animated: true, completion: {
-                        
-                    })
+                    AlertUtil.alert("Warning", message: "Login fail", cancleButton: "OK", atController: self)
                 }
             })
     

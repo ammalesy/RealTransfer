@@ -206,7 +206,7 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
                         cell.defectImageView.image = imageOnCache!
                         defectModel.realImage = imageOnCache!
                     }else{
-                        let url:NSURL = NSURL(string: "http://\(DOMAIN_NAME)/Service/images/\(PROJECT!.pj_datebase_name!)/\(self.defectRoomRef!.df_un_id!)/\(defectModel.df_image_path!).jpg")! //
+                        let url:NSURL = NSURL(string: "http://\(DOMAIN_NAME)/images/\(PROJECT!.pj_datebase_name!)/\(self.defectRoomRef!.df_un_id!)/\(defectModel.df_image_path!).jpg")! //
                         cell.defectImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "p1"), completed: { (imageReturn, error, sdImageCacheType, url) in
                             if imageReturn != nil
                             {
@@ -322,7 +322,14 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
             self.defectRoomRef?.doCache()
             self.reloadData(self.defectRoomRef!)
             
+            let splitArr = self.splitViewController?.viewControllers
+            let nav = splitArr![1] as! UINavigationController
+            let navArr = nav.viewControllers
+            let addController:AddDefectViewController = navArr[0] as! AddDefectViewController
+            addController.defectRoom = DefectRoom.getCache(self.defectRoomRef!.df_room_id!)
+            
         }else{
+      
             let controllers:[UIViewController] = (self.splitViewController?.viewControllers)!
             let nav:UINavigationController = controllers[1] as! UINavigationController
             nav.popToRootViewControllerAnimated(true)
