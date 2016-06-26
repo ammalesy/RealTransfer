@@ -83,7 +83,7 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AddDefectDetailViewController.keyboardWasHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
         self.imageView.image = self.image!
         splitController = (self.splitViewController as! NZSplitViewController)
-        splitController!.nzNavigationController?.hideRightInfo(false)
+        
         self.listSubTypeModeEnable(false)
         
         categoryList = Category.sharedInstance.getCategory()
@@ -325,18 +325,19 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
         {
             self.typeBtn.setTitle(model.text, forState: UIControlState.Normal)
             self.categorySelected = model.identifier
-            self.subCategorySelected = nil
-            self.listSubCategorySelected = nil
+            self.clearSubCategoryValue()
+            
         }
         else if contorller.identifier == "subType"
         {
             self.subtypeBtn.setTitle(model.text, forState: UIControlState.Normal)
             self.subCategorySelected = model.identifier
             
+            self.clearListSubCategoryValue()
+            
             if model.identifier == kOTHER_IDENTIFIER
             {
                 self.listSubTypeModeEnable(true)
-                self.listSubCategorySelected = nil
             }
             else
             {
@@ -351,6 +352,16 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
         }
         self.verifyButtonColor()
         self.closeDropDown()
+    }
+    func clearSubCategoryValue(){
+        self.subtypeBtn.setTitle("", forState: UIControlState.Normal)
+        self.subCategorySelected = nil
+        self.clearListSubCategoryValue()
+    }
+    func clearListSubCategoryValue(){
+        self.listSubTypeBtn.setTitle("", forState: UIControlState.Normal)
+        self.listSubtypeTextView.text = ""
+        self.listSubCategorySelected = nil
     }
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.closeDropDown()

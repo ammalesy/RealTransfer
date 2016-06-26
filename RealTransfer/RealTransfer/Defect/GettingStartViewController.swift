@@ -226,6 +226,14 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
                     
                 })
             }else{
+                let customer:CustomerInfo = CustomerInfo.sharedInstance
+                let buildingName = self.buldingSelected?.building_name!
+                let csName = (self.components.lastObject as! RowModel).detail!
+                let room = self.roomSelected?.un_name!
+                customer.building = buildingName!
+                customer.cs = csName
+                customer.room = room!
+                
                 
                 let defectRoom:DefectRoom = DefectRoom(room: self.roomSelected, user: user, userCS: self.csSelected, project: self.project)
                 defectRoom.checkDuplicate({ (defectRoomDup, isDuplicate) in
@@ -242,6 +250,8 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
                                     
                                     SwiftSpinner.hide()
                                     self.hideView()
+                                    
+                                    customer.canShow = true
                                 })
                             }else{
                                 
@@ -268,11 +278,13 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
                                 
                                 SwiftSpinner.hide()
                                 self.hideView()
+                                
+                                customer.canShow = true
                             })
 
                         }else{
                             SwiftSpinner.hide()
-                            AlertUtil.alert("Parse2", message: "Parse2", cancleButton: "OK", atController: self)
+                            AlertUtil.alert("ตรวจรับครั้งที่สอง", message: "กำลังทำครับ", cancleButton: "OK", atController: self)
                         }
                         
                         
@@ -524,7 +536,7 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         
         
         self.queryInfo { (list) in
-            
+            let customer:CustomerInfo = CustomerInfo.sharedInstance
             
             var defectInfo:NSMutableDictionary
             var roomInfo:NSMutableDictionary
@@ -538,8 +550,15 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
                 
                 row4.headInfo4 = "Room Type : "
                 row4.headInfo5 = "Unit Type : "
-                row4.detailInfo4 = roomInfo.objectForKey("room_type_info") as? String
-                row4.detailInfo5 = roomInfo.objectForKey("unit_type_name") as? String
+                
+                let roomType = roomInfo.objectForKey("room_type_info") as? String
+                let unitType = roomInfo.objectForKey("unit_type_name") as? String
+                
+                row4.detailInfo4 = roomType!
+                row4.detailInfo5 = unitType!
+                
+                customer.roomType = roomType!
+                customer.unitType = unitType!
                 
             }
             
@@ -550,25 +569,63 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
                 if let date = defectInfo.objectForKey("df_check_date") as? String {
                     
                     let dateArr = date.componentsSeparatedByString("|")
-                    row4.detailInfo6 = "\(dateArr[0]) \(dateArr[1])"
+                    let dateConcat = "\(dateArr[0]) \(dateArr[1])"
+                    row4.detailInfo6 = dateConcat
+                    
+                    customer.checkDate = dateConcat
                 }
-                row4.detailInfo7 = defectInfo.objectForKey("df_room_id") as? String
+                let defectNo = defectInfo.objectForKey("df_room_id") as? String
+                row4.detailInfo7 = defectNo!
+                customer.defectNo = defectNo!
+                
             }
             
             if ((list?.objectForKey("qcCheckerInfo") as? NSMutableDictionary) != nil) {
                 qcCheckerInfo = (list?.objectForKey("qcCheckerInfo") as? NSMutableDictionary)!
+                let qcChecker = "\(qcCheckerInfo.objectForKey("user_pers_fname") as! String) \(qcCheckerInfo.objectForKey("user_pers_lname") as! String)"
                 row4.headInfo8 = "QC Checker : "
-                row4.detailInfo8 = "\(qcCheckerInfo.objectForKey("user_pers_fname") as! String) \(qcCheckerInfo.objectForKey("user_pers_lname") as! String)"
+                row4.detailInfo8 = qcChecker
+                
+                customer.qcChecker = qcChecker
             }
-            
             
             row4.style = CELL_INFO_LABEL_IDENTIFIER
             row4.headInfo1 = "Name : "
             row4.headInfo2 = "Email : "
-            row4.headInfo3 = "Phone No.: "
-            row4.detailInfo1 = userInfo.objectForKey("name") as? String
-            row4.detailInfo2 = userInfo.objectForKey("email") as? String
-            row4.detailInfo3 = userInfo.objectForKey("tel") as? String
+            row4.headInfo3 = "Phone No.: "//pers_prefix
+            
+            
+            
+            let prefix = userInfo.objectForKey("pers_prefix") as? String
+            let fname = userInfo.objectForKey("pers_fname") as? String
+            let lname = userInfo.objectForKey("pers_lname") as? String
+            let qt_unit_number_id = userInfo.objectForKey("qt_unit_number_id") as? String
+            let pers_sex = userInfo.objectForKey("pers_sex") as? String
+            let pers_card_id = userInfo.objectForKey("pers_card_id") as? String
+            let pers_mobile = userInfo.objectForKey("pers_mobile") as? String
+            let pers_email = userInfo.objectForKey("pers_email") as? String
+            let pers_tel = userInfo.objectForKey("pers_tel") as? String
+            
+            customer.pers_prefix = prefix!
+            customer.pers_fname = fname!
+            customer.pers_lname = lname!
+            customer.qt_unit_number_id = qt_unit_number_id!
+            customer.pers_sex = pers_sex!
+            customer.pers_card_id = pers_card_id!
+            customer.pers_mobile = pers_mobile!
+            customer.pers_email = pers_email!
+            customer.pers_tel = pers_tel!
+            
+            var name = "N/A"
+            if fname != "N/A" && lname != "N/A" {
+                name = "\(prefix!)\(fname!) \(lname!)"
+            }
+            
+            row4.detailInfo1 = name
+            row4.detailInfo2 = pers_email!
+            row4.detailInfo3 = pers_tel!
+            
+            self.nzNavigationController!.assignRightInfovalue(customer, roomNo: self.roomSelected!.un_name!)
             
             self.components.addObject(row4);
             

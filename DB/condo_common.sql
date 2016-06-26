@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 19, 2016 at 08:39 PM
+-- Generation Time: Jun 26, 2016 at 06:42 PM
 -- Server version: 5.6.26
 -- PHP Version: 5.6.12
 
@@ -128,7 +128,13 @@ INSERT INTO `log_authentication` (`at_ip`, `at_user_id`, `at_agent`, `at_timesta
 ('::1', 0, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36', '2016-06-09 02:36:40'),
 ('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-06-15 16:31:18'),
 ('127.0.0.1', 5, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-06-15 16:31:42'),
-('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-06-15 16:32:58');
+('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-06-15 16:32:58'),
+('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-06-25 05:50:40'),
+('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-06-25 09:17:26'),
+('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.3', '2016-06-25 09:39:23'),
+('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-06-26 03:59:50'),
+('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.3', '2016-06-26 05:04:06'),
+('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-06-26 14:35:49');
 
 -- --------------------------------------------------------
 

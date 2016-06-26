@@ -20,6 +20,7 @@
 		18521DFD1D16B64D00B9622C /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18521DFC1D16B64D00B9622C /* UIImageExtension.swift */; };
 		1854F69C1D12FC54003B9FE0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1854F69B1D12FC54003B9FE0 /* User.swift */; };
 		1854F6AD1D130865003B9FE0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1854F6AC1D130865003B9FE0 /* Model.swift */; };
+		185E07401D202B510049F30B /* CustomerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185E073F1D202B510049F30B /* CustomerInfo.swift */; };
 		1889D9E11D1451FC0095507F /* SwiftSpinner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1889D9E01D1451FC0095507F /* SwiftSpinner.framework */; };
 		18AACE171D145ACA0098F5BA /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AACE161D145ACA0098F5BA /* ProjectModel.swift */; };
 		18CA73111D1C13120021712B /* AlertUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CA73101D1C13120021712B /* AlertUtil.swift */; };
@@ -86,6 +87,7 @@
 		18521DFC1D16B64D00B9622C /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		1854F69B1D12FC54003B9FE0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1854F6AC1D130865003B9FE0 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		185E073F1D202B510049F30B /* CustomerInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerInfo.swift; sourceTree = "<group>"; };
 		1889D9DD1D1450400095507F /* AlamofireNetworkActivityIndicator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireNetworkActivityIndicator.framework; path = "../../../Library/Developer/Xcode/DerivedData/RealTransfer-dxjmravslvqqrxcfhswvgaqtusax/Build/Products/Debug-iphonesimulator/AlamofireNetworkActivityIndicator.framework"; sourceTree = "<group>"; };
 		1889D9E01D1451FC0095507F /* SwiftSpinner.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftSpinner.framework; path = "../../../Library/Developer/Xcode/DerivedData/RealTransfer-dxjmravslvqqrxcfhswvgaqtusax/Build/Products/Debug-iphonesimulator/SwiftSpinner.framework"; sourceTree = "<group>"; };
 		18AACE161D145ACA0098F5BA /* ProjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectModel.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				18DF989D1D152F2C004BE990 /* DefectRoom.swift */,
 				18DF989F1D155AFF004BE990 /* DefectModel.swift */,
 				180098201D164A4C00BB11FD /* Sync.swift */,
+				185E073F1D202B510049F30B /* CustomerInfo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -539,6 +542,7 @@
 				521A7B281D05305200971B7B /* UIFontExtention.swift in Sources */,
 				5290560D1D0519EE00B7D28C /* NZPopoverView.swift in Sources */,
 				18DF989C1D15180B004BE990 /* Room.swift in Sources */,
+				185E07401D202B510049F30B /* CustomerInfo.swift in Sources */,
 				5218E5751D09123C008B5402 /* NZDropDowCell.swift in Sources */,
 				18CA73111D1C13120021712B /* AlertUtil.swift in Sources */,
 				52499B0F1D06BA410003F6D5 /* CellDropDown.swift in Sources */,

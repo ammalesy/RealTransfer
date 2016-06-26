@@ -45,7 +45,11 @@ class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
         
         self.titleLb.font = UIFont.fontSemiBold(22)
         self.subTitleLb.font = UIFont.fontNormal(18)
+        self.roomNoCaptionLb.text = "Room No. "
+        self.cusNameCaptionLb.text = "Client : "
         
+        let user:User = User().getOnCache()!
+        self.subTitleLb.text = "\(user.pm_name!) : \(user.user_pers_fname!) \(user.user_pers_lname!)"
         
     }
     override func didReceiveMemoryWarning() {
@@ -178,8 +182,12 @@ class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
             popover = NZPopoverView.standardSize()
             
             popover.delegate = self
-            popover.addRow(NZRow(text: "View info", imageName:"Info-97", tintColor: UIColor.darkGrayColor(),  identifier: "info"))
-            popover.addRow(NZRow(text: "Sync", imageName:"sync", tintColor: UIColor.darkGrayColor(),  identifier: "sync"))
+            if CustomerInfo.sharedInstance.canShow {
+                popover.addRow(NZRow(text: "View info", imageName:"Info-97", tintColor: UIColor.darkGrayColor(),  identifier: "info"))
+            }
+            if PROJECT != nil {
+                popover.addRow(NZRow(text: "Sync", imageName:"sync", tintColor: UIColor.darkGrayColor(),  identifier: "sync"))
+            }
             popover.addRow(NZRow(text: "Sign out", imageName:"Enter-96", tintColor: UIColor.RGB(223, G: 0, B: 0),  identifier: "logout"))
             
             
@@ -239,7 +247,7 @@ class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
                 PROJECT = nil
                 Building.buldings.removeAllObjects()
                 CSRoleModel.csUSers.removeAllObjects()
-                
+                CustomerInfo.sharedInstance.clear()
             
             })
         }
@@ -273,5 +281,19 @@ class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
         self.roomNoLb.hidden = flag
         self.roomNoCaptionLb.hidden = flag
         self.cusNameCaptionLb.hidden = flag
+    }
+    func assignRightInfovalue(customer:CustomerInfo!, roomNo:String!){
+        Queue.mainQueue { 
+            self.hideRightInfo(false)
+            
+            var name = "N/A"
+            if customer.pers_fname != "N/A" && customer.pers_lname != "N/A" {
+                name = "\(customer.pers_prefix)\(customer.pers_fname) \(customer.pers_lname)"
+            }
+            self.cusNameLb.text = name
+            self.roomNoLb.text = roomNo
+        }
+        
+    
     }
 }

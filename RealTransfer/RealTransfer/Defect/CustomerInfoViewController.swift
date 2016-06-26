@@ -27,18 +27,25 @@ class CustomerInfoViewController: UIViewController,UITableViewDataSource,UITable
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
+        let customer:CustomerInfo = CustomerInfo.sharedInstance
         
-        listData.addObject(RowModel(head: "1", detail: "11"))
-        listData.addObject(RowModel(head: "2", detail: "22"))
-        listData.addObject(RowModel(head: "3", detail: "33"))
-        listData.addObject(RowModel(head: "4", detail: "44"))
-        listData.addObject(RowModel(head: "5", detail: "55"))
-        listData.addObject(RowModel(head: "6", detail: "66"))
-        listData.addObject(RowModel(head: "7", detail: "77"))
-        listData.addObject(RowModel(head: "8", detail: "88"))
-        listData.addObject(RowModel(head: "9", detail: "99"))
-        listData.addObject(RowModel(head: "10", detail: "1010"))
-        listData.addObject(RowModel(head: "11", detail: "1111"))
+        listData.addObject(RowModel(head: "Building : ", detail: customer.building))
+        listData.addObject(RowModel(head: "Room : ", detail: customer.room))
+        
+        var name = "N/A"
+        if customer.pers_fname != "N/A" && customer.pers_lname != "N/A" {
+            name = "\(customer.pers_prefix)\(customer.pers_fname) \(customer.pers_lname)"
+        }
+        
+        listData.addObject(RowModel(head: "Name : ", detail: name))
+        listData.addObject(RowModel(head: "Email : ", detail: customer.pers_email))
+        listData.addObject(RowModel(head: "Phone No : ", detail: customer.pers_tel))
+        listData.addObject(RowModel(head: "Room Type : ", detail: customer.roomType))
+        listData.addObject(RowModel(head: "Unit Type : ", detail: customer.unitType))
+        listData.addObject(RowModel(head: "Check Date : ", detail: customer.checkDate))
+        listData.addObject(RowModel(head: "Defect No.: ", detail: customer.defectNo))
+        listData.addObject(RowModel(head: "QC Checker : ", detail: customer.qcChecker))
+        listData.addObject(RowModel(head: "CS : ", detail: customer.cs))
 
         // Do any additional setup after loading the view.
     }

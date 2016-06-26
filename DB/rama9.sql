@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 19, 2016 at 08:39 PM
+-- Generation Time: Jun 26, 2016 at 06:42 PM
 -- Server version: 5.6.26
 -- PHP Version: 5.6.12
 
@@ -10829,14 +10829,15 @@ CREATE TABLE IF NOT EXISTS `tb_building` (
   `building_info` text,
   `building_image` varchar(250) DEFAULT NULL,
   `building_sts_active` varchar(5) DEFAULT 'on'
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tb_building`
 --
 
 INSERT INTO `tb_building` (`building_id`, `building_name`, `building_info`, `building_image`, `building_sts_active`) VALUES
-(1, 'A', '-', 'Images/project/4/building/1/1430720623.jpg', 'on');
+(1, 'A', '-', 'Images/project/4/building/1/1430720623.jpg', 'on'),
+(2, 'B', '-', 'Images/project/4/building/1/1430720623.jpg', 'on');
 
 -- --------------------------------------------------------
 
@@ -11473,23 +11474,35 @@ CREATE TABLE IF NOT EXISTS `tb_defect` (
   `df_room_id_ref` int(11) NOT NULL,
   `df_date` varchar(250) NOT NULL,
   `df_image_path` varchar(250) NOT NULL,
-  `df_status` int(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8;
+  `df_status` int(1) NOT NULL DEFAULT '1',
+  `complete_status` int(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=135 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tb_defect`
 --
 
-INSERT INTO `tb_defect` (`df_id`, `df_category`, `df_sub_category`, `df_detail`, `df_room_id_ref`, `df_date`, `df_image_path`, `df_status`) VALUES
-(79, '1', '1-1', '1-1-5', 5, '20/06/2559|01:01:42', '020062559010149', 1),
-(80, '1', '99999999', 'ทดสอบ', 5, '20/06/2559|01:04:30', '020062559010435', 1),
-(81, '1', '1-1', '1-1-5', 5, '20/06/2559|01:06:02', '020062559010605', 1),
-(82, '1', '1-1', '1-1-2', 5, 'daf', '020062559010605', 1),
-(83, '1', '1-1', '1-1-2', 5, 'daf', '020062559010605', 1),
-(84, '1', '1-1', '1-1-2', 5, 'daf', '020062559010605', 1),
-(85, '1', '1-1', '1-1-2', 5, 'daf', '020062559010605', 1),
-(86, '1', '1-1', '1-1-6', 5, '20/06/2559|01:37:24', '020062559013750', 1),
-(87, '1', '1-1', '1-1-5', 5, '20/06/2559|01:38:53', '020062559013856', 1);
+INSERT INTO `tb_defect` (`df_id`, `df_category`, `df_sub_category`, `df_detail`, `df_room_id_ref`, `df_date`, `df_image_path`, `df_status`, `complete_status`) VALUES
+(115, '1', '1-1', '1-1-5', 5, '23/06/2559|10:44:57', '023062559104609', 1, 0),
+(116, '1', '1-1', '1-1-5', 5, '23/06/2559|10:45:05', '123062559104609', 1, 0),
+(117, '1', '1-1', '1-1-2', 5, '23/06/2559|10:45:18', '223062559104609', 1, 0),
+(118, '1', '1-1', '1-1-6', 5, '23/06/2559|10:47:38', '023062559104743', 1, 0),
+(119, '1', '99999999', 'ทดสอบ', 5, '23/06/2559|10:47:11', '123062559104743', 1, 0),
+(120, '1', '99999999', 'อิอิ', 15, '23/06/2559|11:03:01', '023062559110309', 1, 0),
+(121, '1', '1-1', '1-1-5', 5, '23/06/2559|11:16:31', '023062559111634', 1, 0),
+(122, '1', '1-1', '1-1-5', 0, '24/06/2559|12:24:54', '024062559122457', 1, 0),
+(123, '1', '1-1', '1-1-5', 0, '24/06/2559|12:24:54', '024062559122501', 1, 0),
+(124, '1', '1-1', '1-1-5', 19, '24/06/2559|12:26:18', '024062559122621', 1, 0),
+(125, '1', '1-1', '1-1-5', 0, '24/06/2559|12:29:43', '024062559122946', 1, 0),
+(126, '1', '1-1', '1-1-5', 0, '24/06/2559|12:29:43', '024062559123033', 1, 0),
+(127, '1', '1-1', '1-1-5', 0, '24/06/2559|12:32:19', '024062559123221', 1, 0),
+(128, '1', '1-1', '1-1-5', 25, '24/06/2559|12:43:48', '024062559124351', 1, 0),
+(129, '1', '1-1', '1-1-5', 26, '24/06/2559|01:21:25', '024062559012127', 1, 0),
+(130, '1', '99999999', 'Jojjojo', 15, '25/06/2016|10:26:07', '025062559102612', 1, 0),
+(131, '1', '1-1', '1-1-4', 27, '25/06/2016|10:28:31', '025062559102837', 1, 0),
+(132, '1', '1-1', '1-1-5', 28, '25/06/2016|10:31:10', '025062559103115', 1, 0),
+(133, '1', '1-1', '1-1-5', 16, '25/06/2016|10:31:50', '025062559103154', 1, 0),
+(134, '2', '99999999', 'Kklo', 31, '26/06/2016|12:03:49', '026062559120353', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -11892,7 +11905,7 @@ INSERT INTO `tb_payment` (`pm_id`, `pm_temp_code`, `pm_receipt_code`, `pm_date`,
 (15, 'T04-160608-00015', NULL, '2016-06-08 10:39:58', 'Cash', 20000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'no', 1, NULL, NULL, '2016-06-08 03:39:58', NULL),
 (16, 'T04-160608-00016', NULL, '2016-06-08 10:40:18', 'Cash', 60000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'no', 1, NULL, NULL, '2016-06-08 03:40:18', NULL),
 (17, 'T04-160609-00017', NULL, '2016-06-09 09:51:57', 'Cash', 20000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'no', 1, NULL, NULL, '2016-06-09 02:51:57', NULL),
-(18, 'T04-160609-00018', NULL, '2016-06-09 09:51:57', 'Cash', 60000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'no', 1, NULL, NULL, '2016-06-09 02:51:57', NULL);
+(18, 'T04-160609-00018', 'R04-160201-00005', '2016-06-09 09:51:57', 'Cash', 60000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'no', 1, 1, NULL, '2016-06-09 02:51:57', NULL);
 
 -- --------------------------------------------------------
 
@@ -13154,7 +13167,7 @@ CREATE TABLE IF NOT EXISTS `tb_receipt_offical` (
   `rc_customer_id` int(11) NOT NULL,
   `rc_un_name` varchar(5) NOT NULL DEFAULT '',
   `rc_edited` varchar(3) NOT NULL DEFAULT 'no'
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tb_receipt_offical`
@@ -13164,7 +13177,8 @@ INSERT INTO `tb_receipt_offical` (`rc_id`, `rc_code`, `rc_temp_code`, `rc_refer_
 (1, 'R04-150101-00001', 'T04-160602-00001', '', 'Booking Fee', 'B04-160602-00001', NULL, NULL, NULL, NULL, 10000, '2015-01-01 00:00:00', 0, 'yes', 'on', '', '2016-06-02 07:39:49', 4, '0705', 'no'),
 (2, 'R04-150101-00002', 'T04-160602-00002', '', 'Contract Fee', 'B04-160602-00001', 'C04-160602-00001', NULL, NULL, NULL, 50000, '2015-01-01 00:00:00', 0, 'yes', 'on', '', '2016-06-02 07:41:09', 4, '0705', 'no'),
 (3, 'R04-150101-00003', 'T04-160602-00003', '', 'Booking Fee', 'B04-160602-00002', NULL, NULL, NULL, NULL, 20000, '2015-01-01 00:00:00', 0, 'yes', 'on', '', '2016-06-02 07:59:44', 5, '0802', 'no'),
-(4, 'R04-150101-00004', 'T04-160602-00004', '', 'Contract Fee', 'B04-160602-00002', 'C04-160602-00002', NULL, NULL, NULL, 60000, '2015-01-01 00:00:00', 0, 'yes', 'on', '', '2016-06-02 08:00:01', 5, '0802', 'no');
+(4, 'R04-150101-00004', 'T04-160602-00004', '', 'Contract Fee', 'B04-160602-00002', 'C04-160602-00002', NULL, NULL, NULL, 60000, '2015-01-01 00:00:00', 0, 'yes', 'on', '', '2016-06-02 08:00:01', 5, '0802', 'no'),
+(5, 'R04-160201-00005', 'T04-160609-00018', NULL, 'Contract Fee', 'B04-160609-00009', 'C04-160609-00009', NULL, NULL, NULL, 60000, '2016-02-01 00:00:00', 0, 'yes', 'on', '', '2016-06-25 07:00:07', 11, '0809', 'no');
 
 -- --------------------------------------------------------
 
@@ -13208,7 +13222,7 @@ INSERT INTO `tb_receipt_temporary` (`rc_id`, `rc_code`, `rc_refer_form`, `rc_pay
 (7, 'T04-160608-00007', '', 'Booking Fee', 'B04-160608-00004', NULL, NULL, NULL, NULL, 20000, '2016-06-08 10:08:02', 37, 'no', 'on', NULL, '2016-06-08 03:08:02', 3, '0701', 'no'),
 (8, 'T04-160608-00008', NULL, 'Booking Fee', 'B04-160608-00005', NULL, NULL, NULL, NULL, 20000, '2016-06-08 10:22:23', 37, 'no', 'on', NULL, '2016-06-08 03:22:23', 9, '0808', 'no'),
 (9, 'T04-160608-00009', NULL, 'Contract Fee', 'B04-160608-00005', 'C04-160608-00005', NULL, NULL, NULL, 60000, '2016-06-08 10:22:23', 37, 'no', 'on', NULL, '2016-06-08 03:22:23', 9, '0808', 'no'),
-(10, 'T04-160608-00010', '', 'Booking Fee', 'B04-160608-00006', NULL, NULL, NULL, NULL, 10000, '2016-06-08 10:28:12', 37, 'no', 'on', NULL, '2016-06-08 03:28:12', 9, '0705', 'no'),
+(10, 'T04-160608-00010', '', 'Booking Fee', 'B04-160608-00006', NULL, NULL, NULL, NULL, 10000, '2016-06-08 10:28:12', 37, 'yes', 'on', '', '2016-06-08 03:28:12', 9, '0705', 'no'),
 (11, 'T04-160608-00011', '', 'Contract Fee', 'B04-160608-00006', 'C04-160608-00006', NULL, NULL, NULL, 50000, '2016-06-08 10:28:28', 37, 'no', 'on', NULL, '2016-06-08 03:28:28', 9, '0705', 'no'),
 (12, 'T04-160608-00012', NULL, 'Booking Fee', 'B04-160608-00007', NULL, NULL, NULL, NULL, 20000, '2016-06-08 10:29:36', 37, 'no', 'on', NULL, '2016-06-08 03:29:36', 9, '0707', 'no'),
 (13, 'T04-160608-00013', NULL, 'Contract Fee', 'B04-160608-00007', 'C04-160608-00007', NULL, NULL, NULL, 60000, '2016-06-08 10:29:36', 37, 'yes', 'on', '', '2016-06-08 03:29:36', 9, '0707', 'no'),
@@ -13216,7 +13230,7 @@ INSERT INTO `tb_receipt_temporary` (`rc_id`, `rc_code`, `rc_refer_form`, `rc_pay
 (15, 'T04-160608-00015', '', 'Booking Fee', 'B04-160608-00008', NULL, NULL, NULL, NULL, 20000, '2016-06-08 10:39:58', 37, 'no', 'on', NULL, '2016-06-08 03:39:58', 9, '0708', 'no'),
 (16, 'T04-160608-00016', '', 'Contract Fee', 'B04-160608-00008', 'C04-160608-00008', NULL, NULL, NULL, 60000, '2016-06-08 10:40:18', 37, 'no', 'on', NULL, '2016-06-08 03:40:18', 9, '0708', 'no'),
 (17, 'T04-160609-00017', NULL, 'Booking Fee', 'B04-160609-00009', NULL, NULL, NULL, NULL, 20000, '2016-06-09 09:51:57', 0, 'no', 'on', NULL, '2016-06-09 02:51:57', 11, '0809', 'no'),
-(18, 'T04-160609-00018', NULL, 'Contract Fee', 'B04-160609-00009', 'C04-160609-00009', NULL, NULL, NULL, 60000, '2016-06-09 09:51:57', 0, 'no', 'on', NULL, '2016-06-09 02:51:57', 11, '0809', 'no');
+(18, 'T04-160609-00018', NULL, 'Contract Fee', 'B04-160609-00009', 'C04-160609-00009', NULL, NULL, NULL, 60000, '2016-06-09 09:51:57', 0, 'yes', 'off', '', '2016-06-09 02:51:57', 11, '0809', 'no');
 
 -- --------------------------------------------------------
 
@@ -13247,7 +13261,7 @@ CREATE TABLE IF NOT EXISTS `tb_room_status` (
   `rs_status` text COLLATE utf8_unicode_ci NOT NULL,
   `rs_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `rs_staff_id` text COLLATE utf8_unicode_ci
-) ENGINE=InnoDB AUTO_INCREMENT=24715 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24716 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `tb_room_status`
@@ -37767,7 +37781,8 @@ INSERT INTO `tb_room_status` (`rs_id`, `rs_unit_number`, `rs_cus_id`, `rs_status
 (24711, 28, '11', 'Booking', '2016-06-09 02:51:57', '0'),
 (24712, 28, '11', 'Make Contract', '2016-06-09 02:51:57', '0'),
 (24713, 28, '11', 'Temp receipt for contract', '2016-06-09 02:51:57', '0'),
-(24714, 41, '11', 'Quotation', '2016-06-09 02:53:47', '0');
+(24714, 41, '11', 'Quotation', '2016-06-09 02:53:47', '0'),
+(24715, 28, '11', 'Contract Fee', '2016-06-25 07:00:07', '0');
 
 -- --------------------------------------------------------
 
@@ -38372,16 +38387,34 @@ CREATE TABLE IF NOT EXISTS `tb_unit_defect` (
   `df_check_date` varchar(100) NOT NULL,
   `df_user_id` int(11) NOT NULL,
   `df_user_id_cs` int(11) NOT NULL,
-  `df_sync_status` int(1) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+  `df_sync_status` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tb_unit_defect`
 --
 
 INSERT INTO `tb_unit_defect` (`df_room_id`, `df_un_id`, `df_check_date`, `df_user_id`, `df_user_id_cs`, `df_sync_status`) VALUES
-(5, 1, '20/06/2559|01:38:56', 0, 37, 0),
-(15, 2, '20/06/2559|12:53:57', 0, 1, 0);
+(5, 1, '25/06/2016|10:20:58', 0, 37, 0),
+(15, 2, '25/06/2016|10:26:27', 0, 1, 1),
+(16, 18, '25/06/2016|10:31:54', 0, 1, 1),
+(17, 56, '24/06/2559|12:20:38', 0, 1, 0),
+(18, 57, '24/06/2559|12:23:22', 0, 0, 0),
+(19, 24, '24/06/2559|12:26:21', 0, 37, 0),
+(20, 45, '24/06/2559|12:28:20', 0, 37, 0),
+(21, 148, '24/06/2559|12:29:34', 0, 37, 0),
+(22, 44, '24/06/2559|12:32:10', 0, 1, 0),
+(23, 70, '24/06/2559|12:38:03', 0, 30, 0),
+(24, 59, '24/06/2559|12:40:50', 0, 1, 0),
+(25, 91, '24/06/2559|12:43:51', 0, 37, 0),
+(26, 131, '24/06/2559|01:21:27', 0, 1, 0),
+(27, 6, '25/06/2016|10:28:41', 0, 1, 1),
+(28, 17, '25/06/2016|10:31:20', 0, 37, 1),
+(29, 29, '26/06/2016|11:55:10', 0, 30, 0),
+(30, 34, '26/06/2016|11:59:51', 0, 30, 0),
+(31, 32, '26/06/2016|12:03:53', 0, 30, 1),
+(32, 40, '26/06/2016|10:56:44', 0, 1, 0),
+(33, 58, '26/06/2016|11:00:45', 0, 30, 0);
 
 -- --------------------------------------------------------
 
@@ -38400,7 +38433,7 @@ CREATE TABLE IF NOT EXISTS `tb_unit_number` (
   `un_view` text NOT NULL,
   `un_status_room` varchar(10) NOT NULL DEFAULT 'Available',
   `un_sts_active` varchar(3) NOT NULL DEFAULT 'on'
-) ENGINE=InnoDB AUTO_INCREMENT=531 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=532 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tb_unit_number`
@@ -38936,7 +38969,8 @@ INSERT INTO `tb_unit_number` (`un_id`, `un_build_id`, `un_floor_id`, `un_unit_ty
 (527, 1, 31, 15, '3105', '05', 'N', '', 'Sold', 'on'),
 (528, 1, 31, 24, '3107', '07', 'W', '', 'Available', 'on'),
 (529, 1, 31, 23, '3108', '08', 'S', '', 'Available', 'on'),
-(530, 1, 31, 26, '3109', '09', 'S', '', 'Available', 'on');
+(530, 1, 31, 26, '3109', '09', 'S', '', 'Available', 'on'),
+(531, 2, 29, 1, '1000', '09', 's', '', 'Available', 'on');
 
 -- --------------------------------------------------------
 
@@ -39390,7 +39424,7 @@ ALTER TABLE `tb_booking`
 -- AUTO_INCREMENT for table `tb_building`
 --
 ALTER TABLE `tb_building`
-  MODIFY `building_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `building_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tb_calendar`
 --
@@ -39435,7 +39469,7 @@ ALTER TABLE `tb_credit_auto`
 -- AUTO_INCREMENT for table `tb_defect`
 --
 ALTER TABLE `tb_defect`
-  MODIFY `df_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=88;
+  MODIFY `df_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=135;
 --
 -- AUTO_INCREMENT for table `tb_email`
 --
@@ -39515,7 +39549,7 @@ ALTER TABLE `tb_quotation`
 -- AUTO_INCREMENT for table `tb_receipt_offical`
 --
 ALTER TABLE `tb_receipt_offical`
-  MODIFY `rc_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `rc_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tb_receipt_temporary`
 --
@@ -39530,7 +39564,7 @@ ALTER TABLE `tb_report`
 -- AUTO_INCREMENT for table `tb_room_status`
 --
 ALTER TABLE `tb_room_status`
-  MODIFY `rs_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24715;
+  MODIFY `rs_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24716;
 --
 -- AUTO_INCREMENT for table `tb_sms`
 --
@@ -39590,12 +39624,12 @@ ALTER TABLE `tb_transfer_ownership`
 -- AUTO_INCREMENT for table `tb_unit_defect`
 --
 ALTER TABLE `tb_unit_defect`
-  MODIFY `df_room_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+  MODIFY `df_room_id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT for table `tb_unit_number`
 --
 ALTER TABLE `tb_unit_number`
-  MODIFY `un_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=531;
+  MODIFY `un_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=532;
 --
 -- AUTO_INCREMENT for table `tb_unit_type`
 --

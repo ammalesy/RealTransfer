@@ -22,7 +22,7 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
         super.viewDidLoad()
         
         splitController = (self.splitViewController as! NZSplitViewController)
-        splitController!.nzNavigationController?.hideRightInfo(false)
+
         splitController!.nzNavigationController?.delegate = self
         
         // Do any additional setup after loading the view.
@@ -175,8 +175,12 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
                 })
                 
             })
+            let cancelAction:UIAlertAction = UIAlertAction(title: "ยกเลิก", style: UIAlertActionStyle.Cancel, handler: { (action) in
+                
+            })
             alert.addAction(noneCompleteAction)
             alert.addAction(completedAction)
+            alert.addAction(cancelAction)
             
             self.presentViewController(alert, animated: true, completion: {
                 

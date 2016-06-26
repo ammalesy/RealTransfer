@@ -13,6 +13,7 @@ import Alamofire
 
 class User: Model,NSCoding {
     
+    var pm_name:String?
     var user_id:String?
     var user_permission:String?
     var user_pers_fname:String?
@@ -28,6 +29,7 @@ class User: Model,NSCoding {
  
     }
     required init(coder aDecoder: NSCoder) {
+        self.pm_name  = aDecoder.decodeObjectForKey("pm_name") as? String
         self.user_id  = aDecoder.decodeObjectForKey("user_id") as? String
         self.user_permission  = aDecoder.decodeObjectForKey("user_permission") as? String
         self.user_pers_fname  = aDecoder.decodeObjectForKey("user_pers_fname") as? String
@@ -40,6 +42,9 @@ class User: Model,NSCoding {
     }
     
     func encodeWithCoder(aCoder: NSCoder) {
+        if let val = self.pm_name{
+            aCoder.encodeObject(val, forKey: "pm_name")
+        }
         if let val = self.user_id{
             aCoder.encodeObject(val, forKey: "user_id")
         }
@@ -85,6 +90,7 @@ class User: Model,NSCoding {
                 if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
                     print("JSON: \(JSON)")
                     if JSON.objectForKey("status") as! String == "200" {
+                        self.pm_name = JSON.objectForKey("pm_name") as? String
                         self.user_id = JSON.objectForKey("user_id") as? String
                         self.user_permission = JSON.objectForKey("user_permission") as? String
                         self.user_pers_fname = JSON.objectForKey("user_pers_fname") as? String

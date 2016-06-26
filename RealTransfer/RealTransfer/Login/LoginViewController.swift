@@ -91,6 +91,8 @@ class LoginViewController: NZViewController {
         user?.login({ (result) in
             
             SwiftSpinner.show("Retriving data..", animated: true)
+            
+            
             Category.syncCategory({
                 
                 SwiftSpinner.hide()

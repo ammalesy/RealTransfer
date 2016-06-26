@@ -1,9 +1,9 @@
 <?php
 
-	
+
 
 	/**
-	* 
+	*
 	*/
 	class UnitDefect
 	{
@@ -15,7 +15,7 @@
 		public static function updateSyncDate($db_name,$df_room_id,$timestamp,$df_sync_status) {
 
 			$conn = Database::connect_db_by_dbName($db_name);
-			$sql  = "UPDATE ".$db_name.".tb_unit_defect 
+			$sql  = "UPDATE ".$db_name.".tb_unit_defect
 					SET df_check_date = '".$timestamp."', df_sync_status = '".$df_sync_status."'
 					WHERE tb_unit_defect.df_room_id = ".$df_room_id.";";
 			$result = mysqli_query($conn, $sql);
@@ -47,7 +47,7 @@
 
 			$conn = Database::connect_db_by_dbName($db_name);
 			$result = mysqli_query($conn, "SELECT * FROM tb_unit_defect WHERE df_un_id = ".$un_id."");
-			
+
 			$return = array();
 			while ($row = mysqli_fetch_array($result,MYSQLI_ASSOC)) {
 				array_push($return, $row);
@@ -69,7 +69,7 @@
 		public static function add($un_id,$user_id,$db_name,$user_id_cs,$df_check_date) {
 
 			$conn = Database::condo_common();
-			$result = mysqli_query($conn, "INSERT INTO `".$db_name."`.`tb_unit_defect` (`df_room_id`, `df_un_id`, `df_check_date`, `df_user_id`, `df_user_id_cs`) 
+			$result = mysqli_query($conn, "INSERT INTO `".$db_name."`.`tb_unit_defect` (`df_room_id`, `df_un_id`, `df_check_date`, `df_user_id`, `df_user_id_cs`)
 										   VALUES (NULL, '".$un_id."', '".$df_check_date."', '".$user_id."', '".$user_id_cs."');");
 
 			if($result != FALSE){
@@ -103,11 +103,12 @@
 				$returnArray['csInfo'] = $csInfo;
 
 			}
-			
-			$returnArray['userInfo'] = array('name'=>'test', 'email'=>'test', 'tel'=>'test');
+
+			$user_result = User::getUserByUnitID($un_id,$db_name);
+			$returnArray['userInfo'] = $user_result;
 			$returnArray['roomInfo'] = $roomInfo;
-			
-			
+
+
 
 			return $returnArray;
 		}
@@ -135,11 +136,11 @@
 		}
 		public static function getCustomerByUn_id($un_id, $db_name) {
 			$conn = Database::condo_common();
-			$sql = "SELECT un_id,unit_type_id,room_type_id, room_type_info, unit_type_name 
+			$sql = "SELECT un_id,unit_type_id,room_type_id, room_type_info, unit_type_name
 											FROM condo_common.tb_room_type JOIN (
-																				 SELECT un_id, un_unit_type_id, unit_type_name,unit_type_id,unit_type_room_type_id 
-																				 FROM ".$db_name.".tb_unit_number JOIN ".$db_name.".tb_unit_type ON (un_unit_type_id = unit_Type_id) 
-																				 WHERE un_id = ".$un_id.") tb_room 
+																				 SELECT un_id, un_unit_type_id, unit_type_name,unit_type_id,unit_type_room_type_id
+																				 FROM ".$db_name.".tb_unit_number JOIN ".$db_name.".tb_unit_type ON (un_unit_type_id = unit_Type_id)
+																				 WHERE un_id = ".$un_id.") tb_room
 																			ON (room_type_id = unit_type_room_type_id)";
 			$result = mysqli_query($conn, $sql);
 			//echo $sql;
@@ -155,11 +156,11 @@
 		}
 		public static function getRoomInfo($un_id, $db_name) {
 			$conn = Database::condo_common();
-			$sql = "SELECT un_id,unit_type_id,room_type_id, room_type_info, unit_type_name 
+			$sql = "SELECT un_id,unit_type_id,room_type_id, room_type_info, unit_type_name
 											FROM condo_common.tb_room_type JOIN (
-																				 SELECT un_id, un_unit_type_id, unit_type_name,unit_type_id,unit_type_room_type_id 
-																				 FROM ".$db_name.".tb_unit_number JOIN ".$db_name.".tb_unit_type ON (un_unit_type_id = unit_Type_id) 
-																				 WHERE un_id = ".$un_id.") tb_room 
+																				 SELECT un_id, un_unit_type_id, unit_type_name,unit_type_id,unit_type_room_type_id
+																				 FROM ".$db_name.".tb_unit_number JOIN ".$db_name.".tb_unit_type ON (un_unit_type_id = unit_Type_id)
+																				 WHERE un_id = ".$un_id.") tb_room
 																			ON (room_type_id = unit_type_room_type_id)";
 			$result = mysqli_query($conn, $sql);
 			//echo $sql;
