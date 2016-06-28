@@ -228,13 +228,20 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
             defect.df_id = "waiting"
             let imgName = UIImage.uniqNameBySeq("0")
             defect.df_image_path = imgName
-            defect.realImage = UIImage(data: (self.imageView.image?.lowQualityJPEGNSData)!)
+            defect.realImage = UIImage(data: (self.imageView.image?.lowerQualityJPEGNSData)!)
             ImageCaching.sharedInstance.setImageByName(imgName, image: defect.realImage, isFromServer: false)
             SDImageCache.sharedImageCache().storeImage(defect.realImage, forKey: imgName, toDisk: true)
             ImageCaching.sharedInstance.save()
             defect.df_room_id_ref = self.defectRoom?.df_room_id
             defect.df_status = "0"
             defect.subCategoryName = self.subCategorySelected
+            
+            if self.isModeGanrantee() {
+                defect.df_type = "1"
+            }else{
+                defect.df_type = "0"
+            }
+            
             self.saveAndKeepToDisk(defect)
         }else{
             //EDIT
@@ -250,10 +257,16 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
             
             let imgName = UIImage.uniqNameBySeq("0")
             self.defectModel!.df_image_path = imgName
-            self.defectModel!.realImage = UIImage(data: (self.imageView.image?.lowQualityJPEGNSData)!)
+            self.defectModel!.realImage = UIImage(data: (self.imageView.image?.lowerQualityJPEGNSData)!)
             ImageCaching.sharedInstance.setImageByName(imgName, image: self.defectModel!.realImage, isFromServer: false)
             SDImageCache.sharedImageCache().storeImage(self.defectModel!.realImage, forKey: imgName, toDisk: true)
             ImageCaching.sharedInstance.save()
+            
+            if self.isModeGanrantee() {
+                self.defectModel!.df_type = "1"
+            }else{
+                self.defectModel!.df_type = "0"
+            }
             
             self.saveAndKeepToDisk(self.defectModel!)
             print(self.defectRoom?.listDefect)
@@ -274,11 +287,26 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
             self.defectRoom?.doCache()
             self.defectRoom = DefectRoom.getCache(roomID)
             
-            let defectListController:DefectListViewController = self.splitController!.viewControllers.first as! DefectListViewController
-            defectListController.reloadData(self.defectRoom!)
+            self.reloadDefectList()
             
             self.navigationController?.popViewControllerAnimated(true)
         }
+    }
+    
+    func reloadDefectList()
+    {
+        let defectListController = self.splitController!.viewControllers.first!
+        
+        if defectListController is DefectListViewController {
+        
+            (defectListController as! DefectListViewController).reloadData(self.defectRoom!)
+            
+        }else if defectListController is GaranteeListViewController {
+            
+            (defectListController as! GaranteeListViewController).reloadData(self.defectRoom!, type: "1")
+        }
+        
+        
     }
     
     
@@ -425,5 +453,17 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
         // Pass the selected object to the new view controller.
     }
     */
+    
+    
+    func isModeGanrantee() -> Bool{
+        let defectListController = self.splitController!.viewControllers.first!
+        
+        if defectListController is GaranteeListViewController {
+            
+            return true
+        }
+        
+        return false
+    }
 
 }

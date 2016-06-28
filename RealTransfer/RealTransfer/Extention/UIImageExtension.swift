@@ -26,6 +26,7 @@ extension UIImage {
     var mediumQualityJPEGNSData: NSData  { return UIImageJPEGRepresentation(self, 0.5)!  }
     var lowMediumQualityJPEGNSData: NSData     { return UIImageJPEGRepresentation(self, 0.4)! }
     var lowQualityJPEGNSData: NSData     { return UIImageJPEGRepresentation(self, 0.25)! }
+    var lowerQualityJPEGNSData: NSData     { return UIImageJPEGRepresentation(self, 0.1)! }
     var lowestQualityJPEGNSData:NSData   { return UIImageJPEGRepresentation(self, 0.0)!  }
     
 }

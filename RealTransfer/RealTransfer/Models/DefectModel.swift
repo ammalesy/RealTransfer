@@ -18,6 +18,7 @@ class DefectModel: NSObject,NSCoding {
     var df_date:String?
     var df_image_path:String?
     var df_status:String?
+    var df_type:String?
     
     var realImage:UIImage?
     
@@ -39,6 +40,7 @@ class DefectModel: NSObject,NSCoding {
         json.setObject(self.df_date!, forKey: "df_date")
         json.setObject(self.df_image_path!, forKey: "df_image_path")
         json.setObject(self.df_status!, forKey: "df_status")
+        json.setObject(self.df_type!, forKey: "df_type")
         return json
         
     }
@@ -51,6 +53,7 @@ class DefectModel: NSObject,NSCoding {
         self.df_date  = aDecoder.decodeObjectForKey("df_date") as? String
         self.df_image_path  = aDecoder.decodeObjectForKey("df_image_path") as? String
         self.df_status  = aDecoder.decodeObjectForKey("df_status") as? String
+        self.df_type  = aDecoder.decodeObjectForKey("df_type") as? String
         //self.realImage  = aDecoder.decodeObjectForKey("realImage") as? UIImage
         
     }
@@ -79,6 +82,9 @@ class DefectModel: NSObject,NSCoding {
         }
         if let val = self.df_status{
             aCoder.encodeObject(val, forKey: "df_status")
+        }
+        if let val = self.df_type{
+            aCoder.encodeObject(val, forKey: "df_type")
         }
 //        if let val = self.realImage{
 //            aCoder.encodeObject(val, forKey: "realImage")

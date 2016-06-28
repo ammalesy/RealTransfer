@@ -53,24 +53,33 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
             dropDownModel.identifier = data.objectForKey("id") as! String
             dropDownList.addObject(dropDownModel)
         }
+        self.setNumberOfDefect()
+    }
+    func setNumberOfDefect(){
         self.countDefectLb.text = "Defect ทั้งหมด (\(list.count))"
     }
     
     func reloadData(defectRoom:DefectRoom!) {
+        self.reloadData(defectRoom, type: "0");
+    }
+    func reloadData(defectRoom:DefectRoom!, type:String!) {
         Queue.mainQueue {
             
             self.defectRoomRef = defectRoom
             
             self.list.removeAllObjects()
             for model:DefectModel in ((defectRoom.listDefect! as NSArray) as! [DefectModel]) {
-                model.needDisplayText()
-                self.list.addObject(model)
+                
+                if model.df_type == type {
+                    model.needDisplayText()
+                    self.list.addObject(model)
+                }
             }
             self.displayList = self.list.mutableCopy() as! NSMutableArray
             self.createGroupListDataByListData()
             self.tableView.reloadData()
             
-            self.countDefectLb.text = "Defect ทั้งหมด (\(self.list.count))"
+            self.setNumberOfDefect()
         }
     }
     

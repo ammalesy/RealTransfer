@@ -283,8 +283,18 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
                             })
 
                         }else{
-                            SwiftSpinner.hide()
-                            AlertUtil.alert("ตรวจรับครั้งที่สอง", message: "กำลังทำครับ", cancleButton: "OK", atController: self)
+                            //INITIALED & RELOAD DEFECT LIST
+                            defectRoomDup?.getListDefect({
+                                
+                                //FILTER GATANTEE ONLY
+                                
+                                SwiftSpinner.hide()
+                                self.initialRoomCheckingPart2(defectRoomDup)
+                                self.hideView()
+                                customer.canShow = true
+                            })
+                            
+                            
                         }
                         
                         
@@ -305,6 +315,43 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         let nav:UINavigationController = self.nzSplitViewController?.viewControllers.last as! UINavigationController
         let addDefectViewController:AddDefectViewController = nav.viewControllers[0] as! AddDefectViewController
         addDefectViewController.defectRoom = defectRoom
+    }
+    func initialRoomCheckingPart2(defectRoom:DefectRoom!){
+        
+        let controller:DefectListCheckingViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DefectListCheckingViewController") as! DefectListCheckingViewController
+        controller.defectRoomRef = defectRoom
+        
+        
+        let navPointer:NZNavigationViewController = self.nzNavigationController!
+        
+        self.nzNavigationController?.popViewControllerWithOutAnimate({
+            
+            navPointer.pushViewControllerWithOutAnimate(controller, completion: {
+                
+                
+                
+            })
+            
+        })
+        
+        
+//        let garanteeListViewController:GaranteeListViewController = self.storyboard?.instantiateViewControllerWithIdentifier("GaranteeListViewController") as! GaranteeListViewController
+//        garanteeListViewController.reloadData(defectRoom, type: "1")
+//        
+//        self.nzSplitViewController?.viewControllers[0] = garanteeListViewController
+//        
+//        let controllers:[UIViewController] = (self.nzSplitViewController?.viewControllers)!
+//        
+//        for controller in controllers {
+//        
+//            if controller is UINavigationController {
+//                let nav:UINavigationController = controller as! UINavigationController
+//                let addDefectViewController:AddDefectViewController = nav.viewControllers[0] as! AddDefectViewController
+//                addDefectViewController.defectRoom = defectRoom
+//            }
+//        }
+        
+        
     }
     @IBAction func exitAction(sender: AnyObject) {
         

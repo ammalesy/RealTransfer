@@ -18,6 +18,8 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
     var defectRoom:DefectRoom?
     var project:ProjectModel!
     
+    var needShowGettingStart:Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,7 +31,12 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         Queue.mainQueue { () -> Void in
-            self.showGettingStartView()
+            
+            if self.needShowGettingStart {
+                self.showGettingStartView()
+            }
+            
+            
         }
     }
     override func viewDidAppear(animated: Bool) {
@@ -258,8 +265,17 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
     }
     
     func refresh() {
-        let defectListController:DefectListViewController = self.splitController?.viewControllers.first as! DefectListViewController
-        defectListController.reloadData(self.defectRoom)
+
+        let defectListController = self.splitController!.viewControllers.first!
+        
+        if defectListController is DefectListViewController {
+            
+            (defectListController as! DefectListViewController).reloadData(self.defectRoom!)
+            
+        }else if defectListController is GaranteeListViewController {
+            
+            (defectListController as! GaranteeListViewController).reloadData(self.defectRoom!, type: "1")
+        }
         
         let nav:UINavigationController = self.splitController?.viewControllers.last as! UINavigationController
         let addDefectViewController:AddDefectViewController = nav.viewControllers[0] as! AddDefectViewController

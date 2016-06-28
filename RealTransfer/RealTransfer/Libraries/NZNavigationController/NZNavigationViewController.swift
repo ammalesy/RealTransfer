@@ -81,6 +81,42 @@ class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
             }
         }
     }
+    
+    func popViewControllerWithOutAnimate(completion: (() -> Void)?) {
+        
+        let beforeController:UIViewController = viewControllers.objectAtIndex(viewControllers.count - 2) as! UIViewController
+        let lastController:UIViewController = viewControllers.lastObject as! UIViewController
+        
+        if beforeController is NZViewController {
+            (beforeController as! NZViewController).stateConfigData()
+        }else if beforeController is NZSplitViewController {
+            (beforeController as! NZSplitViewController).stateConfigData()
+        }
+        self.popStack(lastController)
+        
+        if (completion != nil) {
+            completion!()
+        }
+    }
+    
+    func pushViewControllerWithOutAnimate(newController:UIViewController, completion: (() -> Void)?){
+        
+        let oldController:UIViewController = self.viewControllers.lastObject as! UIViewController
+        
+        self.setHeight(self.containerView.frame.size.height, controller: newController)
+        self.pushStack(newController)
+        if newController is NZViewController {
+            (newController as! NZViewController).stateConfigData()
+        }else if newController is NZSplitViewController {
+            (newController as! NZSplitViewController).stateConfigData()
+        }
+        self.setX(0, controller: oldController)
+        
+        if (completion != nil) {
+            completion!()
+        }
+    }
+    
     func pushViewController(newController:UIViewController, completion: (() -> Void)?){
         
         let oldController:UIViewController = self.viewControllers.lastObject as! UIViewController

@@ -21,8 +21,10 @@
 		1854F69C1D12FC54003B9FE0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1854F69B1D12FC54003B9FE0 /* User.swift */; };
 		1854F6AD1D130865003B9FE0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1854F6AC1D130865003B9FE0 /* Model.swift */; };
 		185E07401D202B510049F30B /* CustomerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185E073F1D202B510049F30B /* CustomerInfo.swift */; };
+		186537131D22E28B00A11F49 /* DefectListCheckingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186537121D22E28B00A11F49 /* DefectListCheckingViewController.swift */; };
 		1889D9E11D1451FC0095507F /* SwiftSpinner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1889D9E01D1451FC0095507F /* SwiftSpinner.framework */; };
 		18AACE171D145ACA0098F5BA /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AACE161D145ACA0098F5BA /* ProjectModel.swift */; };
+		18C0C20E1D21881B00B079BB /* GaranteeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0C20D1D21881B00B079BB /* GaranteeListViewController.swift */; };
 		18CA73111D1C13120021712B /* AlertUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CA73101D1C13120021712B /* AlertUtil.swift */; };
 		18DF98961D146280004BE990 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18DF98951D146280004BE990 /* SDWebImage.framework */; };
 		18DF98981D14F31E004BE990 /* Building.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DF98971D14F31E004BE990 /* Building.swift */; };
@@ -88,10 +90,12 @@
 		1854F69B1D12FC54003B9FE0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1854F6AC1D130865003B9FE0 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		185E073F1D202B510049F30B /* CustomerInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerInfo.swift; sourceTree = "<group>"; };
+		186537121D22E28B00A11F49 /* DefectListCheckingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefectListCheckingViewController.swift; sourceTree = "<group>"; };
 		1889D9DD1D1450400095507F /* AlamofireNetworkActivityIndicator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireNetworkActivityIndicator.framework; path = "../../../Library/Developer/Xcode/DerivedData/RealTransfer-dxjmravslvqqrxcfhswvgaqtusax/Build/Products/Debug-iphonesimulator/AlamofireNetworkActivityIndicator.framework"; sourceTree = "<group>"; };
 		1889D9E01D1451FC0095507F /* SwiftSpinner.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftSpinner.framework; path = "../../../Library/Developer/Xcode/DerivedData/RealTransfer-dxjmravslvqqrxcfhswvgaqtusax/Build/Products/Debug-iphonesimulator/SwiftSpinner.framework"; sourceTree = "<group>"; };
 		18AACE161D145ACA0098F5BA /* ProjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectModel.swift; sourceTree = "<group>"; };
 		18AACE181D1461880098F5BA /* RealTransfer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RealTransfer-Bridging-Header.h"; sourceTree = "<group>"; };
+		18C0C20D1D21881B00B079BB /* GaranteeListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GaranteeListViewController.swift; sourceTree = "<group>"; };
 		18CA73101D1C13120021712B /* AlertUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertUtil.swift; sourceTree = "<group>"; };
 		18DF98951D146280004BE990 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = "Pods/../build/Debug-iphoneos/SDWebImage.framework"; sourceTree = "<group>"; };
 		18DF98971D14F31E004BE990 /* Building.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Building.swift; sourceTree = "<group>"; };
@@ -305,6 +309,8 @@
 				5299C3CD1D066C810021DD97 /* GettingStartViewController.swift */,
 				5240D9FC1D07F6CC0071D287 /* DefectListViewController.swift */,
 				184E42651D0DB7DC0073CF60 /* CustomerInfoViewController.swift */,
+				18C0C20D1D21881B00B079BB /* GaranteeListViewController.swift */,
+				186537121D22E28B00A11F49 /* DefectListCheckingViewController.swift */,
 			);
 			path = Defect;
 			sourceTree = "<group>";
@@ -543,11 +549,13 @@
 				5290560D1D0519EE00B7D28C /* NZPopoverView.swift in Sources */,
 				18DF989C1D15180B004BE990 /* Room.swift in Sources */,
 				185E07401D202B510049F30B /* CustomerInfo.swift in Sources */,
+				186537131D22E28B00A11F49 /* DefectListCheckingViewController.swift in Sources */,
 				5218E5751D09123C008B5402 /* NZDropDowCell.swift in Sources */,
 				18CA73111D1C13120021712B /* AlertUtil.swift in Sources */,
 				52499B0F1D06BA410003F6D5 /* CellDropDown.swift in Sources */,
 				5204FF441D06D55E00A3991B /* NZSplitViewController.swift in Sources */,
 				5299C3CE1D066C810021DD97 /* GettingStartViewController.swift in Sources */,
+				18C0C20E1D21881B00B079BB /* GaranteeListViewController.swift in Sources */,
 				184E42661D0DB7DC0073CF60 /* CustomerInfoViewController.swift in Sources */,
 				520AC67D1D096236000A8754 /* AddDefectViewController.swift in Sources */,
 				1800981F1D159DF700BB11FD /* NSDateFormaterExtension.swift in Sources */,
