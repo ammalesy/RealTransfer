@@ -295,13 +295,14 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
     
     func reloadDefectList()
     {
-        let defectListController = self.splitController!.viewControllers.first!
+        let arr:[UIViewController] = self.splitController!.viewControllers
+        let defectListController = arr[0]
         
-        if defectListController is DefectListViewController {
+        if (defectListController as! DefectListViewController).className() == "DefectListViewController" {
         
             (defectListController as! DefectListViewController).reloadData(self.defectRoom!)
             
-        }else if defectListController is GaranteeListViewController {
+        }else if (defectListController as! DefectListViewController).className() == "GaranteeListViewController" {
             
             (defectListController as! GaranteeListViewController).reloadData(self.defectRoom!, type: "1")
         }
@@ -458,7 +459,7 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
     func isModeGanrantee() -> Bool{
         let defectListController = self.splitController!.viewControllers.first!
         
-        if defectListController is GaranteeListViewController {
+        if (defectListController as! DefectListViewController).className() == "GaranteeListViewController" {
             
             return true
         }

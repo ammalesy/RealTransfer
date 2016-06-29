@@ -55,6 +55,9 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
         }
         self.setNumberOfDefect()
     }
+    func className() -> String {
+        return "DefectListViewController"
+    }
     func setNumberOfDefect(){
         self.countDefectLb.text = "Defect ทั้งหมด (\(list.count))"
     }

@@ -175,9 +175,19 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
                 
                 Queue.serialQueue({
                     Queue.mainQueue({
-                        self.splitController?.nzNavigationController?.popViewController({
-                            
-                        })
+                        
+                        if self.isModeGanrantee() {
+                            self.splitController?.nzNavigationController?.popViewControllerWithOutAnimate({
+                                self.splitController?.nzNavigationController?.popViewController({
+                                    
+                                })
+                            })
+                        }else{
+                            self.splitController?.nzNavigationController?.popViewController({
+                                
+                            })
+                        }
+                        
                     })
                 })
                 
@@ -185,7 +195,11 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
             let cancelAction:UIAlertAction = UIAlertAction(title: "ยกเลิก", style: UIAlertActionStyle.Cancel, handler: { (action) in
                 
             })
-            alert.addAction(noneCompleteAction)
+            
+            if isModeGanrantee() == false {
+                alert.addAction(noneCompleteAction)
+            }
+            
             alert.addAction(completedAction)
             alert.addAction(cancelAction)
             
@@ -268,11 +282,11 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
 
         let defectListController = self.splitController!.viewControllers.first!
         
-        if defectListController is DefectListViewController {
+        if (defectListController as! DefectListViewController).className() == "DefectListViewController" {
             
             (defectListController as! DefectListViewController).reloadData(self.defectRoom!)
             
-        }else if defectListController is GaranteeListViewController {
+        }else if (defectListController as! DefectListViewController).className() == "GaranteeListViewController" {
             
             (defectListController as! GaranteeListViewController).reloadData(self.defectRoom!, type: "1")
         }
@@ -281,14 +295,17 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
         let addDefectViewController:AddDefectViewController = nav.viewControllers[0] as! AddDefectViewController
         addDefectViewController.defectRoom = self.defectRoom
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    
+    func isModeGanrantee() -> Bool{
+        let defectListController = self.splitController!.viewControllers.first!
+        
+        if (defectListController as! DefectListViewController).className() == "GaranteeListViewController" {
+            
+            return true
+        }
+        
+        return false
     }
-    */
 
 }

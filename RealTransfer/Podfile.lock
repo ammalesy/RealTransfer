@@ -1,21 +1,24 @@
 PODS:
   - Alamofire (3.4.1)
-  - KMPlaceholderTextView (1.2.0)
+  - KMPlaceholderTextView (1.2.1)
   - SDWebImage (3.8.1):
     - SDWebImage/Core (= 3.8.1)
   - SDWebImage/Core (3.8.1)
   - SwiftSpinner (0.9.5)
+  - TTTAttributedLabel (2.0.0)
 
 DEPENDENCIES:
   - Alamofire (~> 3.4)
   - KMPlaceholderTextView (~> 1.2.0)
   - SDWebImage (~> 3.8)
   - SwiftSpinner
+  - TTTAttributedLabel
 
 SPEC CHECKSUMS:
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
-  KMPlaceholderTextView: cae8ee889bd38d20587eee6b2623b8218f31b8f5
+  KMPlaceholderTextView: be39afe3524144451941ddebf1d571ab1ef6e358
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   SwiftSpinner: c6585a0ae5c67eb33e737695cce88f0262008cce
+  TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
 
 COCOAPODS: 0.39.0

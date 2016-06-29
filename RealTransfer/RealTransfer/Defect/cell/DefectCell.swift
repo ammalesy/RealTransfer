@@ -5,8 +5,8 @@
 //  Created by AmmalesPSC91 on 6/8/2559 BE.
 //  Copyright © 2559 nuizoro. All rights reserved.
 //
-
 import UIKit
+import TTTAttributedLabel
 
 @objc protocol DefectCellViewDelegate{
 
@@ -20,8 +20,8 @@ class DefectCell: UITableViewCell,NZPopoverViewDelegate {
 
     var popover:NZPopoverView!
     
-    @IBOutlet weak var detailTextLb: UILabel!
-    @IBOutlet weak var middleTextLb: UILabel!
+    @IBOutlet weak var detailTextLb: TTTAttributedLabel!
+    @IBOutlet weak var middleTextLb: TTTAttributedLabel!
     @IBOutlet weak var titleLb: UILabel!
     @IBOutlet weak var statusIconImageView: UIImageView!
     @IBOutlet weak var defectImageView: UIImageView!
@@ -32,7 +32,8 @@ class DefectCell: UITableViewCell,NZPopoverViewDelegate {
     override func awakeFromNib() {
         
         self.statusIconImageView.assignCornerRadius(self.statusIconImageView.frame.size.height / 2)
-        
+        middleTextLb.verticalAlignment = TTTAttributedLabelVerticalAlignment.Top
+        detailTextLb.verticalAlignment = TTTAttributedLabelVerticalAlignment.Top
     }
     
     func setHideEditting(hide:Bool){

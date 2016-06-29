@@ -222,6 +222,7 @@ class DefectRoom: Model,NSCoding {
                             defect.df_status = dict.objectForKey("df_status") as? String
                             defect.subCategoryName = dict.objectForKey("df_sub_category") as? String
                             defect.df_type = dict.objectForKey("df_type") as? String
+                            defect.complete_status = dict.objectForKey("complete_status") as? String
                             
                             self.listDefect?.addObject(defect)
                         }

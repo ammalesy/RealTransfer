@@ -32,6 +32,8 @@
 		18DF989C1D15180B004BE990 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DF989B1D15180B004BE990 /* Room.swift */; };
 		18DF989E1D152F2C004BE990 /* DefectRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DF989D1D152F2C004BE990 /* DefectRoom.swift */; };
 		18DF98A01D155AFF004BE990 /* DefectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DF989F1D155AFF004BE990 /* DefectModel.swift */; };
+		18E039FC1D2430A9000F17B4 /* DefectCellChecking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E039FB1D2430A9000F17B4 /* DefectCellChecking.swift */; };
+		18F37A3D1D243E2B002767F7 /* TTTAttributedLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F37A3C1D243E2B002767F7 /* TTTAttributedLabel.framework */; };
 		18F589F71D1804AA00F06813 /* NSStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F589F61D1804AA00F06813 /* NSStringExtension.swift */; };
 		18F589FC1D183AC700F06813 /* CachingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F589FB1D183AC700F06813 /* CachingManager.swift */; };
 		18F589FE1D183AF400F06813 /* ImageCaching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F589FD1D183AF400F06813 /* ImageCaching.swift */; };
@@ -103,6 +105,8 @@
 		18DF989B1D15180B004BE990 /* Room.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		18DF989D1D152F2C004BE990 /* DefectRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefectRoom.swift; sourceTree = "<group>"; };
 		18DF989F1D155AFF004BE990 /* DefectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefectModel.swift; sourceTree = "<group>"; };
+		18E039FB1D2430A9000F17B4 /* DefectCellChecking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefectCellChecking.swift; sourceTree = "<group>"; };
+		18F37A3C1D243E2B002767F7 /* TTTAttributedLabel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TTTAttributedLabel.framework; path = "Pods/../build/Debug-iphoneos/TTTAttributedLabel.framework"; sourceTree = "<group>"; };
 		18F589F61D1804AA00F06813 /* NSStringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSStringExtension.swift; sourceTree = "<group>"; };
 		18F589FB1D183AC700F06813 /* CachingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachingManager.swift; sourceTree = "<group>"; };
 		18F589FD1D183AF400F06813 /* ImageCaching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCaching.swift; sourceTree = "<group>"; };
@@ -157,6 +161,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18F37A3D1D243E2B002767F7 /* TTTAttributedLabel.framework in Frameworks */,
 				180AD4601D199E56000D802B /* KMPlaceholderTextView.framework in Frameworks */,
 				18DF98961D146280004BE990 /* SDWebImage.framework in Frameworks */,
 				1889D9E11D1451FC0095507F /* SwiftSpinner.framework in Frameworks */,
@@ -209,6 +214,7 @@
 		44444307A5AF2D6255AC4ADE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				18F37A3C1D243E2B002767F7 /* TTTAttributedLabel.framework */,
 				180AD45F1D199E56000D802B /* KMPlaceholderTextView.framework */,
 				18DF98951D146280004BE990 /* SDWebImage.framework */,
 				1889D9E01D1451FC0095507F /* SwiftSpinner.framework */,
@@ -288,6 +294,7 @@
 				52499B101D06BD110003F6D5 /* CellTxtSearch.swift */,
 				52499B121D06C70C0003F6D5 /* CellInfoLabel.swift */,
 				5240D9FE1D07F7610071D287 /* DefectCell.swift */,
+				18E039FB1D2430A9000F17B4 /* DefectCellChecking.swift */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -544,6 +551,7 @@
 			files = (
 				5290560B1D0519EE00B7D28C /* NZNavigationViewController.swift in Sources */,
 				18DF98981D14F31E004BE990 /* Building.swift in Sources */,
+				18E039FC1D2430A9000F17B4 /* DefectCellChecking.swift in Sources */,
 				5284FD611D05763D006C5D1B /* DefectViewController.swift in Sources */,
 				521A7B281D05305200971B7B /* UIFontExtention.swift in Sources */,
 				5290560D1D0519EE00B7D28C /* NZPopoverView.swift in Sources */,
