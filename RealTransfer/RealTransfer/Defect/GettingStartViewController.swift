@@ -76,7 +76,7 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         components.addObject(row2);
         
         let row3:RowModel = RowModel()
-        row3.head = "Room : "
+        row3.head = "Unit No. : "
         row3.style = CELL_TXT_SEARCH_IDENTIFIER
         row3.colorNextbutton = UIColor.RGB(192, G: 193, B: 194)
         row3.identifier = "ROOM_LIST"
@@ -651,7 +651,10 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             let pers_card_id = userInfo.objectForKey("pers_card_id") as? String
             let pers_mobile = userInfo.objectForKey("pers_mobile") as? String
             let pers_email = userInfo.objectForKey("pers_email") as? String
-            let pers_tel = userInfo.objectForKey("pers_tel") as? String
+            var pers_tel = userInfo.objectForKey("pers_mobile") as? String
+            if pers_tel == "N/A" {
+                pers_tel = userInfo.objectForKey("pers_tel") as? String
+            }
             
             customer.pers_prefix = prefix!
             customer.pers_fname = fname!

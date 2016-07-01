@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import SwiftSpinner
+import Alamofire
 
-class DefectListCheckingViewController: NZViewController,UITableViewDataSource,UITableViewDelegate,DefectCellViewDelegate {
+class DefectListCheckingViewController: NZViewController,UITableViewDataSource,UITableViewDelegate,DefectCellViewDelegate,NZNavigationViewControllerDelegate {
 
     var passCount:Int = 0
     var allDefect:Int = 0
@@ -27,6 +29,7 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
     @IBOutlet weak var passLb: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         alldefectBtn.assignCornerRadius(5)
         garanteeBtn.assignCornerRadius(5)
@@ -55,6 +58,9 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
         self.reloadData(defectRoomRef, type: "0")
         
         self.setNumberOfDefect()
+    }
+    override func stateConfigData() {
+        self.nzNavigationController?.delegate = self
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -184,6 +190,13 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
         }
         cell.statusIconImageView.backgroundColor = dropDownModel.iconColor
         
+        
+        if defectModel.complete_status == "0" {
+            cell.iconImgView.image = UIImage(named: "un_check_sync")
+        }else{
+            cell.iconImgView.image = UIImage(named: "checked_sync")
+        }
+        
         return cell
         
     }
@@ -285,5 +298,125 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
         
     }
     
+    func defectCellCheckingButtonClicked(view: DefectCellChecking) {
+        let indexPath:NSIndexPath = self.tableView.indexPathForCell(view)!
+        let categoryName:String = groupList.objectAtIndex(indexPath.section) as! String
+        let dropDownModel:DropDownModel = self.getDropDownModelFromCategoryName(categoryName)!
+        
+        let resultPredicate:NSPredicate = NSPredicate(format: "categoryName contains[c] %@", dropDownModel.identifier)
+        let resultArray:[AnyObject] = displayList.filteredArrayUsingPredicate(resultPredicate)
+        let index:Int = (resultArray.count - 1) - indexPath.row
+        let defectModel:DefectModel = resultArray[index] as! DefectModel
+        
+        if defectModel.complete_status == "1" {
+            defectModel.complete_status = "0"
+        }else{
+            defectModel.complete_status = "1"
+        }
+        
+        self.defectRoomRef?.doCache()
+        self.tableView.reloadData()
+        
+    }
+    
+    func nzNavigation(controller: NZNavigationViewController, didClickMenu popover: NZPopoverView, menu: NZRow) {
+        
+        if self.defectRoomRef != nil && menu.identifier == "sync" {
+            
+            let alert = UIAlertController(title: "ตัวเลือก", message:"การซิงค์", preferredStyle: UIAlertControllerStyle.Alert)
+            let completedAction:UIAlertAction = UIAlertAction(title: "อัพเดทสถานะการตรวจรับทั้งหมด", style: UIAlertActionStyle.Default, handler: { (action) in
+                Queue.serialQueue({
+                    Queue.mainQueue({
+                        self.sync()
+                    })
+                })
+                
+                Queue.serialQueue({
+                    Queue.mainQueue({
+                        
+                        self.nzNavigationController?.popViewController({
+                            popover.hide()
+                        })
+                        
+                    })
+                })
+                
+            })
+            let cancelAction:UIAlertAction = UIAlertAction(title: "ยกเลิก", style: UIAlertActionStyle.Cancel, handler: { (action) in
+                
+            })
+            alert.addAction(completedAction)
+            alert.addAction(cancelAction)
+            
+            self.presentViewController(alert, animated: true, completion: {
+                
+            })
+            
+        }
+        
+        
+    }
+    
+    func sync() {
+        
+        SwiftSpinner.show("Uploading ..", animated: true)
+        let cache:DefectRoom = DefectRoom.getCache(self.defectRoomRef?.df_room_id)!
+        cache.df_sync_status = "1"
+        
+        Sync.controllerReferer = self
+        Sync.syncToServer(cache ,db_name: PROJECT?.pj_datebase_name!, timeStamp: NSDateFormatter.dateFormater().stringFromDate(NSDate()), defect: (cache.listDefect)!)
+        { (result) in
+            
+            if result == "TRUE" {
+                
+                cache.getListDefectOnServer({
+                    
+                    cache.doCache()
+                    self.defectRoomRef = cache
+                    self.reloadData(self.defectRoomRef, type: "0")
+                    
+                    SwiftSpinner.hide()
+                    
+                })
+                
+            }else if result == "FALSE"{
+                let alert = UIAlertController(title: "แจ้งเตือน", message: "รายการล่าสุดแล้ว", preferredStyle: UIAlertControllerStyle.Alert)
+                let action:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: { (action) in
+                    
+                })
+                alert.addAction(action)
+                
+                self.presentViewController(alert, animated: true, completion: {
+                    SwiftSpinner.hide()
+                })
+            }else {
+                
+                cache.getListDefectOnServer({
+                    
+                    cache.doCache()
+                    self.defectRoomRef = cache
+                    self.reloadData(self.defectRoomRef, type: "0")
+                    
+                    SwiftSpinner.hide()
+                    let alert = UIAlertController(title: "แจ้งเตือน", message: "Image upload fail!", preferredStyle: UIAlertControllerStyle.Alert)
+                    let action:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: { (action) in
+                        
+                        
+                        
+                    })
+                    alert.addAction(action)
+                    
+                    self.presentViewController(alert, animated: true, completion: {
+                        
+                    })
+                    
+                })
+                
+                
+            }
+            
+        }
+        
+    }
     
 }

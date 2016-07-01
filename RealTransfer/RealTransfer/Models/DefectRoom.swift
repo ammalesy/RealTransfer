@@ -44,7 +44,16 @@ class DefectRoom: Model,NSCoding {
         
         return nil
     }
-    
+    func isHaveGuaranteeObjectNeverSync() -> Bool {
+        for defect:DefectModel in ((self.listDefect! as NSArray) as! [DefectModel]) {
+           
+            if defect.df_type == "1" && defect.df_status == "0" {
+                return true
+            }
+            
+        }
+        return false
+    }
     func doCache() {
         let userDefault:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         let listData = (userDefault.objectForKey(kLIST_DEFECT_ROOM) as? NSData)
@@ -136,7 +145,7 @@ class DefectRoom: Model,NSCoding {
                     Queue.mainQueue({ 
                         //PUSH
                         let timeStamp = NSDateFormatter.dateFormater().stringFromDate(NSDate())
-                        Sync.syncToServer(defectRoom,db_name: PROJECT!.pj_datebase_name!, timeStamp: timeStamp, defect: (defectRoom.listDefect)!)
+                        Sync.syncToServer(defectRoom, db_name: PROJECT!.pj_datebase_name!, timeStamp: timeStamp, defect: (defectRoom.listDefect)!)
                         { (result) in
                             
                             Queue.mainQueue({

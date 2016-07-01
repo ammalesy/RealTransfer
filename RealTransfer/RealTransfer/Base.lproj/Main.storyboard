@@ -1271,14 +1271,18 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Defect ทั้งหมด (22)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u2O-uP-Hll">
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Defect ทั้งหมด (22)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u2O-uP-Hll">
                                 <rect key="frame" x="20" y="30" width="161" height="30"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="qYl-s3-VRR"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SukhumvitSet-Medium" family="Sukhumvit Set" pointSize="20"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Bth-7U-mbk" appends="YES" id="DBR-Jl-Mmh"/>
+                                </connections>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hs9-x9-cGV">
                                 <rect key="frame" x="181" y="20" width="419" height="50"/>
@@ -1325,6 +1329,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mbx-4c-uhq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Bth-7U-mbk" userLabel="openFilter">
+                    <connections>
+                        <action selector="openDropDown:" destination="Aag-dg-5CK" id="ljg-cg-jKx"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2956" y="-135"/>
         </scene>
@@ -1508,14 +1517,18 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ประเภทห้อง /พื้นที่" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XiF-eE-9ar">
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ประเภทห้อง /พื้นที่" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XiF-eE-9ar">
                                 <rect key="frame" x="10" y="320" width="180" height="50"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="y5A-nG-1AT"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SukhumvitSet-Text" family="Sukhumvit Set" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="mSs-SM-SlH" appends="YES" id="59d-m8-rwf"/>
+                                </connections>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1DA-dG-Wmh" userLabel="line1">
                                 <rect key="frame" x="0.0" y="370" width="600" height="1"/>
@@ -1524,11 +1537,14 @@
                                     <constraint firstAttribute="height" constant="1" id="sBm-PY-fXa"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="หมวดงานที่ต้องแก้ไข" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xHV-ue-IuG">
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="หมวดงานที่ต้องแก้ไข" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xHV-ue-IuG">
                                 <rect key="frame" x="10" y="371" width="180" height="50"/>
                                 <fontDescription key="fontDescription" name="SukhumvitSet-Text" family="Sukhumvit Set" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="3yv-q0-3e5" appends="YES" id="dSC-RZ-mPq"/>
+                                </connections>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s2y-eG-Oih" userLabel="line2">
                                 <rect key="frame" x="0.0" y="421" width="600" height="1"/>
@@ -1537,7 +1553,7 @@
                                     <constraint firstAttribute="height" constant="1" id="7dQ-eb-Rgx"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="รายการที่ต้องแก้ไข" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uWL-eM-eKm">
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="รายการที่ต้องแก้ไข" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uWL-eM-eKm">
                                 <rect key="frame" x="10" y="422" width="180" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="KgP-Bl-yIb"/>
@@ -1545,6 +1561,9 @@
                                 <fontDescription key="fontDescription" name="SukhumvitSet-Text" family="Sukhumvit Set" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="J4Q-H7-6U2" appends="YES" id="5dD-tD-GQv"/>
+                                </connections>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0zj-9P-8rm" userLabel="line3">
                                 <rect key="frame" x="0.0" y="472" width="600" height="1"/>
@@ -1582,24 +1601,33 @@
                                     <action selector="save:" destination="DV0-3K-AAA" eventType="touchUpInside" id="BZc-hs-peV"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropDown" translatesAutoresizingMaskIntoConstraints="NO" id="utz-EX-zcN">
+                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropDown" translatesAutoresizingMaskIntoConstraints="NO" id="utz-EX-zcN">
                                 <rect key="frame" x="565" y="332" width="25" height="25"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="25" id="ckp-B5-Aoz"/>
                                     <constraint firstAttribute="height" constant="25" id="ue1-YM-ENy"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="9af-Rv-0T1" appends="YES" id="9Hz-IA-ocM"/>
+                                </connections>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropDown" translatesAutoresizingMaskIntoConstraints="NO" id="ieS-jI-O95">
+                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropDown" translatesAutoresizingMaskIntoConstraints="NO" id="ieS-jI-O95">
                                 <rect key="frame" x="565" y="384" width="25" height="25"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="25" id="6DG-Uj-K1r"/>
                                     <constraint firstAttribute="height" constant="25" id="6yj-Z0-jpC"/>
                                     <constraint firstAttribute="width" constant="25" id="BS6-XZ-8d7"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="NGp-a6-Bk7"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="J97-Oq-Qvc" appends="YES" id="74z-eL-aue"/>
+                                </connections>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropDown" translatesAutoresizingMaskIntoConstraints="NO" id="78N-gt-kxX">
+                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropDown" translatesAutoresizingMaskIntoConstraints="NO" id="78N-gt-kxX">
                                 <rect key="frame" x="565" y="435" width="25" height="25"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="25" id="4w7-Ia-efN"/>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="25" id="Bcx-wu-CPm"/>
@@ -1608,6 +1636,9 @@
                                     <constraint firstAttribute="height" constant="25" id="trF-Kh-YIV"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="uIt-Gs-ncz"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="A28-pt-TZD" appends="YES" id="OCq-RF-jiv"/>
+                                </connections>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kid-rG-62k" userLabel="type">
                                 <rect key="frame" x="195" y="320" width="370" height="50"/>
@@ -1729,6 +1760,36 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TB5-ss-vMy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="mSs-SM-SlH" userLabel="openType">
+                    <connections>
+                        <action selector="openTypeDropDown:" destination="DV0-3K-AAA" id="hlc-lm-dGV"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="3yv-q0-3e5" userLabel="openSub">
+                    <connections>
+                        <action selector="openSubTypeDropDown:" destination="DV0-3K-AAA" id="JgU-VV-zU9"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="J4Q-H7-6U2" userLabel="openList">
+                    <connections>
+                        <action selector="openListSubTypeDropDown:" destination="DV0-3K-AAA" id="4QE-QD-BVa"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="9af-Rv-0T1" userLabel="openTypeArrow">
+                    <connections>
+                        <action selector="openTypeDropDown:" destination="DV0-3K-AAA" id="4Uj-MP-2so"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="J97-Oq-Qvc" userLabel="openSubTypeArrow">
+                    <connections>
+                        <action selector="openSubTypeDropDown:" destination="DV0-3K-AAA" id="wK4-dd-MvR"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="A28-pt-TZD" userLabel="openListArrow">
+                    <connections>
+                        <action selector="openListSubTypeDropDown:" destination="DV0-3K-AAA" id="D8c-LN-eg7"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="4482" y="573"/>
         </scene>
@@ -1797,7 +1858,7 @@
                                                     <constraint firstAttribute="width" constant="100" id="udM-bd-2Fw"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="SukhumvitSet-Bold" family="Sukhumvit Set" pointSize="20"/>
-                                                <state key="normal" title="Submit">
+                                                <state key="normal" title="OK">
                                                     <color key="titleColor" red="0.47058823529411764" green="0.73725490196078436" blue="0.11764705882352941" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>

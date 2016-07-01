@@ -10,6 +10,8 @@
             <string>SukhumvitSet-Text</string>
             <string>SukhumvitSet-Text</string>
             <string>SukhumvitSet-Text</string>
+            <string>SukhumvitSet-SemiBold</string>
+            <string>SukhumvitSet-SemiBold</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -203,8 +205,8 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="150" id="6Ow-mL-FHF"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="10"/>
-                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="SukhumvitSet-SemiBold" family="Sukhumvit Set" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -219,14 +221,14 @@
                                             <constraint firstAttribute="height" constant="1" id="BkC-yu-yhk"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2016 @ Real Transfer All Rights Reserved" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eNd-Ji-3gW">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Powered by Real Transfer" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eNd-Ji-3gW">
                                         <rect key="frame" x="310" y="1" width="280" height="19"/>
-                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="10"/>
-                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" name="SukhumvitSet-SemiBold" family="Sukhumvit Set" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.40392156862745099" green="0.7803921568627451" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="fcE-pu-h6N" firstAttribute="leading" secondItem="5SH-Ok-Nfn" secondAttribute="leading" id="2GZ-2l-WkA"/>
                                     <constraint firstItem="Rw6-hv-u1H" firstAttribute="top" secondItem="5SH-Ok-Nfn" secondAttribute="top" id="4S4-R9-vvZ"/>

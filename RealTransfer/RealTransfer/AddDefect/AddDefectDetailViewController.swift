@@ -466,5 +466,14 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
         
         return false
     }
+    
+    
+//    override func shouldAutorotate() -> Bool {
+//        return true
+//    }
+//    
+//    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+//        return UIInterfaceOrientationMask.Portrait
+//    }
 
 }

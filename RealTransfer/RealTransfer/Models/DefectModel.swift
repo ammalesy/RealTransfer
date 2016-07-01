@@ -26,6 +26,9 @@ class DefectModel: NSObject,NSCoding {
     var categoryName_displayText: String!
     var subCategoryName_displayText: String!
     var listSubCategory_displayText: String!
+    
+    //temp ref
+    var mode:String!
 
     override init() {
         
@@ -43,6 +46,7 @@ class DefectModel: NSObject,NSCoding {
         json.setObject(self.df_status!, forKey: "df_status")
         json.setObject(self.df_type!, forKey: "df_type")
         json.setObject(self.complete_status!, forKey: "complete_status")
+        json.setObject(self.mode!, forKey: "mode")
         
         return json
         

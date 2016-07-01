@@ -13,6 +13,9 @@ import TTTAttributedLabel
     optional func defectCell(cell:DefectCell, didClickMenu model:NZRow, popover:NZPopoverView)
     optional func defectCellPopoverWillShow(cell:DefectCell)
     optional func defectCellPopoverWillHide(cell:DefectCell)
+    
+    
+    optional func defectCellCheckingButtonClicked(view:DefectCellChecking)
 
 }
 

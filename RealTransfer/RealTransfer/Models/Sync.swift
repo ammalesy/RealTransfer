@@ -32,11 +32,14 @@ class Sync: Model {
         
         var i:Int = 0
         for sync:DefectModel in ((defect as NSArray) as! [DefectModel]) {
+            
             if sync.df_status == "0" {
                 let imagePathName = UIImage.uniqNameBySeq(String(i))
                 if let img:UIImage = ImageCaching.sharedInstance.getImageByName(sync.df_image_path) {
                     sync.realImage = img
                     sync.df_image_path = imagePathName
+                    sync.complete_status = "0"
+                    sync.mode = "INSERT"
                     images.addObject(ImageSync(image: sync.realImage!, imagePath: imagePathName))
                     ImageCaching.sharedInstance.setImageByName(imagePathName, image: sync.realImage!, isFromServer: false)
                     ImageCaching.sharedInstance.save()
@@ -44,7 +47,11 @@ class Sync: Model {
                 }
                 i = i + 1
                
-            }else{
+            } else{
+                
+                sync.mode = "UPDATE"
+                param.addObject(sync.toJson())
+                
                 if ImageCaching.sharedInstance.isImageDidSyncServer(sync.df_image_path!) == false {
                     if let image:UIImage = ImageCaching.sharedInstance.getImageByName(sync.df_image_path!) {
                         sync.realImage = image
@@ -54,6 +61,9 @@ class Sync: Model {
                 }
             }
         }
+        
+        
+        
         let path = "http://\(DOMAIN_NAME)/Defect/syncDefect.php?ransom=\(NSString.randomStringWithLength(10))"
         var needUpdateFlagOnly = "0"
         
@@ -64,7 +74,13 @@ class Sync: Model {
             needUpdateFlagOnly = "1"
         }
         
-        let postParam = ["data":param,"db_name":db_name,"timestamp":timeStamp,"df_room_id":defectRoom.df_room_id!, "df_sync_status":defectRoom.df_sync_status!, "needUpdateFlagOnly":needUpdateFlagOnly]
+
+        let postParam = ["data":param,
+                         "db_name":db_name,
+                         "timestamp":timeStamp,
+                         "df_room_id":defectRoom.df_room_id!,
+                         "df_sync_status":defectRoom.df_sync_status!,
+                         "needUpdateFlagOnly":needUpdateFlagOnly]
 
         Alamofire.request(.POST, path,
             parameters: postParam,
