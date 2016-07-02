@@ -31,6 +31,19 @@
 
 		}
 
+		public static function update($db_name,$data) {
+
+			$conn = Database::connect_db_by_dbName($db_name);
+			$result = mysqli_query($conn, "UPDATE `".$db_name."`.`tb_defect`
+																		SET `complete_status` = '".$data->complete_status."'
+																		WHERE `tb_defect`.`df_id` = ".$data->df_id.";");
+			return $result;
+
+			mysqli_free_result($result);
+			mysqli_close($conn);
+
+		}
+
 		public static function sync($db_name,$data) {
 
 			$conn = Database::connect_db_by_dbName($db_name);

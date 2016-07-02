@@ -19,7 +19,7 @@ class DefectCellChecking: DefectCell {
         self.statusIconImageView.assignCornerRadius(self.statusIconImageView.frame.size.height / 2)
         self.middleTextLb.verticalAlignment = TTTAttributedLabelVerticalAlignment.Top
         self.detailRightLb.verticalAlignment = TTTAttributedLabelVerticalAlignment.Top
-        
+        self.assignTapOnImageView()
     }
     
     @IBAction func checkBoxAction(sender: AnyObject) {

@@ -14,7 +14,7 @@ let NZ_DROPDOWN_NOT_NEED_CUSTOM_POSITION_Y:CGFloat = 9897654329.98
      optional func dropDownViewDidClose(view:NZDropDownViewController)
      optional func nzDropDown(contorller:NZDropDownViewController, didClickCell model:DropDownModel)
      optional func nzDropDownCustomPositon(contorller:NZDropDownViewController) -> CGRect
-     optional func nzDropDownCustomYPositon(contorller:NZDropDownViewController) -> CGFloat
+    optional func nzDropDownCustomYPositon(contorller:NZDropDownViewController, width:CGFloat, height:CGFloat) -> CGFloat
      optional func nzDropDownHideSearchPanel(contorller:NZDropDownViewController) -> Bool
 }
 
@@ -109,6 +109,8 @@ class NZDropDownViewController: UIViewController,UITableViewDataSource,UITableVi
         }
     }
     func updatePositionAtView(view:UIView){
+        let asjustWidthVal:CGFloat = 100
+        var frameDP:CGRect = self.view.frame
         
         if ((self.delegate != nil) &&
             (self.delegate as! NSObject).respondsToSelector(#selector(NZDropDownViewDelegate.nzDropDownCustomPositon(_:))))
@@ -130,27 +132,26 @@ class NZDropDownViewController: UIViewController,UITableViewDataSource,UITableVi
         if CGFloat(height) > view.frame.size.height {
             height = Int(view.frame.size.height) - 80
         }
+        frameDP.size.height = CGFloat(height)
+        frameDP.size.width = view.frame.size.width - asjustWidthVal
+        
         var y:CGFloat = (view.frame.size.height / 2) - CGFloat((height / 2))
         
         if ((self.delegate != nil) &&
-            (self.delegate as! NSObject).respondsToSelector(#selector(NZDropDownViewDelegate.nzDropDownCustomYPositon(_:))))
+            (self.delegate as! NSObject).respondsToSelector(#selector(NZDropDownViewDelegate.nzDropDownCustomYPositon(_:width:height:))))
         {
             
-            let yDelegate:CGFloat = self.delegate!.nzDropDownCustomYPositon!(self)
+            let yDelegate:CGFloat = self.delegate!.nzDropDownCustomYPositon!(self, width: frameDP.size.width, height: frameDP.size.height)
             if yDelegate != NZ_DROPDOWN_NOT_NEED_CUSTOM_POSITION_Y {
                 y = yDelegate
             }
         }
-        
-        
-        let asjustWidthVal:CGFloat = 100
-        var frameDP:CGRect = self.view.frame
-        frameDP.size.height = CGFloat(height)
-        frameDP.size.width = view.frame.size.width - asjustWidthVal
         frameDP.origin.x += asjustWidthVal / 2
         frameDP.origin.y = y
         self.view.frame = frameDP
         self.view.setNeedsDisplay()
+        
+        
         
     }
     @IBAction func searchAction(sender: AnyObject) {

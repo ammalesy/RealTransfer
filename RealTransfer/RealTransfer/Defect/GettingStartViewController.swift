@@ -23,6 +23,7 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
     var buldingSelected:Building?
     var csSelected:User?
     var roomSelected:Room?
+    var user_id_before:String?
     //////
     
     var project:ProjectModel! = nil
@@ -207,15 +208,15 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         //Queue.mainQueue { () -> Void in
             let user:User = User().getOnCache()!
             
-            var isCsNil:Bool = true
-            if  self.csSelected == nil && (self.components.lastObject as! RowModel).enable == false {
-                isCsNil = false
-            }
-            if self.csSelected != nil {
-                isCsNil = false
-            }
-            
-            if(self.roomSelected == nil || self.project == nil || isCsNil) {
+//            var isCsNil:Bool = true
+//            if  self.csSelected == nil && (self.components.lastObject as! RowModel).enable == false {
+//                isCsNil = false
+//            }
+//            if self.csSelected != nil {
+//                isCsNil = false
+//            }
+        
+            if(self.roomSelected == nil || self.project == nil || self.csSelected == nil) {
                 let alert = UIAlertController(title: "Warning", message: "กรุณากรอกข้อมูลให้ครบ", preferredStyle: UIAlertControllerStyle.Alert)
                 let action:UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { (action) in
                     
@@ -234,9 +235,16 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
                 customer.cs = csName
                 customer.room = room!
                 
+                var needUpdateCS:Bool = false
+                if self.csSelected != nil {
+                    if self.user_id_before != self.csSelected?.user_id {
+                        needUpdateCS = true
+                    }
+                }
+                
                 
                 let defectRoom:DefectRoom = DefectRoom(room: self.roomSelected, user: user, userCS: self.csSelected, project: self.project)
-                defectRoom.checkDuplicate({ (defectRoomDup, isDuplicate) in
+                defectRoom.checkDuplicate(needUpdateCS, handler: { (defectRoomDup, isDuplicate) in
                     
                     if isDuplicate == false {
                         
@@ -475,11 +483,20 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             
         }
     }
-    func cellTxtSearchTextChange(string: String) {
-        
+    func cellTxtSearchTextChange(cell: CellTxtSearch, string: String) {
         autoCompleteController?.searchWithString(string)
         
+        if string == "" || (string as NSString).length < 4 {
+            cell.nextBtn.enabled = false
+            cell.nextBtn.setTitleColor(UIColor.RGB(200, G: 201, B: 202), forState: UIControlState.Normal)
+        }else if (string as NSString).length >= 4 {
+            cell.nextBtn.enabled = true
+            cell.nextBtn.setTitleColor(UIColor.RGB(104, G: 205, B: 64), forState: UIControlState.Normal)
+        }
+        
+        //verifyButtonColor()
     }
+
     func getCellRoom() -> CellTxtSearch {
         
         let indexPAth:NSIndexPath = NSIndexPath(forRow: 2, inSection: 0)
@@ -683,7 +700,14 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             if ((list?.objectForKey("csInfo") as? NSMutableDictionary) != nil) {
                 csInfo = (list?.objectForKey("csInfo") as? NSMutableDictionary)!
                 row5.detail = "\(csInfo.objectForKey("user_pers_fname") as! String) \(csInfo.objectForKey("user_pers_lname") as! String)"
-                row5.enable = false
+                //row5.enable = false
+                
+                self.csSelected = User()
+                
+                self.csSelected!.user_id = csInfo.objectForKey("user_id") as? String
+                self.csSelected!.user_pers_fname = csInfo.objectForKey("user_pers_fname") as? String
+                self.csSelected!.user_pers_lname = csInfo.objectForKey("user_pers_lname") as? String
+                self.user_id_before = self.csSelected!.user_id!
             }else{
                 row5.detail = ""
             }
@@ -694,16 +718,10 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             self.components.addObject(row5);
             
             self.tableView.reloadData()
-            self.csSelected = nil
             
             self.verifyButtonColor()
             
         }
-        
-        
-        
-        
-        
     }
     func generateDropDownAndParseDataWithCell(cell:CellDropDown, dataList:NSMutableArray!, rowModel:RowModel?) {
         
@@ -724,9 +742,17 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         self.tableView.scrollEnabled = false
         dropDownController?.tableView.reloadData()
     }
-    func nzDropDownCustomYPositon(contorller: NZDropDownViewController) -> CGFloat {
+    func nzDropDownCustomYPositon(contorller: NZDropDownViewController, width: CGFloat, height: CGFloat) -> CGFloat {
         if contorller.identifier == "BUILDING_LIST"{
             return 180;
+        }
+        if contorller.identifier == "CS_LIST" {
+            
+            let row:Int = self.components.indexOfObject((dropDownController!.userInfo as! RowModel))
+            let indexPath:NSIndexPath = NSIndexPath(forRow: row, inSection: 0)
+            let rect:CGRect = self.tableView.rectForRowAtIndexPath(indexPath)
+            return rect.origin.y - (height - 78)
+            
         }
         return NZ_DROPDOWN_NOT_NEED_CUSTOM_POSITION_Y
     }
@@ -778,5 +804,6 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             self.startBtn.setTitleColor(startColor, forState: UIControlState.Normal)
         }
     }
+    
     
 }

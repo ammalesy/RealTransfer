@@ -243,11 +243,17 @@ class DefectRoom: Model,NSCoding {
                 SwiftSpinner.hide()
         }
     }
-    func checkDuplicate(handler: (DefectRoom?, isDuplicate:Bool?) -> Void) {
+    func checkDuplicate(needUpdateCS:Bool!, handler: (DefectRoom?, isDuplicate:Bool?) -> Void) {
         
         SwiftSpinner.show("Verify data..", animated: true)
         
-        Alamofire.request(.GET, "http://\(DOMAIN_NAME)/Defect/isInitial.php?db_name=\(self.project!.pj_datebase_name!)&un_id=\(self.room!.un_id!)&ransom=\(NSString.randomStringWithLength(10))", parameters: [:])
+        var csIDNeedUpdate = ""
+        if (needUpdateCS == true) {
+            csIDNeedUpdate = "&csIDNeedUpdate=\(self.userCS!.user_id!)"
+        }
+        
+        let path = "http://\(DOMAIN_NAME)/Defect/isInitial.php?db_name=\(self.project!.pj_datebase_name!)&un_id=\(self.room!.un_id!)&ransom=\(NSString.randomStringWithLength(10))\(csIDNeedUpdate)"
+        Alamofire.request(.GET, path, parameters: [:])
             .responseJSON { response in
                 
                 if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
@@ -263,7 +269,11 @@ class DefectRoom: Model,NSCoding {
                         defectRoom.df_sync_status = unitDefect.objectForKey("df_sync_status") as? String
                         defectRoom.df_un_id = unitDefect.objectForKey("df_un_id") as? String
                         defectRoom.df_user_id = unitDefect.objectForKey("df_user_id") as? String
-                        defectRoom.df_user_id_cs = unitDefect.objectForKey("df_user_id_cs") as? String
+                        
+                        let cs:String = (unitDefect.objectForKey("df_user_id_cs") as? String)!
+                        let lastCs = ((cs as NSString).componentsSeparatedByString(",") as [String]).last
+                        
+                        defectRoom.df_user_id_cs = lastCs
                         defectRoom.project = self.project
                         
                         handler(defectRoom, isDuplicate: true)

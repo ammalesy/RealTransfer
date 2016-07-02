@@ -10,7 +10,7 @@ import UIKit
 protocol CellTxtSearchDelegate{
     func cellTxtSearchDidClickNext(cell:CellTxtSearch)
     func cellTxtSearchBeginEditting(cell:CellTxtSearch, textField:UITextField)
-    func cellTxtSearchTextChange(string:String)
+    func cellTxtSearchTextChange(cell:CellTxtSearch, string:String)
 }
 
 class CellTxtSearch: UITableViewCell,UITextFieldDelegate {
@@ -71,7 +71,7 @@ class CellTxtSearch: UITableViewCell,UITextFieldDelegate {
         let realString:String = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string)
         
         if self.delegate != nil {
-            self.delegate.cellTxtSearchTextChange(realString)
+            self.delegate.cellTxtSearchTextChange(self, string: realString)
         }
         
         return true

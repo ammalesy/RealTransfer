@@ -418,5 +418,28 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
         }
         
     }
+    func defectCell(cell: DefectCell, didClickImage image: UIImage) {
+        let color = cell.statusIconImageView.backgroundColor
+        let category = cell.titleLb.text
+        let subCategory = cell.middleTextLb.text
+        
+        var detail = ""
+        if cell.isKindOfClass(DefectCellChecking) {
+             detail = (cell as! DefectCellChecking).detailRightLb.text!
+        }else{
+             detail = cell.detailTextLb.text!
+        }
+        
+        
+        let model:ImageViewerModel = ImageViewerModel(iconColor:color!,
+                                                      category:category,
+                                                      subCategory: subCategory,
+                                                      detail: detail)
+        self.nzNavigationController!.showImageViwer(image, model: model)
+        
+    }
+    func touchBeganCell(cell: DefectCell) {
+        
+    }
     
 }

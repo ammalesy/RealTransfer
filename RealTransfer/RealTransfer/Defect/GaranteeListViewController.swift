@@ -60,4 +60,5 @@ class GaranteeListViewController: DefectListViewController {
     @IBAction func garanteeAction(sender: AnyObject) {
         
     }
+    
 }

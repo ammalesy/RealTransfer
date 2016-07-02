@@ -7,6 +7,8 @@
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="SukhumvitSet.ttc">
+            <string>SukhumvitSet-SemiBold</string>
+            <string>SukhumvitSet-SemiBold</string>
             <string>SukhumvitSet-Light</string>
             <string>SukhumvitSet-Bold</string>
             <string>SukhumvitSet-Light</string>
@@ -65,6 +67,10 @@
             <string>SukhumvitSet-Thin</string>
             <string>SukhumvitSet-Bold</string>
             <string>SukhumvitSet-Bold</string>
+            <string>SukhumvitSet-SemiBold</string>
+            <string>SukhumvitSet-Bold</string>
+            <string>SukhumvitSet-SemiBold</string>
+            <string>SukhumvitSet-Text</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -100,7 +106,7 @@
                                     <constraint firstAttribute="width" constant="340" id="dmU-IV-12U"/>
                                     <constraint firstAttribute="height" constant="50" id="zUz-vo-GhG"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="SukhumvitSet-SemiBold" family="Sukhumvit Set" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1234" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uxr-AM-VPs">
@@ -109,7 +115,7 @@
                                     <constraint firstAttribute="width" constant="340" id="CRH-vw-lgV"/>
                                     <constraint firstAttribute="height" constant="50" id="MpL-EC-yLd"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="SukhumvitSet-SemiBold" family="Sukhumvit Set" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please login to your project" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j7o-jw-4mM">
@@ -285,6 +291,126 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N55-g9-C5y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1588" y="246"/>
+        </scene>
+        <!--Image Viewer Controller-->
+        <scene sceneID="LaF-YU-cl5">
+            <objects>
+                <viewController storyboardIdentifier="ImageViewerController" id="rhd-ja-PhJ" customClass="ImageViewerController" customModule="RealTransfer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FaR-b6-vnT"/>
+                        <viewControllerLayoutGuide type="bottom" id="zQO-Qe-LQM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2Pu-E9-14Z">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_large" translatesAutoresizingMaskIntoConstraints="NO" id="iXG-VI-dfk">
+                                <rect key="frame" x="130" y="50" width="340" height="450"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OB5-Qv-BfV">
+                                <rect key="frame" x="545" y="50" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="8Q8-OZ-UsJ"/>
+                                    <constraint firstAttribute="width" constant="40" id="NDF-0g-U8d"/>
+                                </constraints>
+                                <state key="normal" image="Delete Filled-50"/>
+                                <connections>
+                                    <action selector="exitAction:" destination="rhd-ja-PhJ" eventType="touchUpInside" id="1vf-gu-Z4L"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yzn-57-zfN">
+                                <rect key="frame" x="130" y="510" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="6Hd-ql-NWb"/>
+                                    <constraint firstAttribute="height" constant="20" id="n3x-5a-eiC"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Znu-uV-DeT" customClass="TTTAttributedLabel">
+                                <rect key="frame" x="155" y="510" width="119" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="td3-Fj-cLS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SukhumvitSet-SemiBold" family="Sukhumvit Set" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wqx-42-6oC" customClass="TTTAttributedLabel">
+                                <rect key="frame" x="130" y="540" width="144" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="8PT-ft-jfA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SukhumvitSet-Bold" family="Sukhumvit Set" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vwj-St-dtG">
+                                <rect key="frame" x="279" y="510" width="191" height="90"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gwf-sF-VqQ" customClass="TTTAttributedLabel">
+                                        <rect key="frame" x="3" y="0.0" width="57" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="BVW-9G-3PP"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="SukhumvitSet-SemiBold" family="Sukhumvit Set" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5jJ-Kw-m2J" customClass="TTTAttributedLabel">
+                                        <rect key="frame" x="65" y="0.0" width="126" height="90"/>
+                                        <fontDescription key="fontDescription" name="SukhumvitSet-Text" family="Sukhumvit Set" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="gwf-sF-VqQ" firstAttribute="top" secondItem="Vwj-St-dtG" secondAttribute="top" id="3q7-eb-Tjg"/>
+                                    <constraint firstAttribute="trailing" secondItem="5jJ-Kw-m2J" secondAttribute="trailing" id="9SG-Ur-OvL"/>
+                                    <constraint firstItem="gwf-sF-VqQ" firstAttribute="width" secondItem="Vwj-St-dtG" secondAttribute="width" multiplier="0.3" id="CEY-Ms-HVM"/>
+                                    <constraint firstItem="5jJ-Kw-m2J" firstAttribute="top" secondItem="Vwj-St-dtG" secondAttribute="top" id="Thv-Qm-N6C"/>
+                                    <constraint firstItem="gwf-sF-VqQ" firstAttribute="leading" secondItem="Vwj-St-dtG" secondAttribute="leading" constant="3" id="UlL-v1-IhA"/>
+                                    <constraint firstAttribute="bottom" secondItem="5jJ-Kw-m2J" secondAttribute="bottom" id="iX2-UC-coG"/>
+                                    <constraint firstItem="5jJ-Kw-m2J" firstAttribute="leading" secondItem="gwf-sF-VqQ" secondAttribute="trailing" constant="5" id="u2L-CK-KMC"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Wqx-42-6oC" firstAttribute="leading" secondItem="yzn-57-zfN" secondAttribute="leading" id="05P-oY-bwC"/>
+                            <constraint firstItem="Znu-uV-DeT" firstAttribute="width" secondItem="iXG-VI-dfk" secondAttribute="width" multiplier="0.35" id="1EB-Nh-Tah"/>
+                            <constraint firstItem="Vwj-St-dtG" firstAttribute="top" secondItem="Znu-uV-DeT" secondAttribute="top" id="35F-Zn-dsJ"/>
+                            <constraint firstAttribute="trailing" secondItem="iXG-VI-dfk" secondAttribute="trailing" constant="130" id="3vW-ed-8H2"/>
+                            <constraint firstItem="Vwj-St-dtG" firstAttribute="trailing" secondItem="iXG-VI-dfk" secondAttribute="trailing" id="BfE-LH-t7z"/>
+                            <constraint firstItem="OB5-Qv-BfV" firstAttribute="top" secondItem="FaR-b6-vnT" secondAttribute="bottom" constant="30" id="I2r-Gr-IHW"/>
+                            <constraint firstItem="iXG-VI-dfk" firstAttribute="top" secondItem="FaR-b6-vnT" secondAttribute="bottom" constant="30" id="No4-2a-Z9b"/>
+                            <constraint firstItem="Wqx-42-6oC" firstAttribute="trailing" secondItem="Znu-uV-DeT" secondAttribute="trailing" id="Oxw-CB-KsT"/>
+                            <constraint firstItem="Vwj-St-dtG" firstAttribute="leading" secondItem="Wqx-42-6oC" secondAttribute="trailing" constant="5" id="Qle-hu-Lfh"/>
+                            <constraint firstItem="iXG-VI-dfk" firstAttribute="height" secondItem="2Pu-E9-14Z" secondAttribute="height" multiplier="0.75" id="Rb7-e2-c92"/>
+                            <constraint firstItem="Znu-uV-DeT" firstAttribute="leading" secondItem="yzn-57-zfN" secondAttribute="trailing" constant="5" id="WYT-nF-Efk"/>
+                            <constraint firstItem="iXG-VI-dfk" firstAttribute="leading" secondItem="2Pu-E9-14Z" secondAttribute="leading" constant="130" id="Wjk-EZ-TrS"/>
+                            <constraint firstAttribute="trailing" secondItem="Vwj-St-dtG" secondAttribute="trailing" constant="130" id="Wol-sJ-eW9"/>
+                            <constraint firstAttribute="trailing" secondItem="OB5-Qv-BfV" secondAttribute="trailing" constant="15" id="hgQ-Sk-0L5"/>
+                            <constraint firstItem="yzn-57-zfN" firstAttribute="top" secondItem="iXG-VI-dfk" secondAttribute="bottom" constant="10" id="jsR-jo-tLw"/>
+                            <constraint firstItem="yzn-57-zfN" firstAttribute="leading" secondItem="iXG-VI-dfk" secondAttribute="leading" id="n2H-C7-RBK"/>
+                            <constraint firstItem="Wqx-42-6oC" firstAttribute="top" secondItem="Znu-uV-DeT" secondAttribute="bottom" constant="5" id="sL5-NF-SIM"/>
+                            <constraint firstItem="Znu-uV-DeT" firstAttribute="top" secondItem="yzn-57-zfN" secondAttribute="top" id="uoL-mY-nfq"/>
+                            <constraint firstItem="zQO-Qe-LQM" firstAttribute="top" secondItem="Vwj-St-dtG" secondAttribute="bottom" id="vKq-pv-kQt"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="categoryLb" destination="Znu-uV-DeT" id="nlp-en-FB4"/>
+                        <outlet property="closeBtn" destination="OB5-Qv-BfV" id="Usg-q7-3A2"/>
+                        <outlet property="detailCaptionLb" destination="gwf-sF-VqQ" id="dxy-gg-KxC"/>
+                        <outlet property="detailTxtView" destination="5jJ-Kw-m2J" id="sDN-w7-wrc"/>
+                        <outlet property="iconCategory" destination="yzn-57-zfN" id="sWp-gU-q2Z"/>
+                        <outlet property="imageView" destination="iXG-VI-dfk" id="5gG-Qt-vCl"/>
+                        <outlet property="subCategoryLb" destination="Wqx-42-6oC" id="xiF-E4-drO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z0L-SQ-0AH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="931" y="903"/>
         </scene>
         <!--Getting Start View Controller-->
         <scene sceneID="FBD-Zd-tay">
@@ -983,7 +1109,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="114"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defectImg" translatesAutoresizingMaskIntoConstraints="NO" id="SfD-WG-pwl">
+                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defectImg" translatesAutoresizingMaskIntoConstraints="NO" id="SfD-WG-pwl">
                                                     <rect key="frame" x="10" y="10" width="125" height="93"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="125" id="3Cn-hU-Ohy"/>
@@ -1170,7 +1296,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="114"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defectImg" translatesAutoresizingMaskIntoConstraints="NO" id="QS2-1P-yuD">
+                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defectImg" translatesAutoresizingMaskIntoConstraints="NO" id="QS2-1P-yuD">
                                                     <rect key="frame" x="10" y="10" width="125" height="93"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="125" id="RFS-FO-kk4"/>
@@ -1194,7 +1320,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="งานกระจก-หน้าต่างอลูมิเนียม" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6rs-9P-hvZ" customClass="TTTAttributedLabel">
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="งานกระจก-หน้าต่างอลูมิเนียม" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6rs-9P-hvZ" customClass="TTTAttributedLabel">
                                                     <rect key="frame" x="145" y="30" width="455" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="XrN-Mx-cqE"/>
@@ -1203,7 +1329,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="เครื่องปรับอากาศมีปัณหาเรื่องการติดตั้งและอุณหภูมิไม่เย็น" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QoG-nS-NmY" customClass="TTTAttributedLabel">
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="เครื่องปรับอากาศมีปัณหาเรื่องการติดตั้งและอุณหภูมิไม่เย็น" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QoG-nS-NmY" customClass="TTTAttributedLabel">
                                                     <rect key="frame" x="145" y="60" width="455" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="ZeB-CP-cP0"/>
@@ -1580,7 +1706,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="SukhumvitSet-Text" family="Sukhumvit Set" pointSize="20"/>
                                 <state key="normal" title="ยกเลิก">
-                                    <color key="titleColor" red="0.84641135089999997" green="0.1162139464" blue="0.23851408399999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.84705882352941175" green="0.11764705882352941" blue="0.23921568627450979" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="cancle:" destination="DV0-3K-AAA" eventType="touchUpInside" id="Arw-wA-Rfv"/>
@@ -2021,7 +2147,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="114"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defectImg" translatesAutoresizingMaskIntoConstraints="NO" id="7qU-DH-IRX">
+                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defectImg" translatesAutoresizingMaskIntoConstraints="NO" id="7qU-DH-IRX">
                                                     <rect key="frame" x="10" y="10" width="125" height="93"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="93" id="bqo-hC-cU6"/>
@@ -2036,7 +2162,7 @@
                                                         <constraint firstAttribute="height" constant="15" id="ZXU-ib-Xuu"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="พื้นที่ห้องนอน 1 Bed, 2 Bed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c12-WC-paN">
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="พื้นที่ห้องนอน 1 Bed, 2 Bed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c12-WC-paN">
                                                     <rect key="frame" x="165" y="5" width="365" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="HrK-eU-8Ao"/>
@@ -2045,7 +2171,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="งานกระจก-หน้าต่างอลูมิเนียม" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gVJ-wu-Uos" customClass="TTTAttributedLabel">
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="งานกระจก-หน้าต่างอลูมิเนียม" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gVJ-wu-Uos" customClass="TTTAttributedLabel">
                                                     <rect key="frame" x="145" y="30" width="455" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="vy9-0t-DKA"/>
@@ -2054,7 +2180,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="เครื่องปรับอากาศมีปัณหาเรื่องการติดตั้งและอุณหภูมิไม่เย็น" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wbz-0m-da0" customClass="TTTAttributedLabel">
+                                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="เครื่องปรับอากาศมีปัณหาเรื่องการติดตั้งและอุณหภูมิไม่เย็น" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wbz-0m-da0" customClass="TTTAttributedLabel">
                                                     <rect key="frame" x="145" y="60" width="455" height="44"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="qHD-ht-awA"/>
@@ -2184,6 +2310,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Delete Filled-50" width="50" height="50"/>
         <image name="Pencil" width="50" height="50"/>
         <image name="camera_icon" width="50" height="42"/>
         <image name="defectImg" width="206" height="154"/>

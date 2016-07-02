@@ -31,6 +31,11 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(DefectListViewController.tableViewTouch))
+        tap.cancelsTouchesInView = false
+        self.tableView.userInteractionEnabled = true
+        self.tableView.addGestureRecognizer(tap)
+        
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.estimatedRowHeight = 114
@@ -177,6 +182,13 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
             dropDownController?.closeView()
             dropDownController = nil
         }
+        
+        let splitViewcontroller:NZSplitViewController = self.splitViewController as! NZSplitViewController
+        let nav:UINavigationController = splitViewcontroller.viewControllers[1] as! UINavigationController
+        let controller = nav.viewControllers.last!
+        if controller.isKindOfClass(AddDefectDetailViewController) {
+            (controller as! AddDefectDetailViewController).closeDropDown()
+        }
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return groupList.count
@@ -272,15 +284,18 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
         
         return cell
     }
+    func tableViewTouch(){
+        self.closeDropDown()
+    }
+    func touchBeganCell(cell: DefectCell) {
+        
+        self.closeDropDown()
+    }
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        if dropDownController != nil {
-            dropDownController?.closeView()
-            dropDownController = nil
-        }else{
+        self.closeDropDown()
         
-            // SELECTION
-        }
     }
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
@@ -355,6 +370,27 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
         
         
         cell.hideMenuPopoverIfViewIsShowing()
+        
+    }
+    func defectCell(cell: DefectCell, didClickImage image: UIImage) {
+        
+        let color = cell.statusIconImageView.backgroundColor
+        let category = cell.titleLb.text
+        let subCategory = cell.middleTextLb.text
+        
+        var detail = ""
+        if cell.isKindOfClass(DefectCellChecking) {
+            detail = (cell as! DefectCellChecking).detailRightLb.text!
+        }else{
+            detail = cell.detailTextLb.text!
+        }
+        
+        
+        let model:ImageViewerModel = ImageViewerModel(iconColor:color!,
+                                                      category:category,
+                                                      subCategory: subCategory,
+                                                      detail: detail)
+        (self.splitViewController as! NZSplitViewController).nzNavigationController!.showImageViwer(image, model: model)
         
     }
     

@@ -13,6 +13,8 @@ import TTTAttributedLabel
     optional func defectCell(cell:DefectCell, didClickMenu model:NZRow, popover:NZPopoverView)
     optional func defectCellPopoverWillShow(cell:DefectCell)
     optional func defectCellPopoverWillHide(cell:DefectCell)
+    optional func touchBeganCell(cell:DefectCell)
+    optional func defectCell(cell:DefectCell, didClickImage image:UIImage)
     
     
     optional func defectCellCheckingButtonClicked(view:DefectCellChecking)
@@ -37,6 +39,21 @@ class DefectCell: UITableViewCell,NZPopoverViewDelegate {
         self.statusIconImageView.assignCornerRadius(self.statusIconImageView.frame.size.height / 2)
         middleTextLb.verticalAlignment = TTTAttributedLabelVerticalAlignment.Top
         detailTextLb.verticalAlignment = TTTAttributedLabelVerticalAlignment.Top
+        self.assignTapOnImageView()
+    }
+    func assignTapOnImageView(){
+        let tap = UITapGestureRecognizer(target: self, action: #selector(DefectCell.tapImageView))
+        tap.cancelsTouchesInView = false
+        self.defectImageView.userInteractionEnabled = true
+        self.defectImageView.addGestureRecognizer(tap)
+    }
+    
+    func tapImageView(){
+        if (self.delegate != nil) {
+            
+            self.delegate?.defectCell!(self, didClickImage: self.defectImageView.image!)
+            
+        }
     }
     
     func setHideEditting(hide:Bool){
@@ -51,8 +68,7 @@ class DefectCell: UITableViewCell,NZPopoverViewDelegate {
     @IBAction func editAction(sender: AnyObject) {
         
         if popover != nil {
-            popover.hide()
-            popover = nil
+            self.hideMenuPopoverIfViewIsShowing()
         }else{
             if (self.delegate != nil) {
                 
@@ -92,5 +108,12 @@ class DefectCell: UITableViewCell,NZPopoverViewDelegate {
     }
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.hideMenuPopoverIfViewIsShowing()
+        
+        if (self.delegate != nil) {
+            
+            self.delegate?.touchBeganCell!(self)
+            
+        }
+
     }
 }

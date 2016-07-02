@@ -12,6 +12,17 @@
 		{
 			# code...
 		}
+		public static function updateCSID($user_id,$df_room_id,$db_name) {
+
+			$conn = Database::connect_db_by_dbName($db_name);
+			$sql  = "UPDATE ".$db_name.".tb_unit_defect
+							SET df_user_id_cs = '".$user_id."'
+							WHERE tb_unit_defect.df_room_id = ".$df_room_id.";";
+			$result = mysqli_query($conn, $sql);
+			//mysqli_free_result($result);
+			mysqli_close($conn);
+
+		}
 		public static function updateSyncDate($db_name,$df_room_id,$timestamp,$df_sync_status) {
 
 			$conn = Database::connect_db_by_dbName($db_name);
@@ -19,8 +30,7 @@
 					SET df_check_date = '".$timestamp."', df_sync_status = '".$df_sync_status."'
 					WHERE tb_unit_defect.df_room_id = ".$df_room_id.";";
 			$result = mysqli_query($conn, $sql);
-			return $sql;
-			mysqli_free_result($result);
+			//mysqli_free_result($result);
 			mysqli_close($conn);
 
 		}
@@ -97,7 +107,14 @@
 			if(count($defectInfo) > 0){
 
 				$qcCheckerInfo = User::getUserByID($defectInfo['df_user_id']);
-				$csInfo = User::getUserByID($defectInfo['df_user_id_cs']);
+
+				$cs_id = $defectInfo['df_user_id_cs'];
+				$df_user_id_cs_list = explode(",",$defectInfo['df_user_id_cs']);
+				if (count($df_user_id_cs_list) > 1) {
+						$cs_id = $df_user_id_cs_list[count($df_user_id_cs_list) - 1];
+				}
+
+				$csInfo = User::getUserByID($cs_id);
 				$returnArray['defectInfo'] = $defectInfo;
 				$returnArray['qcCheckerInfo'] = $qcCheckerInfo;
 				$returnArray['csInfo'] = $csInfo;
@@ -107,8 +124,6 @@
 			$user_result = User::getUserByUnitID($un_id,$db_name);
 			$returnArray['userInfo'] = $user_result;
 			$returnArray['roomInfo'] = $roomInfo;
-
-
 
 			return $returnArray;
 		}

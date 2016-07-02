@@ -111,6 +111,7 @@ class NZPopoverView: UIView {
             self.alpha = 0
             UIView.animateWithDuration(NZPopoverView.duration, animations: { () -> Void in
                 self.alpha = 1
+
             })
         }
     }
@@ -121,6 +122,7 @@ class NZPopoverView: UIView {
                 self.alpha = 0
             }, completion: { (flag) -> Void in
                 self.removeFromSuperview()
+
             })
         }
     }

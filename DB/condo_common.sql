@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 26, 2016 at 06:42 PM
+-- Generation Time: Jul 02, 2016 at 06:24 PM
 -- Server version: 5.6.26
 -- PHP Version: 5.6.12
 
@@ -134,7 +134,13 @@ INSERT INTO `log_authentication` (`at_ip`, `at_user_id`, `at_agent`, `at_timesta
 ('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.3', '2016-06-25 09:39:23'),
 ('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-06-26 03:59:50'),
 ('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.3', '2016-06-26 05:04:06'),
-('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-06-26 14:35:49');
+('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-06-26 14:35:49'),
+('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-06-28 13:00:07'),
+('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-06-30 17:20:51'),
+('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-07-01 05:50:35'),
+('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-07-01 16:46:51'),
+('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-07-02 05:33:09'),
+('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-07-02 14:42:36');
 
 -- --------------------------------------------------------
 

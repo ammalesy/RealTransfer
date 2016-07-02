@@ -58,6 +58,8 @@ class NZSplitViewController: UISplitViewController {
         self.nzNavigationController?.hideMenuPopoverIfViewIsShowing()
     }
     
+    
+    
     /*
     // MARK: - Navigation
     

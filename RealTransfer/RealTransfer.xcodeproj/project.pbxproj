@@ -34,6 +34,8 @@
 		18DF989E1D152F2C004BE990 /* DefectRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DF989D1D152F2C004BE990 /* DefectRoom.swift */; };
 		18DF98A01D155AFF004BE990 /* DefectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DF989F1D155AFF004BE990 /* DefectModel.swift */; };
 		18E039FC1D2430A9000F17B4 /* DefectCellChecking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E039FB1D2430A9000F17B4 /* DefectCellChecking.swift */; };
+		18F121611D27D6CC0046326F /* ImageViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F121601D27D6CC0046326F /* ImageViewerController.swift */; };
+		18F121631D27EC210046326F /* ImageViewerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F121621D27EC210046326F /* ImageViewerModel.swift */; };
 		18F37A3D1D243E2B002767F7 /* TTTAttributedLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F37A3C1D243E2B002767F7 /* TTTAttributedLabel.framework */; };
 		18F589F71D1804AA00F06813 /* NSStringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F589F61D1804AA00F06813 /* NSStringExtension.swift */; };
 		18F589FC1D183AC700F06813 /* CachingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F589FB1D183AC700F06813 /* CachingManager.swift */; };
@@ -108,6 +110,8 @@
 		18DF989D1D152F2C004BE990 /* DefectRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefectRoom.swift; sourceTree = "<group>"; };
 		18DF989F1D155AFF004BE990 /* DefectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefectModel.swift; sourceTree = "<group>"; };
 		18E039FB1D2430A9000F17B4 /* DefectCellChecking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefectCellChecking.swift; sourceTree = "<group>"; };
+		18F121601D27D6CC0046326F /* ImageViewerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewerController.swift; sourceTree = "<group>"; };
+		18F121621D27EC210046326F /* ImageViewerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewerModel.swift; sourceTree = "<group>"; };
 		18F37A3C1D243E2B002767F7 /* TTTAttributedLabel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TTTAttributedLabel.framework; path = "Pods/../build/Debug-iphoneos/TTTAttributedLabel.framework"; sourceTree = "<group>"; };
 		18F589F61D1804AA00F06813 /* NSStringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSStringExtension.swift; sourceTree = "<group>"; };
 		18F589FB1D183AC700F06813 /* CachingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CachingManager.swift; sourceTree = "<group>"; };
@@ -190,6 +194,15 @@
 				185E073F1D202B510049F30B /* CustomerInfo.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		18F1215F1D27D6B60046326F /* ImageViwer */ = {
+			isa = PBXGroup;
+			children = (
+				18F121601D27D6CC0046326F /* ImageViewerController.swift */,
+				18F121621D27EC210046326F /* ImageViewerModel.swift */,
+			);
+			path = ImageViwer;
 			sourceTree = "<group>";
 		};
 		18F589FA1D183ABF00F06813 /* Lib */ = {
@@ -355,6 +368,7 @@
 				5290560F1D051B3200B7D28C /* Login */,
 				5284FD5F1D05762A006C5D1B /* Defect */,
 				520AC67B1D096226000A8754 /* AddDefect */,
+				18F1215F1D27D6B60046326F /* ImageViwer */,
 				529056121D051C6000B7D28C /* Project */,
 				529055ED1D0518DE00B7D28C /* AppDelegate.swift */,
 				529055F11D0518DE00B7D28C /* Main.storyboard */,
@@ -585,6 +599,7 @@
 				18521DFD1D16B64D00B9622C /* UIImageExtension.swift in Sources */,
 				52499B0A1D06A19F0003F6D5 /* CellLabelStatic.swift in Sources */,
 				1854F69C1D12FC54003B9FE0 /* User.swift in Sources */,
+				18F121631D27EC210046326F /* ImageViewerModel.swift in Sources */,
 				521A7B331D0552B400971B7B /* ProjectCollectionViewCell.swift in Sources */,
 				529055F61D0518DE00B7D28C /* RealTransfer.xcdatamodeld in Sources */,
 				185144551D2632D3007420C2 /* UIViewControllerExtension.swift in Sources */,
@@ -593,6 +608,7 @@
 				18F589FE1D183AF400F06813 /* ImageCaching.swift in Sources */,
 				180AD45E1D1953E5000D802B /* BuildingCaching.swift in Sources */,
 				5240DA061D080A1E0071D287 /* NZDropDownViewController.swift in Sources */,
+				18F121611D27D6CC0046326F /* ImageViewerController.swift in Sources */,
 				521A7B311D05504C00971B7B /* Queue.swift in Sources */,
 				18DF98A01D155AFF004BE990 /* DefectModel.swift in Sources */,
 				18F589F71D1804AA00F06813 /* NSStringExtension.swift in Sources */,

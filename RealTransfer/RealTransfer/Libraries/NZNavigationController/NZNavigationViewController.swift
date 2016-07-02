@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftSpinner
+import SDWebImage
 
 @objc protocol NZNavigationViewControllerDelegate{
     optional func nzNavigation(controller:NZNavigationViewController, didClickMenu popover: NZPopoverView, menu: NZRow)
@@ -51,6 +52,21 @@ class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
         let user:User = User().getOnCache()!
         self.subTitleLb.text = "\(user.pm_name!) : \(user.user_pers_fname!) \(user.user_pers_lname!)"
         
+        self.setIconImage()
+        
+    }
+    func setIconImage(){
+        Queue.mainQueue({
+            
+            let url:NSURL = NSURL(string: "http://\(DOMAIN_NAME)/images/logo/logo.jpg")! //
+            
+            self.logoImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "logo_large"), options: SDWebImageOptions.RefreshCached, completed: { (imageReturn, error, sdImageCacheType, url) in
+                
+                
+                
+            })
+            
+        })
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -331,5 +347,30 @@ class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
         }
         
     
+    }
+    func showImageViwer(image:UIImage!, model:ImageViewerModel!){
+        
+        let controller:ImageViewerController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("ImageViewerController") as! ImageViewerController
+        controller.view.alpha = 0
+        controller.iconCategory.backgroundColor = model.iconColor
+        controller.categoryLb.text = model.category
+        controller.subCategoryLb.text = model.subCategory
+        controller.detailTxtView.text = model.detail
+        controller.imageView.image = image
+        
+        UIView.animateWithDuration(0.5, animations: {
+            controller.view.alpha = 1
+            controller.view.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.9)
+            controller.view.frame = (self.view.frame)
+            controller.view.layoutIfNeeded()
+            
+            self.addChildViewController(controller)
+            self.view.addSubview(controller.view)
+            controller.didMoveToParentViewController(self)
+        }) { (result) in
+            
+        }
+        
+        
     }
 }

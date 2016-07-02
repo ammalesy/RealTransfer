@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftSpinner
+import SDWebImage
 
 class LoginViewController: NZViewController {
 
@@ -18,14 +19,62 @@ class LoginViewController: NZViewController {
     @IBOutlet weak var passwordTxt: UITextField!
     @IBOutlet weak var loginBtn: UIButton!
     
+    var textFieldActive:UITextField?
+    
     var user:User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setIconImage()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.tapAnyWhere))
+        self.view.addGestureRecognizer(tap)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginViewController.keyboardWasShown(_:)), name:UIKeyboardWillShowNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginViewController.keyboardWasHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
+    }
+    func tapAnyWhere(){
+        self.usernameTxt.resignFirstResponder()
+        self.passwordTxt.resignFirstResponder()
+    }
+    func keyboardWasShown(notification: NSNotification) {
+        var info = notification.userInfo!
+        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            
+            var rect:CGRect = self.view.frame
+            let moreMinusPositionY = (self.view.frame.size.height) - (self.passwordTxt.frame.origin.y) - (self.passwordTxt.frame.size.height)
+            rect.origin.y -= ((keyboardFrame.size.height+20) - moreMinusPositionY)
+            self.view.frame = rect
+            self.view.setNeedsDisplay()
+        })
+    }
+    func keyboardWasHide(notification: NSNotification) {
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            
+            var rect:CGRect = self.view.frame
+            rect.origin.y = 0
+            self.view.frame = rect
+            self.view.setNeedsDisplay()
+        })
+    }
+    func setIconImage(){
+        Queue.mainQueue({
+            
+            let url:NSURL = NSURL(string: "http://\(DOMAIN_NAME)/images/logo/logo.jpg")! //
+            
+            self.logoImageview.sd_setImageWithURL(url, placeholderImage: UIImage(named: "logo_large"), options: SDWebImageOptions.RefreshCached, completed: { (imageReturn, error, sdImageCacheType, url) in
+                
+                
+                
+            })
+            
+        })
     }
     override func viewsNeedApplyFont() -> [UIView] {
         
-        return [usernameTxt,passwordTxt,loginBtn,titleLabel]
+        return [loginBtn,titleLabel]
         
     }
     override func stateAfterSetfont(){
