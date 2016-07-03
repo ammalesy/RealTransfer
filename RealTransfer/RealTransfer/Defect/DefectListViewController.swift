@@ -22,7 +22,7 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
     var groupList:NSMutableArray = NSMutableArray()
     
     var defectRoomRef:DefectRoom?
-    
+    var isShowAll:Bool = true
     
     var dropDownController:NZDropDownViewController?
 
@@ -153,26 +153,27 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
     func nzDropDown(contorller: NZDropDownViewController, didClickCell model: DropDownModel) {
         
         self.closeDropDown()
+        self.filterWithKey(model.identifier)
+    }
+    func filterWithKey(key:String!){
         displayList.removeAllObjects()
         
-        if model.identifier == "ALL"
+        if key == "ALL"
         {
-        
+            
             displayList = list.mutableCopy() as! NSMutableArray
+            isShowAll = true
         }else{
-            let resultPredicate:NSPredicate = NSPredicate(format: "categoryName contains[c] %@", model.identifier)
+            isShowAll = false
+            let resultPredicate:NSPredicate = NSPredicate(format: "categoryName contains[c] %@", key)
             let resultArray:[AnyObject] = list.filteredArrayUsingPredicate(resultPredicate)
             
             for model in resultArray {
                 displayList.addObject(model)
             }
         }
-        
-        
-        
         self.createGroupListDataByListData()
         self.tableView.reloadData()
-        
     }
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.closeDropDown()
@@ -191,9 +192,18 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
         }
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        
+        if isShowAll {
+            return 1
+        }
+        
         return groupList.count
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if isShowAll {
+            return displayList.count
+        }
         
         let categoryName:String = groupList.objectAtIndex(section) as! String
         let dropDownModel:DropDownModel = self.getDropDownModelFromCategoryName(categoryName)!
@@ -205,14 +215,25 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
+        var defectModel:DefectModel!
         
-        let categoryName:String = groupList.objectAtIndex(indexPath.section) as! String
-        let dropDownModel:DropDownModel = self.getDropDownModelFromCategoryName(categoryName)!
+        let categoryName:String!
+        let dropDownModel:DropDownModel!
+        if isShowAll {
+            defectModel = displayList.objectAtIndex((displayList.count - 1) - indexPath.row) as! DefectModel
+            categoryName = defectModel.categoryName!
+            dropDownModel = self.getDropDownModelFromCategoryName(categoryName)!
+        }else{
+            categoryName = groupList.objectAtIndex(indexPath.section) as! String
+            dropDownModel = self.getDropDownModelFromCategoryName(categoryName)!
+            let resultPredicate:NSPredicate = NSPredicate(format: "categoryName contains[c] %@", dropDownModel.identifier)
+            let resultArray:[AnyObject] = displayList.filteredArrayUsingPredicate(resultPredicate)
+            let index:Int = (resultArray.count - 1) - indexPath.row
+            defectModel = resultArray[index] as! DefectModel
+        }
         
-        let resultPredicate:NSPredicate = NSPredicate(format: "categoryName contains[c] %@", dropDownModel.identifier)
-        let resultArray:[AnyObject] = displayList.filteredArrayUsingPredicate(resultPredicate)
-        let index:Int = (resultArray.count - 1) - indexPath.row
-        let defectModel:DefectModel = resultArray[index] as! DefectModel
+        
+        
         let cell:DefectCell = tableView.dequeueReusableCellWithIdentifier(CELL_DEFECT_IDENTIFIER) as! DefectCell
         cell.delegate = self
         ///*===== IMAGE =======*//
@@ -334,14 +355,22 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
     }
     
     func defectCell(cell: DefectCell, didClickMenu model: NZRow, popover: NZPopoverView) {
+        let defectModel:DefectModel!
         
         let indexPath:NSIndexPath = self.tableView.indexPathForCell(cell)!
-        let categoryName:String = groupList.objectAtIndex(indexPath.section) as! String
-        let dropDownModel:DropDownModel = self.getDropDownModelFromCategoryName(categoryName)!
-        let resultPredicate:NSPredicate = NSPredicate(format: "categoryName contains[c] %@", dropDownModel.identifier)
-        let resultArray:[AnyObject] = displayList.filteredArrayUsingPredicate(resultPredicate)
-        let index:Int = (resultArray.count - 1) - indexPath.row
-        let defectModel:DefectModel = resultArray[index] as! DefectModel
+        
+        if isShowAll {
+            defectModel = displayList.objectAtIndex((displayList.count - 1) - indexPath.row) as! DefectModel
+        }else{
+            let categoryName:String = groupList.objectAtIndex(indexPath.section) as! String
+            let dropDownModel:DropDownModel = self.getDropDownModelFromCategoryName(categoryName)!
+            let resultPredicate:NSPredicate = NSPredicate(format: "categoryName contains[c] %@", dropDownModel.identifier)
+            let resultArray:[AnyObject] = displayList.filteredArrayUsingPredicate(resultPredicate)
+            let index:Int = (resultArray.count - 1) - indexPath.row
+            defectModel = resultArray[index] as! DefectModel
+        }
+        
+        
         
         if model.identifier == "delete" {
             ImageCaching.sharedInstance.removeImageByName(defectModel.df_image_path)

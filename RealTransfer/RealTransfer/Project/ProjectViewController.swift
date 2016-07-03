@@ -33,11 +33,15 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
         
         self.nzNavigationController?.titleLb.text = "Dash Board"
         self.nzNavigationController?.subTitleLb.text = "\(user.user_work_position!) : \(user.user_pers_fname!) \(user.user_pers_lname!)"
+        
+        Queue.mainQueue { 
+            self.nzNavigationController?.hideRightInfo(true)
+        }
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.nzNavigationController?.hideRightInfo(true)
+        
     }
     
     

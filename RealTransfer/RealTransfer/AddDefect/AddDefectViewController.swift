@@ -131,7 +131,7 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
         if mediaType == (kUTTypeImage as String) {
             let image = info[UIImagePickerControllerOriginalImage]
                 as! UIImage
-            
+            self.defectRoom = DefectRoom.getCache(self.defectRoom?.df_room_id!)
             let detailController:AddDefectDetailViewController = AddDefectDetailViewController.instance(image, defectRoom: self.defectRoom, state: DefectViewState.New)
             self.navigationController?.pushViewController(detailController, animated: true)
             

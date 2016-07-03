@@ -295,16 +295,42 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
     
     func reloadDefectList()
     {
+        let defectModel:DefectModel = self.defectRoom!.listDefect?.lastObject as! DefectModel
+        var key:String! = defectModel.categoryName
+        
         let arr:[UIViewController] = self.splitController!.viewControllers
         let defectListController = arr[0]
         
         if (defectListController as! DefectListViewController).className() == "DefectListViewController" {
-        
-            (defectListController as! DefectListViewController).reloadData(self.defectRoom!)
+            
+            let controller:DefectListViewController = (defectListController as! DefectListViewController)
+            if controller.isShowAll {
+                key = "ALL"
+            }
+            Queue.mainQueue({ 
+                controller.reloadData(self.defectRoom!)
+                
+                Queue.mainQueue({ 
+                    controller.filterWithKey(key)
+                })
+            })
+            
+            
             
         }else if (defectListController as! DefectListViewController).className() == "GaranteeListViewController" {
+
+            let controller:GaranteeListViewController = (defectListController as! GaranteeListViewController)
+            if controller.isShowAll {
+                key = "ALL"
+            }
+            Queue.mainQueue({ 
+                controller.reloadData(self.defectRoom!, type: "1")
+                Queue.mainQueue({ 
+                    controller.filterWithKey(key)
+                })
+            })
             
-            (defectListController as! GaranteeListViewController).reloadData(self.defectRoom!, type: "1")
+            
         }
         
         
