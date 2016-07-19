@@ -235,12 +235,12 @@ class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
             
             popover.delegate = self
             if CustomerInfo.sharedInstance.canShow {
-                popover.addRow(NZRow(text: "View info", imageName:"Info-97", tintColor: UIColor.darkGrayColor(),  identifier: "info"))
+                popover.addRow(NZRow(text: "ดูข้อมูลลูกค้า", imageName:"Info-97", tintColor: UIColor.darkGrayColor(),  identifier: "info"))
             }
             if PROJECT != nil {
-                popover.addRow(NZRow(text: "Sync", imageName:"sync", tintColor: UIColor.darkGrayColor(),  identifier: "sync"))
+                popover.addRow(NZRow(text: "บันทึก", imageName:"sync", tintColor: UIColor.darkGrayColor(),  identifier: "sync"))
             }
-            popover.addRow(NZRow(text: "Sign out", imageName:"Enter-96", tintColor: UIColor.RGB(223, G: 0, B: 0),  identifier: "logout"))
+            popover.addRow(NZRow(text: "ออกจากระบบ", imageName:"Enter-96", tintColor: UIColor.RGB(223, G: 0, B: 0),  identifier: "logout"))
             
             
             popover.showNearView(sender as! UIButton, addToView: self.view)
@@ -300,7 +300,8 @@ class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
                 Building.buldings.removeAllObjects()
                 CSRoleModel.csUSers.removeAllObjects()
                 CustomerInfo.sharedInstance.clear()
-            
+                GaranteeListViewController.desTroyShareInstance()
+                NZSplitViewController.desTroyShareInstance()
             })
         }
         else if menu.identifier == "sync" {

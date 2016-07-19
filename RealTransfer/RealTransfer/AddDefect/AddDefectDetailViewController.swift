@@ -113,7 +113,7 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
                     
                 }
             }
-            
+            self.verifyButtonColor()
         }
     }
 
@@ -228,7 +228,7 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
             defect.df_id = "waiting"
             let imgName = UIImage.uniqNameBySeq("0")
             defect.df_image_path = imgName
-            defect.realImage = UIImage(data: (self.imageView.image?.lowerQualityJPEGNSData)!)
+            defect.realImage = UIImage(data: (UIImage(data: (self.imageView.image?.lowerQualityJPEGNSData)!)?.mediumQualityJPEGNSData)!)
             ImageCaching.sharedInstance.setImageByName(imgName, image: defect.realImage, isFromServer: false)
             SDImageCache.sharedImageCache().storeImage(defect.realImage, forKey: imgName, toDisk: true)
             ImageCaching.sharedInstance.save()
@@ -237,7 +237,9 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
             defect.subCategoryName = self.subCategorySelected
             
             if self.isModeGanrantee() {
+                self.increaseGuaranteeValue()
                 defect.df_type = "1"
+                
             }else{
                 defect.df_type = "0"
             }
@@ -257,7 +259,7 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
             
             let imgName = UIImage.uniqNameBySeq("0")
             self.defectModel!.df_image_path = imgName
-            self.defectModel!.realImage = UIImage(data: (self.imageView.image?.lowerQualityJPEGNSData)!)
+            self.defectModel!.realImage = UIImage(data: (UIImage(data: (self.imageView.image?.lowerQualityJPEGNSData)!)?.mediumQualityJPEGNSData)!)
             ImageCaching.sharedInstance.setImageByName(imgName, image: self.defectModel!.realImage, isFromServer: false)
             SDImageCache.sharedImageCache().storeImage(self.defectModel!.realImage, forKey: imgName, toDisk: true)
             ImageCaching.sharedInstance.save()
@@ -327,6 +329,8 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
                 controller.reloadData(self.defectRoom!, type: "1")
                 Queue.mainQueue({ 
                     controller.filterWithKey(key)
+                    self.getDefectListCheckingController().defectRoomRef = self.defectRoom
+                    self.getDefectListCheckingController().setNumberOfDefect()
                 })
             })
             
@@ -491,6 +495,21 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
         }
         
         return false
+    }
+    func getDefectListCheckingController()->DefectListCheckingViewController {
+        let controllers:NSMutableArray = self.splitController!.nzNavigationController!.viewControllers
+        return controllers[1] as! DefectListCheckingViewController
+    }
+    func getGuaranteeDefectListController()->GaranteeListViewController {
+        let controllers:NSMutableArray = self.splitController!.nzNavigationController!.viewControllers
+        let split:NZSplitViewController = controllers[2] as! NZSplitViewController
+        
+        
+        return split.viewControllers.first as! GaranteeListViewController
+    }
+    func increaseGuaranteeValue(){
+        self.getDefectListCheckingController().plusCountGuaranteeDefectValue()
+        self.getGuaranteeDefectListController().plusCountGuaranteeDefectValue()
     }
     
     

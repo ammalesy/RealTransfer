@@ -66,11 +66,12 @@ class NZPopoverView: UIView {
             let rowView:UIButton = UIButton(frame: CGRectMake(0,y,NZPopoverView.width,NZPopoverView.rowHeight))
             rowView.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
             rowView.imageEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 20)
-            rowView.titleEdgeInsets = UIEdgeInsetsMake(0, 25, 0, 0)
+            rowView.titleEdgeInsets = UIEdgeInsetsMake(0, 15, 0, 0)
             self.addLineToRowView(rowView)
             rowView.tag = index
             rowView.userInteractionEnabled = true
             rowView.setTitle(row.text, forState: UIControlState.Normal)
+          
             rowView.backgroundColor = row.color
             if row.imageName != nil {
                  rowView.setImage(UIImage(named: row.imageName!)!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), forState: UIControlState.Normal)

@@ -112,5 +112,23 @@ class Category: Model {
         }
         return []
     }
+    
+    
+    class func convertCategoryNameToString(categoryName:String!)->String? {
+        let categoryList:NSDictionary = Category.sharedInstance.getCategory()
+        
+        //LEVEL1
+        for data:NSDictionary in categoryList.objectForKey("list") as! [NSDictionary] {
+            
+            if (data.objectForKey("id") as! String) == categoryName {
+                
+                return (data.objectForKey("title") as! String)
+                
+            }
+        }
+        
+        return nil
+        
+    }
 
 }

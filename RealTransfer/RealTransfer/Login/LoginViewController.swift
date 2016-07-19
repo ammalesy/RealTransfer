@@ -62,13 +62,15 @@ class LoginViewController: NZViewController {
     func setIconImage(){
         Queue.mainQueue({
             
-            let url:NSURL = NSURL(string: "http://\(DOMAIN_NAME)/images/logo/logo.jpg")! //
+            //let url:NSURL = NSURL(string: "http://\(DOMAIN_NAME)/images/logo/logo.jpg")! //
             
-            self.logoImageview.sd_setImageWithURL(url, placeholderImage: UIImage(named: "logo_large"), options: SDWebImageOptions.RefreshCached, completed: { (imageReturn, error, sdImageCacheType, url) in
-                
-                
-                
-            })
+//            self.logoImageview.sd_setImageWithURL(url, placeholderImage: UIImage(named: "logo_large"), options: SDWebImageOptions.RefreshCached, completed: { (imageReturn, error, sdImageCacheType, url) in
+//                
+//                
+//                
+//            })
+            
+            self.logoImageview.image = UIImage(named: "logo_large")
             
         })
     }

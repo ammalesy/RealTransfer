@@ -10,15 +10,20 @@ import UIKit
 import SwiftSpinner
 import Alamofire
 
-class DefectListCheckingViewController: NZViewController,UITableViewDataSource,UITableViewDelegate,DefectCellViewDelegate,NZNavigationViewControllerDelegate {
+class DefectListCheckingViewController: NZViewController,UITableViewDataSource,UITableViewDelegate,DefectCellViewDelegate,NZNavigationViewControllerDelegate,NZDropDownViewDelegate {
 
     var passCount:Int = 0
     var allDefect:Int = 0
     var garanteeDefect:Int = 0
+    var filterSelected:String?
+    var filterTypeSelected:String?
     
     @IBOutlet weak var alldefectBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var garanteeBtn: UIButton!
+    @IBOutlet weak var filterTypeBtn: UIButton!
+    
+     var dropDownController:NZDropDownViewController?
     
     var defectRoomRef:DefectRoom?
     var list:NSMutableArray = NSMutableArray()
@@ -26,14 +31,38 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
     var groupList:NSMutableArray = NSMutableArray()
     var dropDownList:NSMutableArray = NSMutableArray()
     
+    var dropDownListFilterChecking:NSMutableArray = NSMutableArray()
+    
     @IBOutlet weak var passLb: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(DefectListViewController.tableViewTouch))
+        tap.cancelsTouchesInView = false
+        self.tableView.userInteractionEnabled = true
+        self.tableView.addGestureRecognizer(tap)
         
         alldefectBtn.assignCornerRadius(5)
         garanteeBtn.assignCornerRadius(5)
+        filterTypeBtn.assignCornerRadius(5)
         
+        self.initialDropDownList()
+        self.initialDropDownCheckingList()
+        
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        self.tableView.estimatedRowHeight = 114
+        self.reloadData(defectRoomRef, type: "0")
+
+        alldefectBtn.titleLabel?.adjustsFontSizeToFitWidth = true
+        alldefectBtn.titleLabel?.numberOfLines = 2
+        filterTypeBtn.titleLabel?.adjustsFontSizeToFitWidth = true
+        filterTypeBtn.titleLabel?.numberOfLines = 2
+
+        self.filterSelected = "ALL"
+        self.filterTypeSelected = "ALL"
+        self.setNumberOfDefect()
+    }
+    func initialDropDownList(){
         let firstModel:DropDownModel = DropDownModel(text: "เลือกดูทั้งหมด")
         firstModel.identifier = "ALL"
         dropDownList.addObject(firstModel)
@@ -51,13 +80,11 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
             dropDownModel.identifier = data.objectForKey("id") as! String
             dropDownList.addObject(dropDownModel)
         }
-        
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
-        self.tableView.estimatedRowHeight = 114
-        self.reloadData(defectRoomRef, type: "0")
-        
-        self.setNumberOfDefect()
+    }
+    func initialDropDownCheckingList(){
+        self.dropDownListFilterChecking.addObject(DropDownModel(text: "เลือกดูทั้งหมด", identifier: "ALL"))
+        self.dropDownListFilterChecking.addObject(DropDownModel(text: "รายการตรวจสอบเรียบร้อย", identifier: "1"))
+        self.dropDownListFilterChecking.addObject(DropDownModel(text: "รายการที่รอตรวจสอบ", identifier: "0"))
     }
     override func stateConfigData() {
         self.nzNavigationController?.delegate = self
@@ -107,26 +134,42 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+
         return groupList.count
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         let categoryName:String = groupList.objectAtIndex(section) as! String
         let dropDownModel:DropDownModel = self.getDropDownModelFromCategoryName(categoryName)!
         
         
         let resultPredicate:NSPredicate = NSPredicate(format: "categoryName contains[c] %@", dropDownModel.identifier)
         let resultArray:[AnyObject] = list.filteredArrayUsingPredicate(resultPredicate)
+        
+        if self.filterTypeSelected != "ALL" {
+            let mutable:NSMutableArray = NSMutableArray(array: resultArray)
+            let resultPredicate:NSPredicate = NSPredicate(format: "complete_status contains[c] %@", self.filterTypeSelected!)
+            let resultArray:[AnyObject] = mutable.filteredArrayUsingPredicate(resultPredicate)
+            return resultArray.count
+        }
+        
         return resultArray.count
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+       
+        var defectModel:DefectModel!
         
-        let categoryName:String = groupList.objectAtIndex(indexPath.section) as! String
-        let dropDownModel:DropDownModel = self.getDropDownModelFromCategoryName(categoryName)!
-        
+        let categoryName:String!
+        let dropDownModel:DropDownModel!
+        categoryName = groupList.objectAtIndex(indexPath.section) as! String
+        dropDownModel = self.getDropDownModelFromCategoryName(categoryName)!
         let resultPredicate:NSPredicate = NSPredicate(format: "categoryName contains[c] %@", dropDownModel.identifier)
         let resultArray:[AnyObject] = displayList.filteredArrayUsingPredicate(resultPredicate)
         let index:Int = (resultArray.count - 1) - indexPath.row
-        let defectModel:DefectModel = resultArray[index] as! DefectModel
+        defectModel = resultArray[index] as! DefectModel
+
+        
+        
         let cell:DefectCellChecking = tableView.dequeueReusableCellWithIdentifier(CELL_DEFECT_IDENTIFIER) as! DefectCellChecking
         cell.delegate = self
         ///*===== IMAGE =======*//
@@ -217,8 +260,8 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
             let bgLine:UIView = UIView(frame: CGRectMake(0,0,tableView.frame.size.width,30))
             bgLine.backgroundColor = UIColor.whiteColor()
             
-            let line:UIView = UIView(frame: CGRectMake(10,15,bgLine.frame.size.width - 10,1))
-            line.backgroundColor = UIColor.lightGrayColor()
+            let line:UIView = UIView(frame: CGRectMake(10,15,bgLine.frame.size.width - 10,0.7))
+            line.backgroundColor = UIColor.RGB(219, G: 219, B: 219)
             
             bgLine.addSubview(line)
             return bgLine
@@ -236,17 +279,24 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
         passCount = 0
         
         if self.defectRoomRef != nil {
-            for defect:DefectModel in (((self.defectRoomRef?.listDefect)!  as NSArray) as! [DefectModel]) {
+            
+            var theList:NSMutableArray = (self.defectRoomRef?.listDefect)!
+            if self.filterTypeSelected != "ALL" {
+                theList = displayList
+            }
+            
+            for defect:DefectModel in (((theList)  as NSArray) as! [DefectModel]) {
                 
                 if defect.df_type == "0" {
                     allDefect += 1
+                    if  defect.complete_status == "1" {
+                        passCount += 1
+                    }
                 }else{
                     garanteeDefect += 1
                 }
                 
-                if  defect.complete_status == "1" {
-                    passCount += 1
-                }
+                
             }
         }
         
@@ -254,12 +304,38 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
         
         self.alldefectBtn.setTitle("Defect ทั้งหมด (\(allDefect))", forState: UIControlState.Normal)
         self.garanteeBtn.setTitle("Guarantee (\(garanteeDefect))", forState: UIControlState.Normal)
-        self.passLb.text = "\(passCount) / \(self.defectRoomRef!.listDefect!.count)"
+        self.passLb.text = "\(passCount) / \(allDefect)"
         
+    }
+    func setNumberCheckingOnList(list:NSMutableArray){
+        var allDefect = 0
+        var passCount = 0
+        for defect:DefectModel in ((list  as NSArray) as! [DefectModel]) {
+            
+            if defect.df_type == "0" {
+                allDefect += 1
+                if  defect.complete_status == "1" {
+                    passCount += 1
+                }
+            }
+        }
+        
+        if self.filterTypeSelected == "0" {
+            self.passLb.text = "0 / \(allDefect)"
+        }else{
+            self.passLb.text = "\(passCount) / \(allDefect)"
+        }
+        
+    }
+    func setNumberOfDefect(number:Int){
+        self.alldefectBtn.setTitle("Defect ทั้งหมด (\(number))", forState: UIControlState.Normal)
+    }
+    func setNumberOfDefect(number:Int, title:String!){
+         self.alldefectBtn.setTitle("\(title) (\(number))", forState: UIControlState.Normal)
     }
     @IBAction func garanteeAction(sender: AnyObject) {
         
-        let split:NZSplitViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("NZSplitViewController") as! NZSplitViewController
+        let split:NZSplitViewController = NZSplitViewController.sharedInstance()
         let controllers:[UIViewController] = split.viewControllers;
         let nav:UINavigationController = controllers[1] as! UINavigationController
         let subsNav:[UIViewController] = nav.viewControllers
@@ -275,7 +351,7 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
         self.nzNavigationController?.pushViewControllerWithOutAnimate(split, completion: { () -> Void in
             
             
-                    let garanteeListViewController:GaranteeListViewController = self.storyboard?.instantiateViewControllerWithIdentifier("GaranteeListViewController") as! GaranteeListViewController
+                    let garanteeListViewController:GaranteeListViewController = GaranteeListViewController.sharedInstance()
                     garanteeListViewController.reloadData(self.defectRoomRef!, type: "1")
                     garanteeListViewController.allDefect = self.allDefect
                     garanteeListViewController.garanteeDefect = self.garanteeDefect
@@ -299,14 +375,16 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
     }
     
     func defectCellCheckingButtonClicked(view: DefectCellChecking) {
+        let defectModel:DefectModel!
+        var resultArray:[AnyObject]?
         let indexPath:NSIndexPath = self.tableView.indexPathForCell(view)!
+        
         let categoryName:String = groupList.objectAtIndex(indexPath.section) as! String
         let dropDownModel:DropDownModel = self.getDropDownModelFromCategoryName(categoryName)!
-        
         let resultPredicate:NSPredicate = NSPredicate(format: "categoryName contains[c] %@", dropDownModel.identifier)
-        let resultArray:[AnyObject] = displayList.filteredArrayUsingPredicate(resultPredicate)
-        let index:Int = (resultArray.count - 1) - indexPath.row
-        let defectModel:DefectModel = resultArray[index] as! DefectModel
+        resultArray = displayList.filteredArrayUsingPredicate(resultPredicate)
+        let index:Int = (resultArray!.count - 1) - indexPath.row
+        defectModel = resultArray![index] as! DefectModel
         
         if defectModel.complete_status == "1" {
             defectModel.complete_status = "0"
@@ -317,8 +395,25 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
         self.defectRoomRef?.doCache()
         self.tableView.reloadData()
         
+        if self.filterTypeSelected != "ALL" {
+            let resultPredicate:NSPredicate = NSPredicate(format: "complete_status contains[c] %@", self.filterTypeSelected!)
+            let resultArray:[AnyObject] = displayList.filteredArrayUsingPredicate(resultPredicate)
+            displayList.removeAllObjects()
+            for model in resultArray {
+                displayList.addObject(model)
+            }
+        }
+        self.setNumberCheckingOnList(displayList)
+        self.updateTitleFilterButton(resultArray)
     }
-    
+    func updateTitleFilterButton(resultArray:[AnyObject]?) {
+        if self.filterSelected == "ALL" {
+            self.setNumberOfDefect()
+        }else{
+            self.setNumberOfDefect(resultArray!.count, title: Category.convertCategoryNameToString(self.filterSelected!))
+        }
+        
+    }
     func nzNavigation(controller: NZNavigationViewController, didClickMenu popover: NZPopoverView, menu: NZRow) {
         
         if self.defectRoomRef != nil && menu.identifier == "sync" {
@@ -336,6 +431,7 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
                         
                         self.nzNavigationController?.popViewController({
                             popover.hide()
+                            self.nzNavigationController?.hideRightInfo(true)
                         })
                         
                     })
@@ -380,7 +476,7 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
                 })
                 
             }else if result == "FALSE"{
-                let alert = UIAlertController(title: "แจ้งเตือน", message: "รายการล่าสุดแล้ว", preferredStyle: UIAlertControllerStyle.Alert)
+                let alert = UIAlertController(title: "แจ้งเตือน", message: "ซิงค์กับเซริฟเวอร์เรียบร้อยแล้ว", preferredStyle: UIAlertControllerStyle.Alert)
                 let action:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: { (action) in
                     
                 })
@@ -440,6 +536,166 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
     }
     func touchBeganCell(cell: DefectCell) {
         
+    }
+    func plusCountGuaranteeDefectValue() {
+        garanteeDefect += 1
+        self.setGuaranteeCount(garanteeDefect)
+    }
+    func setGuaranteeCount(number:Int){
+        self.garanteeBtn.setTitle("Guarantee (\(number))", forState: UIControlState.Normal)
+    }
+    @IBAction func allDefectAction(sender: AnyObject) {
+        if dropDownController == nil {
+            
+            self.generateDropDownWithDataList(dropDownList, identifier: "filterType")
+        }
+    }
+    func nzDropDownViewdidAppear(contorller: NZDropDownViewController) {
+        
+        let sizeTable = contorller.tableView.contentSize
+        var rect = contorller.view.frame
+        var newHeight = sizeTable.height + 50
+        if newHeight > self.view.frame.size.height {
+            newHeight = self.view.frame.size.height - 50
+        }
+        
+        rect.size.height = newHeight
+        contorller.view.frame = rect
+        contorller.view.setNeedsDisplay()
+        
+    }
+    func generateDropDownWithDataList(list:NSMutableArray!, identifier:String!){
+        dropDownController = UIStoryboard(name: "NZDropDown", bundle: nil).instantiateViewControllerWithIdentifier("NZDropDownViewController") as? NZDropDownViewController
+        dropDownController!.delegate = self
+        dropDownController?.identifier = identifier
+        
+        for model:DropDownModel in ((list as NSArray) as! [DropDownModel]) {
+            dropDownController!.rawObjects.addObject(model)
+        }
+        
+        dropDownController!.displayObjects = dropDownController!.rawObjects.mutableCopy() as! NSMutableArray
+        dropDownController?.updatePositionAtView(self.view)
+        
+        self.addChildViewController(dropDownController!)
+        self.view.addSubview(dropDownController!.view)
+    }
+    
+    /////DELEGATE
+    func nzDropDownHideSearchPanel(contorller: NZDropDownViewController) -> Bool {
+        return true
+    }
+    func nzDropDownCustomPositon(contorller: NZDropDownViewController) -> CGRect {
+        
+        if contorller.identifier == "filterTypeChecking" {
+            return CGRectMake(
+                self.filterTypeBtn.frame.origin.x + 20
+                , self.filterTypeBtn.frame.origin.y + 10
+                , 200
+                , (self.tableView.frame.size.height / 2)+50
+            )
+        }else{
+            return CGRectMake(
+                self.alldefectBtn.frame.origin.x + 20
+                , self.alldefectBtn.frame.origin.y + 10
+                , 340
+                , (self.tableView.frame.size.height / 2)+50
+            )
+        }
+        
+        
+    }
+    func nzDropDown(contorller: NZDropDownViewController, shouldDisplayCell model: DropDownModel) -> Bool {
+        
+        let resultPredicate:NSPredicate = NSPredicate(format: "categoryName contains[c] %@", model.identifier)
+        let resultArray:[AnyObject] = list.filteredArrayUsingPredicate(resultPredicate)
+        
+        if resultArray.count == 0 && model.identifier != "ALL" {
+            return false
+        }
+        return true
+        
+    }
+    func dropDownViewDidClose(view: NZDropDownViewController) {
+        
+    }
+    func nzDropDown(contorller: NZDropDownViewController, didClickCell model: DropDownModel) {
+        self.closeDropDown()
+        if contorller.identifier == "filterType" {
+            self.filterSelected = model.identifier
+        }else{
+            self.filterTypeSelected = model.identifier
+            self.filterTypeBtn.setTitle(model.text, forState: UIControlState.Normal)
+        }
+        self.filterWithKey(self.filterSelected)
+        
+    }
+    
+    func filterWithKey(key:String!){
+        displayList.removeAllObjects()
+        
+        if key == "ALL"
+        {
+            
+            displayList = list.mutableCopy() as! NSMutableArray
+            
+            if self.filterTypeSelected != "ALL" {
+                let resultPredicate:NSPredicate = NSPredicate(format: "complete_status contains[c] %@", self.filterTypeSelected!)
+                let resultArray:[AnyObject] = displayList.filteredArrayUsingPredicate(resultPredicate)
+                displayList.removeAllObjects()
+                for model in resultArray {
+                    displayList.addObject(model)
+                }
+            
+            }
+            
+            self.setNumberOfDefect(displayList.count)
+            self.setNumberCheckingOnList(displayList);
+        }else{
+           
+            let resultPredicate:NSPredicate = NSPredicate(format: "categoryName contains[c] %@", key)
+            let resultArray:[AnyObject] = list.filteredArrayUsingPredicate(resultPredicate)
+            for model in resultArray {
+                displayList.addObject(model)
+            }
+            
+            if self.filterTypeSelected != "ALL" {
+                let resultPredicate:NSPredicate = NSPredicate(format: "complete_status contains[c] %@", self.filterTypeSelected!)
+                let resultArray:[AnyObject] = displayList.filteredArrayUsingPredicate(resultPredicate)
+                displayList.removeAllObjects()
+                for model in resultArray {
+                    displayList.addObject(model)
+                }
+                
+            }
+            
+            
+            self.setNumberOfDefect(displayList.count, title: Category.convertCategoryNameToString(key!))
+            self.setNumberCheckingOnList(displayList);
+        }
+        self.createGroupListDataByListData()
+        self.tableView.reloadData()
+    }
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.closeDropDown()
+    }
+    func tableViewTouch(){
+        self.closeDropDown()
+        
+        self.nzNavigationController?.hideMenuPopoverIfViewIsShowing()
+    }
+    func closeDropDown() {
+        if dropDownController != nil {
+            dropDownController?.closeView()
+            dropDownController = nil
+        }
+        
+    }
+    
+    @IBAction func filterTypeAction(sender: AnyObject) {
+        if dropDownController == nil {
+            
+            self.generateDropDownWithDataList(dropDownListFilterChecking, identifier: "filterTypeChecking")
+        }
     }
     
 }

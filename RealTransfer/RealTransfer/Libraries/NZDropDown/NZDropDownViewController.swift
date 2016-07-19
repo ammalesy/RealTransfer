@@ -13,9 +13,11 @@ let NZ_DROPDOWN_NOT_NEED_CUSTOM_POSITION_Y:CGFloat = 9897654329.98
 @objc protocol NZDropDownViewDelegate{
      optional func dropDownViewDidClose(view:NZDropDownViewController)
      optional func nzDropDown(contorller:NZDropDownViewController, didClickCell model:DropDownModel)
+     optional func nzDropDown(contorller:NZDropDownViewController, shouldDisplayCell model:DropDownModel) -> Bool
      optional func nzDropDownCustomPositon(contorller:NZDropDownViewController) -> CGRect
-    optional func nzDropDownCustomYPositon(contorller:NZDropDownViewController, width:CGFloat, height:CGFloat) -> CGFloat
+     optional func nzDropDownCustomYPositon(contorller:NZDropDownViewController, width:CGFloat, height:CGFloat) -> CGFloat
      optional func nzDropDownHideSearchPanel(contorller:NZDropDownViewController) -> Bool
+     optional func nzDropDownViewdidAppear(contorller:NZDropDownViewController)
 }
 
 class NZDropDownViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate {
@@ -34,6 +36,19 @@ class NZDropDownViewController: UIViewController,UITableViewDataSource,UITableVi
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var searchTxt: UITextField!
     @IBOutlet weak var tableView: UITableView!
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if ((self.delegate != nil) &&
+            (self.delegate as! NSObject).respondsToSelector(#selector(NZDropDownViewDelegate.nzDropDownViewdidAppear(_:))))
+        {
+            
+            self.delegate!.nzDropDownViewdidAppear!(self)
+
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -97,6 +112,19 @@ class NZDropDownViewController: UIViewController,UITableViewDataSource,UITableVi
         
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        
+        
+        if ((self.delegate != nil) &&
+            (self.delegate as! NSObject).respondsToSelector(#selector(NZDropDownViewDelegate.nzDropDown(_:shouldDisplayCell:))))
+        {
+            let model:DropDownModel = displayObjects.objectAtIndex(indexPath.row) as! DropDownModel
+            let shouldDisplay = self.delegate!.nzDropDown!(self, shouldDisplayCell: model)
+            if shouldDisplay == false {
+                return 0
+            }
+            
+        }
+        
         return UITableViewAutomaticDimension
     }
     func closeView() {

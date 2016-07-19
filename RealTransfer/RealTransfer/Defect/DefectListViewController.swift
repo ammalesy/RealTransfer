@@ -23,6 +23,7 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
     
     var defectRoomRef:DefectRoom?
     var isShowAll:Bool = true
+    var filterSelected:String?
     
     var dropDownController:NZDropDownViewController?
 
@@ -43,6 +44,7 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
         
         let firstModel:DropDownModel = DropDownModel(text: "เลือกดูทั้งหมด")
         firstModel.identifier = "ALL"
+        filterSelected = "ALL"
         dropDownList.addObject(firstModel)
         
         let categoryList:NSDictionary = Category.sharedInstance.getCategory()
@@ -64,7 +66,13 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
         return "DefectListViewController"
     }
     func setNumberOfDefect(){
-        self.countDefectLb.text = "Defect ทั้งหมด (\(list.count))"
+        self.countDefectLb?.text = "Defect ทั้งหมด (\(list.count))"
+    }
+    func setNumberOfDefect(number:Int){
+        self.countDefectLb?.text = "Defect ทั้งหมด (\(number))"
+    }
+    func setNumberOfDefect(number:Int, title:String!){
+        self.countDefectLb?.text = "\(title) (\(number))"
     }
     
     func reloadData(defectRoom:DefectRoom!) {
@@ -120,6 +128,20 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
         
         
     }
+    func nzDropDownViewdidAppear(contorller: NZDropDownViewController) {
+        
+        let sizeTable = contorller.tableView.contentSize
+        var rect = contorller.view.frame
+        var newHeight = sizeTable.height + 50
+        if newHeight > self.view.frame.size.height {
+            newHeight = self.view.frame.size.height - 50
+        }
+        
+        rect.size.height = newHeight
+        contorller.view.frame = rect
+        contorller.view.setNeedsDisplay()
+        
+    }
     func generateDropDownWithDataList(list:NSMutableArray!, identifier:String!){
         dropDownController = UIStoryboard(name: "NZDropDown", bundle: nil).instantiateViewControllerWithIdentifier("NZDropDownViewController") as? NZDropDownViewController
         dropDownController!.delegate = self
@@ -154,7 +176,21 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
         
         self.closeDropDown()
         self.filterWithKey(model.identifier)
+        self.filterSelected = model.identifier
+        
     }
+    func nzDropDown(contorller: NZDropDownViewController, shouldDisplayCell model: DropDownModel) -> Bool {
+        
+        let resultPredicate:NSPredicate = NSPredicate(format: "categoryName contains[c] %@", model.identifier)
+        let resultArray:[AnyObject] = list.filteredArrayUsingPredicate(resultPredicate)
+        
+        if resultArray.count == 0 && model.identifier != "ALL" {
+            return false
+        }
+        return true
+        
+    }
+    
     func filterWithKey(key:String!){
         displayList.removeAllObjects()
         
@@ -163,6 +199,7 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
             
             displayList = list.mutableCopy() as! NSMutableArray
             isShowAll = true
+            self.setNumberOfDefect(displayList.count)
         }else{
             isShowAll = false
             let resultPredicate:NSPredicate = NSPredicate(format: "categoryName contains[c] %@", key)
@@ -171,6 +208,8 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
             for model in resultArray {
                 displayList.addObject(model)
             }
+            
+            self.setNumberOfDefect(resultArray.count, title: Category.convertCategoryNameToString(key!))
         }
         self.createGroupListDataByListData()
         self.tableView.reloadData()

@@ -11,6 +11,20 @@ import UIKit
 class NZSplitViewController: UISplitViewController {
     var nzNavigationController:NZNavigationViewController?
     
+    static var shareInstance:NZSplitViewController?
+    
+    class func sharedInstance()->NZSplitViewController {
+        if self.shareInstance == nil {
+            self.shareInstance = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("NZSplitViewController") as? NZSplitViewController
+        }
+        return self.shareInstance!
+    }
+    class func desTroyShareInstance() {
+        
+        self.shareInstance = nil;
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

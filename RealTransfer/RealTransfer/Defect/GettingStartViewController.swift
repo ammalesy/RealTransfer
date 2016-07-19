@@ -490,6 +490,14 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             cell.nextBtn.enabled = false
             cell.nextBtn.setTitleColor(UIColor.RGB(200, G: 201, B: 202), forState: UIControlState.Normal)
         }else if (string as NSString).length >= 4 {
+            
+            for model:AutoCompleteModel in (((autoCompleteController?.displayObjects)! as NSArray) as! [AutoCompleteModel]) {
+                if (model.userInfo as! Room).un_name == string {
+                    self.roomSelected = (model.userInfo as! Room)
+                    break;
+                }
+            }
+            
             cell.nextBtn.enabled = true
             cell.nextBtn.setTitleColor(UIColor.RGB(104, G: 205, B: 64), forState: UIControlState.Normal)
         }
@@ -530,6 +538,10 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         if model.userInfo is Room
         {
             self.roomSelected = model.userInfo as? Room
+            let cell:CellTxtSearch = self.getCellRoom()
+            cell.nextBtn.enabled = true
+            cell.nextBtn.setTitleColor(UIColor.RGB(104, G: 205, B: 64), forState: UIControlState.Normal)
+            
         }
 
         self.closeAutoComplete()
@@ -638,7 +650,7 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
                     
                     customer.checkDate = dateConcat
                 }
-                let defectNo = defectInfo.objectForKey("df_room_id") as? String
+                let defectNo = defectInfo.objectForKey("df_no") as? String
                 row4.detailInfo7 = defectNo!
                 customer.defectNo = defectNo!
                 
@@ -647,8 +659,12 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             if ((list?.objectForKey("qcCheckerInfo") as? NSMutableDictionary) != nil) {
                 qcCheckerInfo = (list?.objectForKey("qcCheckerInfo") as? NSMutableDictionary)!
                 let qcChecker = "\(qcCheckerInfo.objectForKey("user_pers_fname") as! String) \(qcCheckerInfo.objectForKey("user_pers_lname") as! String)"
-                row4.headInfo8 = "QC Checker : "
-                row4.detailInfo8 = qcChecker
+//                row4.headInfo8 = "QC Checker : "
+//                row4.detailInfo8 = qcChecker
+//                
+                row4.headInfo8 = ""
+                row4.detailInfo8 = ""
+
                 
                 customer.qcChecker = qcChecker
             }
@@ -723,7 +739,7 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             
         }
     }
-    func generateDropDownAndParseDataWithCell(cell:CellDropDown, dataList:NSMutableArray!, rowModel:RowModel?) {
+    func generateDropDownAndParseDataWithCell(cell:CellDropDown, dataList:NSMutableArray!, rowModel:RowModel?)->NZDropDownViewController? {
         
         dropDownController = UIStoryboard(name: "NZDropDown", bundle: nil).instantiateViewControllerWithIdentifier("NZDropDownViewController") as? NZDropDownViewController
         dropDownController?.labelReference = cell.rightLabel
@@ -741,6 +757,16 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         self.panelView.addSubview(dropDownController!.view)
         self.tableView.scrollEnabled = false
         dropDownController?.tableView.reloadData()
+        
+        return dropDownController!
+    }
+    func nzDropDownHideSearchPanel(contorller: NZDropDownViewController) -> Bool {
+        
+        if contorller.identifier == "BUILDING_LIST"{
+            return true;
+        }
+        return false;
+        
     }
     func nzDropDownCustomYPositon(contorller: NZDropDownViewController, width: CGFloat, height: CGFloat) -> CGFloat {
         if contorller.identifier == "BUILDING_LIST"{

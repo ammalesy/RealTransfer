@@ -18,6 +18,7 @@ class DefectRoom: Model,NSCoding {
     var df_un_id:String?
     var df_check_date:String?
     var df_user_id:String?
+    var df_no:String?
     var df_user_id_cs:String?
     var df_sync_status:String?
     
@@ -94,6 +95,7 @@ class DefectRoom: Model,NSCoding {
         self.df_check_date  = aDecoder.decodeObjectForKey("df_check_date") as? String
         self.df_user_id  = aDecoder.decodeObjectForKey("df_user_id") as? String
         self.df_user_id_cs  = aDecoder.decodeObjectForKey("df_user_id_cs") as? String
+        self.df_no  = aDecoder.decodeObjectForKey("df_no") as? String
         self.df_sync_status  = aDecoder.decodeObjectForKey("df_sync_status") as? String
         self.listDefect  = (aDecoder.decodeObjectForKey("listDefect") as? NSMutableArray)!
   
@@ -114,6 +116,9 @@ class DefectRoom: Model,NSCoding {
         }
         if let val = self.df_user_id_cs{
             aCoder.encodeObject(val, forKey: "df_user_id_cs")
+        }
+        if let val = self.df_no{
+            aCoder.encodeObject(val, forKey: "df_no")
         }
         if let val = self.df_sync_status{
             aCoder.encodeObject(val, forKey: "df_sync_status")
@@ -269,6 +274,7 @@ class DefectRoom: Model,NSCoding {
                         defectRoom.df_sync_status = unitDefect.objectForKey("df_sync_status") as? String
                         defectRoom.df_un_id = unitDefect.objectForKey("df_un_id") as? String
                         defectRoom.df_user_id = unitDefect.objectForKey("df_user_id") as? String
+                        defectRoom.df_no = unitDefect.objectForKey("df_no") as? String
                         
                         let cs:String = (unitDefect.objectForKey("df_user_id_cs") as? String)!
                         let lastCs = ((cs as NSString).componentsSeparatedByString(",") as [String]).last
@@ -324,6 +330,7 @@ class DefectRoom: Model,NSCoding {
                             self.df_un_id = unitDefect.objectForKey("df_un_id") as? String
                             self.df_user_id = unitDefect.objectForKey("df_user_id") as? String
                             self.df_user_id_cs = unitDefect.objectForKey("df_user_id_cs") as? String
+                            self.df_no = unitDefect.objectForKey("df_no") as? String
                             self.project = PROJECT
                         }
                         

@@ -9,9 +9,10 @@
 import UIKit
 
 let kPath = "PATH"
-let domainName = "ec2-52-10-22-26.us-west-2.compute.amazonaws.com"
+//let domainName = "ec2-52-10-22-26.us-west-2.compute.amazonaws.com"
 //let domainName = "192.168.1.3"
-//let domainName = "192.168.1.5"
+let domainName = "192.168.1.5"
+//let domainName = "127.0.0.1"
 let defaultPath = "\(domainName)/Service"
 
 class PathUtil: NSObject {

@@ -42,6 +42,7 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        
     }
     func showGettingStartView(){
         let controller:GettingStartViewController = self.storyboard?.instantiateViewControllerWithIdentifier("GettingStartViewController") as! GettingStartViewController
@@ -91,7 +92,7 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
                 )
                 
                 view.addTarget(self, action: #selector(AddDefectViewController.tapImageGallery), forControlEvents: UIControlEvents.TouchUpInside)
-                view.setImage(UIImage(named: "p1"), forState: UIControlState.Normal)
+                view.setImage(UIImage(named: "folder"), forState: UIControlState.Normal)
                 view.userInteractionEnabled = true
                 imagePicker!.cameraOverlayView = view
                 imagePicker!.cameraOverlayView?.userInteractionEnabled = true
@@ -160,13 +161,13 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
         
         if self.defectRoom != nil && menu.identifier == "sync" {
             
-            let alert = UIAlertController(title: "ตัวเลือก", message:"กรุณาเลือกประเภทการซิงค์", preferredStyle: UIAlertControllerStyle.Alert)
-            let noneCompleteAction:UIAlertAction = UIAlertAction(title: "ยังคงเหลือการตรวจสอบ", style: UIAlertActionStyle.Default, handler: { (action) in
+            let alert = UIAlertController(title: "ยืนยันการตรวจสอบ", message:"กรุณาเลือกประเภทการบันทึก", preferredStyle: UIAlertControllerStyle.Alert)
+            let noneCompleteAction:UIAlertAction = UIAlertAction(title: "บันทึกและรอตรวจสอบเพิ่มภายหลัง", style: UIAlertActionStyle.Default, handler: { (action) in
                 
                 self.sync(false)
                 
             })
-            let completedAction:UIAlertAction = UIAlertAction(title: "ตรวจสอบทั้งหมดแล้ว", style: UIAlertActionStyle.Default, handler: { (action) in
+            let completedAction:UIAlertAction = UIAlertAction(title: "บันทึกและยืนยัน", style: UIAlertActionStyle.Default, handler: { (action) in
                 Queue.serialQueue({
                     Queue.mainQueue({ 
                          self.sync(true)
@@ -179,12 +180,12 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
                         if self.isModeGanrantee() {
                             self.splitController?.nzNavigationController?.popViewControllerWithOutAnimate({
                                 self.splitController?.nzNavigationController?.popViewController({
-                                    
+                                    self.splitController?.nzNavigationController?.hideRightInfo(true)
                                 })
                             })
                         }else{
                             self.splitController?.nzNavigationController?.popViewController({
-                                
+                                self.splitController?.nzNavigationController?.hideRightInfo(true)
                             })
                         }
                         
@@ -236,10 +237,19 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
                     
                     SwiftSpinner.hide()
                     
+                    let alert = UIAlertController(title: "บันทึกสำเร็จ", message:nil, preferredStyle: UIAlertControllerStyle.Alert)
+                    let completedAction:UIAlertAction = UIAlertAction(title: "ตกลง", style: UIAlertActionStyle.Default, handler: { (action) in
+
+                    })
+                    alert.addAction(completedAction)
+                    self.presentViewController(alert, animated: true, completion: {
+                        
+                    })
+                    
                 }) 
                 
             }else if result == "FALSE"{
-                let alert = UIAlertController(title: "แจ้งเตือน", message: "รายการล่าสุดแล้ว", preferredStyle: UIAlertControllerStyle.Alert)
+                let alert = UIAlertController(title: "แจ้งเตือน", message: "ซิงค์กับเซริฟเวอร์เรียบร้อยแล้ว", preferredStyle: UIAlertControllerStyle.Alert)
                 let action:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: { (action) in
                     
                 })
