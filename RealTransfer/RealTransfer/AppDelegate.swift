@@ -21,7 +21,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
+    func application(application: UIApplication, supportedInterfaceOrientationsForWindow window: UIWindow?) -> UIInterfaceOrientationMask {
+        
+        return checkOrientation(self.window?.rootViewController)
+        
+    }
+    func checkOrientation(viewController:UIViewController?)-> UIInterfaceOrientationMask{
+        
+        if(viewController == nil){
+            
+            return UIInterfaceOrientationMask.Landscape//All means all orientation
+            
+        }else if (viewController is GalleryImagePickerController){
+            
+            return UIInterfaceOrientationMask.All//This is sign in view controller that i only want to set this to portrait mode only
+            
+        }else{
+            
+            return checkOrientation(viewController!.presentedViewController)
+        }
+    }
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
     

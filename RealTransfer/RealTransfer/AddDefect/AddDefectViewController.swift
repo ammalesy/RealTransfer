@@ -14,7 +14,7 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
 
     var splitController:NZSplitViewController?
     var imagePicker:UIImagePickerController?
-    var imagePickerGallery:UIImagePickerController?
+    var imagePickerGallery:GalleryImagePickerController?
     var defectRoom:DefectRoom?
     var project:ProjectModel!
     
@@ -106,7 +106,7 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
     func tapImageGallery(){
         
         if imagePicker != nil {
-            imagePickerGallery = UIImagePickerController()
+            imagePickerGallery = GalleryImagePickerController()
             
             imagePickerGallery!.delegate = self
             imagePickerGallery!.sourceType =
@@ -317,5 +317,7 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
         
         return false
     }
+    
+    
 
 }

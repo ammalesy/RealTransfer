@@ -13,5 +13,6 @@ pod 'SwiftSpinner'
 pod 'SDWebImage', '~>3.8'
 pod 'KMPlaceholderTextView', '~> 1.2.0'
 pod 'TTTAttributedLabel'
+pod 'ToggleView', '~> 0.0.1'
 end
 

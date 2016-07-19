@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'B92995D8163C99032FDD4947'
+               BlueprintIdentifier = '4DB772DBA786AAE57DA94A82'
                BlueprintName = 'Pods-RealTransfer'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods_RealTransfer.framework'>

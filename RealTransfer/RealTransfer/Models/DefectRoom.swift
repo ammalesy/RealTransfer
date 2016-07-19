@@ -238,6 +238,12 @@ class DefectRoom: Model,NSCoding {
                             defect.df_type = dict.objectForKey("df_type") as? String
                             defect.complete_status = dict.objectForKey("complete_status") as? String
                             
+                            if defect.complete_status == "0" {
+                                defect.canEdit = "1"
+                            }else{
+                                defect.canEdit = "0"
+                            }
+                            
                             self.listDefect?.addObject(defect)
                         }
                         

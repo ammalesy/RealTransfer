@@ -89,6 +89,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-RealTransfer/SDWebImage.framework"
   install_framework "Pods-RealTransfer/SwiftSpinner.framework"
   install_framework "Pods-RealTransfer/TTTAttributedLabel.framework"
+  install_framework "Pods-RealTransfer/ToggleView.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-RealTransfer/Alamofire.framework"
@@ -96,4 +97,5 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-RealTransfer/SDWebImage.framework"
   install_framework "Pods-RealTransfer/SwiftSpinner.framework"
   install_framework "Pods-RealTransfer/TTTAttributedLabel.framework"
+  install_framework "Pods-RealTransfer/ToggleView.framework"
 fi

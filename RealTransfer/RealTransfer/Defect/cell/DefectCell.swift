@@ -18,6 +18,7 @@ import TTTAttributedLabel
     
     
     optional func defectCellCheckingButtonClicked(view:DefectCellChecking)
+    optional func defectCellSwitchCanChanged(view:DefectCellChecking) -> Bool
 
 }
 

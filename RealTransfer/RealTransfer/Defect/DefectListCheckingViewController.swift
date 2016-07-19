@@ -201,11 +201,6 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
                     
                 })
             })
-            
-            
-            
-            
-            
         }
         //////////////////////////
         
@@ -235,10 +230,24 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
         
         
         if defectModel.complete_status == "0" {
-            cell.iconImgView.image = UIImage(named: "un_check_sync")
+            cell.switching.setOn(false, animated: false)
+            cell.titleCheckDate.text = "รอการ   ตรวจสอบ"
+            cell.switching.userInteractionEnabled = true
         }else{
-            cell.iconImgView.image = UIImage(named: "checked_sync")
+            cell.switching.setOn(true, animated: false)
+            let arrayDate:[String] = (defectModel.df_date! as NSString).componentsSeparatedByString("|")
+            cell.titleCheckDate.text = "ตรวจเมื่อ \(arrayDate[0])"
+            
+            if defectModel.canEdit == "0"  {
+                cell.switching.userInteractionEnabled = false
+            }else if defectModel.canEdit == "1" {
+                cell.switching.userInteractionEnabled = true
+            }
         }
+        
+        
+        
+        cell.defectRef = defectModel
         
         return cell
         
@@ -373,8 +382,9 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
         
         
     }
-    
+
     func defectCellCheckingButtonClicked(view: DefectCellChecking) {
+
         let defectModel:DefectModel!
         var resultArray:[AnyObject]?
         let indexPath:NSIndexPath = self.tableView.indexPathForCell(view)!
@@ -390,7 +400,9 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
             defectModel.complete_status = "0"
         }else{
             defectModel.complete_status = "1"
+            defectModel.df_date = NSDateFormatter.dateFormater().stringFromDate(NSDate())
         }
+
         
         self.defectRoomRef?.doCache()
         self.tableView.reloadData()
@@ -606,11 +618,13 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
     }
     func nzDropDown(contorller: NZDropDownViewController, shouldDisplayCell model: DropDownModel) -> Bool {
         
-        let resultPredicate:NSPredicate = NSPredicate(format: "categoryName contains[c] %@", model.identifier)
-        let resultArray:[AnyObject] = list.filteredArrayUsingPredicate(resultPredicate)
-        
-        if resultArray.count == 0 && model.identifier != "ALL" {
-            return false
+        if contorller.identifier == "filterType" {
+            let resultPredicate:NSPredicate = NSPredicate(format: "categoryName contains[c] %@", model.identifier)
+            let resultArray:[AnyObject] = list.filteredArrayUsingPredicate(resultPredicate)
+            
+            if resultArray.count == 0 && model.identifier != "ALL" {
+                return false
+            }
         }
         return true
         

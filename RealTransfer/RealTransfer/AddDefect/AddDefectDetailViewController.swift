@@ -125,8 +125,12 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
     }
     func openImagePickerViewByType(type:UIImagePickerControllerSourceType!){
         
+        if type == UIImagePickerControllerSourceType.PhotoLibrary {
+            imagePicker = GalleryImagePickerController()
+        }else{
+            imagePicker = UIImagePickerController()
+        }
         
-        imagePicker = UIImagePickerController()
         
         imagePicker!.delegate = self
         imagePicker!.sourceType = type

@@ -1,0 +1,6 @@
+framework module ToggleView {
+  umbrella header "ToggleView-umbrella.h"
+
+  export *
+  module * { export * }
+}
