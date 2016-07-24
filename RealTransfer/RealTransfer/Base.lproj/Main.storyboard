@@ -50,7 +50,8 @@
             <string>SukhumvitSet-SemiBold</string>
             <string>SukhumvitSet-Bold</string>
             <string>SukhumvitSet-Thin</string>
-            <string>SukhumvitSet-Medium</string>
+            <string>SukhumvitSet-Bold</string>
+            <string>SukhumvitSet-Bold</string>
             <string>SukhumvitSet-Text</string>
             <string>SukhumvitSet-Text</string>
             <string>SukhumvitSet-Text</string>
@@ -1452,7 +1453,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="114" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="uLM-bV-lkD">
-                                <rect key="frame" x="0.0" y="70" width="600" height="530"/>
+                                <rect key="frame" x="0.0" y="90" width="600" height="510"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="CellDefect" rowHeight="114" id="xhI-kK-gb4" customClass="DefectCell" customModule="RealTransfer" customModuleProvider="target">
@@ -1563,30 +1564,51 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Defect ทั้งหมด (22)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="1" translatesAutoresizingMaskIntoConstraints="NO" id="u2O-uP-Hll">
-                                <rect key="frame" x="20" y="30" width="145" height="30"/>
-                                <gestureRecognizers/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hs9-x9-cGV">
+                                <rect key="frame" x="10" y="30" width="300" height="50"/>
+                                <color key="backgroundColor" red="0.96078431369999995" green="0.96470588239999999" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="qYl-s3-VRR"/>
+                                    <constraint firstAttribute="width" constant="300" id="1Zz-Xa-Bsi"/>
+                                    <constraint firstAttribute="width" constant="240" id="2JP-0s-rjt"/>
+                                    <constraint firstAttribute="height" constant="50" id="Xzq-hp-jSQ"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="SukhumvitSet-Medium" family="Sukhumvit Set" pointSize="18"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="Bth-7U-mbk" appends="YES" id="DBR-Jl-Mmh"/>
-                                </connections>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hs9-x9-cGV">
-                                <rect key="frame" x="165" y="20" width="435" height="50"/>
+                                <fontDescription key="fontDescription" name="SukhumvitSet-Bold" family="Sukhumvit Set" pointSize="14"/>
+                                <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="20" maxY="0.0"/>
+                                <state key="normal" title="Defect">
+                                    <color key="titleColor" red="0.2784313725" green="0.76862745099999996" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="2JP-0s-rjt"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <action selector="openDropDown:" destination="Aag-dg-5CK" eventType="touchUpInside" id="kGD-PH-s2x"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropDown" translatesAutoresizingMaskIntoConstraints="NO" id="jYd-is-tdP">
-                                <rect key="frame" x="570" y="35" width="20" height="20"/>
+                            <label hidden="YES" opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Defect ทั้งหมด (22)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="1" translatesAutoresizingMaskIntoConstraints="NO" id="u2O-uP-Hll">
+                                <rect key="frame" x="20" y="30" width="115" height="50"/>
+                                <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="0ZY-2h-tn3"/>
-                                    <constraint firstAttribute="width" constant="20" id="o3V-Mq-DUr"/>
+                                    <constraint firstAttribute="height" constant="30" id="qYl-s3-VRR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SukhumvitSet-Bold" family="Sukhumvit Set" pointSize="14"/>
+                                <color key="textColor" red="0.2784313725" green="0.76862745099999996" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="qYl-s3-VRR"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Bth-7U-mbk" appends="YES" id="DBR-Jl-Mmh"/>
+                                </connections>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ExpandArrow" translatesAutoresizingMaskIntoConstraints="NO" id="jYd-is-tdP">
+                                <rect key="frame" x="288" y="47" width="15" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="0ZY-2h-tn3"/>
+                                    <constraint firstAttribute="width" constant="15" id="o3V-Mq-DUr"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -1595,22 +1617,59 @@
                             <constraint firstItem="u2O-uP-Hll" firstAttribute="leading" secondItem="bpK-Fz-FJQ" secondAttribute="leading" constant="20" id="01q-Uc-1JI"/>
                             <constraint firstItem="hs9-x9-cGV" firstAttribute="leading" secondItem="u2O-uP-Hll" secondAttribute="trailing" id="1Dg-20-XB9"/>
                             <constraint firstItem="g73-DC-q9X" firstAttribute="top" secondItem="uLM-bV-lkD" secondAttribute="bottom" id="4oM-qD-pU7"/>
+                            <constraint firstItem="jYd-is-tdP" firstAttribute="leading" secondItem="hs9-x9-cGV" secondAttribute="trailing" constant="-22" id="6Ca-nI-HzQ"/>
+                            <constraint firstItem="u2O-uP-Hll" firstAttribute="height" secondItem="hs9-x9-cGV" secondAttribute="height" id="C50-Cr-CBg"/>
+                            <constraint firstItem="hs9-x9-cGV" firstAttribute="leading" secondItem="u2O-uP-Hll" secondAttribute="leading" constant="-10" id="Dqm-pa-x8S"/>
                             <constraint firstItem="uLM-bV-lkD" firstAttribute="leading" secondItem="bpK-Fz-FJQ" secondAttribute="leading" id="Ge8-2H-hgr"/>
                             <constraint firstAttribute="trailing" secondItem="hs9-x9-cGV" secondAttribute="trailing" id="ID6-5d-mJv"/>
+                            <constraint firstItem="hs9-x9-cGV" firstAttribute="leading" secondItem="u2O-uP-Hll" secondAttribute="leading" constant="10" id="Iji-7D-3JX"/>
+                            <constraint firstItem="uLM-bV-lkD" firstAttribute="top" secondItem="hs9-x9-cGV" secondAttribute="bottom" constant="10" id="Is0-ft-LMl"/>
+                            <constraint firstItem="hs9-x9-cGV" firstAttribute="leading" secondItem="u2O-uP-Hll" secondAttribute="trailing" constant="-128" id="Oqu-ZF-zYc"/>
                             <constraint firstItem="hs9-x9-cGV" firstAttribute="top" secondItem="qxs-yG-IJx" secondAttribute="bottom" id="POD-5F-QsQ"/>
+                            <constraint firstItem="hs9-x9-cGV" firstAttribute="top" secondItem="qxs-yG-IJx" secondAttribute="bottom" constant="10" id="QXS-Yw-ouG"/>
+                            <constraint firstItem="jYd-is-tdP" firstAttribute="leading" secondItem="hs9-x9-cGV" secondAttribute="trailing" constant="-20" id="SVl-MM-fhO"/>
+                            <constraint firstItem="u2O-uP-Hll" firstAttribute="centerY" secondItem="hs9-x9-cGV" secondAttribute="centerY" id="TvL-t0-SDu"/>
                             <constraint firstItem="uLM-bV-lkD" firstAttribute="top" secondItem="u2O-uP-Hll" secondAttribute="bottom" constant="10" id="YUZ-Y6-6b5"/>
+                            <constraint firstItem="jYd-is-tdP" firstAttribute="centerY" secondItem="u2O-uP-Hll" secondAttribute="centerY" id="b9d-j1-RJW"/>
                             <constraint firstItem="uLM-bV-lkD" firstAttribute="top" secondItem="bpK-Fz-FJQ" secondAttribute="top" id="cfq-Fx-YJi"/>
+                            <constraint firstItem="hs9-x9-cGV" firstAttribute="leading" secondItem="bpK-Fz-FJQ" secondAttribute="leadingMargin" id="ekN-wk-96X"/>
                             <constraint firstAttribute="trailing" secondItem="jYd-is-tdP" secondAttribute="trailing" constant="10" id="emD-0S-4bC"/>
                             <constraint firstAttribute="trailing" secondItem="u2O-uP-Hll" secondAttribute="trailing" id="j8E-Iu-FFp"/>
+                            <constraint firstItem="hs9-x9-cGV" firstAttribute="leading" secondItem="bpK-Fz-FJQ" secondAttribute="leading" constant="10" id="l8N-ad-DxD"/>
                             <constraint firstItem="u2O-uP-Hll" firstAttribute="top" secondItem="qxs-yG-IJx" secondAttribute="bottom" constant="10" id="pic-7U-o3D"/>
+                            <constraint firstItem="u2O-uP-Hll" firstAttribute="height" secondItem="hs9-x9-cGV" secondAttribute="height" id="q5r-Yq-9qi"/>
                             <constraint firstItem="uLM-bV-lkD" firstAttribute="top" secondItem="hs9-x9-cGV" secondAttribute="bottom" id="rA5-e6-a76"/>
                             <constraint firstAttribute="trailing" secondItem="uLM-bV-lkD" secondAttribute="trailing" id="rpx-iC-YTm"/>
+                            <constraint firstItem="jYd-is-tdP" firstAttribute="leading" secondItem="hs9-x9-cGV" secondAttribute="trailing" constant="-20" id="uAY-kw-wBe"/>
+                            <constraint firstItem="jYd-is-tdP" firstAttribute="centerY" secondItem="hs9-x9-cGV" secondAttribute="centerY" id="wrO-kw-x8F"/>
+                            <constraint firstItem="hs9-x9-cGV" firstAttribute="leading" secondItem="u2O-uP-Hll" secondAttribute="trailing" constant="-128" id="xa2-6H-Uvj"/>
+                            <constraint firstItem="hs9-x9-cGV" firstAttribute="leading" secondItem="u2O-uP-Hll" secondAttribute="trailing" constant="-115" id="xlZ-gF-1al"/>
                             <constraint firstItem="jYd-is-tdP" firstAttribute="centerY" secondItem="hs9-x9-cGV" secondAttribute="centerY" id="xnk-4m-vag"/>
+                            <constraint firstItem="jYd-is-tdP" firstAttribute="trailing" secondItem="hs9-x9-cGV" secondAttribute="trailing" id="yLu-GB-vbG"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="1Dg-20-XB9"/>
+                                <exclude reference="ID6-5d-mJv"/>
+                                <exclude reference="Iji-7D-3JX"/>
+                                <exclude reference="Oqu-ZF-zYc"/>
+                                <exclude reference="POD-5F-QsQ"/>
+                                <exclude reference="ekN-wk-96X"/>
+                                <exclude reference="xa2-6H-Uvj"/>
+                                <exclude reference="xlZ-gF-1al"/>
+                                <exclude reference="01q-Uc-1JI"/>
+                                <exclude reference="C50-Cr-CBg"/>
                                 <exclude reference="j8E-Iu-FFp"/>
+                                <exclude reference="pic-7U-o3D"/>
+                                <exclude reference="YUZ-Y6-6b5"/>
                                 <exclude reference="cfq-Fx-YJi"/>
+                                <exclude reference="rA5-e6-a76"/>
+                                <exclude reference="SVl-MM-fhO"/>
+                                <exclude reference="emD-0S-4bC"/>
+                                <exclude reference="uAY-kw-wBe"/>
+                                <exclude reference="wrO-kw-x8F"/>
+                                <exclude reference="xnk-4m-vag"/>
+                                <exclude reference="yLu-GB-vbG"/>
                             </mask>
                         </variation>
                     </view>

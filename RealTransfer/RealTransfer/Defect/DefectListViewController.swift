@@ -67,13 +67,15 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
         return "DefectListViewController"
     }
     func setNumberOfDefect(){
-        self.countDefectLb?.text = "Defect ทั้งหมด (\(list.count))"
+        self.filterButton?.setTitle("Defect ทั้งหมด (\(list.count))", forState: UIControlState.Normal)
     }
     func setNumberOfDefect(number:Int){
-        self.countDefectLb?.text = "Defect ทั้งหมด (\(number))"
+
+        self.filterButton?.setTitle("Defect ทั้งหมด (\(number))", forState: UIControlState.Normal)
     }
     func setNumberOfDefect(number:Int, title:String!){
-        self.countDefectLb?.text = "\(title) (\(number))"
+  
+        self.filterButton?.setTitle("\(title) (\(number))", forState: UIControlState.Normal)
     }
     
     func reloadData(defectRoom:DefectRoom!) {
