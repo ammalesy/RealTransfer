@@ -25,97 +25,112 @@ class Sync: Model {
 
     static var controllerReferer:UIViewController?
     
-    class func syncToServer(defectRoom:DefectRoom!, db_name:String!, timeStamp:String! , defect:NSMutableArray!, handler: (String!) -> Void) {
+    class func syncToServer(defectRoom:DefectRoom!,
+                            db_name:String!,
+                            timeStamp:String! ,
+                            defect:NSMutableArray!,
+                            handler: (String!) -> Void)
+    {
         
-        let images:NSMutableArray = NSMutableArray()
-        let param:NSMutableArray = NSMutableArray()
-        
-        var i:Int = 0
-        for sync:DefectModel in ((defect as NSArray) as! [DefectModel]) {
+        NetworkDetection.manager.isConected { (isConedted) in
             
-            if sync.df_status == "0" {
-                let imagePathName = UIImage.uniqNameBySeq(String(i))
-                if let img:UIImage = ImageCaching.sharedInstance.getImageByName(sync.df_image_path) {
-                    sync.realImage = img
-                    sync.df_image_path = imagePathName
-                    sync.complete_status = "0"
-                    sync.mode = "INSERT"
-                    images.addObject(ImageSync(image: sync.realImage!, imagePath: imagePathName))
-                    ImageCaching.sharedInstance.setImageByName(imagePathName, image: sync.realImage!, isFromServer: false)
-                    ImageCaching.sharedInstance.save()
-                    param.addObject(sync.toJson())
-                }
-                i = i + 1
-               
-            } else{
+            if isConedted == false {
+            
+                handler("NETWORK_FAIL")
                 
-                sync.mode = "UPDATE"
-                param.addObject(sync.toJson())
+            }else{
+                let images:NSMutableArray = NSMutableArray()
+                let param:NSMutableArray = NSMutableArray()
                 
-                if ImageCaching.sharedInstance.isImageDidSyncServer(sync.df_image_path!) == false {
-                    if let image:UIImage = ImageCaching.sharedInstance.getImageByName(sync.df_image_path!) {
-                        sync.realImage = image
-                        images.addObject(ImageSync(image: sync.realImage!, imagePath: sync.df_image_path!))
-                    }
+                var i:Int = 0
+                for sync:DefectModel in ((defect as NSArray) as! [DefectModel]) {
                     
-                }
-            }
-        }
-        
-        
-        
-        let path = "http://\(DOMAIN_NAME)/Defect/syncDefect.php?ransom=\(NSString.randomStringWithLength(10))"
-        var needUpdateFlagOnly = "0"
-        
-        if param.count <= 0 && images.count == 0 && defectRoom.df_sync_status! == "0"{
-            handler("FALSE")
-            return;
-        }else if param.count <= 0 && images.count == 0 && defectRoom.df_sync_status! == "1" {
-            needUpdateFlagOnly = "1"
-        }
-        
-
-        let postParam = ["data":param,
-                         "db_name":db_name,
-                         "timestamp":timeStamp,
-                         "df_room_id":defectRoom.df_room_id!,
-                         "df_sync_status":defectRoom.df_sync_status!,
-                         "needUpdateFlagOnly":needUpdateFlagOnly]
-
-        Alamofire.request(.POST, path,
-            parameters: postParam,
-            encoding: ParameterEncoding.JSON)
-            .responseJSON { response in
-                print(response.request)  // original URL request
-                print(response.response) // URL response
-                print(response.data)     // server data
-                print(response.result)   // result of response serialization
-                
-                if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
-                    if JSON.objectForKey("status") as! String == "200" {
+                    if sync.df_status == "0" {
+                        let imagePathName = UIImage.uniqNameBySeq(String(i))
+                        if let img:UIImage = ImageCaching.sharedInstance.getImageByName(sync.df_image_path) {
+                            sync.realImage = img
+                            sync.df_image_path = imagePathName
+                            sync.complete_status = "0"
+                            sync.mode = "INSERT"
+                            images.addObject(ImageSync(image: sync.realImage!, imagePath: imagePathName))
+                            ImageCaching.sharedInstance.setImageByName(imagePathName, image: sync.realImage!, isFromServer: false)
+                            ImageCaching.sharedInstance.save()
+                            param.addObject(sync.toJson())
+                        }
+                        i = i + 1
                         
-                        defectRoom.df_check_date = timeStamp
+                    } else{
                         
-                        if images.count > 0 {
+                        sync.mode = "UPDATE"
+                        param.addObject(sync.toJson())
                         
-                            self.uploadImages(images, defectRoom: defectRoom!, handler: { (flag) in
-                                handler(flag)
-                            })
+                        if ImageCaching.sharedInstance.isImageDidSyncServer(sync.df_image_path!) == false {
+                            if let image:UIImage = ImageCaching.sharedInstance.getImageByName(sync.df_image_path!) {
+                                sync.realImage = image
+                                images.addObject(ImageSync(image: sync.realImage!, imagePath: sync.df_image_path!))
+                            }
                             
+                        }
+                    }
+                }
+                
+                
+                
+                let path = "http://\(DOMAIN_NAME)/Defect/syncDefect.php?ransom=\(NSString.randomStringWithLength(10))"
+                var needUpdateFlagOnly = "0"
+                
+                if param.count <= 0 && images.count == 0 && defectRoom.df_sync_status! == "0"{
+                    handler("FALSE")
+                    return;
+                }else if param.count <= 0 && images.count == 0 && defectRoom.df_sync_status! == "1" {
+                    needUpdateFlagOnly = "1"
+                }
+                
+                
+                let postParam = ["data":param,
+                    "db_name":db_name,
+                    "timestamp":timeStamp,
+                    "df_room_id":defectRoom.df_room_id!,
+                    "df_sync_status":defectRoom.df_sync_status!,
+                    "needUpdateFlagOnly":needUpdateFlagOnly]
+                
+                Alamofire.request(.POST, path,
+                    parameters: postParam,
+                    encoding: ParameterEncoding.JSON)
+                    .responseJSON { response in
+                        print(response.request)  // original URL request
+                        print(response.response) // URL response
+                        print(response.data)     // server data
+                        print(response.result)   // result of response serialization
+                        
+                        if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
+                            if JSON.objectForKey("status") as! String == "200" {
+                                
+                                defectRoom.df_check_date = timeStamp
+                                
+                                if images.count > 0 {
+                                    
+                                    self.uploadImages(images, defectRoom: defectRoom!, handler: { (flag) in
+                                        handler(flag)
+                                    })
+                                    
+                                }else{
+                                    SwiftSpinner.hide()
+                                    handler("TRUE")
+                                }
+                                
+                            }else{
+                                SwiftSpinner.hide()
+                                handler("FALSE")
+                            }
                         }else{
                             SwiftSpinner.hide()
-                            handler("TRUE")
+                            handler("FALSE")
                         }
                         
-                    }else{
-                        SwiftSpinner.hide()
-                        handler("FALSE")
-                    }
-                }else{
-                    SwiftSpinner.hide()
-                    handler("FALSE")
                 }
-
+            }
+            
         }
     }
     

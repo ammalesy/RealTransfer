@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (3.4.1)
   - KMPlaceholderTextView (1.2.2)
+  - ReachabilitySwift (2.3.3)
   - SDWebImage (3.8.1):
     - SDWebImage/Core (= 3.8.1)
   - SDWebImage/Core (3.8.1)
@@ -11,6 +12,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 3.4)
   - KMPlaceholderTextView (~> 1.2.0)
+  - ReachabilitySwift
   - SDWebImage (~> 3.8)
   - SwiftSpinner
   - ToggleView (~> 0.0.1)
@@ -19,6 +21,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
   KMPlaceholderTextView: bbff031935d84f7eedb585e7f77120020fbae9e8
+  ReachabilitySwift: e0f6b6f280effb47731acfaaa2d5ffe223703793
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   SwiftSpinner: c6585a0ae5c67eb33e737695cce88f0262008cce
   ToggleView: c19e75ab7c78d548f9eca8e3c438271cce6c9e2d

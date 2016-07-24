@@ -74,46 +74,57 @@ class User: Model,NSCoding {
         }
     }
     
-    func login(handler: (Bool?) -> Void){
+    func login(handler: (Bool?) -> Void, networkFail: () -> Void){
         
-        SwiftSpinner.show("Loging in..", animated: true)
-        var path = "http://\(DOMAIN_NAME)/User/login.php?username=\(self.username!)&password=\(self.password!)"
         
-        path = "\(path)&random=\(NSString.randomStringWithLength(10))"
-        Alamofire.request(.GET, path, parameters: [:])
-            .responseJSON { response in
-                print(response.request)  // original URL request
-                print(response.response) // URL response
-                print(response.data)     // server data
-                print(response.result)   // result of response serialization
+        NetworkDetection.manager.isConected { (isConected) in
+            
+            if isConected == false {
+                networkFail()
+            }else{
+                SwiftSpinner.show("Loging in..", animated: true)
+                var path = "http://\(DOMAIN_NAME)/User/login.php?username=\(self.username!)&password=\(self.password!)"
                 
-                if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
-                    print("JSON: \(JSON)")
-                    if JSON.objectForKey("status") as! String == "200" {
-                        self.pm_name = JSON.objectForKey("pm_name") as? String
-                        self.user_id = JSON.objectForKey("user_id") as? String
-                        self.user_permission = JSON.objectForKey("user_permission") as? String
-                        self.user_pers_fname = JSON.objectForKey("user_pers_fname") as? String
-                        self.user_pers_lname = JSON.objectForKey("user_pers_lname") as? String
-                        self.user_sts_active = JSON.objectForKey("user_sts_active") as? String
-                        self.user_username = JSON.objectForKey("user_username") as? String
-                        self.user_work_position = JSON.objectForKey("user_work_position") as? String
-                        self.user_work_user_id = JSON.objectForKey("user_work_user_id") as? String
-                        self.doCacheUSer()
-                        handler(true)
-                        SwiftSpinner.hide()
-                    }else{
-                        handler(false)
-                        SwiftSpinner.hide()
-                        debugPrint(response)
-                    }
-                    
-                }else{
-                    handler(false)
-                    SwiftSpinner.hide()
-                    debugPrint(response)
+                path = "\(path)&random=\(NSString.randomStringWithLength(10))"
+                Alamofire.request(.GET, path, parameters: [:])
+                    .responseJSON { response in
+                        print(response.request)  // original URL request
+                        print(response.response) // URL response
+                        print(response.data)     // server data
+                        print(response.result)   // result of response serialization
+                        
+                        if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
+                            print("JSON: \(JSON)")
+                            if JSON.objectForKey("status") as! String == "200" {
+                                self.pm_name = JSON.objectForKey("pm_name") as? String
+                                self.user_id = JSON.objectForKey("user_id") as? String
+                                self.user_permission = JSON.objectForKey("user_permission") as? String
+                                self.user_pers_fname = JSON.objectForKey("user_pers_fname") as? String
+                                self.user_pers_lname = JSON.objectForKey("user_pers_lname") as? String
+                                self.user_sts_active = JSON.objectForKey("user_sts_active") as? String
+                                self.user_username = JSON.objectForKey("user_username") as? String
+                                self.user_work_position = JSON.objectForKey("user_work_position") as? String
+                                self.user_work_user_id = JSON.objectForKey("user_work_user_id") as? String
+                                self.doCacheUSer()
+                                handler(true)
+                                SwiftSpinner.hide()
+                            }else{
+                                handler(false)
+                                SwiftSpinner.hide()
+                                debugPrint(response)
+                            }
+                            
+                        }else{
+                            handler(false)
+                            SwiftSpinner.hide()
+                            debugPrint(response)
+                        }
                 }
+            }
+            
         }
+        
+       
     }
     func getOnCache()->User?{
     

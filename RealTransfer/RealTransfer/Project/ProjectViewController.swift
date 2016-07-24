@@ -28,15 +28,21 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
             self.projects = list!
             self.collectionView.reloadData()
             
-        })
-        let user:User = User().getOnCache()!
-        
-        self.nzNavigationController?.titleLb.text = "Dash Board"
-        self.nzNavigationController?.subTitleLb.text = "\(user.user_work_position!) : \(user.user_pers_fname!) \(user.user_pers_lname!)"
-        
-        Queue.mainQueue { 
-            self.nzNavigationController?.hideRightInfo(true)
+            let user:User = User().getOnCache()!
+            
+            self.nzNavigationController?.titleLb.text = "Dash Board"
+            self.nzNavigationController?.subTitleLb.text = "\(user.user_work_position!) : \(user.user_pers_fname!) \(user.user_pers_lname!)"
+            
+            Queue.mainQueue {
+                self.nzNavigationController?.hideRightInfo(true)
+            }
+            
+        }) { 
+            
+            AlertUtil.alertNetworkFail(self)
+            
         }
+        
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)

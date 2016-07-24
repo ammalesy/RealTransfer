@@ -8,6 +8,8 @@
 
 import UIKit
 
+let CELL_DEFECT_FULL_DETAIL_IDENTIFIER = "CellDefectFullDetail"
+
 class GaranteeListViewController: DefectListViewController {
 
     
@@ -16,6 +18,7 @@ class GaranteeListViewController: DefectListViewController {
     @IBOutlet weak var allDefectBtn: UIButton!
     @IBOutlet weak var garanteeBtn: UIButton!
     var splitController:NZSplitViewController?
+    var fullCellMode:Bool = true
     
     
     var allDefect:Int = 0
@@ -82,6 +85,61 @@ class GaranteeListViewController: DefectListViewController {
     }
     @IBAction func garanteeAction(sender: AnyObject) {
         super.openDropDown(String())
+    }
+    
+    
+    override func dequeCell() -> DefectCell {
+        
+        var cell:DefectCell = tableView.dequeueReusableCellWithIdentifier(CELL_DEFECT_IDENTIFIER) as! DefectCell
+        
+        if fullCellMode == true {
+            
+            cell = tableView.dequeueReusableCellWithIdentifier(CELL_DEFECT_FULL_DETAIL_IDENTIFIER) as! DefectCell
+            
+        }
+        
+        return cell
+    }
+    
+    func needFullCellMode(needFullCell:Bool){
+        
+        self.fullCellMode = needFullCell
+        self.tableView.reloadData()
+        
+        var width:CGFloat = 400
+        if needFullCell {
+            width = (UIScreen.mainScreen().bounds.size.width * 85) / 100
+        }
+        
+        UIView.animateWithDuration(0.3) {
+            self.splitController?.minimumPrimaryColumnWidth = width
+            self.splitController?.maximumPrimaryColumnWidth = width
+            self.splitController?.view.layoutIfNeeded()
+        }
+        
+    }
+    
+    
+    override func defectCell(cell: DefectCell, didClickMenu model: NZRow, popover: NZPopoverView) {
+        
+        super.defectCell(cell, didClickMenu: model, popover: popover)
+        
+        if model.identifier != "delete" {
+            
+            self.needFullCellMode(false)
+        }
+        
+        
+    }
+    
+    override func nzDropDownCustomPositon(contorller: NZDropDownViewController) -> CGRect {
+        
+        return CGRectMake(
+            260
+            , self.filterButton.frame.origin.y + 10
+            , 230
+            , self.tableView.frame.size.height / 2
+        )
     }
     
 }

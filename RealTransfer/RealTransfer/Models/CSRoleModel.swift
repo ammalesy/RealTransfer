@@ -15,7 +15,7 @@ class CSRoleModel: Model {
     static var csUSers:NSMutableArray = NSMutableArray() //<== GLOBAL VAR
     //DATA
     
-    func getCSUsers(handler: (NSMutableArray?) -> Void){
+    func getCSUsers(handler: (NSMutableArray?) -> Void, networkFail: () -> Void){
         
         if CSRoleModel.csUSers.count > 0
         {
@@ -23,40 +23,55 @@ class CSRoleModel: Model {
         }
         else
         {
-            let returnList:NSMutableArray = NSMutableArray()
-            SwiftSpinner.show("Retriving CS..", animated: true)
             
-            Alamofire.request(.GET, "http://\(DOMAIN_NAME)/User/getCSRole.php?ransom=\(NSString.randomStringWithLength(10))", parameters: [:])
-                .responseJSON { response in
+            NetworkDetection.manager.isConected({ (isConected) in
+                
+                if isConected == false {
+                
+                    networkFail()
                     
-                    if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
-                        print("JSON: \(JSON)")
-                        if JSON.objectForKey("status") as! String == "200" {
+                }else{
+                    
+                    let returnList:NSMutableArray = NSMutableArray()
+                    SwiftSpinner.show("Retriving CS..", animated: true)
+                    
+                    Alamofire.request(.GET, "http://\(DOMAIN_NAME)/User/getCSRole.php?ransom=\(NSString.randomStringWithLength(10))", parameters: [:])
+                        .responseJSON { response in
                             
-                            for user:NSDictionary in ((JSON.objectForKey("userList") as! NSArray) as! [NSDictionary]) {
-
-                                let userModel:User = User()
-                                userModel.user_id = user.objectForKey("user_id") as? String
-                                userModel.user_pers_fname = user.objectForKey("user_pers_fname") as? String
-                                userModel.user_pers_lname = user.objectForKey("user_pers_lname") as? String
-                                userModel.user_permission = user.objectForKey("user_permission") as? String
-
-                           
-                                returnList.addObject(userModel)
+                            if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
+                                print("JSON: \(JSON)")
+                                if JSON.objectForKey("status") as! String == "200" {
+                                    
+                                    for user:NSDictionary in ((JSON.objectForKey("userList") as! NSArray) as! [NSDictionary]) {
+                                        
+                                        let userModel:User = User()
+                                        userModel.user_id = user.objectForKey("user_id") as? String
+                                        userModel.user_pers_fname = user.objectForKey("user_pers_fname") as? String
+                                        userModel.user_pers_lname = user.objectForKey("user_pers_lname") as? String
+                                        userModel.user_permission = user.objectForKey("user_permission") as? String
+                                        
+                                        
+                                        returnList.addObject(userModel)
+                                    }
+                                    CSRoleModel.csUSers = returnList;
+                                    handler(returnList)
+                                    SwiftSpinner.hide()
+                                }else{
+                                    handler(nil)
+                                    SwiftSpinner.hide()
+                                }
+                                
+                            }else{
+                                handler(nil)
+                                SwiftSpinner.hide()
                             }
-                            CSRoleModel.csUSers = returnList;
-                            handler(returnList)
-                            SwiftSpinner.hide()
-                        }else{
-                            handler(nil)
-                            SwiftSpinner.hide()
-                        }
-                        
-                    }else{
-                        handler(nil)
-                        SwiftSpinner.hide()
                     }
-            }
+                    
+                }
+                
+            })
+            
+            
         }
     }
 

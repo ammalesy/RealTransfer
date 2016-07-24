@@ -43,6 +43,11 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
         super.viewDidAppear(animated)
         
         
+        if self.isModeGanrantee() {
+            let controller:GaranteeListViewController =  self.getGuaranteeDefectListController()
+            controller.needFullCellMode(true)
+        }
+        
     }
     func showGettingStartView(){
         let controller:GettingStartViewController = self.storyboard?.instantiateViewControllerWithIdentifier("GettingStartViewController") as! GettingStartViewController
@@ -97,9 +102,16 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
                 imagePicker!.cameraOverlayView = view
                 imagePicker!.cameraOverlayView?.userInteractionEnabled = true
                 imagePicker?.showsCameraControls = true
-                
-                splitController?.nzNavigationController!.presentViewController(imagePicker!, animated: true,
-                    completion: nil)
+            
+                if self.isModeGanrantee() {
+                    let controller:GaranteeListViewController =  self.getGuaranteeDefectListController()
+                    controller.needFullCellMode(false)
+                }
+                splitController?.nzNavigationController!.presentViewController(imagePicker!, animated: true, completion: {
+                    
+                    
+                    
+                })
         }
         
     }
@@ -128,10 +140,11 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
         let mediaType = info[UIImagePickerControllerMediaType] as! String
-        
+        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        CameraRoll.sharedInstance.saveImage(image)
         if mediaType == (kUTTypeImage as String) {
-            let image = info[UIImagePickerControllerOriginalImage]
-                as! UIImage
+            
+            
             self.defectRoom = DefectRoom.getCache(self.defectRoom?.df_room_id!)
             let detailController:AddDefectDetailViewController = AddDefectDetailViewController.instance(image, defectRoom: self.defectRoom, state: DefectViewState.New)
             self.navigationController?.pushViewController(detailController, animated: true)
@@ -142,6 +155,8 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
         Queue.mainQueue { () -> Void in
             if self.imagePickerGallery != nil {
                 self.imagePickerGallery?.dismissViewControllerAnimated(true, completion: { () -> Void in
+                    
+                    
                     
                 })
             }
@@ -157,6 +172,25 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
         }
         
     }
+    func goProjectPage(){
+        Queue.serialQueue({
+            Queue.mainQueue({
+                
+                if self.isModeGanrantee() {
+                    self.splitController?.nzNavigationController?.popViewControllerWithOutAnimate({
+                        self.splitController?.nzNavigationController?.popViewController({
+                            self.splitController?.nzNavigationController?.hideRightInfo(true)
+                        })
+                    })
+                }else{
+                    self.splitController?.nzNavigationController?.popViewController({
+                        self.splitController?.nzNavigationController?.hideRightInfo(true)
+                    })
+                }
+                
+            })
+        })
+    }
     func nzNavigation(controller: NZNavigationViewController, didClickMenu popover: NZPopoverView, menu: NZRow) {
         
         if self.defectRoom != nil && menu.identifier == "sync" {
@@ -164,44 +198,32 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
             let alert = UIAlertController(title: "ยืนยันการตรวจสอบ", message:"กรุณาเลือกประเภทการบันทึก", preferredStyle: UIAlertControllerStyle.Alert)
             let noneCompleteAction:UIAlertAction = UIAlertAction(title: "บันทึกและรอตรวจสอบเพิ่มภายหลัง", style: UIAlertActionStyle.Default, handler: { (action) in
                 
-                self.sync(false)
+                self.sync(false, completion: { 
+                    self.goProjectPage()
+                })
                 
             })
             let completedAction:UIAlertAction = UIAlertAction(title: "บันทึกและยืนยัน", style: UIAlertActionStyle.Default, handler: { (action) in
                 Queue.serialQueue({
                     Queue.mainQueue({ 
-                         self.sync(true)
+                         self.sync(true, completion: { 
+                            self.goProjectPage()
+                         })
                     })
                 })
                 
-                Queue.serialQueue({
-                    Queue.mainQueue({
-                        
-                        if self.isModeGanrantee() {
-                            self.splitController?.nzNavigationController?.popViewControllerWithOutAnimate({
-                                self.splitController?.nzNavigationController?.popViewController({
-                                    self.splitController?.nzNavigationController?.hideRightInfo(true)
-                                })
-                            })
-                        }else{
-                            self.splitController?.nzNavigationController?.popViewController({
-                                self.splitController?.nzNavigationController?.hideRightInfo(true)
-                            })
-                        }
-                        
-                    })
-                })
+                
                 
             })
             let cancelAction:UIAlertAction = UIAlertAction(title: "ยกเลิก", style: UIAlertActionStyle.Cancel, handler: { (action) in
                 
             })
             
+            
+            alert.addAction(completedAction)
             if isModeGanrantee() == false {
                 alert.addAction(noneCompleteAction)
             }
-            
-            alert.addAction(completedAction)
             alert.addAction(cancelAction)
             
             self.presentViewController(alert, animated: true, completion: {
@@ -212,7 +234,7 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
             
         }
     }
-    func sync(isFinally:Bool!) {
+    func sync(isFinally:Bool!, completion: (() -> Void)?) {
         
         SwiftSpinner.show("Uploading ..", animated: true)
         let cache:DefectRoom = DefectRoom.getCache(self.defectRoom?.df_room_id)!
@@ -227,7 +249,11 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
         Sync.syncToServer(cache ,db_name: PROJECT?.pj_datebase_name!, timeStamp: NSDateFormatter.dateFormater().stringFromDate(NSDate()), defect: (cache.listDefect)!)
         { (result) in
             
-            if result == "TRUE" {
+            if  result == "NETWORK_FAIL" {
+                SwiftSpinner.hide()
+                AlertUtil.alertNetworkFail(self)
+            
+            }else if result == "TRUE" {
                 
                 cache.getListDefectOnServer({ 
                     
@@ -239,19 +265,29 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
                     
                     let alert = UIAlertController(title: "บันทึกสำเร็จ", message:nil, preferredStyle: UIAlertControllerStyle.Alert)
                     let completedAction:UIAlertAction = UIAlertAction(title: "ตกลง", style: UIAlertActionStyle.Default, handler: { (action) in
-
+                        
+                        if (completion != nil) {
+                            completion!()
+                        }
                     })
                     alert.addAction(completedAction)
                     self.presentViewController(alert, animated: true, completion: {
                         
                     })
                     
-                }) 
+                }, networkFail: { 
+                    
+                    AlertUtil.alertNetworkFail(self)
+                    
+                })
                 
             }else if result == "FALSE"{
                 let alert = UIAlertController(title: "แจ้งเตือน", message: "ซิงค์กับเซริฟเวอร์เรียบร้อยแล้ว", preferredStyle: UIAlertControllerStyle.Alert)
                 let action:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: { (action) in
                     
+                    if (completion != nil) {
+                        completion!()
+                    }
                 })
                 alert.addAction(action)
                 
@@ -267,10 +303,12 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
                     self.refresh()
                     
                     SwiftSpinner.hide()
-                    let alert = UIAlertController(title: "แจ้งเตือน", message: "Image upload fail!", preferredStyle: UIAlertControllerStyle.Alert)
+                    let alert = UIAlertController(title: "บันทึกข้อมูลไม่สำเร็จ", message: "กรุณากดบันทึกอีกครั้งหนึ่งและตรวจสอบการเชื่อมต่ออินเทอร์เน็ต", preferredStyle: UIAlertControllerStyle.Alert)
                     let action:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: { (action) in
                         
-                        
+                        if (completion != nil) {
+                            completion!()
+                        }
                         
                     })
                     alert.addAction(action)
@@ -279,6 +317,8 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
                         
                     })
                     
+                }, networkFail: { 
+                    AlertUtil.alertNetworkFail(self)
                 })
                 
                 
@@ -316,6 +356,14 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
         }
         
         return false
+    }
+    
+    func getGuaranteeDefectListController()->GaranteeListViewController {
+        let controllers:NSMutableArray = self.splitController!.nzNavigationController!.viewControllers
+        let split:NZSplitViewController = controllers[2] as! NZSplitViewController
+        
+        
+        return split.viewControllers.first as! GaranteeListViewController
     }
     
     

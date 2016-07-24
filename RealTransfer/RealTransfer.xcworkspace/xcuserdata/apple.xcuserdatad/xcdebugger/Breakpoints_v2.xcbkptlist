@@ -10,28 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RealTransfer/AddDefect/AddDefectViewController.swift"
-            timestampString = "490545741.921712"
+            timestampString = "491042509.178828"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "230"
-            endingLineNumber = "230"
-            landmarkName = "sync(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RealTransfer/AddDefect/AddDefectViewController.swift"
-            timestampString = "489432532.488195"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "236"
-            endingLineNumber = "236"
-            landmarkName = "sync(_:)"
+            startingLineNumber = "256"
+            endingLineNumber = "256"
+            landmarkName = "sync(_:completion:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -42,92 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RealTransfer/AddDefect/AddDefectDetailViewController.swift"
-            timestampString = "488284807.209014"
+            timestampString = "491043328.166386"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
             landmarkName = "initialData()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RealTransfer/Models/Sync.swift"
-            timestampString = "489002145.975856"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
-            landmarkName = "syncToServer(_:db_name:timeStamp:defect:handler:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RealTransfer/Models/Sync.swift"
-            timestampString = "490545753.215052"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
-            landmarkName = "syncToServer(_:db_name:timeStamp:defect:handler:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RealTransfer/Lib/ImageCaching.swift"
-            timestampString = "488391196.202736"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
-            landmarkName = "setDidImageSyncByName(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RealTransfer/Defect/DefectListViewController.swift"
-            timestampString = "490613112.495777"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "397"
-            endingLineNumber = "397"
-            landmarkName = "defectCell(_:didClickMenu:popover:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RealTransfer/AddDefect/AddDefectViewController.swift"
-            timestampString = "489432532.488195"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "217"
-            endingLineNumber = "217"
-            landmarkName = "sync(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -170,27 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RealTransfer/AddDefect/AddDefectDetailViewController.swift"
-            timestampString = "490631696.574673"
+            timestampString = "491043328.166386"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "257"
-            endingLineNumber = "257"
-            landmarkName = "save(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RealTransfer/AddDefect/AddDefectDetailViewController.swift"
-            timestampString = "490631696.574673"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "278"
-            endingLineNumber = "278"
+            startingLineNumber = "267"
+            endingLineNumber = "267"
             landmarkName = "save(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -202,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RealTransfer/Defect/DefectListViewController.swift"
-            timestampString = "490613112.495777"
+            timestampString = "491045034.757545"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "428"
-            endingLineNumber = "428"
+            startingLineNumber = "448"
+            endingLineNumber = "448"
             landmarkName = "defectCell(_:didClickMenu:popover:)"
             landmarkType = "5">
             <Locations>
@@ -218,11 +106,11 @@
                   moduleName = "RealTransfer"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Documents/RealTransfer/RealTransfer/RealTransfer/Defect/DefectListViewController.swift"
-                  timestampString = "490631474.948223"
+                  timestampString = "491060635.336253"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "428"
-                  endingLineNumber = "428"
+                  startingLineNumber = "448"
+                  endingLineNumber = "448"
                   offsetFromSymbolStart = "5040">
                </Location>
                <Location
@@ -233,11 +121,11 @@
                   moduleName = "RealTransfer"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Documents/RealTransfer/RealTransfer/RealTransfer/Defect/DefectListViewController.swift"
-                  timestampString = "490631474.948395"
+                  timestampString = "491060635.336411"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "428"
-                  endingLineNumber = "428"
+                  startingLineNumber = "448"
+                  endingLineNumber = "448"
                   offsetFromSymbolStart = "8500">
                </Location>
             </Locations>
@@ -249,61 +137,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RealTransfer/Models/Sync.swift"
-            timestampString = "489002145.975856"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
-            landmarkName = "syncToServer(_:db_name:timeStamp:defect:handler:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RealTransfer/Models/Sync.swift"
-            timestampString = "489002145.975856"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
-            landmarkName = "syncToServer(_:db_name:timeStamp:defect:handler:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "RealTransfer/Defect/DefectListCheckingViewController.swift"
-            timestampString = "490627430.729695"
+            timestampString = "491052765.229415"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "470"
-            endingLineNumber = "470"
-            landmarkName = "sync()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RealTransfer/AddDefect/AddDefectViewController.swift"
-            timestampString = "489432532.488195"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
-            landmarkName = "nzNavigation(_:didClickMenu:menu:)"
+            startingLineNumber = "507"
+            endingLineNumber = "507"
+            landmarkName = "sync(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -314,59 +154,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RealTransfer/Models/Sync.swift"
-            timestampString = "490626750.319115"
+            timestampString = "490969821.024971"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
             landmarkName = "syncToServer(_:db_name:timeStamp:defect:handler:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RealTransfer/AddDefect/AddDefectViewController.swift"
-            timestampString = "490538707.510876"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "263"
-            endingLineNumber = "263"
-            landmarkName = "sync(_:)"
             landmarkType = "5">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "RealTransfer.AddDefectViewController.(sync (Swift.ImplicitlyUnwrappedOptional&lt;Swift.Bool&gt;) -&gt; ()).(closure #1)"
+                  symbolName = "static RealTransfer.Sync.syncToServer (Swift.ImplicitlyUnwrappedOptional&lt;RealTransfer.DefectRoom&gt;, db_name : Swift.ImplicitlyUnwrappedOptional&lt;Swift.String&gt;, timeStamp : Swift.ImplicitlyUnwrappedOptional&lt;Swift.String&gt;, defect : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.NSMutableArray&gt;, handler : (Swift.ImplicitlyUnwrappedOptional&lt;Swift.String&gt;) -&gt; ()) -&gt; ()"
                   moduleName = "RealTransfer"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Documents/RealTransfer/RealTransfer/RealTransfer/AddDefect/AddDefectViewController.swift"
-                  timestampString = "490631474.95283"
+                  urlString = "file:///Users/apple/Documents/RealTransfer/RealTransfer/RealTransfer/Models/Sync.swift"
+                  timestampString = "491060635.340514"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "263"
-                  endingLineNumber = "263"
-                  offsetFromSymbolStart = "1876">
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "124">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "RealTransfer.AddDefectViewController.(sync (Swift.ImplicitlyUnwrappedOptional&lt;Swift.Bool&gt;) -&gt; ()).(closure #1).(closure #4)"
+                  symbolName = "static RealTransfer.Sync.(syncToServer (Swift.ImplicitlyUnwrappedOptional&lt;RealTransfer.DefectRoom&gt;, db_name : Swift.ImplicitlyUnwrappedOptional&lt;Swift.String&gt;, timeStamp : Swift.ImplicitlyUnwrappedOptional&lt;Swift.String&gt;, defect : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.NSMutableArray&gt;, handler : (Swift.ImplicitlyUnwrappedOptional&lt;Swift.String&gt;) -&gt; ()) -&gt; ()).(closure #1)"
                   moduleName = "RealTransfer"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Documents/RealTransfer/RealTransfer/RealTransfer/AddDefect/AddDefectViewController.swift"
-                  timestampString = "490631474.952985"
+                  urlString = "file:///Users/apple/Documents/RealTransfer/RealTransfer/RealTransfer/Models/Sync.swift"
+                  timestampString = "491060635.340843"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "265"
-                  endingLineNumber = "265"
-                  offsetFromSymbolStart = "20">
+                  startingLineNumber = "37"
+                  endingLineNumber = "37"
+                  offsetFromSymbolStart = "148">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -377,78 +201,46 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RealTransfer/Models/Sync.swift"
-            timestampString = "489003908.932743"
+            filePath = "RealTransfer/AddDefect/AddDefectViewController.swift"
+            timestampString = "491042509.178828"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
-            landmarkName = "syncToServer(_:db_name:timeStamp:defect:handler:)"
+            startingLineNumber = "320"
+            endingLineNumber = "320"
+            landmarkName = "sync(_:completion:)"
             landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RealTransfer/Models/Sync.swift"
-            timestampString = "489003910.627142"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
-            landmarkName = "syncToServer(_:db_name:timeStamp:defect:handler:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RealTransfer/Defect/cell/DefectCell.swift"
-            timestampString = "490622581.186315"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "editAction(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RealTransfer/Defect/DefectListViewController.swift"
-            timestampString = "490613112.495777"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "393"
-            endingLineNumber = "393"
-            landmarkName = "defectCellPopoverWillHide(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RealTransfer/Defect/DefectListViewController.swift"
-            timestampString = "490613112.495777"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "390"
-            endingLineNumber = "390"
-            landmarkName = "defectCellPopoverWillShow(_:)"
-            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RealTransfer.AddDefectViewController.(sync (Swift.ImplicitlyUnwrappedOptional&lt;Swift.Bool&gt;, completion : Swift.Optional&lt;() -&gt; ()&gt;) -&gt; ()).(closure #1).(closure #5)"
+                  moduleName = "RealTransfer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Documents/RealTransfer/RealTransfer/RealTransfer/AddDefect/AddDefectViewController.swift"
+                  timestampString = "491060635.342502"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "320"
+                  endingLineNumber = "320"
+                  offsetFromSymbolStart = "1128">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RealTransfer.AddDefectViewController.(sync (Swift.ImplicitlyUnwrappedOptional&lt;Swift.Bool&gt;, completion : Swift.Optional&lt;() -&gt; ()&gt;) -&gt; ()).(closure #1).(closure #6)"
+                  moduleName = "RealTransfer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Documents/RealTransfer/RealTransfer/RealTransfer/AddDefect/AddDefectViewController.swift"
+                  timestampString = "491060635.342712"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "321"
+                  endingLineNumber = "321"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -458,27 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RealTransfer/Defect/DefectListCheckingViewController.swift"
-            timestampString = "490627430.729695"
+            timestampString = "491052765.229415"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "543"
-            endingLineNumber = "543"
-            landmarkName = "defectCell(_:didClickImage:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RealTransfer/Defect/DefectListCheckingViewController.swift"
-            timestampString = "490627430.729695"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "533"
-            endingLineNumber = "533"
+            startingLineNumber = "596"
+            endingLineNumber = "596"
             landmarkName = "defectCell(_:didClickImage:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -506,187 +282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RealTransfer/Defect/DefectListViewController.swift"
-            timestampString = "489692037.541295"
+            timestampString = "490984210.236677"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "reloadData(_:type:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RealTransfer/Defect/DefectListViewController.swift"
-            timestampString = "489692037.541295"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
-            landmarkName = "reloadData(_:type:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RealTransfer/AddDefect/AddDefectDetailViewController.swift"
-            timestampString = "490631696.574673"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "309"
-            endingLineNumber = "309"
-            landmarkName = "reloadDefectList()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RealTransfer/AddDefect/AddDefectDetailViewController.swift"
-            timestampString = "490631696.574673"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "283"
-            endingLineNumber = "283"
-            landmarkName = "saveAndKeepToDisk(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RealTransfer/Defect/GaranteeListViewController.swift"
-            timestampString = "489603852.844091"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "setGuaranteeCount(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RealTransfer/Defect/GaranteeListViewController.swift"
-            timestampString = "489603852.844091"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "plusCountGuaranteeDefectValue()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RealTransfer/Defect/DefectListCheckingViewController.swift"
-            timestampString = "490627430.729695"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "554"
-            endingLineNumber = "554"
-            landmarkName = "plusCountGuaranteeDefectValue()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RealTransfer/Defect/DefectListCheckingViewController.swift"
-            timestampString = "490627430.729695"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "557"
-            endingLineNumber = "557"
-            landmarkName = "setGuaranteeCount(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RealTransfer/Defect/GaranteeListViewController.swift"
-            timestampString = "489603852.844091"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "setNumberOfDefect()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RealTransfer/Defect/GaranteeListViewController.swift"
-            timestampString = "489603852.844091"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "setNumberOfDefect(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RealTransfer/Defect/GaranteeListViewController.swift"
-            timestampString = "489603910.963847"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "sharedInstance()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RealTransfer/Defect/DefectListViewController.swift"
-            timestampString = "490547390.321286"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "146"
-            endingLineNumber = "146"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
             landmarkName = "generateDropDownWithDataList(_:identifier:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -698,11 +298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RealTransfer/Defect/DefectListViewController.swift"
-            timestampString = "490547089.020914"
+            timestampString = "490984210.236677"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
             landmarkName = "nzDropDownViewdidAppear(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -714,11 +314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RealTransfer/Defect/GettingStartViewController.swift"
-            timestampString = "490599160.416818"
+            timestampString = "490971691.265368"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "495"
-            endingLineNumber = "495"
+            startingLineNumber = "525"
+            endingLineNumber = "525"
             landmarkName = "cellTxtSearchTextChange(_:string:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -730,11 +330,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RealTransfer/Defect/DefectListCheckingViewController.swift"
-            timestampString = "490627430.729695"
+            timestampString = "491052765.229415"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "665"
-            endingLineNumber = "665"
+            startingLineNumber = "728"
+            endingLineNumber = "728"
             landmarkName = "filterWithKey(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -746,11 +346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RealTransfer/Defect/DefectListCheckingViewController.swift"
-            timestampString = "490627430.729695"
+            timestampString = "491052765.229415"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "689"
-            endingLineNumber = "689"
+            startingLineNumber = "752"
+            endingLineNumber = "752"
             landmarkName = "filterWithKey(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -762,27 +362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RealTransfer/Defect/DefectListCheckingViewController.swift"
-            timestampString = "490627430.729695"
+            timestampString = "491052765.229415"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "398"
-            endingLineNumber = "398"
-            landmarkName = "defectCellCheckingButtonClicked(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RealTransfer/Defect/DefectListCheckingViewController.swift"
-            timestampString = "490627430.729695"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "621"
-            endingLineNumber = "621"
+            startingLineNumber = "684"
+            endingLineNumber = "684"
             landmarkName = "nzDropDown(_:shouldDisplayCell:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -793,12 +377,204 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RealTransfer/Models/DefectRoom.swift"
-            timestampString = "490628317.070766"
+            filePath = "RealTransfer/Defect/cell/DefectCell.swift"
+            timestampString = "490984325.495555"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "editAction(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RealTransfer/Lib/NZSwitch.swift"
+            timestampString = "491057056.843661"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "onPand(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RealTransfer/Defect/DefectListCheckingViewController.swift"
+            timestampString = "491052805.00691"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "418"
+            endingLineNumber = "418"
+            landmarkName = "defectCellCheckingButtonClicked(_:isOn:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RealTransfer/Models/Sync.swift"
+            timestampString = "491057431.017434"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "187"
+            endingLineNumber = "187"
+            landmarkName = "uploadImages(_:defectRoom:handler:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RealTransfer/Models/Sync.swift"
+            timestampString = "491057595.914429"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
+            landmarkName = "syncToServer(_:db_name:timeStamp:defect:handler:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RealTransfer/Models/Sync.swift"
+            timestampString = "491057713.375444"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
+            landmarkName = "syncToServer(_:db_name:timeStamp:defect:handler:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RealTransfer/Defect/DefectListCheckingViewController.swift"
+            timestampString = "491057764.591101"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "559"
+            endingLineNumber = "559"
+            landmarkName = "sync(_:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RealTransfer.DefectListCheckingViewController.(sync (Swift.Optional&lt;() -&gt; ()&gt;) -&gt; ()).(closure #1)"
+                  moduleName = "RealTransfer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Documents/RealTransfer/RealTransfer/RealTransfer/Defect/DefectListCheckingViewController.swift"
+                  timestampString = "491060635.356175"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "560"
+                  endingLineNumber = "560"
+                  offsetFromSymbolStart = "2516">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RealTransfer.DefectListCheckingViewController.(sync (Swift.Optional&lt;() -&gt; ()&gt;) -&gt; ()).(closure #1).(closure #5)"
+                  moduleName = "RealTransfer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Documents/RealTransfer/RealTransfer/RealTransfer/Defect/DefectListCheckingViewController.swift"
+                  timestampString = "491060635.356316"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "562"
+                  endingLineNumber = "562"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RealTransfer/Models/DefectRoom.swift"
+            timestampString = "491058481.05375"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
+            landmarkName = "getListDefect(_:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RealTransfer.DefectRoom.getListDefect ((success : Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "RealTransfer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Documents/RealTransfer/RealTransfer/RealTransfer/Models/DefectRoom.swift"
+                  timestampString = "491060635.3574"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "196"
+                  endingLineNumber = "196"
+                  offsetFromSymbolStart = "736">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RealTransfer.DefectRoom.(getListDefect ((success : Swift.Bool) -&gt; ()) -&gt; ()).(closure #3)"
+                  moduleName = "RealTransfer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Documents/RealTransfer/RealTransfer/RealTransfer/Models/DefectRoom.swift"
+                  timestampString = "491060635.357564"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "198"
+                  endingLineNumber = "198"
+                  offsetFromSymbolStart = "24">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RealTransfer/Models/DefectRoom.swift"
+            timestampString = "491058494.085407"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "183"
+            endingLineNumber = "183"
             landmarkName = "getListDefect(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -809,13 +585,77 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "RealTransfer/AppDelegate.swift"
-            timestampString = "490631184.690357"
+            filePath = "RealTransfer/Models/Sync.swift"
+            timestampString = "491058533.886759"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "checkOrientation(_:)"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "syncToServer(_:db_name:timeStamp:defect:handler:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RealTransfer/Models/Sync.swift"
+            timestampString = "491058556.775956"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "syncToServer(_:db_name:timeStamp:defect:handler:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RealTransfer/Lib/ImageCaching.swift"
+            timestampString = "491058595.175408"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
+            landmarkName = "isImageDidSyncServer(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RealTransfer/Models/Sync.swift"
+            timestampString = "491058780.258859"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "syncToServer(_:db_name:timeStamp:defect:handler:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RealTransfer/Models/Sync.swift"
+            timestampString = "491058767.412267"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "syncToServer(_:db_name:timeStamp:defect:handler:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

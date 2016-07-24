@@ -35,6 +35,12 @@ class AlertUtil: NSObject {
         
     }
     
+    class func alertNetworkFail(atController:UIViewController!){
+    
+        AlertUtil.alert("แจ้งเตือน", message: "กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ต", cancleButton: "OK", atController: atController)
+        
+    }
+    
     //
 
 }

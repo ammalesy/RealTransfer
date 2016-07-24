@@ -26,6 +26,7 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
     var filterSelected:String?
     
     var dropDownController:NZDropDownViewController?
+    var currentCellPopoverDisplaying:DefectCell?
 
     @IBOutlet weak var filterButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
@@ -132,9 +133,9 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
         
         let sizeTable = contorller.tableView.contentSize
         var rect = contorller.view.frame
-        var newHeight = sizeTable.height + 50
+        var newHeight = sizeTable.height
         if newHeight > self.view.frame.size.height {
-            newHeight = self.view.frame.size.height - 50
+            newHeight = self.view.frame.size.height
         }
         
         rect.size.height = newHeight
@@ -252,6 +253,14 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
         let resultArray:[AnyObject] = list.filteredArrayUsingPredicate(resultPredicate)
         return resultArray.count
     }
+    
+    func dequeCell()->DefectCell {
+        
+        let cell:DefectCell = self.tableView.dequeueReusableCellWithIdentifier(CELL_DEFECT_IDENTIFIER) as! DefectCell
+        return cell
+        
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         var defectModel:DefectModel!
@@ -273,7 +282,7 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
         
         
         
-        let cell:DefectCell = tableView.dequeueReusableCellWithIdentifier(CELL_DEFECT_IDENTIFIER) as! DefectCell
+        let cell:DefectCell = self.dequeCell()
         cell.delegate = self
         ///*===== IMAGE =======*//
         print(defectModel.df_image_path)
@@ -346,6 +355,12 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
     }
     func tableViewTouch(){
         self.closeDropDown()
+        
+        currentCellPopoverDisplaying?.hideMenuPopoverIfViewIsShowing()
+        currentCellPopoverDisplaying = nil
+        
+        
+        
     }
     func touchBeganCell(cell: DefectCell) {
         
@@ -393,6 +408,11 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
         self.tableView.scrollEnabled = true
     }
     
+    func defectCell(cell: DefectCell, didShowPopover popover: NZPopoverView) {
+        
+        currentCellPopoverDisplaying = cell
+        
+    }
     func defectCell(cell: DefectCell, didClickMenu model: NZRow, popover: NZPopoverView) {
         let defectModel:DefectModel!
         

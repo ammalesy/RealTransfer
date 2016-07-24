@@ -14,6 +14,7 @@
 		180AD45E1D1953E5000D802B /* BuildingCaching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180AD45D1D1953E5000D802B /* BuildingCaching.swift */; };
 		180AD4601D199E56000D802B /* KMPlaceholderTextView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180AD45F1D199E56000D802B /* KMPlaceholderTextView.framework */; };
 		181D5C531D1CE5D5000DD110 /* PathUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181D5C521D1CE5D5000DD110 /* PathUtil.swift */; };
+		182290221D43968100F94652 /* NetworkDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182290211D43968100F94652 /* NetworkDetection.swift */; };
 		184E425E1D0C2EA20073CF60 /* AddDefectDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184E425D1D0C2EA20073CF60 /* AddDefectDetailViewController.swift */; };
 		184E42601D0C4BFD0073CF60 /* NZDropDownIconColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184E425F1D0C4BFD0073CF60 /* NZDropDownIconColorCell.swift */; };
 		184E42661D0DB7DC0073CF60 /* CustomerInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184E42651D0DB7DC0073CF60 /* CustomerInfoViewController.swift */; };
@@ -25,6 +26,10 @@
 		186537131D22E28B00A11F49 /* DefectListCheckingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186537121D22E28B00A11F49 /* DefectListCheckingViewController.swift */; };
 		1876D5131D3E372300B6FAA1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1876D5121D3E372300B6FAA1 /* QuartzCore.framework */; };
 		1876D5151D3E6D3E00B6FAA1 /* GalleryImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1876D5141D3E6D3E00B6FAA1 /* GalleryImagePickerController.swift */; };
+		188606281D43997F00B2CD7C /* ReachabilitySwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188606271D43997F00B2CD7C /* ReachabilitySwift.framework */; };
+		1886062A1D43A4C600B2CD7C /* CameraRoll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188606291D43A4C600B2CD7C /* CameraRoll.swift */; };
+		1886062C1D43A58400B2CD7C /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1886062B1D43A58400B2CD7C /* Photos.framework */; };
+		188606531D44CCD200B2CD7C /* NZSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188606521D44CCD200B2CD7C /* NZSwitch.swift */; };
 		1889D9E11D1451FC0095507F /* SwiftSpinner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1889D9E01D1451FC0095507F /* SwiftSpinner.framework */; };
 		18AACE171D145ACA0098F5BA /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AACE161D145ACA0098F5BA /* ProjectModel.swift */; };
 		18C0C20E1D21881B00B079BB /* GaranteeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0C20D1D21881B00B079BB /* GaranteeListViewController.swift */; };
@@ -90,6 +95,7 @@
 		180AD45D1D1953E5000D802B /* BuildingCaching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildingCaching.swift; sourceTree = "<group>"; };
 		180AD45F1D199E56000D802B /* KMPlaceholderTextView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KMPlaceholderTextView.framework; path = "../../../Library/Developer/Xcode/DerivedData/RealTransfer-dxjmravslvqqrxcfhswvgaqtusax/Build/Products/Debug-iphoneos/KMPlaceholderTextView.framework"; sourceTree = "<group>"; };
 		181D5C521D1CE5D5000DD110 /* PathUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PathUtil.swift; sourceTree = "<group>"; };
+		182290211D43968100F94652 /* NetworkDetection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkDetection.swift; sourceTree = "<group>"; };
 		184E425D1D0C2EA20073CF60 /* AddDefectDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDefectDetailViewController.swift; sourceTree = "<group>"; };
 		184E425F1D0C4BFD0073CF60 /* NZDropDownIconColorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NZDropDownIconColorCell.swift; sourceTree = "<group>"; };
 		184E42651D0DB7DC0073CF60 /* CustomerInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerInfoViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +107,10 @@
 		186537121D22E28B00A11F49 /* DefectListCheckingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefectListCheckingViewController.swift; sourceTree = "<group>"; };
 		1876D5121D3E372300B6FAA1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		1876D5141D3E6D3E00B6FAA1 /* GalleryImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryImagePickerController.swift; sourceTree = "<group>"; };
+		188606271D43997F00B2CD7C /* ReachabilitySwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReachabilitySwift.framework; path = "../../../Library/Developer/Xcode/DerivedData/RealTransfer-dxjmravslvqqrxcfhswvgaqtusax/Build/Products/Debug-iphoneos/ReachabilitySwift.framework"; sourceTree = "<group>"; };
+		188606291D43A4C600B2CD7C /* CameraRoll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraRoll.swift; sourceTree = "<group>"; };
+		1886062B1D43A58400B2CD7C /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		188606521D44CCD200B2CD7C /* NZSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NZSwitch.swift; sourceTree = "<group>"; };
 		1889D9DD1D1450400095507F /* AlamofireNetworkActivityIndicator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireNetworkActivityIndicator.framework; path = "../../../Library/Developer/Xcode/DerivedData/RealTransfer-dxjmravslvqqrxcfhswvgaqtusax/Build/Products/Debug-iphonesimulator/AlamofireNetworkActivityIndicator.framework"; sourceTree = "<group>"; };
 		1889D9E01D1451FC0095507F /* SwiftSpinner.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftSpinner.framework; path = "../../../Library/Developer/Xcode/DerivedData/RealTransfer-dxjmravslvqqrxcfhswvgaqtusax/Build/Products/Debug-iphonesimulator/SwiftSpinner.framework"; sourceTree = "<group>"; };
 		18AACE161D145ACA0098F5BA /* ProjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectModel.swift; sourceTree = "<group>"; };
@@ -171,6 +181,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1886062C1D43A58400B2CD7C /* Photos.framework in Frameworks */,
+				188606281D43997F00B2CD7C /* ReachabilitySwift.framework in Frameworks */,
 				1876D5131D3E372300B6FAA1 /* QuartzCore.framework in Frameworks */,
 				18F37A3D1D243E2B002767F7 /* TTTAttributedLabel.framework in Frameworks */,
 				180AD4601D199E56000D802B /* KMPlaceholderTextView.framework in Frameworks */,
@@ -213,12 +225,15 @@
 		18F589FA1D183ABF00F06813 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				188606521D44CCD200B2CD7C /* NZSwitch.swift */,
 				18F589FB1D183AC700F06813 /* CachingManager.swift */,
 				18F589FD1D183AF400F06813 /* ImageCaching.swift */,
 				180AD45D1D1953E5000D802B /* BuildingCaching.swift */,
 				18CA73101D1C13120021712B /* AlertUtil.swift */,
 				181D5C521D1CE5D5000DD110 /* PathUtil.swift */,
 				1876D5141D3E6D3E00B6FAA1 /* GalleryImagePickerController.swift */,
+				182290211D43968100F94652 /* NetworkDetection.swift */,
+				188606291D43A4C600B2CD7C /* CameraRoll.swift */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -235,6 +250,8 @@
 		44444307A5AF2D6255AC4ADE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1886062B1D43A58400B2CD7C /* Photos.framework */,
+				188606271D43997F00B2CD7C /* ReachabilitySwift.framework */,
 				1876D5121D3E372300B6FAA1 /* QuartzCore.framework */,
 				18F37A3C1D243E2B002767F7 /* TTTAttributedLabel.framework */,
 				180AD45F1D199E56000D802B /* KMPlaceholderTextView.framework */,
@@ -582,6 +599,7 @@
 				18DF989C1D15180B004BE990 /* Room.swift in Sources */,
 				185E07401D202B510049F30B /* CustomerInfo.swift in Sources */,
 				186537131D22E28B00A11F49 /* DefectListCheckingViewController.swift in Sources */,
+				188606531D44CCD200B2CD7C /* NZSwitch.swift in Sources */,
 				5218E5751D09123C008B5402 /* NZDropDowCell.swift in Sources */,
 				18CA73111D1C13120021712B /* AlertUtil.swift in Sources */,
 				52499B0F1D06BA410003F6D5 /* CellDropDown.swift in Sources */,
@@ -612,6 +630,7 @@
 				185144551D2632D3007420C2 /* UIViewControllerExtension.swift in Sources */,
 				18AACE171D145ACA0098F5BA /* ProjectModel.swift in Sources */,
 				520AC6751D094C6D000A8754 /* NZAutoCompleteViewController.swift in Sources */,
+				182290221D43968100F94652 /* NetworkDetection.swift in Sources */,
 				18F589FE1D183AF400F06813 /* ImageCaching.swift in Sources */,
 				180AD45E1D1953E5000D802B /* BuildingCaching.swift in Sources */,
 				5240DA061D080A1E0071D287 /* NZDropDownViewController.swift in Sources */,
@@ -625,6 +644,7 @@
 				184E42601D0C4BFD0073CF60 /* NZDropDownIconColorCell.swift in Sources */,
 				521A7B241D05277700971B7B /* UIViewExtension.swift in Sources */,
 				521A7B261D05291900971B7B /* UIColorExtension.swift in Sources */,
+				1886062A1D43A4C600B2CD7C /* CameraRoll.swift in Sources */,
 				18F589FC1D183AC700F06813 /* CachingManager.swift in Sources */,
 				5240D9FF1D07F7610071D287 /* DefectCell.swift in Sources */,
 				1854F6AD1D130865003B9FE0 /* Model.swift in Sources */,

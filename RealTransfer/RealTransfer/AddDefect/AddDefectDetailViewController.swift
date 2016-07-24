@@ -76,7 +76,14 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
             self.view.setNeedsDisplay()
         })
     }
-    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if self.isModeGanrantee() {
+            let controller:GaranteeListViewController =  self.getGuaranteeDefectListController()
+            controller.needFullCellMode(false)
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AddDefectDetailViewController.keyboardWasShown(_:)), name:UIKeyboardWillShowNotification, object: nil);
@@ -90,6 +97,7 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
         
         self.initialData()
     }
+
     func initialData(){
         if self.state == DefectViewState.Edit {
             
@@ -154,12 +162,14 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
         let mediaType = info[UIImagePickerControllerMediaType] as! String
         
         if mediaType == (kUTTypeImage as String) {
-            let image = info[UIImagePickerControllerOriginalImage]
-                as! UIImage
+            let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+            CameraRoll.sharedInstance.saveImage(image)
             
             self.imageView.image = image
             
             self.imagePicker?.dismissViewControllerAnimated(true, completion: { 
+                
+                
                 
             })
         }
@@ -215,7 +225,7 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
     }
     
     @IBAction func cancle(sender: AnyObject) {
-        self.navigationController?.popViewControllerAnimated(true)
+        self.popViewController()
     }
     @IBAction func save(sender: AnyObject) {
         if self.subCategorySelected == kOTHER_IDENTIFIER
@@ -295,8 +305,14 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
             
             self.reloadDefectList()
             
-            self.navigationController?.popViewControllerAnimated(true)
+            self.popViewController()
         }
+    }
+    
+    func popViewController(){
+        
+        self.navigationController?.popViewControllerAnimated(true)
+
     }
     
     func reloadDefectList()

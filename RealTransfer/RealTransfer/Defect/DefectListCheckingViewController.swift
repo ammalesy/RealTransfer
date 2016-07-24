@@ -229,21 +229,37 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
         cell.statusIconImageView.backgroundColor = dropDownModel.iconColor
         
         
+//        if defectModel.complete_status == "0" {
+//            cell.switching.setOn(false, animated: false)
+//            cell.titleCheckDate.text = "รอการ   ตรวจสอบ"
+//            cell.switching.userInteractionEnabled = true
+//        }else{
+//            cell.switching.setOn(true, animated: false)
+//            let arrayDate:[String] = (defectModel.df_date! as NSString).componentsSeparatedByString("|")
+//            cell.titleCheckDate.text = "ตรวจเมื่อ \(arrayDate[0])"
+//            
+//            if defectModel.canEdit == "0"  {
+//                cell.switching.userInteractionEnabled = false
+//            }else if defectModel.canEdit == "1" {
+//                cell.switching.userInteractionEnabled = true
+//            }
+//        }
+        
         if defectModel.complete_status == "0" {
-            cell.switching.setOn(false, animated: false)
-            cell.titleCheckDate.text = "รอการ   ตรวจสอบ"
-            cell.switching.userInteractionEnabled = true
+            cell.nzSwitch.setOn(false, text: "รอการตรวจสอบ")
+            cell.nzSwitch.userInteractionEnabled = true
         }else{
-            cell.switching.setOn(true, animated: false)
+            
             let arrayDate:[String] = (defectModel.df_date! as NSString).componentsSeparatedByString("|")
-            cell.titleCheckDate.text = "ตรวจเมื่อ \(arrayDate[0])"
+            cell.nzSwitch.setOn(true, text: "ตรวจเมื่อ \(arrayDate[0])")
             
             if defectModel.canEdit == "0"  {
-                cell.switching.userInteractionEnabled = false
+                cell.nzSwitch.userInteractionEnabled = false
             }else if defectModel.canEdit == "1" {
-                cell.switching.userInteractionEnabled = true
+                cell.nzSwitch.userInteractionEnabled = true
             }
         }
+
         
         
         
@@ -354,13 +370,14 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
             addDefectViewController.needShowGettingStart = false
 
         }
-        
-        split.minimumPrimaryColumnWidth = 400
-        split.maximumPrimaryColumnWidth = 400
+        let max = (UIScreen.mainScreen().bounds.size.width * 85) / 100;
+        split.minimumPrimaryColumnWidth = max
+        split.maximumPrimaryColumnWidth = max
         self.nzNavigationController?.pushViewControllerWithOutAnimate(split, completion: { () -> Void in
             
             
                     let garanteeListViewController:GaranteeListViewController = GaranteeListViewController.sharedInstance()
+                    garanteeListViewController.fullCellMode = true
                     garanteeListViewController.reloadData(self.defectRoomRef!, type: "1")
                     garanteeListViewController.allDefect = self.allDefect
                     garanteeListViewController.garanteeDefect = self.garanteeDefect
@@ -383,8 +400,10 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
         
     }
 
-    func defectCellCheckingButtonClicked(view: DefectCellChecking) {
-
+    func defectCellCheckingButtonClicked(view: DefectCellChecking, isOn on: Bool) {
+        
+        
+        
         let defectModel:DefectModel!
         var resultArray:[AnyObject]?
         let indexPath:NSIndexPath = self.tableView.indexPathForCell(view)!
@@ -396,13 +415,28 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
         let index:Int = (resultArray!.count - 1) - indexPath.row
         defectModel = resultArray![index] as! DefectModel
         
-        if defectModel.complete_status == "1" {
-            defectModel.complete_status = "0"
-        }else{
+        
+        if (on == true && defectModel.complete_status == "1") {
+            return
+        }
+        if (on == false && defectModel.complete_status == "0") {
+            return
+        }
+        
+        if on == true {
             defectModel.complete_status = "1"
             defectModel.df_date = NSDateFormatter.dateFormater().stringFromDate(NSDate())
+        }else{
+            defectModel.complete_status = "0"
         }
-
+        
+//        if defectModel.complete_status == "1" {
+//            defectModel.complete_status = "0"
+//        }else{
+//            defectModel.complete_status = "1"
+//            defectModel.df_date = NSDateFormatter.dateFormater().stringFromDate(NSDate())
+//        }
+        
         
         self.defectRoomRef?.doCache()
         self.tableView.reloadData()
@@ -417,6 +451,7 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
         }
         self.setNumberCheckingOnList(displayList)
         self.updateTitleFilterButton(resultArray)
+        
     }
     func updateTitleFilterButton(resultArray:[AnyObject]?) {
         if self.filterSelected == "ALL" {
@@ -434,20 +469,22 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
             let completedAction:UIAlertAction = UIAlertAction(title: "อัพเดทสถานะการตรวจรับทั้งหมด", style: UIAlertActionStyle.Default, handler: { (action) in
                 Queue.serialQueue({
                     Queue.mainQueue({
-                        self.sync()
+                        self.sync({ 
+                            Queue.serialQueue({
+                                Queue.mainQueue({
+                                    
+                                    self.nzNavigationController?.popViewController({
+                                        popover.hide()
+                                        self.nzNavigationController?.hideRightInfo(true)
+                                    })
+                                    
+                                })
+                            })
+
+                        })
                     })
                 })
                 
-                Queue.serialQueue({
-                    Queue.mainQueue({
-                        
-                        self.nzNavigationController?.popViewController({
-                            popover.hide()
-                            self.nzNavigationController?.hideRightInfo(true)
-                        })
-                        
-                    })
-                })
                 
             })
             let cancelAction:UIAlertAction = UIAlertAction(title: "ยกเลิก", style: UIAlertActionStyle.Cancel, handler: { (action) in
@@ -465,7 +502,7 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
         
     }
     
-    func sync() {
+    func sync(completion: (() -> Void)?) {
         
         SwiftSpinner.show("Uploading ..", animated: true)
         let cache:DefectRoom = DefectRoom.getCache(self.defectRoomRef?.df_room_id)!
@@ -475,9 +512,13 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
         Sync.syncToServer(cache ,db_name: PROJECT?.pj_datebase_name!, timeStamp: NSDateFormatter.dateFormater().stringFromDate(NSDate()), defect: (cache.listDefect)!)
         { (result) in
             
-            if result == "TRUE" {
+            if  result == "NETWORK_FAIL" {
+                SwiftSpinner.hide()
+                AlertUtil.alertNetworkFail(self)
                 
-                cache.getListDefectOnServer({
+            }else if result == "TRUE" {
+                
+                cache.getListDefectOnServer({ 
                     
                     cache.doCache()
                     self.defectRoomRef = cache
@@ -485,12 +526,29 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
                     
                     SwiftSpinner.hide()
                     
+                    let alert = UIAlertController(title: "บันทึกสำเร็จ", message:nil, preferredStyle: UIAlertControllerStyle.Alert)
+                    let completedAction:UIAlertAction = UIAlertAction(title: "ตกลง", style: UIAlertActionStyle.Default, handler: { (action) in
+                        
+                        if (completion != nil) {
+                            completion!()
+                        }
+                    })
+                    alert.addAction(completedAction)
+                    self.presentViewController(alert, animated: true, completion: {
+                        
+                    })
+                    
+                }, networkFail: { 
+                    AlertUtil.alertNetworkFail(self)
                 })
                 
             }else if result == "FALSE"{
                 let alert = UIAlertController(title: "แจ้งเตือน", message: "ซิงค์กับเซริฟเวอร์เรียบร้อยแล้ว", preferredStyle: UIAlertControllerStyle.Alert)
                 let action:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: { (action) in
-                    
+                    if (completion != nil) {
+                        completion!()
+                    }
+
                 })
                 alert.addAction(action)
                 
@@ -506,9 +564,12 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
                     self.reloadData(self.defectRoomRef, type: "0")
                     
                     SwiftSpinner.hide()
-                    let alert = UIAlertController(title: "แจ้งเตือน", message: "Image upload fail!", preferredStyle: UIAlertControllerStyle.Alert)
+                    let alert = UIAlertController(title: "บันทึกข้อมูลไม่สำเร็จ", message: "กรุณากดบันทึกอีกครั้งหนึ่งและตรวจสอบการเชื่อมต่ออินเทอร์เน็ต", preferredStyle: UIAlertControllerStyle.Alert)
                     let action:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: { (action) in
                         
+                        if (completion != nil) {
+                            completion!()
+                        }
                         
                         
                     })
@@ -518,6 +579,8 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
                         
                     })
                     
+                }, networkFail: { 
+                    AlertUtil.alertNetworkFail(self)
                 })
                 
                 
@@ -566,9 +629,9 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
         
         let sizeTable = contorller.tableView.contentSize
         var rect = contorller.view.frame
-        var newHeight = sizeTable.height + 50
+        var newHeight = sizeTable.height
         if newHeight > self.view.frame.size.height {
-            newHeight = self.view.frame.size.height - 50
+            newHeight = self.view.frame.size.height
         }
         
         rect.size.height = newHeight

@@ -17,8 +17,9 @@ import TTTAttributedLabel
     optional func defectCell(cell:DefectCell, didClickImage image:UIImage)
     
     
-    optional func defectCellCheckingButtonClicked(view:DefectCellChecking)
+    optional func defectCellCheckingButtonClicked(view:DefectCellChecking, isOn on:Bool)
     optional func defectCellSwitchCanChanged(view:DefectCellChecking) -> Bool
+    optional func defectCell(cell:DefectCell, didShowPopover popover:NZPopoverView)
 
 }
 
@@ -76,14 +77,21 @@ class DefectCell: UITableViewCell,NZPopoverViewDelegate {
                 self.delegate?.defectCellPopoverWillShow!(self)
                 
             }
-            
-            popover = NZPopoverView.standardSize()
+            popover = NZPopoverView.standardSizeWithArrow()
             popover.delegate = self
             popover.addRow(NZRow(text: "Edit", imageName:nil, tintColor: UIColor.darkGrayColor(),  identifier: "edit"))
             popover.addRow(NZRow(text: "Delete", imageName:nil, tintColor: UIColor(red: 223/255, green: 0/255, blue: 0/255, alpha: 1),  identifier: "delete"))
             
             popover.showNearView(self.editImageView, addToView: self)
+            
+            if (self.delegate != nil) {
+                
+                self.delegate?.defectCell!(self, didShowPopover: self.popover)
+                
+            }
         }
+        
+
         
     }
     func hideMenuPopoverIfViewIsShowing(){
@@ -98,6 +106,11 @@ class DefectCell: UITableViewCell,NZPopoverViewDelegate {
         }
     }
     
+    func popoverViewMarginHarizontalView(view: NZPopoverView) -> CGFloat {
+        
+        return -10
+        
+    }
     func popoverView(view: NZPopoverView, didClickRow menu: NZRow) {
         
         if (self.delegate != nil) {

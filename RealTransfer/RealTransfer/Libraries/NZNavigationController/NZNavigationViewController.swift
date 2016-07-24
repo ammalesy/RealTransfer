@@ -235,7 +235,7 @@ class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
             
             popover.delegate = self
             if CustomerInfo.sharedInstance.canShow {
-                popover.addRow(NZRow(text: "ดูข้อมูลลูกค้า", imageName:"Info-97", tintColor: UIColor.darkGrayColor(),  identifier: "info"))
+                popover.addRow(NZRow(text: "ข้อมูลลูกค้า", imageName:"Info-97", tintColor: UIColor.darkGrayColor(),  identifier: "info"))
             }
             if PROJECT != nil {
                 popover.addRow(NZRow(text: "บันทึก", imageName:"sync", tintColor: UIColor.darkGrayColor(),  identifier: "sync"))
@@ -372,6 +372,12 @@ class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
             
         }
         
+        
+    }
+    
+    func popoverViewMarginHarizontalView(view: NZPopoverView) -> CGFloat {
+        
+        return 0
         
     }
 }

@@ -249,18 +249,26 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
                     if isDuplicate == false {
                         
                         defectRoom.add({ (resultFlag, message, status) in
-                            
                             if resultFlag == true {
                                 //INITIALED & RELOAD DEFECT LIST
-                                defectRoom.getListDefect({
+                                defectRoom.getListDefect({ (success) in
                                     
-                                    self.initialRoom(defectRoom)
+                                    if success {
+                                        self.initialRoom(defectRoom)
+                                        
+                                        SwiftSpinner.hide()
+                                        self.hideView()
+                                        
+                                        customer.canShow = true
+                                    }else{
+                                        SwiftSpinner.hide()
+                                        AlertUtil.alertNetworkFail(self)
+                                    }
                                     
-                                    SwiftSpinner.hide()
-                                    self.hideView()
-                                    
-                                    customer.canShow = true
                                 })
+                                
+                                
+                                //
                             }else{
                                 
                                 let alert = UIAlertController(title: "Fail", message: "Error code:\(status!) \(message!)", preferredStyle: UIAlertControllerStyle.Alert)
@@ -273,33 +281,50 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
                                     SwiftSpinner.hide()
                                 })
                             }
-                            
+                        }, networkFail: { 
+                            SwiftSpinner.hide()
+                            AlertUtil.alertNetworkFail(self)
                         })
                         
+                    
                     }else{
                         
                         if defectRoomDup?.df_sync_status == "0" {
                             //INITIALED & RELOAD DEFECT LIST
-                            defectRoomDup?.getListDefect({
+                            defectRoomDup?.getListDefect({ (success) in
                                 
-                                self.initialRoom(defectRoomDup)
+                                if success {
+                                    self.initialRoom(defectRoomDup)
+                                    
+                                    SwiftSpinner.hide()
+                                    self.hideView()
+                                    
+                                    customer.canShow = true
+                                }else{
+                                    SwiftSpinner.hide()
+                                    AlertUtil.alertNetworkFail(self)
+                                }
                                 
-                                SwiftSpinner.hide()
-                                self.hideView()
-                                
-                                customer.canShow = true
                             })
-
+                            
+                            //
+                            
                         }else{
                             //INITIALED & RELOAD DEFECT LIST
-                            defectRoomDup?.getListDefect({
+                            defectRoomDup?.getListDefect({ (success) in
                                 
-                                //FILTER GATANTEE ONLY
+                                if success {
+                                    //FILTER GATANTEE ONLY
+                                    
+                                    SwiftSpinner.hide()
+                                    self.initialRoomCheckingPart2(defectRoomDup)
+                                    self.hideView()
+                                    customer.canShow = true
+                                }else{
+                                    SwiftSpinner.hide()
+                                    AlertUtil.alertNetworkFail(self)
+                                }
                                 
-                                SwiftSpinner.hide()
-                                self.initialRoomCheckingPart2(defectRoomDup)
-                                self.hideView()
-                                customer.canShow = true
                             })
                             
                             
@@ -308,10 +333,10 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
                         
                     }
                     
+                }, networkFail: { 
+                    SwiftSpinner.hide()
+                    AlertUtil.alertNetworkFail(self)
                 })
-                
-                
-                
             }
        // }
     }
@@ -416,6 +441,7 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             else if data.identifier == "CS_LIST"
             {
                 CSRoleModel().getCSUsers({ (list) in
+                    
                     Queue.mainQueue({
                         let listDropDown:NSMutableArray = NSMutableArray()
                         for user:User in ((list! as NSArray) as! [User]) {
@@ -426,6 +452,10 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
                         }
                         self.generateDropDownAndParseDataWithCell(cell,dataList: listDropDown, rowModel: data)
                     })
+                    
+                }, networkFail: {
+                    
+                    AlertUtil.alertNetworkFail(self)
                     
                 })
             }
@@ -611,131 +641,139 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         }
         
         
-        self.queryInfo { (list) in
-            let customer:CustomerInfo = CustomerInfo.sharedInstance
+        NetworkDetection.manager.isConected { (isConected) in
             
-            var defectInfo:NSMutableDictionary
-            var roomInfo:NSMutableDictionary
-            var qcCheckerInfo:NSMutableDictionary
-            var csInfo:NSMutableDictionary
-            
-            let userInfo:NSDictionary = (list?.objectForKey("userInfo")!)! as! NSDictionary
-            
-            if ((list?.objectForKey("roomInfo") as? NSMutableDictionary) != nil) {
-                roomInfo = (list?.objectForKey("roomInfo") as? NSMutableDictionary)!
-                
-                row4.headInfo4 = "Room Type : "
-                row4.headInfo5 = "Unit Type : "
-                
-                let roomType = roomInfo.objectForKey("room_type_info") as? String
-                let unitType = roomInfo.objectForKey("unit_type_name") as? String
-                
-                row4.detailInfo4 = roomType!
-                row4.detailInfo5 = unitType!
-                
-                customer.roomType = roomType!
-                customer.unitType = unitType!
-                
-            }
-            
-            if ((list?.objectForKey("defectInfo") as? NSMutableDictionary) != nil) {
-                defectInfo = (list?.objectForKey("defectInfo") as? NSMutableDictionary)!
-                row4.headInfo6 = "Check Date : "
-                row4.headInfo7 = "Defect No : "
-                if let date = defectInfo.objectForKey("df_check_date") as? String {
-                    
-                    let dateArr = date.componentsSeparatedByString("|")
-                    let dateConcat = "\(dateArr[0]) \(dateArr[1])"
-                    row4.detailInfo6 = dateConcat
-                    
-                    customer.checkDate = dateConcat
-                }
-                let defectNo = defectInfo.objectForKey("df_no") as? String
-                row4.detailInfo7 = defectNo!
-                customer.defectNo = defectNo!
-                
-            }
-            
-            if ((list?.objectForKey("qcCheckerInfo") as? NSMutableDictionary) != nil) {
-                qcCheckerInfo = (list?.objectForKey("qcCheckerInfo") as? NSMutableDictionary)!
-                let qcChecker = "\(qcCheckerInfo.objectForKey("user_pers_fname") as! String) \(qcCheckerInfo.objectForKey("user_pers_lname") as! String)"
-//                row4.headInfo8 = "QC Checker : "
-//                row4.detailInfo8 = qcChecker
-//                
-                row4.headInfo8 = ""
-                row4.detailInfo8 = ""
-
-                
-                customer.qcChecker = qcChecker
-            }
-            
-            row4.style = CELL_INFO_LABEL_IDENTIFIER
-            row4.headInfo1 = "Name : "
-            row4.headInfo2 = "Email : "
-            row4.headInfo3 = "Phone No.: "//pers_prefix
-            
-            
-            
-            let prefix = userInfo.objectForKey("pers_prefix") as? String
-            let fname = userInfo.objectForKey("pers_fname") as? String
-            let lname = userInfo.objectForKey("pers_lname") as? String
-            let qt_unit_number_id = userInfo.objectForKey("qt_unit_number_id") as? String
-            let pers_sex = userInfo.objectForKey("pers_sex") as? String
-            let pers_card_id = userInfo.objectForKey("pers_card_id") as? String
-            let pers_mobile = userInfo.objectForKey("pers_mobile") as? String
-            let pers_email = userInfo.objectForKey("pers_email") as? String
-            var pers_tel = userInfo.objectForKey("pers_mobile") as? String
-            if pers_tel == "N/A" {
-                pers_tel = userInfo.objectForKey("pers_tel") as? String
-            }
-            
-            customer.pers_prefix = prefix!
-            customer.pers_fname = fname!
-            customer.pers_lname = lname!
-            customer.qt_unit_number_id = qt_unit_number_id!
-            customer.pers_sex = pers_sex!
-            customer.pers_card_id = pers_card_id!
-            customer.pers_mobile = pers_mobile!
-            customer.pers_email = pers_email!
-            customer.pers_tel = pers_tel!
-            
-            var name = "N/A"
-            if fname != "N/A" && lname != "N/A" {
-                name = "\(prefix!)\(fname!) \(lname!)"
-            }
-            
-            row4.detailInfo1 = name
-            row4.detailInfo2 = pers_email!
-            row4.detailInfo3 = pers_tel!
-            
-            self.nzNavigationController!.assignRightInfovalue(customer, roomNo: self.roomSelected!.un_name!)
-            
-            self.components.addObject(row4);
-            
-            
-            if ((list?.objectForKey("csInfo") as? NSMutableDictionary) != nil) {
-                csInfo = (list?.objectForKey("csInfo") as? NSMutableDictionary)!
-                row5.detail = "\(csInfo.objectForKey("user_pers_fname") as! String) \(csInfo.objectForKey("user_pers_lname") as! String)"
-                //row5.enable = false
-                
-                self.csSelected = User()
-                
-                self.csSelected!.user_id = csInfo.objectForKey("user_id") as? String
-                self.csSelected!.user_pers_fname = csInfo.objectForKey("user_pers_fname") as? String
-                self.csSelected!.user_pers_lname = csInfo.objectForKey("user_pers_lname") as? String
-                self.user_id_before = self.csSelected!.user_id!
+            if isConected == false {
+                AlertUtil.alertNetworkFail(self)
             }else{
-                row5.detail = ""
+                self.queryInfo { (list) in
+                    let customer:CustomerInfo = CustomerInfo.sharedInstance
+                    
+                    var defectInfo:NSMutableDictionary
+                    var roomInfo:NSMutableDictionary
+                    var qcCheckerInfo:NSMutableDictionary
+                    var csInfo:NSMutableDictionary
+                    
+                    let userInfo:NSDictionary = (list?.objectForKey("userInfo")!)! as! NSDictionary
+                    
+                    if ((list?.objectForKey("roomInfo") as? NSMutableDictionary) != nil) {
+                        roomInfo = (list?.objectForKey("roomInfo") as? NSMutableDictionary)!
+                        
+                        row4.headInfo4 = "Room Type : "
+                        row4.headInfo5 = "Unit Type : "
+                        
+                        let roomType = roomInfo.objectForKey("room_type_info") as? String
+                        let unitType = roomInfo.objectForKey("unit_type_name") as? String
+                        
+                        row4.detailInfo4 = roomType!
+                        row4.detailInfo5 = unitType!
+                        
+                        customer.roomType = roomType!
+                        customer.unitType = unitType!
+                        
+                    }
+                    
+                    if ((list?.objectForKey("defectInfo") as? NSMutableDictionary) != nil) {
+                        defectInfo = (list?.objectForKey("defectInfo") as? NSMutableDictionary)!
+                        row4.headInfo6 = "Check Date : "
+                        row4.headInfo7 = "Defect No : "
+                        if let date = defectInfo.objectForKey("df_check_date") as? String {
+                            
+                            let dateArr = date.componentsSeparatedByString("|")
+                            let dateConcat = "\(dateArr[0]) \(dateArr[1])"
+                            row4.detailInfo6 = dateConcat
+                            
+                            customer.checkDate = dateConcat
+                        }
+                        let defectNo = defectInfo.objectForKey("df_no") as? String
+                        row4.detailInfo7 = defectNo!
+                        customer.defectNo = defectNo!
+                        
+                    }
+                    
+                    if ((list?.objectForKey("qcCheckerInfo") as? NSMutableDictionary) != nil) {
+                        qcCheckerInfo = (list?.objectForKey("qcCheckerInfo") as? NSMutableDictionary)!
+                        let qcChecker = "\(qcCheckerInfo.objectForKey("user_pers_fname") as! String) \(qcCheckerInfo.objectForKey("user_pers_lname") as! String)"
+                        //                row4.headInfo8 = "QC Checker : "
+                        //                row4.detailInfo8 = qcChecker
+                        //
+                        row4.headInfo8 = ""
+                        row4.detailInfo8 = ""
+                        
+                        
+                        customer.qcChecker = qcChecker
+                    }
+                    
+                    row4.style = CELL_INFO_LABEL_IDENTIFIER
+                    row4.headInfo1 = "Name : "
+                    row4.headInfo2 = "Email : "
+                    row4.headInfo3 = "Phone No.: "//pers_prefix
+                    
+                    
+                    
+                    let prefix = userInfo.objectForKey("pers_prefix") as? String
+                    let fname = userInfo.objectForKey("pers_fname") as? String
+                    let lname = userInfo.objectForKey("pers_lname") as? String
+                    let qt_unit_number_id = userInfo.objectForKey("qt_unit_number_id") as? String
+                    let pers_sex = userInfo.objectForKey("pers_sex") as? String
+                    let pers_card_id = userInfo.objectForKey("pers_card_id") as? String
+                    let pers_mobile = userInfo.objectForKey("pers_mobile") as? String
+                    let pers_email = userInfo.objectForKey("pers_email") as? String
+                    var pers_tel = userInfo.objectForKey("pers_mobile") as? String
+                    if pers_tel == "N/A" {
+                        pers_tel = userInfo.objectForKey("pers_tel") as? String
+                    }
+                    
+                    customer.pers_prefix = prefix!
+                    customer.pers_fname = fname!
+                    customer.pers_lname = lname!
+                    customer.qt_unit_number_id = qt_unit_number_id!
+                    customer.pers_sex = pers_sex!
+                    customer.pers_card_id = pers_card_id!
+                    customer.pers_mobile = pers_mobile!
+                    customer.pers_email = pers_email!
+                    customer.pers_tel = pers_tel!
+                    
+                    var name = "N/A"
+                    if fname != "N/A" && lname != "N/A" {
+                        name = "\(prefix!)\(fname!) \(lname!)"
+                    }
+                    
+                    row4.detailInfo1 = name
+                    row4.detailInfo2 = pers_email!
+                    row4.detailInfo3 = pers_tel!
+                    
+                    self.nzNavigationController!.assignRightInfovalue(customer, roomNo: self.roomSelected!.un_name!)
+                    
+                    self.components.addObject(row4);
+                    
+                    
+                    if ((list?.objectForKey("csInfo") as? NSMutableDictionary) != nil) {
+                        csInfo = (list?.objectForKey("csInfo") as? NSMutableDictionary)!
+                        row5.detail = "\(csInfo.objectForKey("user_pers_fname") as! String) \(csInfo.objectForKey("user_pers_lname") as! String)"
+                        //row5.enable = false
+                        
+                        self.csSelected = User()
+                        
+                        self.csSelected!.user_id = csInfo.objectForKey("user_id") as? String
+                        self.csSelected!.user_pers_fname = csInfo.objectForKey("user_pers_fname") as? String
+                        self.csSelected!.user_pers_lname = csInfo.objectForKey("user_pers_lname") as? String
+                        self.user_id_before = self.csSelected!.user_id!
+                    }else{
+                        row5.detail = ""
+                    }
+                    
+                    row5.head = "CS : "
+                    row5.style = CELL_DROUP_DOWN_IDENTIFIER
+                    row5.identifier = "CS_LIST"
+                    self.components.addObject(row5);
+                    
+                    self.tableView.reloadData()
+                    
+                    self.verifyButtonColor()
+                    
+                }
             }
-            
-            row5.head = "CS : "
-            row5.style = CELL_DROUP_DOWN_IDENTIFIER
-            row5.identifier = "CS_LIST"
-            self.components.addObject(row5);
-            
-            self.tableView.reloadData()
-            
-            self.verifyButtonColor()
             
         }
     }
@@ -766,6 +804,24 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             return true;
         }
         return false;
+        
+    }
+    func nzDropDownViewdidAppear(contorller: NZDropDownViewController) {
+        
+        if contorller.identifier == "BUILDING_LIST"{
+            
+            let sizeTable = contorller.tableView.contentSize
+            var rect = contorller.view.frame
+            var newHeight = sizeTable.height
+            if newHeight > self.view.frame.size.height {
+                newHeight = self.view.frame.size.height
+            }
+            
+            rect.size.height = newHeight
+            contorller.view.frame = rect
+            contorller.view.setNeedsDisplay()
+            
+        }
         
     }
     func nzDropDownCustomYPositon(contorller: NZDropDownViewController, width: CGFloat, height: CGFloat) -> CGFloat {
