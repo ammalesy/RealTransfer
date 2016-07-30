@@ -118,7 +118,8 @@ class LoginViewController: NZViewController {
                 
             })
             alert.addTextFieldWithConfigurationHandler({ (txt1) in
-                (txt1 as UITextField).placeholder = "Ex.domainname.com/Service"
+                txt1.text = DOMAIN_NAME
+                (txt1 as UITextField).placeholder = "https://domainname.com/Service"
             })
             alert.addAction(cancleAction)
             alert.addAction(okAction)
