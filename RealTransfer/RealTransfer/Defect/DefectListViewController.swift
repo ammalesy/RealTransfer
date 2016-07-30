@@ -301,16 +301,18 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
                         cell.defectImageView.image = imageOnCache!
                         defectModel.realImage = imageOnCache!
                     }else{
-                        let url:NSURL = NSURL(string: "http://\(DOMAIN_NAME)/images/\(PROJECT!.pj_datebase_name!)/\(self.defectRoomRef!.df_un_id!)/\(defectModel.df_image_path!).jpg")! //
-                        cell.defectImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "p1"), completed: { (imageReturn, error, sdImageCacheType, url) in
+                        let url:NSURL = NSURL(string: "\(DOMAIN_NAME)/images/\(PROJECT!.pj_datebase_name!)/\(self.defectRoomRef!.df_un_id!)/\(defectModel.df_image_path!).jpg")! //
+                        
+                        cell.defectImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "p1"), options: .AllowInvalidSSLCertificates, completed: { (imageReturn, error, sdImageCacheType, url) in
+                            
                             if imageReturn != nil
                             {
                                 defectModel.realImage = imageReturn
                                 ImageCaching.sharedInstance.setImageByName(defectModel.df_image_path!, image: imageReturn!, isFromServer: true)
                                 ImageCaching.sharedInstance.save()
                             }
+                            
                         })
-                        //                cell.defectImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "p1"), options: SDWebImageOptions.RefreshCached)
                     }
                     
                 })
@@ -483,5 +485,7 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
         (self.splitViewController as! NZSplitViewController).nzNavigationController!.showImageViwer(image, model: model)
         
     }
+    
+    
     
 }

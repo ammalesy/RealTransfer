@@ -76,7 +76,7 @@ class Sync: Model {
                 
                 
                 
-                let path = "http://\(DOMAIN_NAME)/Defect/syncDefect.php?ransom=\(NSString.randomStringWithLength(10))"
+                let path = "\(DOMAIN_NAME)/Defect/syncDefect.php?ransom=\(NSString.randomStringWithLength(10))"
                 var needUpdateFlagOnly = "0"
                 
                 if param.count <= 0 && images.count == 0 && defectRoom.df_sync_status! == "0"{
@@ -138,7 +138,7 @@ class Sync: Model {
         ////UPLOAD IMAGES
         Alamofire.upload(
             .POST,
-            "http://\(DOMAIN_NAME)/Defect/uploadImage.php?ransom=\(NSString.randomStringWithLength(10))",
+            "\(DOMAIN_NAME)/Defect/uploadImage.php?ransom=\(NSString.randomStringWithLength(10))",
             headers: [
                 "db_name":PROJECT!.pj_datebase_name!,
                 "un_id":defectRoom.df_un_id!
@@ -194,7 +194,7 @@ class Sync: Model {
     }
     
     /*
-     Alamofire.request(.GET, "http://\(DOMAIN_NAME)/User/getCSRole.php", parameters: [:])
+     Alamofire.request(.GET, "\(DOMAIN_NAME)/User/getCSRole.php", parameters: [:])
      .responseJSON { response in
      
      if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {

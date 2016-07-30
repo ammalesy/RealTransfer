@@ -41,6 +41,7 @@
 		18DF989E1D152F2C004BE990 /* DefectRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DF989D1D152F2C004BE990 /* DefectRoom.swift */; };
 		18DF98A01D155AFF004BE990 /* DefectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DF989F1D155AFF004BE990 /* DefectModel.swift */; };
 		18E039FC1D2430A9000F17B4 /* DefectCellChecking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E039FB1D2430A9000F17B4 /* DefectCellChecking.swift */; };
+		18EC63991D4C7B4D005E6A54 /* CallService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EC63981D4C7B4D005E6A54 /* CallService.swift */; };
 		18F121611D27D6CC0046326F /* ImageViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F121601D27D6CC0046326F /* ImageViewerController.swift */; };
 		18F121631D27EC210046326F /* ImageViewerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18F121621D27EC210046326F /* ImageViewerModel.swift */; };
 		18F37A3D1D243E2B002767F7 /* TTTAttributedLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18F37A3C1D243E2B002767F7 /* TTTAttributedLabel.framework */; };
@@ -124,6 +125,7 @@
 		18DF989D1D152F2C004BE990 /* DefectRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefectRoom.swift; sourceTree = "<group>"; };
 		18DF989F1D155AFF004BE990 /* DefectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefectModel.swift; sourceTree = "<group>"; };
 		18E039FB1D2430A9000F17B4 /* DefectCellChecking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefectCellChecking.swift; sourceTree = "<group>"; };
+		18EC63981D4C7B4D005E6A54 /* CallService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallService.swift; sourceTree = "<group>"; };
 		18F121601D27D6CC0046326F /* ImageViewerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewerController.swift; sourceTree = "<group>"; };
 		18F121621D27EC210046326F /* ImageViewerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewerModel.swift; sourceTree = "<group>"; };
 		18F37A3C1D243E2B002767F7 /* TTTAttributedLabel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TTTAttributedLabel.framework; path = "Pods/../build/Debug-iphoneos/TTTAttributedLabel.framework"; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 				1876D5141D3E6D3E00B6FAA1 /* GalleryImagePickerController.swift */,
 				182290211D43968100F94652 /* NetworkDetection.swift */,
 				188606291D43A4C600B2CD7C /* CameraRoll.swift */,
+				18EC63981D4C7B4D005E6A54 /* CallService.swift */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -647,6 +650,7 @@
 				1886062A1D43A4C600B2CD7C /* CameraRoll.swift in Sources */,
 				18F589FC1D183AC700F06813 /* CachingManager.swift in Sources */,
 				5240D9FF1D07F7610071D287 /* DefectCell.swift in Sources */,
+				18EC63991D4C7B4D005E6A54 /* CallService.swift in Sources */,
 				1854F6AD1D130865003B9FE0 /* Model.swift in Sources */,
 				180098211D164A4C00BB11FD /* Sync.swift in Sources */,
 				18DF989A1D150C76004BE990 /* CSRoleModel.swift in Sources */,
@@ -777,7 +781,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mint.RealTransfer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "209d4667-e7ef-4508-a172-07c5080d9357";
+				PROVISIONING_PROFILE = "";
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "RealTransfer-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 2;
@@ -802,7 +806,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mint.RealTransfer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "209d4667-e7ef-4508-a172-07c5080d9357";
+				PROVISIONING_PROFILE = "";
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "RealTransfer-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 2;

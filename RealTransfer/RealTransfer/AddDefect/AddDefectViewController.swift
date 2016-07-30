@@ -38,7 +38,15 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
             
             
         }
+       
     }
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+        let noti = NSNotification(name: "TOUCH_BEGAN_VIEW", object: nil)
+        NSNotificationCenter.defaultCenter().postNotification(noti)
+        
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -90,7 +98,7 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
                 imagePicker!.mediaTypes = [kUTTypeImage as NSString as String]
                 imagePicker!.allowsEditing = false
                 
-                
+            
                 let view:UIButton = UIButton(frame: CGRectMake(
                     imagePicker!.view.frame.size.width - 80,
                     imagePicker!.view.frame.size.height - 150,50,50)
@@ -102,6 +110,12 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
                 imagePicker!.cameraOverlayView = view
                 imagePicker!.cameraOverlayView?.userInteractionEnabled = true
                 imagePicker?.showsCameraControls = true
+            
+                CameraRoll.sharedInstance.getLastImage({ (image) in
+                
+                    view.setImage(image, forState: UIControlState.Normal)
+                    
+                })
             
                 if self.isModeGanrantee() {
                     let controller:GaranteeListViewController =  self.getGuaranteeDefectListController()
@@ -177,10 +191,12 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
             Queue.mainQueue({
                 
                 if self.isModeGanrantee() {
-                    self.splitController?.nzNavigationController?.popViewControllerWithOutAnimate({
-                        self.splitController?.nzNavigationController?.popViewController({
-                            self.splitController?.nzNavigationController?.hideRightInfo(true)
+                    self.splitController?.nzNavigationController?.popViewControllerWithOutAnimate({ (navigationController) in
+                        
+                        navigationController.popViewController({
+                            navigationController.hideRightInfo(true)
                         })
+                        
                     })
                 }else{
                     self.splitController?.nzNavigationController?.popViewController({

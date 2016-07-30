@@ -187,16 +187,18 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
                         cell.defectImageView.image = imageOnCache!
                         defectModel.realImage = imageOnCache!
                     }else{
-                        let url:NSURL = NSURL(string: "http://\(DOMAIN_NAME)/images/\(PROJECT!.pj_datebase_name!)/\(self.defectRoomRef!.df_un_id!)/\(defectModel.df_image_path!).jpg")! //
-                        cell.defectImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "p1"), completed: { (imageReturn, error, sdImageCacheType, url) in
+                        let url:NSURL = NSURL(string: "\(DOMAIN_NAME)/images/\(PROJECT!.pj_datebase_name!)/\(self.defectRoomRef!.df_un_id!)/\(defectModel.df_image_path!).jpg")!
+
+                        cell.defectImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "p1"), options: .AllowInvalidSSLCertificates, completed: { (imageReturn, error, sdImageCacheType, url) in
+                            
                             if imageReturn != nil
                             {
                                 defectModel.realImage = imageReturn
                                 ImageCaching.sharedInstance.setImageByName(defectModel.df_image_path!, image: imageReturn!, isFromServer: true)
                                 ImageCaching.sharedInstance.save()
                             }
+                            
                         })
-                        //                cell.defectImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "p1"), options: SDWebImageOptions.RefreshCached)
                     }
                     
                 })
@@ -251,12 +253,13 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
         }else{
             
             let arrayDate:[String] = (defectModel.df_date! as NSString).componentsSeparatedByString("|")
-            cell.nzSwitch.setOn(true, text: "ตรวจเมื่อ \(arrayDate[0])")
             
             if defectModel.canEdit == "0"  {
+                cell.nzSwitch.setOn(true, text: "ตรวจเมื่อ \(arrayDate[0])")
                 cell.nzSwitch.userInteractionEnabled = false
             }else if defectModel.canEdit == "1" {
                 cell.nzSwitch.userInteractionEnabled = true
+                cell.nzSwitch.setOn(true, text: "เรียบร้อย")
             }
         }
 

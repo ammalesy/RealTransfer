@@ -42,6 +42,7 @@ class DefectCell: UITableViewCell,NZPopoverViewDelegate {
         middleTextLb.verticalAlignment = TTTAttributedLabelVerticalAlignment.Top
         detailTextLb.verticalAlignment = TTTAttributedLabelVerticalAlignment.Top
         self.assignTapOnImageView()
+        
     }
     func assignTapOnImageView(){
         let tap = UITapGestureRecognizer(target: self, action: #selector(DefectCell.tapImageView))
@@ -89,6 +90,7 @@ class DefectCell: UITableViewCell,NZPopoverViewDelegate {
                 self.delegate?.defectCell!(self, didShowPopover: self.popover)
                 
             }
+            self.addObServerHidePopupEditting()
         }
         
 
@@ -103,6 +105,7 @@ class DefectCell: UITableViewCell,NZPopoverViewDelegate {
             }
             popover.hide()
             popover = nil
+            NSNotificationCenter.defaultCenter().removeObserver("TOUCH_BEGAN_VIEW")
         }
     }
     
@@ -129,5 +132,19 @@ class DefectCell: UITableViewCell,NZPopoverViewDelegate {
             
         }
 
+    }
+    func addObServerHidePopupEditting(){
+        
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: #selector(hideMenuPopoverIfViewIsShowing),
+            name: "TOUCH_BEGAN_VIEW",
+            object: nil)
+        
+    }
+    deinit {
+    
+        NSNotificationCenter.defaultCenter().removeObserver("TOUCH_BEGAN_VIEW")
+    
     }
 }

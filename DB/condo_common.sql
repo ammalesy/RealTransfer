@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 02, 2016 at 06:24 PM
+-- Generation Time: Jul 30, 2016 at 12:23 PM
 -- Server version: 5.6.26
 -- PHP Version: 5.6.12
 
@@ -140,7 +140,18 @@ INSERT INTO `log_authentication` (`at_ip`, `at_user_id`, `at_agent`, `at_timesta
 ('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-07-01 05:50:35'),
 ('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-07-01 16:46:51'),
 ('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-07-02 05:33:09'),
-('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-07-02 14:42:36');
+('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-07-02 14:42:36'),
+('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-07-03 05:10:41'),
+('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-07-03 11:01:54'),
+('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-07-05 16:02:36'),
+('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-07-06 16:21:30'),
+('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-07-08 17:34:07'),
+('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-07-09 14:00:48'),
+('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-07-09 15:28:25'),
+('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-07-18 13:23:24'),
+('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-07-19 13:48:20'),
+('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-07-29 16:53:26'),
+('127.0.0.1', 0, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/601.5.17 (KHTML, like Gecko) Version/9.1 Safari/601.5.17', '2016-07-30 07:35:31');
 
 -- --------------------------------------------------------
 
@@ -911,6 +922,13 @@ CREATE TABLE IF NOT EXISTS `log_project` (
   `pj_update_by` int(11) DEFAULT NULL,
   `pj_update` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `log_project`
+--
+
+INSERT INTO `log_project` (`pj_id`, `pj_name`, `pj_detail`, `pj_image`, `pj_datebase_name`, `pj_active`, `pj_update_by`, `pj_update`) VALUES
+(4, 'Diplomat Sathorn', 'Rama 9', NULL, 'rama9', 'on', 0, '2016-07-09 15:27:53');
 
 -- --------------------------------------------------------
 
@@ -5324,7 +5342,7 @@ CREATE TABLE IF NOT EXISTS `tb_project` (
 --
 
 INSERT INTO `tb_project` (`pj_id`, `pj_name`, `pj_detail`, `pj_image`, `pj_datebase_name`, `pj_active`) VALUES
-(4, 'Than Living Rama 9 - Airport Link', 'Rama 9', 'Images/project/4/1432088478.png', 'rama9', 'on'),
+(4, 'Diplomat Sathorn', 'Rama 9', 'Images/project/4/1432088478.png', 'rama9', 'on'),
 (2, 'MyStory', 'MyStory', 'Images/project/2/1439887634.png', 'mystory', 'on'),
 (5, 'THAN LIVING Ratchada-Wongsawang', '', 'Images/project/5/1442204323.png', 'wongsawang', 'on'),
 (6, 'Real Condo', 'RealCondo', 'Images/project/6/1458185334.jpg', 'RealCondo', 'off');

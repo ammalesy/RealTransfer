@@ -47,6 +47,8 @@
             <string>SukhumvitSet-Bold</string>
             <string>SukhumvitSet-SemiBold</string>
             <string>SukhumvitSet-Light</string>
+            <string>SukhumvitSet-Text</string>
+            <string>SukhumvitSet-Text</string>
             <string>SukhumvitSet-SemiBold</string>
             <string>SukhumvitSet-Bold</string>
             <string>SukhumvitSet-Thin</string>
@@ -77,8 +79,6 @@
             <string>SukhumvitSet-Light</string>
             <string>SukhumvitSet-Bold</string>
             <string>SukhumvitSet-Bold</string>
-            <string>SukhumvitSet-Text</string>
-            <string>SukhumvitSet-Text</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -1241,7 +1241,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="พื้นที่ห้องนอน 1 Bed, 2 Bed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chO-Vl-3oS">
-                                                    <rect key="frame" x="165" y="5" width="120" height="25"/>
+                                                    <rect key="frame" x="165" y="5" width="180" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="d6R-Xt-Pfa"/>
                                                     </constraints>
@@ -1250,7 +1250,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="งานกระจก-หน้าต่างอลูมิเนียม" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VIU-rD-gZf" customClass="TTTAttributedLabel">
-                                                    <rect key="frame" x="145" y="30" width="138" height="69"/>
+                                                    <rect key="frame" x="145" y="30" width="180" height="69"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="68" id="baw-X2-cPi"/>
                                                     </constraints>
@@ -1264,14 +1264,14 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UMx-zy-AWk" userLabel="verticalLine">
-                                                    <rect key="frame" x="300" y="11" width="1" height="93"/>
+                                                    <rect key="frame" x="398" y="11" width="1" height="93"/>
                                                     <color key="backgroundColor" red="0.85882352941176465" green="0.85882352941176465" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="1" id="LhQ-lY-hWK"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="รายการที่ต้องแก้ไข" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZBG-i8-iQg">
-                                                    <rect key="frame" x="316" y="5" width="100" height="25"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="รายการที่ต้องแก้ไข" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZBG-i8-iQg">
+                                                    <rect key="frame" x="414" y="5" width="98" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="LRj-vs-ZbU"/>
                                                     </constraints>
@@ -1279,8 +1279,8 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="รายการที่ต้องแก้ไขkaspdkpaskdpaskdpasdkpaskdpaksd" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s9S-Nx-aib" customClass="TTTAttributedLabel">
-                                                    <rect key="frame" x="316" y="30" width="185" height="69"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="รายการที่ต้องแก้ไขkaspdkpaskdpaskdpasdkpaskdpaksd" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s9S-Nx-aib" customClass="TTTAttributedLabel">
+                                                    <rect key="frame" x="414" y="30" width="347" height="69"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="68" id="7Gn-Na-srr"/>
                                                         <constraint firstAttribute="height" constant="25" id="93c-k5-Mht"/>
@@ -1350,8 +1350,8 @@
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="riL-2r-vO7"/>
-                                                            <exclude reference="tpk-YB-hAc"/>
                                                             <exclude reference="hBN-Yn-RKw"/>
+                                                            <exclude reference="tpk-YB-hAc"/>
                                                         </mask>
                                                     </variation>
                                                     <connections>
@@ -1364,7 +1364,7 @@
                                             <constraints>
                                                 <constraint firstItem="s9S-Nx-aib" firstAttribute="leading" secondItem="ZBG-i8-iQg" secondAttribute="leading" id="16X-8P-A2R"/>
                                                 <constraint firstItem="chO-Vl-3oS" firstAttribute="leading" secondItem="OdV-Hi-A1M" secondAttribute="trailing" constant="5" id="5S7-Ns-YWV"/>
-                                                <constraint firstItem="chO-Vl-3oS" firstAttribute="width" secondItem="HgL-ts-N9E" secondAttribute="width" multiplier="0.2" id="Dpq-Zo-4SJ"/>
+                                                <constraint firstItem="chO-Vl-3oS" firstAttribute="width" secondItem="HgL-ts-N9E" secondAttribute="width" multiplier="0.3" id="Dpq-Zo-4SJ"/>
                                                 <constraint firstItem="SfD-WG-pwl" firstAttribute="centerY" secondItem="HgL-ts-N9E" secondAttribute="centerY" id="HKz-A0-ssQ"/>
                                                 <constraint firstItem="VIU-rD-gZf" firstAttribute="top" secondItem="chO-Vl-3oS" secondAttribute="bottom" id="J5e-fD-bpE"/>
                                                 <constraint firstItem="s9S-Nx-aib" firstAttribute="leading" secondItem="UMx-zy-AWk" secondAttribute="trailing" constant="15" id="LBo-7X-nhj"/>
@@ -1380,7 +1380,7 @@
                                                 <constraint firstItem="UMx-zy-AWk" firstAttribute="centerY" secondItem="HgL-ts-N9E" secondAttribute="centerY" id="XAr-3G-sNW"/>
                                                 <constraint firstItem="VIU-rD-gZf" firstAttribute="leading" secondItem="SfD-WG-pwl" secondAttribute="trailing" constant="10" id="XOn-Fn-frd"/>
                                                 <constraint firstItem="YxV-wb-qny" firstAttribute="centerY" secondItem="HgL-ts-N9E" secondAttribute="centerY" id="Zwp-Sq-e4Y"/>
-                                                <constraint firstItem="VIU-rD-gZf" firstAttribute="width" secondItem="HgL-ts-N9E" secondAttribute="width" multiplier="0.23" id="cKq-lY-x8e"/>
+                                                <constraint firstItem="VIU-rD-gZf" firstAttribute="width" secondItem="HgL-ts-N9E" secondAttribute="width" multiplier="0.3" id="cKq-lY-x8e"/>
                                                 <constraint firstAttribute="bottom" secondItem="VIU-rD-gZf" secondAttribute="bottom" constant="15" id="d0n-B6-ARP"/>
                                                 <constraint firstItem="UMx-zy-AWk" firstAttribute="height" secondItem="SfD-WG-pwl" secondAttribute="height" id="e9D-Ho-6ju"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="YxV-wb-qny" secondAttribute="trailing" constant="20" id="erW-Wt-eEp"/>
@@ -1390,18 +1390,20 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="UMx-zy-AWk" secondAttribute="trailing" constant="270" id="pqo-oi-aW1"/>
                                                 <constraint firstItem="ZBG-i8-iQg" firstAttribute="centerY" secondItem="chO-Vl-3oS" secondAttribute="centerY" id="rZx-uR-0QA"/>
                                                 <constraint firstItem="ZBG-i8-iQg" firstAttribute="leading" secondItem="UMx-zy-AWk" secondAttribute="trailing" constant="15" id="ukD-Bv-Cv2"/>
+                                                <constraint firstItem="UMx-zy-AWk" firstAttribute="leading" secondItem="HgL-ts-N9E" secondAttribute="leadingMargin" constant="390" id="vJf-95-nna"/>
                                                 <constraint firstItem="YxV-wb-qny" firstAttribute="centerX" secondItem="HgL-ts-N9E" secondAttribute="centerX" id="wdD-aB-Biy"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
                                                     <exclude reference="Pm0-O8-eaG"/>
                                                     <exclude reference="iwn-Gb-aL7"/>
-                                                    <exclude reference="wdD-aB-Biy"/>
+                                                    <exclude reference="OWf-cj-5jw"/>
                                                     <exclude reference="RVa-jY-wxS"/>
                                                     <exclude reference="ShV-kn-gpK"/>
                                                     <exclude reference="pqo-oi-aW1"/>
                                                     <exclude reference="OJQ-vF-i0o"/>
                                                     <exclude reference="LBo-7X-nhj"/>
+                                                    <exclude reference="wdD-aB-Biy"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -2504,7 +2506,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="พื้นที่ห้องนอน 1 Bed, 2 Bed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1fo-bY-oMI">
-                                                    <rect key="frame" x="165" y="5" width="120" height="25"/>
+                                                    <rect key="frame" x="165" y="5" width="194" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="OQ7-8B-jOw"/>
                                                     </constraints>
@@ -2513,7 +2515,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="งานกระจก-หน้าต่างอลูมิเนียม" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Au-1M-UMo" customClass="TTTAttributedLabel">
-                                                    <rect key="frame" x="145" y="30" width="138" height="69"/>
+                                                    <rect key="frame" x="145" y="30" width="180" height="69"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="68" id="ZFQ-B9-W98"/>
                                                     </constraints>
@@ -2527,14 +2529,14 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qXF-Oq-F5l" userLabel="verticalLine">
-                                                    <rect key="frame" x="300" y="11" width="1" height="93"/>
+                                                    <rect key="frame" x="398" y="11" width="1" height="93"/>
                                                     <color key="backgroundColor" red="0.85882352939999995" green="0.85882352939999995" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="1" id="she-nC-uxc"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="รายการที่ต้องแก้ไข" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xfw-ec-X0U">
-                                                    <rect key="frame" x="316" y="5" width="100" height="25"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="รายการที่ต้องแก้ไข" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xfw-ec-X0U">
+                                                    <rect key="frame" x="414" y="5" width="98" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="xz0-MI-WAx"/>
                                                     </constraints>
@@ -2543,7 +2545,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="รายการที่ต้องแก้ไขkaspdkpaskdpaskdpasdkpaskdpaksd" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nQk-Zw-NPI" customClass="TTTAttributedLabel">
-                                                    <rect key="frame" x="316" y="30" width="284" height="69"/>
+                                                    <rect key="frame" x="414" y="30" width="186" height="69"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="68" id="Q4y-Z7-oza"/>
                                                         <constraint firstAttribute="height" constant="25" id="oLx-xX-dPo"/>
@@ -2558,14 +2560,14 @@
                                                     </variation>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Pencil" translatesAutoresizingMaskIntoConstraints="NO" id="Dji-Gx-qwt">
-                                                    <rect key="frame" x="575" y="10" width="15" height="15"/>
+                                                    <rect key="frame" x="374" y="10" width="15" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="15" id="2tl-8N-LTq"/>
                                                         <constraint firstAttribute="height" constant="15" id="asw-WV-92i"/>
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jgZ-cB-cde" userLabel="PencilButton">
-                                                    <rect key="frame" x="570" y="5" width="25" height="25"/>
+                                                    <rect key="frame" x="369" y="5" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="25" id="OFl-w0-W3Y"/>
                                                         <constraint firstAttribute="width" constant="25" id="b8g-al-hDf"/>
@@ -2577,9 +2579,11 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="Xfw-ec-X0U" secondAttribute="trailing" constant="10" id="1mU-eO-MRC"/>
+                                                <constraint firstItem="jgZ-cB-cde" firstAttribute="leading" secondItem="1fo-bY-oMI" secondAttribute="trailing" constant="10" id="29K-Dq-eN1"/>
                                                 <constraint firstItem="qXF-Oq-F5l" firstAttribute="centerY" secondItem="as6-My-z5r" secondAttribute="centerY" id="2Kf-wQ-VcB"/>
+                                                <constraint firstItem="Dji-Gx-qwt" firstAttribute="trailing" secondItem="qXF-Oq-F5l" secondAttribute="trailing" constant="-10" id="700-Cy-w23"/>
                                                 <constraint firstItem="1fo-bY-oMI" firstAttribute="centerY" secondItem="jXE-bH-CgA" secondAttribute="centerY" id="AJo-WR-rad"/>
-                                                <constraint firstItem="7Au-1M-UMo" firstAttribute="width" secondItem="as6-My-z5r" secondAttribute="width" multiplier="0.23" id="BCA-C3-cUl"/>
+                                                <constraint firstItem="7Au-1M-UMo" firstAttribute="width" secondItem="as6-My-z5r" secondAttribute="width" multiplier="0.3" id="BCA-C3-cUl"/>
                                                 <constraint firstItem="Hyz-r1-Rps" firstAttribute="centerY" secondItem="as6-My-z5r" secondAttribute="centerY" id="CsY-84-S7I"/>
                                                 <constraint firstAttribute="bottom" secondItem="7Au-1M-UMo" secondAttribute="bottom" constant="15" id="Ec3-Xz-zbN"/>
                                                 <constraint firstItem="jXE-bH-CgA" firstAttribute="leading" secondItem="Hyz-r1-Rps" secondAttribute="trailing" constant="10" id="JV3-dz-TYW"/>
@@ -2597,13 +2601,14 @@
                                                 <constraint firstItem="Hyz-r1-Rps" firstAttribute="leading" secondItem="as6-My-z5r" secondAttribute="leading" constant="10" id="fRA-to-b8D"/>
                                                 <constraint firstItem="jgZ-cB-cde" firstAttribute="centerX" secondItem="Dji-Gx-qwt" secondAttribute="centerX" id="fbf-Ob-zAv"/>
                                                 <constraint firstItem="7Au-1M-UMo" firstAttribute="top" secondItem="1fo-bY-oMI" secondAttribute="bottom" id="gLs-qa-bk6"/>
-                                                <constraint firstItem="1fo-bY-oMI" firstAttribute="width" secondItem="as6-My-z5r" secondAttribute="width" multiplier="0.2" id="idz-Z7-3Yg"/>
+                                                <constraint firstItem="1fo-bY-oMI" firstAttribute="width" secondItem="as6-My-z5r" secondAttribute="width" multiplier="0.3" id="idz-Z7-3Yg"/>
                                                 <constraint firstItem="qXF-Oq-F5l" firstAttribute="height" secondItem="Hyz-r1-Rps" secondAttribute="height" id="jBX-jN-qlS"/>
                                                 <constraint firstItem="Xfw-ec-X0U" firstAttribute="leading" secondItem="qXF-Oq-F5l" secondAttribute="trailing" constant="15" id="m1q-Ne-tfv"/>
                                                 <constraint firstItem="jXE-bH-CgA" firstAttribute="top" secondItem="Hyz-r1-Rps" secondAttribute="top" id="mFl-Cv-TfS"/>
                                                 <constraint firstItem="jgZ-cB-cde" firstAttribute="centerY" secondItem="Dji-Gx-qwt" secondAttribute="centerY" id="mg1-NX-lAy"/>
                                                 <constraint firstAttribute="trailing" secondItem="7Au-1M-UMo" secondAttribute="trailing" id="n5d-IB-EDH"/>
                                                 <constraint firstItem="Dji-Gx-qwt" firstAttribute="centerY" secondItem="Xfw-ec-X0U" secondAttribute="centerY" id="nbZ-Xr-Fa3"/>
+                                                <constraint firstItem="qXF-Oq-F5l" firstAttribute="leading" secondItem="as6-My-z5r" secondAttribute="leadingMargin" constant="390" id="qA9-Xn-zhm"/>
                                                 <constraint firstItem="qXF-Oq-F5l" firstAttribute="leading" secondItem="1fo-bY-oMI" secondAttribute="trailing" constant="15" id="sgx-WR-Vzn"/>
                                                 <constraint firstItem="Xfw-ec-X0U" firstAttribute="centerY" secondItem="1fo-bY-oMI" secondAttribute="centerY" id="vmc-Js-TWI"/>
                                                 <constraint firstItem="1fo-bY-oMI" firstAttribute="leading" secondItem="jXE-bH-CgA" secondAttribute="trailing" constant="5" id="z1F-YB-A2Z"/>
@@ -2612,9 +2617,12 @@
                                                 <mask key="constraints">
                                                     <exclude reference="n5d-IB-EDH"/>
                                                     <exclude reference="K8Z-ex-x4G"/>
+                                                    <exclude reference="idz-Z7-3Yg"/>
+                                                    <exclude reference="XBb-1v-slJ"/>
                                                     <exclude reference="LKO-x3-HBe"/>
                                                     <exclude reference="awg-i6-wX7"/>
                                                     <exclude reference="cLF-fY-gXa"/>
+                                                    <exclude reference="sgx-WR-Vzn"/>
                                                     <exclude reference="1mU-eO-MRC"/>
                                                     <exclude reference="LuP-fm-ZtT"/>
                                                 </mask>
@@ -2824,8 +2832,8 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="z28-HO-C7I"/>
                                 <exclude reference="111-WE-M4P"/>
+                                <exclude reference="z28-HO-C7I"/>
                             </mask>
                         </variation>
                     </view>

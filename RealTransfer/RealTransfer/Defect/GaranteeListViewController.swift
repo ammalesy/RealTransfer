@@ -79,7 +79,7 @@ class GaranteeListViewController: DefectListViewController {
 
     @IBAction func alldefectAction(sender: AnyObject) {
         
-        self.splitController?.nzNavigationController?.popViewControllerWithOutAnimate({ 
+        self.splitController?.nzNavigationController?.popViewControllerWithOutAnimate({ (navigationController) in
             
         })
     }

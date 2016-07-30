@@ -83,10 +83,10 @@ class User: Model,NSCoding {
                 networkFail()
             }else{
                 SwiftSpinner.show("Loging in..", animated: true)
-                var path = "http://\(DOMAIN_NAME)/User/login.php?username=\(self.username!)&password=\(self.password!)"
+                var path = "\(DOMAIN_NAME)/User/login.php?username=\(self.username!)&password=\(self.password!)"
                 
                 path = "\(path)&random=\(NSString.randomStringWithLength(10))"
-                Alamofire.request(.GET, path, parameters: [:])
+                Alamofire.Manager.sharedInstance.request(.GET, path, parameters: [:])
                     .responseJSON { response in
                         print(response.request)  // original URL request
                         print(response.response) // URL response

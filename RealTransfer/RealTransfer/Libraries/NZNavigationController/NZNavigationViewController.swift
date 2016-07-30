@@ -58,9 +58,9 @@ class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
     func setIconImage(){
         Queue.mainQueue({
             
-            let url:NSURL = NSURL(string: "http://\(DOMAIN_NAME)/images/logo/logo.jpg")! //
+            let url:NSURL = NSURL(string: "\(DOMAIN_NAME)/images/logo/logo.jpg")! //
             
-            self.logoImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "logo_large"), options: SDWebImageOptions.RefreshCached, completed: { (imageReturn, error, sdImageCacheType, url) in
+            self.logoImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "logo_large"), options: SDWebImageOptions.AllowInvalidSSLCertificates, completed: { (imageReturn, error, sdImageCacheType, url) in
                 
                 
                 
@@ -98,7 +98,11 @@ class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
         }
     }
     
-    func popViewControllerWithOutAnimate(completion: (() -> Void)?) {
+    func lastControllerStack() -> NZViewController {
+        
+        return self.viewControllers.lastObject as! NZViewController
+    }
+    func popViewControllerWithOutAnimate(completion: ((navigationController:NZNavigationViewController) -> Void)?) {
         
         let beforeController:UIViewController = viewControllers.objectAtIndex(viewControllers.count - 2) as! UIViewController
         let lastController:UIViewController = viewControllers.lastObject as! UIViewController
@@ -111,7 +115,7 @@ class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
         self.popStack(lastController)
         
         if (completion != nil) {
-            completion!()
+            completion!(navigationController: self)
         }
     }
     

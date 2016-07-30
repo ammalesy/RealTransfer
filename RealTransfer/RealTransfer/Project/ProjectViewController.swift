@@ -100,8 +100,8 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
         cell.title.text = model.pj_name!
         cell.subTitle.text = model.pj_detail!
         
-        let url:NSURL = NSURL(string: "http://\(domainName)/crm/\(model.pj_image!)")!
-        cell.imageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "p1"), options: SDWebImageOptions.RefreshCached)
+        let url:NSURL = NSURL(string: "\(domainName)/crm/\(model.pj_image!)")!
+        cell.imageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "p1"), options: SDWebImageOptions.AllowInvalidSSLCertificates)
         return cell
     }
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
@@ -128,7 +128,7 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
             if(BuildingCaching.sharedInstance.isNeedUpdate()){
                 
                 SwiftSpinner.show("Retriving projects..", animated: true)
-                let path = "http://\(DOMAIN_NAME)/Project/getAllBuildingAndRoom.php?db_name=\(model.pj_datebase_name!)&random=\(NSString.randomStringWithLength(10))"
+                let path = "\(DOMAIN_NAME)/Project/getAllBuildingAndRoom.php?db_name=\(model.pj_datebase_name!)&random=\(NSString.randomStringWithLength(10))"
                 Alamofire.request(.GET, path, parameters: [:])
                     .responseJSON { response in
                         

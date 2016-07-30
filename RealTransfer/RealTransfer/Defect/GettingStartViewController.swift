@@ -102,7 +102,7 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         }else{
             SwiftSpinner.show("Retriving data..", animated: true)
             
-            Alamofire.request(.GET, "http://\(DOMAIN_NAME)/Defect/getDefectRoomInfo.php?db_name=\(self.project!.pj_datebase_name!)&un_id=\(self.roomSelected!.un_id!)&ransom=\(NSString.randomStringWithLength(10))", parameters: [:])
+            Alamofire.request(.GET, "\(DOMAIN_NAME)/Defect/getDefectRoomInfo.php?db_name=\(self.project!.pj_datebase_name!)&un_id=\(self.roomSelected!.un_id!)&ransom=\(NSString.randomStringWithLength(10))", parameters: [:])
                 .responseJSON { response in
                     
                     if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
@@ -354,12 +354,9 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         let controller:DefectListCheckingViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DefectListCheckingViewController") as! DefectListCheckingViewController
         controller.defectRoomRef = defectRoom
         
-        
-        let navPointer:NZNavigationViewController = self.nzNavigationController!
-        
-        self.nzNavigationController?.popViewControllerWithOutAnimate({
+        self.nzNavigationController?.popViewControllerWithOutAnimate({ (navigationController) in
             
-            navPointer.pushViewControllerWithOutAnimate(controller, completion: {
+            navigationController.pushViewControllerWithOutAnimate(controller, completion: {
                 
                 
                 
@@ -675,8 +672,8 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
                     
                     if ((list?.objectForKey("defectInfo") as? NSMutableDictionary) != nil) {
                         defectInfo = (list?.objectForKey("defectInfo") as? NSMutableDictionary)!
-                        row4.headInfo6 = "Check Date : "
-                        row4.headInfo7 = "Defect No : "
+                        row4.headInfo6 = "Last update : "
+                        //row4.headInfo7 = "Defect No : "
                         if let date = defectInfo.objectForKey("df_check_date") as? String {
                             
                             let dateArr = date.componentsSeparatedByString("|")
@@ -686,7 +683,7 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
                             customer.checkDate = dateConcat
                         }
                         let defectNo = defectInfo.objectForKey("df_no") as? String
-                        row4.detailInfo7 = defectNo!
+                        //row4.detailInfo7 = defectNo!
                         customer.defectNo = defectNo!
                         
                     }
@@ -723,16 +720,33 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
                     if pers_tel == "N/A" {
                         pers_tel = userInfo.objectForKey("pers_tel") as? String
                     }
-                    
-                    customer.pers_prefix = prefix!
-                    customer.pers_fname = fname!
-                    customer.pers_lname = lname!
-                    customer.qt_unit_number_id = qt_unit_number_id!
-                    customer.pers_sex = pers_sex!
-                    customer.pers_card_id = pers_card_id!
-                    customer.pers_mobile = pers_mobile!
-                    customer.pers_email = pers_email!
-                    customer.pers_tel = pers_tel!
+                    if let _prefix = prefix {
+                        customer.pers_prefix = _prefix
+                    }
+                    if let _fname = lname {
+                        customer.pers_fname = _fname
+                    }
+                    if let _lname = lname {
+                        customer.pers_lname = _lname
+                    }
+                    if let number_id  = qt_unit_number_id {
+                        customer.qt_unit_number_id = number_id
+                    }
+                    if let sex = pers_sex {
+                        customer.pers_sex = sex
+                    }
+                    if let card_id = pers_card_id {
+                        customer.pers_card_id = card_id
+                    }
+                    if let mobile = pers_mobile {
+                        customer.pers_mobile = mobile
+                    }
+                    if let email = pers_email {
+                        customer.pers_email = email
+                    }
+                    if let tel = pers_tel {
+                        customer.pers_tel = tel
+                    }
                     
                     var name = "N/A"
                     if fname != "N/A" && lname != "N/A" {
@@ -740,8 +754,12 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
                     }
                     
                     row4.detailInfo1 = name
-                    row4.detailInfo2 = pers_email!
-                    row4.detailInfo3 = pers_tel!
+                    if let email = pers_email {
+                        row4.detailInfo2 = email
+                    }
+                    if let tel = pers_tel {
+                        row4.detailInfo3 = tel
+                    }
                     
                     self.nzNavigationController!.assignRightInfovalue(customer, roomNo: self.roomSelected!.un_name!)
                     
