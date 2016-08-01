@@ -76,26 +76,41 @@ class CameraRoll {
         }
         
     }
-    func getLastImage(completion: (image:UIImage)->Void){
-    
+    func getLastImage(completion: (image:UIImage?)->Void){
+        
+        
+        if assetCollection == nil {
+            self.didCollectionCreateSuccess = {
+                self.getLastRowImage(completion)
+            }
+        }else{
+            self.getLastRowImage(completion)
+        }
+    }
+    func getLastRowImage(completion: (image:UIImage?)->Void){
         let fetchOptions:PHFetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
         
         
-        let fetchResult:PHFetchResult = PHAsset.fetchAssetsWithMediaType(PHAssetMediaType.Image, options: fetchOptions)
+        let fetchResult:PHFetchResult = PHAsset.fetchAssetsInAssetCollection(self.assetCollection, options: fetchOptions)//PHAsset.fetchAssetsWithMediaType(PHAssetMediaType.Image, options: fetchOptions)
         
         let imgOption = PHImageRequestOptions()
         imgOption.version = .Current
         
-        let lastAsset:PHAsset = (fetchResult.lastObject as? PHAsset)!
-        PHImageManager.defaultManager().requestImageForAsset(lastAsset, targetSize: CGSizeMake(100, 100), contentMode: PHImageContentMode.AspectFit, options: imgOption) { (image, info) in
-            
-            Queue.mainQueue({ 
-                completion(image: image!)
+        if fetchResult.count == 0{
+            Queue.mainQueue({
+                completion(image: nil)
             })
-            
-            
+        }else{
+            let lastAsset:PHAsset = (fetchResult.lastObject as? PHAsset)!
+            PHImageManager.defaultManager().requestImageForAsset(lastAsset, targetSize: CGSizeMake(100, 100), contentMode: PHImageContentMode.AspectFit, options: imgOption) { (image, info) in
+                
+                Queue.mainQueue({
+                    completion(image: image!)
+                })
+            }
         }
+        
         
     }
     

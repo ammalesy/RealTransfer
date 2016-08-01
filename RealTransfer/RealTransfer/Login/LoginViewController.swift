@@ -101,7 +101,7 @@ class LoginViewController: NZViewController {
         if self.isSuperAdmin(user?.username!, password: user?.password!) {
          
             let alert = UIAlertController(title: "Initial new baseurl", message:"", preferredStyle: UIAlertControllerStyle.Alert)
-            let cancleAction:UIAlertAction = UIAlertAction(title: "Cancle", style: UIAlertActionStyle.Cancel, handler: { (action) in
+            let cancleAction:UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { (action) in
                 
                 let txts:[UITextField] = alert.textFields!
                 txts[0].resignFirstResponder()
@@ -118,7 +118,7 @@ class LoginViewController: NZViewController {
                 
             })
             alert.addTextFieldWithConfigurationHandler({ (txt1) in
-                txt1.text = DOMAIN_NAME
+                txt1.text = PathUtil.sharedInstance.path
                 (txt1 as UITextField).placeholder = "https://domainname.com/Service"
             })
             alert.addAction(cancleAction)

@@ -102,7 +102,7 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         }else{
             SwiftSpinner.show("Retriving data..", animated: true)
             
-            Alamofire.request(.GET, "\(DOMAIN_NAME)/Defect/getDefectRoomInfo.php?db_name=\(self.project!.pj_datebase_name!)&un_id=\(self.roomSelected!.un_id!)&ransom=\(NSString.randomStringWithLength(10))", parameters: [:])
+            Alamofire.request(.GET, "\(PathUtil.sharedInstance.path)/Defect/getDefectRoomInfo.php?db_name=\(self.project!.pj_datebase_name!)&un_id=\(self.roomSelected!.un_id!)&ransom=\(NSString.randomStringWithLength(10))", parameters: [:])
                 .responseJSON { response in
                     
                     if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {

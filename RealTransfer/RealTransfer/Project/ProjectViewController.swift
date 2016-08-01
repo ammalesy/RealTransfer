@@ -128,7 +128,7 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
             if(BuildingCaching.sharedInstance.isNeedUpdate()){
                 
                 SwiftSpinner.show("Retriving projects..", animated: true)
-                let path = "\(DOMAIN_NAME)/Project/getAllBuildingAndRoom.php?db_name=\(model.pj_datebase_name!)&random=\(NSString.randomStringWithLength(10))"
+                let path = "\(PathUtil.sharedInstance.path)/Project/getAllBuildingAndRoom.php?db_name=\(model.pj_datebase_name!)&random=\(NSString.randomStringWithLength(10))"
                 Alamofire.request(.GET, path, parameters: [:])
                     .responseJSON { response in
                         

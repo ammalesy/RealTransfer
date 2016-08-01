@@ -112,9 +112,9 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
                 imagePicker?.showsCameraControls = true
             
                 CameraRoll.sharedInstance.getLastImage({ (image) in
-                
-                    view.setImage(image, forState: UIControlState.Normal)
-                    
+                    if image != nil {
+                        view.setImage(image, forState: UIControlState.Normal)
+                    }
                 })
             
                 if self.isModeGanrantee() {

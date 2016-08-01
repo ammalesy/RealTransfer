@@ -187,7 +187,7 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
                         cell.defectImageView.image = imageOnCache!
                         defectModel.realImage = imageOnCache!
                     }else{
-                        let url:NSURL = NSURL(string: "\(DOMAIN_NAME)/images/\(PROJECT!.pj_datebase_name!)/\(self.defectRoomRef!.df_un_id!)/\(defectModel.df_image_path!).jpg")!
+                        let url:NSURL = NSURL(string: "\(PathUtil.sharedInstance.path)/images/\(PROJECT!.pj_datebase_name!)/\(self.defectRoomRef!.df_un_id!)/\(defectModel.df_image_path!).jpg")!
 
                         cell.defectImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "p1"), options: .AllowInvalidSSLCertificates, completed: { (imageReturn, error, sdImageCacheType, url) in
                             

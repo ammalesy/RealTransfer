@@ -83,7 +83,7 @@ class User: Model,NSCoding {
                 networkFail()
             }else{
                 SwiftSpinner.show("Loging in..", animated: true)
-                var path = "\(DOMAIN_NAME)/User/login.php?username=\(self.username!)&password=\(self.password!)"
+                var path = "\(PathUtil.sharedInstance.path)/User/login.php?username=\(self.username!)&password=\(self.password!)"
                 
                 path = "\(path)&random=\(NSString.randomStringWithLength(10))"
                 Alamofire.Manager.sharedInstance.request(.GET, path, parameters: [:])

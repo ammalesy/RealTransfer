@@ -58,7 +58,7 @@ class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
     func setIconImage(){
         Queue.mainQueue({
             
-            let url:NSURL = NSURL(string: "\(DOMAIN_NAME)/images/logo/logo.jpg")! //
+            let url:NSURL = NSURL(string: "\(PathUtil.sharedInstance.path)/images/logo/logo.jpg")! //
             
             self.logoImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "logo_large"), options: SDWebImageOptions.AllowInvalidSSLCertificates, completed: { (imageReturn, error, sdImageCacheType, url) in
                 

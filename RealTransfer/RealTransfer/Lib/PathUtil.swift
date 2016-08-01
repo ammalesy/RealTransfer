@@ -13,13 +13,13 @@ let kPath = "PATH"
 let domainName = "https://demo.realsmart.in.th"
 //let domainName = "192.168.1.3"
 //let domainName = "192.168.1.5"
-//let domainName = "127.0.0.1"
+//let domainNamevar"127.0.0.1"
 let defaultPath = "\(domainName)/Service"
 
 class PathUtil: NSObject {
     
     static let sharedInstance = PathUtil()
-    var path:String = defaultPath
+    var path:String = ""
     let userDefault:NSUserDefaults = NSUserDefaults.standardUserDefaults()
     
     override init(){
@@ -35,12 +35,14 @@ class PathUtil: NSObject {
             
         }else{
             self.path = defaultPath
+            
         }
     }
     func setServerPath(path:String!){
         self.path = path
         userDefault.setObject(path!, forKey: kPath)
         userDefault.synchronize()
+        self.refresh()
         
     }
 
