@@ -25,4 +25,8 @@ extension NSString {
         
         return String(randomString)
     }
+    
+    func trim()->String{
+       return self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+    }
 }

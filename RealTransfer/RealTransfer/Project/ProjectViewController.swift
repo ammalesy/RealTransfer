@@ -26,6 +26,7 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
         ProjectModel().getProject({ (list) in
             
             self.projects = list!
+            
             self.collectionView.reloadData()
             
             let user:User = User().getOnCache()!
@@ -100,7 +101,7 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
         cell.title.text = model.pj_name!
         cell.subTitle.text = model.pj_detail!
         
-        let url:NSURL = NSURL(string: "\(domainName)/crm/\(model.pj_image!)")!
+        let url:NSURL = NSURL(string: "\(PathUtil.sharedInstance.getWebPath())/\(model.pj_image!)")!
         cell.imageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "p1"), options: SDWebImageOptions.AllowInvalidSSLCertificates)
         return cell
     }
@@ -128,7 +129,7 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
             if(BuildingCaching.sharedInstance.isNeedUpdate()){
                 
                 SwiftSpinner.show("Retriving projects..", animated: true)
-                let path = "\(PathUtil.sharedInstance.path)/Project/getAllBuildingAndRoom.php?db_name=\(model.pj_datebase_name!)&random=\(NSString.randomStringWithLength(10))"
+                let path = "\(PathUtil.sharedInstance.getApiPath())/Project/getAllBuildingAndRoom.php?db_name=\(model.pj_datebase_name!)&random=\(NSString.randomStringWithLength(10))"
                 Alamofire.request(.GET, path, parameters: [:])
                     .responseJSON { response in
                         

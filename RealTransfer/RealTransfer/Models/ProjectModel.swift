@@ -41,7 +41,7 @@ class ProjectModel: NSObject {
                 
                 let user:User = User().getOnCache()!
                 
-                Alamofire.request(.GET, "\(PathUtil.sharedInstance.path)/User/getProject.php?user_id=\(user.user_id!)&ransom=\(NSString.randomStringWithLength(10))", parameters: [:])
+                Alamofire.request(.GET, "\(PathUtil.sharedInstance.getApiPath())/User/getProject.php?user_id=\(user.user_id!)&ransom=\(NSString.randomStringWithLength(10))", parameters: [:])
                     .responseJSON { response in
                         
                         if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {

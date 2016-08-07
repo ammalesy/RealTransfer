@@ -76,7 +76,7 @@ class Sync: Model {
                 
                 
                 
-                let path = "\(PathUtil.sharedInstance.path)/Defect/syncDefect.php?ransom=\(NSString.randomStringWithLength(10))"
+                let path = "\(PathUtil.sharedInstance.getApiPath())/Defect/syncDefect.php?ransom=\(NSString.randomStringWithLength(10))"
                 var needUpdateFlagOnly = "0"
                 
                 if param.count <= 0 && images.count == 0 && defectRoom.df_sync_status! == "0"{
@@ -138,7 +138,7 @@ class Sync: Model {
         ////UPLOAD IMAGES
         Alamofire.upload(
             .POST,
-            "\(PathUtil.sharedInstance.path)/Defect/uploadImage.php?ransom=\(NSString.randomStringWithLength(10))",
+            "\(PathUtil.sharedInstance.getApiPath())/Defect/uploadImage.php?ransom=\(NSString.randomStringWithLength(10))",
             headers: [
                 "db_name":PROJECT!.pj_datebase_name!,
                 "un_id":defectRoom.df_un_id!

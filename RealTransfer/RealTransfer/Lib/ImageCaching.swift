@@ -13,8 +13,10 @@ let kImageNameCache = "IMAGE_CACHE"
 
 class ImageCaching: CachingManager {
     
-    static let sharedInstance = ImageCaching()
+    var logoProject:UIImage = UIImage(named: "logo_large")!
     
+    static let sharedInstance = ImageCaching()
+
     override init(){
         super.init()
         self.holder = NSMutableDictionary()

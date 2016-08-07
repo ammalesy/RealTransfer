@@ -55,16 +55,27 @@ class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
         self.setIconImage()
         
     }
+    func setIconProjectImage(projectModel:ProjectModel){
+    
+        let url:NSURL = NSURL(string: "\(PathUtil.sharedInstance.getWebPath())/\(projectModel.pj_image!)")! //
+        
+        self.logoImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "logo_large"), options: SDWebImageOptions.AllowInvalidSSLCertificates, completed: { (imageReturn, error, sdImageCacheType, url) in
+        
+        })
+    }
     func setIconImage(){
         Queue.mainQueue({
             
-            let url:NSURL = NSURL(string: "\(PathUtil.sharedInstance.path)/images/logo/logo.jpg")! //
             
-            self.logoImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "logo_large"), options: SDWebImageOptions.AllowInvalidSSLCertificates, completed: { (imageReturn, error, sdImageCacheType, url) in
-                
-                
-                
-            })
+            self.logoImageView.image = ImageCaching.sharedInstance.logoProject
+            
+//            let url:NSURL = NSURL(string: "\(PathUtil.sharedInstance.getApiPath())/images/logo/logo.jpg")! //
+//            
+//            self.logoImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "logo_large"), options: SDWebImageOptions.AllowInvalidSSLCertificates, completed: { (imageReturn, error, sdImageCacheType, url) in
+//                
+//                
+//                
+//            })
             
         })
     }

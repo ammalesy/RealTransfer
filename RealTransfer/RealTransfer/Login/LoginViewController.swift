@@ -11,7 +11,7 @@ import Alamofire
 import SwiftSpinner
 import SDWebImage
 
-class LoginViewController: NZViewController {
+class LoginViewController: NZViewController,URLConfigViewControllerDelegate {
 
     @IBOutlet weak var logoImageview: UIImageView!
     @IBOutlet var titleLabel: UILabel!
@@ -92,41 +92,27 @@ class LoginViewController: NZViewController {
         }
         return false
     }
+    func controllerWillClose() {
+        
+        self.usernameTxt.text = ""
+        self.passwordTxt.text = ""
+        
+    }
     @IBAction func loginAction(sender: AnyObject) {
+        
+        self.usernameTxt.resignFirstResponder()
+        self.passwordTxt.resignFirstResponder()
         
         user = User();
         user?.username = self.usernameTxt.text
         user?.password = self.passwordTxt.text
         
         if self.isSuperAdmin(user?.username!, password: user?.password!) {
-         
-            let alert = UIAlertController(title: "Initial new baseurl", message:"", preferredStyle: UIAlertControllerStyle.Alert)
-            let cancleAction:UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { (action) in
-                
-                let txts:[UITextField] = alert.textFields!
-                txts[0].resignFirstResponder()
-                
-            })
-            let okAction:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) in
-                
-                let txts:[UITextField] = alert.textFields!
-                PathUtil.sharedInstance.setServerPath(txts[0].text!)
-                txts[0].resignFirstResponder()
-                alert.dismissViewControllerAnimated(true, completion: { 
-                    
-                })
-                
-            })
-            alert.addTextFieldWithConfigurationHandler({ (txt1) in
-                txt1.text = PathUtil.sharedInstance.path
-                (txt1 as UITextField).placeholder = "https://domainname.com/Service"
-            })
-            alert.addAction(cancleAction)
-            alert.addAction(okAction)
             
-            self.presentViewController(alert, animated: true, completion: {
-                
-            })
+            
+            let urlController = URLConfigViewController.showOnController(self)
+            urlController.delegate = self
+    
             
             return
         }

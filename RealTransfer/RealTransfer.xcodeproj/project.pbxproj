@@ -24,6 +24,7 @@
 		1854F6AD1D130865003B9FE0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1854F6AC1D130865003B9FE0 /* Model.swift */; };
 		185E07401D202B510049F30B /* CustomerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185E073F1D202B510049F30B /* CustomerInfo.swift */; };
 		186537131D22E28B00A11F49 /* DefectListCheckingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186537121D22E28B00A11F49 /* DefectListCheckingViewController.swift */; };
+		186AB4211D55C19F00DEEBFA /* URLConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186AB4201D55C19F00DEEBFA /* URLConfigViewController.swift */; };
 		1876D5131D3E372300B6FAA1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1876D5121D3E372300B6FAA1 /* QuartzCore.framework */; };
 		1876D5151D3E6D3E00B6FAA1 /* GalleryImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1876D5141D3E6D3E00B6FAA1 /* GalleryImagePickerController.swift */; };
 		188606281D43997F00B2CD7C /* ReachabilitySwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188606271D43997F00B2CD7C /* ReachabilitySwift.framework */; };
@@ -106,6 +107,7 @@
 		1854F6AC1D130865003B9FE0 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		185E073F1D202B510049F30B /* CustomerInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerInfo.swift; sourceTree = "<group>"; };
 		186537121D22E28B00A11F49 /* DefectListCheckingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefectListCheckingViewController.swift; sourceTree = "<group>"; };
+		186AB4201D55C19F00DEEBFA /* URLConfigViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLConfigViewController.swift; sourceTree = "<group>"; };
 		1876D5121D3E372300B6FAA1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		1876D5141D3E6D3E00B6FAA1 /* GalleryImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryImagePickerController.swift; sourceTree = "<group>"; };
 		188606271D43997F00B2CD7C /* ReachabilitySwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReachabilitySwift.framework; path = "../../../Library/Developer/Xcode/DerivedData/RealTransfer-dxjmravslvqqrxcfhswvgaqtusax/Build/Products/Debug-iphoneos/ReachabilitySwift.framework"; sourceTree = "<group>"; };
@@ -445,6 +447,7 @@
 			isa = PBXGroup;
 			children = (
 				529056101D051B3F00B7D28C /* LoginViewController.swift */,
+				186AB4201D55C19F00DEEBFA /* URLConfigViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -640,6 +643,7 @@
 				18F121611D27D6CC0046326F /* ImageViewerController.swift in Sources */,
 				521A7B311D05504C00971B7B /* Queue.swift in Sources */,
 				18DF98A01D155AFF004BE990 /* DefectModel.swift in Sources */,
+				186AB4211D55C19F00DEEBFA /* URLConfigViewController.swift in Sources */,
 				18F589F71D1804AA00F06813 /* NSStringExtension.swift in Sources */,
 				1876D5151D3E6D3E00B6FAA1 /* GalleryImagePickerController.swift in Sources */,
 				52499B151D06C7CF0003F6D5 /* RowInfoModel.swift in Sources */,

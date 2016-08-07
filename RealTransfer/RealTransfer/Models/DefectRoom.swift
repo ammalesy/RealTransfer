@@ -214,7 +214,7 @@ class DefectRoom: Model,NSCoding {
                 networkFail()
             }else{
             
-                let url = "\(PathUtil.sharedInstance.path)/Defect/isSync.php?ransom=\(NSString.randomStringWithLength(10))"
+                let url = "\(PathUtil.sharedInstance.getApiPath())/Defect/isSync.php?ransom=\(NSString.randomStringWithLength(10))"
                 Alamofire.request(.POST, url, parameters: ["db_name":PROJECT!.pj_datebase_name!,
                     "df_room_id":self.df_room_id!,
                     "time_stamp":self.df_check_date!])
@@ -259,7 +259,7 @@ class DefectRoom: Model,NSCoding {
             
                 SwiftSpinner.show("Retrive defect data..", animated: true)
                 
-                Alamofire.request(.GET, "\(PathUtil.sharedInstance.path)/Defect/getListDefect.php?db_name=\(PROJECT!.pj_datebase_name!)&df_room_id=\(self.df_room_id!)&ransom=\(NSString.randomStringWithLength(10))", parameters: [:])
+                Alamofire.request(.GET, "\(PathUtil.sharedInstance.getApiPath())/Defect/getListDefect.php?db_name=\(PROJECT!.pj_datebase_name!)&df_room_id=\(self.df_room_id!)&ransom=\(NSString.randomStringWithLength(10))", parameters: [:])
                     .responseJSON { response in
                         
                         if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
@@ -321,7 +321,7 @@ class DefectRoom: Model,NSCoding {
                     csIDNeedUpdate = "&csIDNeedUpdate=\(self.userCS!.user_id!)"
                 }
                 
-                let path = "\(PathUtil.sharedInstance.path)/Defect/isInitial.php?db_name=\(self.project!.pj_datebase_name!)&un_id=\(self.room!.un_id!)&ransom=\(NSString.randomStringWithLength(10))\(csIDNeedUpdate)"
+                let path = "\(PathUtil.sharedInstance.getApiPath())/Defect/isInitial.php?db_name=\(self.project!.pj_datebase_name!)&un_id=\(self.room!.un_id!)&ransom=\(NSString.randomStringWithLength(10))\(csIDNeedUpdate)"
                 Alamofire.request(.GET, path, parameters: [:])
                     .responseJSON { response in
                         
@@ -381,7 +381,7 @@ class DefectRoom: Model,NSCoding {
             }else{
                 
                 SwiftSpinner.show("Initialing..", animated: true)
-                let path = "\(PathUtil.sharedInstance.path)/Defect/initialRoomDefect.php"
+                let path = "\(PathUtil.sharedInstance.getApiPath())/Defect/initialRoomDefect.php"
                 let param = ["un_id":self.room!.un_id!,
                     "db_name":PROJECT!.pj_datebase_name!,
                     "user_id":self.user!.user_id!,

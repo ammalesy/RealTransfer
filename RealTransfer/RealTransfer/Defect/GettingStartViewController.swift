@@ -51,6 +51,9 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         self.tableView.dataSource = self
         
         self.addGesture()
+        
+        
+        
     }
     func addGesture() {
     
@@ -102,7 +105,7 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         }else{
             SwiftSpinner.show("Retriving data..", animated: true)
             
-            Alamofire.request(.GET, "\(PathUtil.sharedInstance.path)/Defect/getDefectRoomInfo.php?db_name=\(self.project!.pj_datebase_name!)&un_id=\(self.roomSelected!.un_id!)&ransom=\(NSString.randomStringWithLength(10))", parameters: [:])
+            Alamofire.request(.GET, "\(PathUtil.sharedInstance.getApiPath())/Defect/getDefectRoomInfo.php?db_name=\(self.project!.pj_datebase_name!)&un_id=\(self.roomSelected!.un_id!)&ransom=\(NSString.randomStringWithLength(10))", parameters: [:])
                 .responseJSON { response in
                     
                     if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
@@ -227,6 +230,9 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
                     
                 })
             }else{
+
+                self.nzNavigationController?.setIconProjectImage(self.project)
+                
                 let customer:CustomerInfo = CustomerInfo.sharedInstance
                 let buildingName = self.buldingSelected?.building_name!
                 let csName = (self.components.lastObject as! RowModel).detail!

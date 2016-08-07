@@ -9,17 +9,23 @@
 import UIKit
 
 let kPath = "PATH"
+
+let kProtocol = "kProtocol"
+let kDomainName = "kDomainName"
+let kWebDir = "kWebDir"
+let kApiDir = "kApiDir"
+
 //let domainName = "http://ec2-52-10-22-26.us-west-2.compute.amazonaws.com"
-let domainName = "https://demo.realsmart.in.th"
-//let domainName = "192.168.1.3"
-//let domainName = "192.168.1.5"
-//let domainNamevar"127.0.0.1"
-let defaultPath = "\(domainName)/Service"
+//let domainName = "https://demo.realsmart.in.th"
 
 class PathUtil: NSObject {
     
     static let sharedInstance = PathUtil()
-    var path:String = ""
+    
+    var urlProtocol:String = "https://"
+    var domainName:String = "xxx.xx.xx"
+    var webDir:String = "/xxx"
+    var apiDir:String = "/xxx/xxx"
     let userDefault:NSUserDefaults = NSUserDefaults.standardUserDefaults()
     
     override init(){
@@ -28,22 +34,50 @@ class PathUtil: NSObject {
     }
     func refresh() {
         
+        let urlProtocolStr:String? = userDefault.objectForKey(kProtocol) as? String
+        let domainNameStr:String? = userDefault.objectForKey(kDomainName) as? String
+        let webDirStr:String? = userDefault.objectForKey(kWebDir) as? String
+        let apiDirStr:String? = userDefault.objectForKey(kApiDir) as? String
         
-        if let pathStr:String = userDefault.objectForKey(kPath) as? String {
-         
-            self.path = pathStr
+        if urlProtocolStr != nil &&  domainNameStr != nil && webDirStr != nil && apiDirStr != nil {
             
-        }else{
-            self.path = defaultPath
+            self.urlProtocol = urlProtocolStr!
+            self.domainName = domainNameStr!
+            self.webDir = webDirStr!
+            self.apiDir = apiDirStr!
             
         }
     }
-    func setServerPath(path:String!){
-        self.path = path
-        userDefault.setObject(path!, forKey: kPath)
+    func getApiPath()->String{
+        return "\(self.urlProtocol)\(self.domainName)\(self.apiDir)"
+    }
+    func getWebPath()->String{
+        return "\(self.urlProtocol)\(self.domainName)\(self.webDir)"
+    }
+    func set_urlProtocol(protocolUrl:String!){
+        self.urlProtocol = protocolUrl
+        userDefault.setObject(protocolUrl!, forKey: kProtocol)
         userDefault.synchronize()
         self.refresh()
-        
     }
+    func set_DomainName(domainName:String!){
+        self.domainName = domainName
+        userDefault.setObject(domainName!, forKey: kDomainName)
+        userDefault.synchronize()
+        self.refresh()
+    }
+    func set_WebDir(webDir:String!){
+        self.webDir = webDir
+        userDefault.setObject(webDir!, forKey: kWebDir)
+        userDefault.synchronize()
+        self.refresh()
+    }
+    func set_ApiDir(apiDir:String!){
+        self.apiDir = apiDir
+        userDefault.setObject(apiDir!, forKey: kApiDir)
+        userDefault.synchronize()
+        self.refresh()
+    }
+    
 
 }
