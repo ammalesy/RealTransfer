@@ -625,6 +625,18 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         }
         return nil
     }
+    func setDisableOnCellRoom(){
+        self.roomSelected = nil
+        self.getCellRoom().nextBtn.enabled = false
+        self.getCellRoom().textField.text = ""
+        self.getCellRoom().nextBtn.setTitleColor(UIColor.RGB(192, G: 193, B: 194), forState: UIControlState.Normal)
+    }
+    func alertWhenRoomHasNotOwner(){
+        AlertUtil.alert("", message: "ไม่พบรายชื่อลูกค้าของห้องที่เลือก กรุณาเลือกห้องใหม่", cancleButton: "OK", atController: self) { (alertAction) in
+            self.setDisableOnCellRoom()
+            self.tableView.reloadData()
+        }
+    }
     func cellTxtSearchDidClickNext(cell: CellTxtSearch) {
         
         if self.roomSelected == nil || self.buldingSelected == nil {
@@ -649,157 +661,170 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             if isConected == false {
                 AlertUtil.alertNetworkFail(self)
             }else{
-                self.queryInfo { (list) in
-                    let customer:CustomerInfo = CustomerInfo.sharedInstance
+                self.queryInfo { (_list) in
                     
-                    var defectInfo:NSMutableDictionary
-                    var roomInfo:NSMutableDictionary
-                    var qcCheckerInfo:NSMutableDictionary
-                    var csInfo:NSMutableDictionary
-                    
-                    let userInfo:NSDictionary = (list?.objectForKey("userInfo")!)! as! NSDictionary
-                    
-                    if ((list?.objectForKey("roomInfo") as? NSMutableDictionary) != nil) {
-                        roomInfo = (list?.objectForKey("roomInfo") as? NSMutableDictionary)!
-                        
-                        row4.headInfo4 = "Room Type : "
-                        row4.headInfo5 = "Unit Type : "
-                        
-                        let roomType = roomInfo.objectForKey("room_type_info") as? String
-                        let unitType = roomInfo.objectForKey("unit_type_name") as? String
-                        
-                        row4.detailInfo4 = roomType!
-                        row4.detailInfo5 = unitType!
-                        
-                        customer.roomType = roomType!
-                        customer.unitType = unitType!
-                        
-                    }
-                    
-                    if ((list?.objectForKey("defectInfo") as? NSMutableDictionary) != nil) {
-                        defectInfo = (list?.objectForKey("defectInfo") as? NSMutableDictionary)!
-                        row4.headInfo6 = "Last update : "
-                        //row4.headInfo7 = "Defect No : "
-                        if let date = defectInfo.objectForKey("df_check_date") as? String {
-                            
-                            let dateArr = date.componentsSeparatedByString("|")
-                            let dateConcat = "\(dateArr[0]) \(dateArr[1])"
-                            row4.detailInfo6 = dateConcat
-                            
-                            customer.checkDate = dateConcat
+                    if let list = _list {
+                        print(list)
+                        if (list["userInfo"]!["hasOwner"] as! String) == "Y" {
+                            self.assignUserInformationData(list, row4: row4, row5: row5)
+                        }else{
+                            self.alertWhenRoomHasNotOwner()
                         }
-                        let defectNo = defectInfo.objectForKey("df_no") as? String
-                        //row4.detailInfo7 = defectNo!
-                        customer.defectNo = defectNo!
-                        
-                    }
-                    
-                    if ((list?.objectForKey("qcCheckerInfo") as? NSMutableDictionary) != nil) {
-                        qcCheckerInfo = (list?.objectForKey("qcCheckerInfo") as? NSMutableDictionary)!
-                        let qcChecker = "\(qcCheckerInfo.objectForKey("user_pers_fname") as! String) \(qcCheckerInfo.objectForKey("user_pers_lname") as! String)"
-                        //                row4.headInfo8 = "QC Checker : "
-                        //                row4.detailInfo8 = qcChecker
-                        //
-                        row4.headInfo8 = ""
-                        row4.detailInfo8 = ""
-                        
-                        
-                        customer.qcChecker = qcChecker
-                    }
-                    
-                    row4.style = CELL_INFO_LABEL_IDENTIFIER
-                    row4.headInfo1 = "Name : "
-                    row4.headInfo2 = "Email : "
-                    row4.headInfo3 = "Phone No.: "//pers_prefix
-                    
-                    
-                    
-                    let prefix = userInfo.objectForKey("pers_prefix") as? String
-                    let fname = userInfo.objectForKey("pers_fname") as? String
-                    let lname = userInfo.objectForKey("pers_lname") as? String
-                    let qt_unit_number_id = userInfo.objectForKey("qt_unit_number_id") as? String
-                    let pers_sex = userInfo.objectForKey("pers_sex") as? String
-                    let pers_card_id = userInfo.objectForKey("pers_card_id") as? String
-                    let pers_mobile = userInfo.objectForKey("pers_mobile") as? String
-                    let pers_email = userInfo.objectForKey("pers_email") as? String
-                    var pers_tel = userInfo.objectForKey("pers_mobile") as? String
-                    if pers_tel == "N/A" {
-                        pers_tel = userInfo.objectForKey("pers_tel") as? String
-                    }
-                    if let _prefix = prefix {
-                        customer.pers_prefix = _prefix
-                    }
-                    if let _fname = lname {
-                        customer.pers_fname = _fname
-                    }
-                    if let _lname = lname {
-                        customer.pers_lname = _lname
-                    }
-                    if let number_id  = qt_unit_number_id {
-                        customer.qt_unit_number_id = number_id
-                    }
-                    if let sex = pers_sex {
-                        customer.pers_sex = sex
-                    }
-                    if let card_id = pers_card_id {
-                        customer.pers_card_id = card_id
-                    }
-                    if let mobile = pers_mobile {
-                        customer.pers_mobile = mobile
-                    }
-                    if let email = pers_email {
-                        customer.pers_email = email
-                    }
-                    if let tel = pers_tel {
-                        customer.pers_tel = tel
-                    }
-                    
-                    var name = "N/A"
-                    if fname != "N/A" && lname != "N/A" {
-                        name = "\(prefix!)\(fname!) \(lname!)"
-                    }
-                    
-                    row4.detailInfo1 = name
-                    if let email = pers_email {
-                        row4.detailInfo2 = email
-                    }
-                    if let tel = pers_tel {
-                        row4.detailInfo3 = tel
-                    }
-                    
-                    self.nzNavigationController!.assignRightInfovalue(customer, roomNo: self.roomSelected!.un_name!)
-                    
-                    self.components.addObject(row4);
-                    
-                    
-                    if ((list?.objectForKey("csInfo") as? NSMutableDictionary) != nil) {
-                        csInfo = (list?.objectForKey("csInfo") as? NSMutableDictionary)!
-                        row5.detail = "\(csInfo.objectForKey("user_pers_fname") as! String) \(csInfo.objectForKey("user_pers_lname") as! String)"
-                        //row5.enable = false
-                        
-                        self.csSelected = User()
-                        
-                        self.csSelected!.user_id = csInfo.objectForKey("user_id") as? String
-                        self.csSelected!.user_pers_fname = csInfo.objectForKey("user_pers_fname") as? String
-                        self.csSelected!.user_pers_lname = csInfo.objectForKey("user_pers_lname") as? String
-                        self.user_id_before = self.csSelected!.user_id!
                     }else{
-                        row5.detail = ""
+                        AlertUtil.alertNetworkFail(self)
                     }
-                    
-                    row5.head = "CS : "
-                    row5.style = CELL_DROUP_DOWN_IDENTIFIER
-                    row5.identifier = "CS_LIST"
-                    self.components.addObject(row5);
-                    
-                    self.tableView.reloadData()
-                    
-                    self.verifyButtonColor()
-                    
                 }
             }
             
         }
+    }
+    func assignUserInformationData(list:NSMutableDictionary?, row4:RowInfoModel, row5:RowModel){
+        
+        let customer:CustomerInfo = CustomerInfo.sharedInstance
+        
+        var defectInfo:NSMutableDictionary
+        var roomInfo:NSMutableDictionary
+        var qcCheckerInfo:NSMutableDictionary
+        var csInfo:NSMutableDictionary
+        
+        let userInfo:NSDictionary = (list?.objectForKey("userInfo")!)! as! NSDictionary
+        
+        if ((list?.objectForKey("roomInfo") as? NSMutableDictionary) != nil) {
+            roomInfo = (list?.objectForKey("roomInfo") as? NSMutableDictionary)!
+            
+            row4.headInfo4 = "Room Type : "
+            row4.headInfo5 = "Unit Type : "
+            
+            let roomType = roomInfo.objectForKey("room_type_info") as? String
+            let unitType = roomInfo.objectForKey("unit_type_name") as? String
+            
+            row4.detailInfo4 = roomType!
+            row4.detailInfo5 = unitType!
+            
+            customer.roomType = roomType!
+            customer.unitType = unitType!
+            
+        }
+        
+        if ((list?.objectForKey("defectInfo") as? NSMutableDictionary) != nil) {
+            defectInfo = (list?.objectForKey("defectInfo") as? NSMutableDictionary)!
+            row4.headInfo6 = "Last update : "
+            //row4.headInfo7 = "Defect No : "
+            if let date = defectInfo.objectForKey("df_check_date") as? String {
+                
+                let dateArr = date.componentsSeparatedByString("|")
+                let dateConcat = "\(dateArr[0]) \(dateArr[1])"
+                row4.detailInfo6 = dateConcat
+                
+                customer.checkDate = dateConcat
+            }
+            let defectNo = defectInfo.objectForKey("df_no") as? String
+            //row4.detailInfo7 = defectNo!
+            customer.defectNo = defectNo!
+            
+        }
+        
+        if ((list?.objectForKey("qcCheckerInfo") as? NSMutableDictionary) != nil) {
+            qcCheckerInfo = (list?.objectForKey("qcCheckerInfo") as? NSMutableDictionary)!
+            let qcChecker = "\(qcCheckerInfo.objectForKey("user_pers_fname") as! String) \(qcCheckerInfo.objectForKey("user_pers_lname") as! String)"
+            //                row4.headInfo8 = "QC Checker : "
+            //                row4.detailInfo8 = qcChecker
+            //
+            row4.headInfo8 = ""
+            row4.detailInfo8 = ""
+            
+            
+            customer.qcChecker = qcChecker
+        }
+        
+        row4.style = CELL_INFO_LABEL_IDENTIFIER
+        row4.headInfo1 = "Name : "
+        row4.headInfo2 = "Email : "
+        row4.headInfo3 = "Phone No.: "//pers_prefix
+        
+        
+        
+        let prefix = userInfo.objectForKey("pers_prefix") as? String
+        let fname = userInfo.objectForKey("pers_fname") as? String
+        let lname = userInfo.objectForKey("pers_lname") as? String
+        let qt_unit_number_id = userInfo.objectForKey("qt_unit_number_id") as? String
+        let pers_sex = userInfo.objectForKey("pers_sex") as? String
+        let pers_card_id = userInfo.objectForKey("pers_card_id") as? String
+        let pers_mobile = userInfo.objectForKey("pers_mobile") as? String
+        let pers_email = userInfo.objectForKey("pers_email") as? String
+        var pers_tel = userInfo.objectForKey("pers_mobile") as? String
+        if pers_tel == "N/A" {
+            pers_tel = userInfo.objectForKey("pers_tel") as? String
+        }
+        if let _prefix = prefix {
+            customer.pers_prefix = _prefix
+        }
+        if let _fname = lname {
+            customer.pers_fname = _fname
+        }
+        if let _lname = lname {
+            customer.pers_lname = _lname
+        }
+        if let number_id  = qt_unit_number_id {
+            customer.qt_unit_number_id = number_id
+        }
+        if let sex = pers_sex {
+            customer.pers_sex = sex
+        }
+        if let card_id = pers_card_id {
+            customer.pers_card_id = card_id
+        }
+        if let mobile = pers_mobile {
+            customer.pers_mobile = mobile
+        }
+        if let email = pers_email {
+            customer.pers_email = email
+        }
+        if let tel = pers_tel {
+            customer.pers_tel = tel
+        }
+        
+        var name = "N/A"
+        if fname != "N/A" && lname != "N/A" {
+            name = "\(prefix!)\(fname!) \(lname!)"
+        }
+        
+        row4.detailInfo1 = name
+        if let email = pers_email {
+            row4.detailInfo2 = email
+        }
+        if let tel = pers_tel {
+            row4.detailInfo3 = tel
+        }
+        
+        self.nzNavigationController!.assignRightInfovalue(customer, roomNo: self.roomSelected!.un_name!)
+        
+        self.components.addObject(row4);
+        
+        
+        if ((list?.objectForKey("csInfo") as? NSMutableDictionary) != nil) {
+            csInfo = (list?.objectForKey("csInfo") as? NSMutableDictionary)!
+            row5.detail = "\(csInfo.objectForKey("user_pers_fname") as! String) \(csInfo.objectForKey("user_pers_lname") as! String)"
+            //row5.enable = false
+            
+            self.csSelected = User()
+            
+            self.csSelected!.user_id = csInfo.objectForKey("user_id") as? String
+            self.csSelected!.user_pers_fname = csInfo.objectForKey("user_pers_fname") as? String
+            self.csSelected!.user_pers_lname = csInfo.objectForKey("user_pers_lname") as? String
+            self.user_id_before = self.csSelected!.user_id!
+        }else{
+            row5.detail = ""
+        }
+        
+        row5.head = "CS : "
+        row5.style = CELL_DROUP_DOWN_IDENTIFIER
+        row5.identifier = "CS_LIST"
+        self.components.addObject(row5);
+        
+        self.tableView.reloadData()
+        
+        self.verifyButtonColor()
     }
     func generateDropDownAndParseDataWithCell(cell:CellDropDown, dataList:NSMutableArray!, rowModel:RowModel?)->NZDropDownViewController? {
         

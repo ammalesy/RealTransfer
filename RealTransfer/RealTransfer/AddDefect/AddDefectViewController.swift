@@ -154,7 +154,7 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
         let mediaType = info[UIImagePickerControllerMediaType] as! String
-        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let image = (info[UIImagePickerControllerOriginalImage] as! UIImage)
         CameraRoll.sharedInstance.saveImage(image)
         if mediaType == (kUTTypeImage as String) {
             

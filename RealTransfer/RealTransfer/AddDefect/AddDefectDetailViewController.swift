@@ -96,6 +96,8 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
         categoryList = Category.sharedInstance.getCategory()
         
         self.initialData()
+        self.verifyButtonColor()
+        self.verifyButtonEnable()
     }
 
     func initialData(){
@@ -122,6 +124,7 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
                 }
             }
             self.verifyButtonColor()
+            self.verifyButtonEnable()
         }
     }
 
@@ -261,6 +264,9 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
             self.saveAndKeepToDisk(defect)
         }else{
             //EDIT
+            
+            
+            
             self.defectModel!.categoryName = self.categorySelected
             self.defectModel!.subCategoryName = self.subCategorySelected
             self.defectModel!.df_date = timeStamp
@@ -430,6 +436,7 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
             self.listSubCategorySelected = model.identifier
         }
         self.verifyButtonColor()
+        self.verifyButtonEnable()
         self.closeDropDown()
     }
     func clearSubCategoryValue(){
@@ -464,7 +471,13 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
         
         
     }
-    
+    func verifyButtonEnable() {
+        if self.categorySelected == nil || self.subCategorySelected == nil || self.listSubCategorySelected == nil {
+            self.saveBtn.enabled = false
+        }else{
+            self.saveBtn.enabled = true
+        }
+    }
     func verifyButtonColor() {
         if self.categorySelected != nil && self.subCategorySelected != nil
         {
