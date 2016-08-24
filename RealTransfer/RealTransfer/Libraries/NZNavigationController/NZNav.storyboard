@@ -18,7 +18,7 @@
         <!--Navigation View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="NZNavigationViewController" id="BYZ-38-t0r" customClass="NZNavigationViewController" customModule="RealTransfer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NZNavigationViewController" id="BYZ-38-t0r" customClass="NZNavigationViewController" customModule="Real_Transfer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -110,16 +110,16 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IiF-Km-JIo">
-                                                <rect key="frame" x="435" y="39" width="0.0" height="25"/>
+                                                <rect key="frame" x="435" y="52" width="0.0" height="0.0"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="25" id="dpa-Ha-4Hx"/>
+                                                    <constraint firstAttribute="height" id="dpa-Ha-4Hx"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="SukhumvitSet-Text" family="Sukhumvit Set" pointSize="14"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjA-pc-oze">
-                                                <rect key="frame" x="435" y="57" width="0.0" height="25"/>
+                                                <rect key="frame" x="435" y="48" width="0.0" height="25"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="25" id="Cpj-lQ-6Zc"/>
                                                 </constraints>
@@ -128,13 +128,13 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Zd-xO-FDf">
-                                                <rect key="frame" x="430" y="39" width="0.0" height="25"/>
+                                                <rect key="frame" x="430" y="52" width="0.0" height="0.0"/>
                                                 <fontDescription key="fontDescription" name="SukhumvitSet-Text" family="Sukhumvit Set" pointSize="14"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5i3-zw-iPS">
-                                                <rect key="frame" x="430" y="57" width="0.0" height="25"/>
+                                                <rect key="frame" x="430" y="48" width="0.0" height="25"/>
                                                 <fontDescription key="fontDescription" name="SukhumvitSet-Text" family="Sukhumvit Set" pointSize="14"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -177,7 +177,7 @@
                                     <constraint firstAttribute="height" constant="100" id="Hqe-wV-GcX"/>
                                     <constraint firstAttribute="trailing" secondItem="QfZ-4Y-20T" secondAttribute="trailing" constant="40" id="IKp-aY-j7v"/>
                                     <constraint firstItem="QfZ-4Y-20T" firstAttribute="top" secondItem="tXH-bC-twC" secondAttribute="top" id="SpE-fd-J3x"/>
-                                    <constraint firstItem="cjA-pc-oze" firstAttribute="centerY" secondItem="vY0-QC-2Ky" secondAttribute="centerY" constant="9" id="Tc7-pl-OQa"/>
+                                    <constraint firstItem="cjA-pc-oze" firstAttribute="centerY" secondItem="vY0-QC-2Ky" secondAttribute="centerY" id="Tc7-pl-OQa"/>
                                     <constraint firstItem="3hz-pJ-syU" firstAttribute="centerY" secondItem="tXH-bC-twC" secondAttribute="centerY" id="Y1m-ao-HhI"/>
                                     <constraint firstItem="f7T-VD-zNc" firstAttribute="leading" secondItem="tXH-bC-twC" secondAttribute="leading" id="bJV-CK-4b4"/>
                                     <constraint firstItem="3hz-pJ-syU" firstAttribute="top" secondItem="tXH-bC-twC" secondAttribute="top" constant="10" id="fVo-So-Uu5"/>

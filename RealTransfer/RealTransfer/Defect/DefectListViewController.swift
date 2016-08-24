@@ -62,6 +62,7 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
             dropDownList.addObject(dropDownModel)
         }
         self.setNumberOfDefect()
+        self.setTapEventOnContainer()
     }
     func className() -> String {
         return "DefectListViewController"

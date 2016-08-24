@@ -13,7 +13,7 @@ class DefectViewController: NZViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.setTapEventOnContainer()
         
 
     }

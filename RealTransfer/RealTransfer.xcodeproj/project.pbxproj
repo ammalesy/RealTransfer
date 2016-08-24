@@ -27,6 +27,7 @@
 		186AB4211D55C19F00DEEBFA /* URLConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186AB4201D55C19F00DEEBFA /* URLConfigViewController.swift */; };
 		1876D5131D3E372300B6FAA1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1876D5121D3E372300B6FAA1 /* QuartzCore.framework */; };
 		1876D5151D3E6D3E00B6FAA1 /* GalleryImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1876D5141D3E6D3E00B6FAA1 /* GalleryImagePickerController.swift */; };
+		187F40571D6D8B9E0022EB01 /* CellCusInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187F40561D6D8B9E0022EB01 /* CellCusInfo.swift */; };
 		188606281D43997F00B2CD7C /* ReachabilitySwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 188606271D43997F00B2CD7C /* ReachabilitySwift.framework */; };
 		1886062A1D43A4C600B2CD7C /* CameraRoll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188606291D43A4C600B2CD7C /* CameraRoll.swift */; };
 		1886062C1D43A58400B2CD7C /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1886062B1D43A58400B2CD7C /* Photos.framework */; };
@@ -110,6 +111,7 @@
 		186AB4201D55C19F00DEEBFA /* URLConfigViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLConfigViewController.swift; sourceTree = "<group>"; };
 		1876D5121D3E372300B6FAA1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		1876D5141D3E6D3E00B6FAA1 /* GalleryImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryImagePickerController.swift; sourceTree = "<group>"; };
+		187F40561D6D8B9E0022EB01 /* CellCusInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CellCusInfo.swift; path = Model/CellCusInfo.swift; sourceTree = "<group>"; };
 		188606271D43997F00B2CD7C /* ReachabilitySwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReachabilitySwift.framework; path = "../../../Library/Developer/Xcode/DerivedData/RealTransfer-dxjmravslvqqrxcfhswvgaqtusax/Build/Products/Debug-iphoneos/ReachabilitySwift.framework"; sourceTree = "<group>"; };
 		188606291D43A4C600B2CD7C /* CameraRoll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraRoll.swift; sourceTree = "<group>"; };
 		1886062B1D43A58400B2CD7C /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
@@ -160,7 +162,7 @@
 		52499B121D06C70C0003F6D5 /* CellInfoLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellInfoLabel.swift; sourceTree = "<group>"; };
 		52499B141D06C7CF0003F6D5 /* RowInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowInfoModel.swift; sourceTree = "<group>"; };
 		5284FD601D05763D006C5D1B /* DefectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefectViewController.swift; sourceTree = "<group>"; };
-		529055EA1D0518DE00B7D28C /* RealTransfer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealTransfer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		529055EA1D0518DE00B7D28C /* Real Transfer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Real Transfer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		529055ED1D0518DE00B7D28C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		529055F21D0518DE00B7D28C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		529055F51D0518DE00B7D28C /* RealTransfer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RealTransfer.xcdatamodel; sourceTree = "<group>"; };
@@ -335,6 +337,7 @@
 			children = (
 				52499B0B1D06B6F60003F6D5 /* Model */,
 				52499B091D06A19F0003F6D5 /* CellLabelStatic.swift */,
+				187F40561D6D8B9E0022EB01 /* CellCusInfo.swift */,
 				52499B0E1D06BA410003F6D5 /* CellDropDown.swift */,
 				52499B101D06BD110003F6D5 /* CellTxtSearch.swift */,
 				52499B121D06C70C0003F6D5 /* CellInfoLabel.swift */,
@@ -382,7 +385,7 @@
 		529055EB1D0518DE00B7D28C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				529055EA1D0518DE00B7D28C /* RealTransfer.app */,
+				529055EA1D0518DE00B7D28C /* Real Transfer.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -489,7 +492,7 @@
 			);
 			name = RealTransfer;
 			productName = RealTransfer;
-			productReference = 529055EA1D0518DE00B7D28C /* RealTransfer.app */;
+			productReference = 529055EA1D0518DE00B7D28C /* Real Transfer.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -504,7 +507,6 @@
 				TargetAttributes = {
 					529055E91D0518DE00B7D28C = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = T827QP7R38;
 					};
 				};
 			};
@@ -605,6 +607,7 @@
 				18DF989C1D15180B004BE990 /* Room.swift in Sources */,
 				185E07401D202B510049F30B /* CustomerInfo.swift in Sources */,
 				186537131D22E28B00A11F49 /* DefectListCheckingViewController.swift in Sources */,
+				187F40571D6D8B9E0022EB01 /* CellCusInfo.swift in Sources */,
 				188606531D44CCD200B2CD7C /* NZSwitch.swift in Sources */,
 				5218E5751D09123C008B5402 /* NZDropDowCell.swift in Sources */,
 				18CA73111D1C13120021712B /* AlertUtil.swift in Sources */,
@@ -783,9 +786,9 @@
 				INFOPLIST_FILE = RealTransfer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mint.RealTransfer;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mintedimages.realsmart;
+				PRODUCT_NAME = "Real Transfer";
+				PROVISIONING_PROFILE = "3d281be8-619f-41fe-89e6-ce7b986dbac6";
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "RealTransfer-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 2;
@@ -797,8 +800,8 @@
 			baseConfigurationReference = E6C5D39B4B85C857D3B9D77F /* Pods-RealTransfer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Arnut Khummin (T827QP7R38)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Arnut Khummin (T827QP7R38)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Mintedimages Co., Ltd., (SYB8N6A557)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mintedimages Co., Ltd., (SYB8N6A557)";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -808,9 +811,9 @@
 				INFOPLIST_FILE = RealTransfer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mint.RealTransfer;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mintedimages.realsmart;
+				PRODUCT_NAME = "Real Transfer";
+				PROVISIONING_PROFILE = "3d281be8-619f-41fe-89e6-ce7b986dbac6";
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "RealTransfer-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 2;

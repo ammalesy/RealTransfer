@@ -8,7 +8,20 @@
 
 import Foundation
 import UIKit
-
+extension UIViewController{
+    
+    func setTapEventOnContainer() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(NZNavigationViewController.containerTapped))
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
+    }
+    func containerTapped() {
+        
+        let noti = NSNotification(name: "HIDE_MENU_ON_NAV", object: nil)
+        NSNotificationCenter.defaultCenter().postNotification(noti)
+        
+    }
+}
 extension NZViewController {
 
     

@@ -26,6 +26,7 @@ class CustomerInfoViewController: UIViewController,UITableViewDataSource,UITable
         startBtn.assignCornerRadius(5)
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableView.estimatedRowHeight = 50
         
         let customer:CustomerInfo = CustomerInfo.sharedInstance
         
@@ -36,6 +37,7 @@ class CustomerInfoViewController: UIViewController,UITableViewDataSource,UITable
         if customer.pers_fname != "N/A" && customer.pers_lname != "N/A" {
             name = "\(customer.pers_prefix)\(customer.pers_fname) \(customer.pers_lname)"
         }
+        name += customer.full_name_2 + customer.full_name_3 + customer.full_name_4
         
         listData.addObject(RowModel(head: "Name : ", detail: name))
         listData.addObject(RowModel(head: "Email : ", detail: customer.pers_email))
@@ -68,11 +70,15 @@ class CustomerInfoViewController: UIViewController,UITableViewDataSource,UITable
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let model:RowModel = listData.objectAtIndex(indexPath.row) as! RowModel
-        let cell:CellLabelStatic = tableView.dequeueReusableCellWithIdentifier(CELL_LABEL_STATIC_IDENTIFIER) as! CellLabelStatic
+        let cell:CellCusInfo = tableView.dequeueReusableCellWithIdentifier("CellLabelStatic") as! CellCusInfo
         cell.leftLabel.text = model.head
         cell.rightLabel.text = model.detail
         return cell
         
+    }
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    {
+        return UITableViewAutomaticDimension
     }
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         

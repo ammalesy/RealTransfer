@@ -47,6 +47,7 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         self.panelView.layer.shadowOffset = CGSizeMake(1, 1)
         self.panelView.layer.shadowRadius = 2
         
+        self.tableView.estimatedRowHeight = 260;
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
@@ -189,8 +190,17 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             cell.rightLabel4.text = (data as! RowInfoModel).detailInfo4
             cell.rightLabel5.text = (data as! RowInfoModel).detailInfo5
             cell.rightLabel6.text = (data as! RowInfoModel).detailInfo6
+            
+            
+            //HIDDEN ONLY
             cell.rightLabel7.text = (data as! RowInfoModel).detailInfo7
             cell.rightLabel8.text = (data as! RowInfoModel).detailInfo8
+            cell.height_leftLabel7.constant = 0
+            cell.height_leftLabel8.constant = 0
+            cell.height_rightLabel7.constant = 0
+            cell.height_rightLabel8.constant = 0
+            cell.rightLabel7.updateConstraints()
+            cell.rightLabel8.updateConstraints()
             return cell
         }
         
@@ -199,7 +209,7 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let data:RowModel = components.objectAtIndex(indexPath.row) as! RowModel
         if data is RowInfoModel {
-            return 260
+            return UITableViewAutomaticDimension
         }else{
             return 60
         }
@@ -629,7 +639,7 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         self.roomSelected = nil
         self.getCellRoom().nextBtn.enabled = false
         self.getCellRoom().textField.text = ""
-        self.getCellRoom().nextBtn.setTitleColor(UIColor.RGB(192, G: 193, B: 194), forState: UIControlState.Normal)
+        self.getCellRoom().nextBtn.titleLabel?.textColor = UIColor.RGB(192, G: 193, B: 194)
     }
     func alertWhenRoomHasNotOwner(){
         AlertUtil.alert("", message: "ไม่พบรายชื่อลูกค้าของห้องที่เลือก กรุณาเลือกห้องใหม่", cancleButton: "OK", atController: self) { (alertAction) in
@@ -637,9 +647,31 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             self.tableView.reloadData()
         }
     }
+    func alertWhenSelectRoomNotExist(){
+        let cell = self.getCellRoom()
+        let models = (((autoCompleteController?.displayObjects)! as NSArray) as! [AutoCompleteModel])
+        var index = 0
+        for model:AutoCompleteModel in models {
+            if (model.userInfo as! Room).un_name == cell.textField.text {
+                self.roomSelected = (model.userInfo as! Room)
+                break;
+            }
+            index += 1
+        }
+        if index == models.count {
+            AlertUtil.alert("", message: "ไม่พบหมายเลขห้องที่กรอก กรุณาเลือกห้องใหม่อีกครั้ง", cancleButton: "OK", atController: self, handler: { (action) in
+                
+                self.setDisableOnCellRoom()
+                
+            })
+        }
+
+    }
     func cellTxtSearchDidClickNext(cell: CellTxtSearch) {
         
         if self.roomSelected == nil || self.buldingSelected == nil {
+            
+            self.alertWhenRoomHasNotOwner()
             return
         }
         
@@ -743,6 +775,25 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         row4.headInfo3 = "Phone No.: "//pers_prefix
         
         
+        if let user2:NSDictionary = list!.objectForKey("userInfo2") as? NSDictionary {
+            let prefix = user2.objectForKey("pers_prefix") as? String
+            let fname = user2.objectForKey("pers_fname") as? String
+            let lname = user2.objectForKey("pers_lname") as? String
+            customer.full_name_2 = "\n\(prefix!)\(fname!) \(lname!)"
+        }
+        if let user3:NSDictionary = list!.objectForKey("userInfo3") as? NSDictionary {
+            let prefix = user3.objectForKey("pers_prefix") as? String
+            let fname = user3.objectForKey("pers_fname") as? String
+            let lname = user3.objectForKey("pers_lname") as? String
+            customer.full_name_3 = "\n\(prefix!)\(fname!) \(lname!)"
+        }
+        if let user4:NSDictionary = list!.objectForKey("userInfo4") as? NSDictionary {
+            let prefix = user4.objectForKey("pers_prefix") as? String
+            let fname = user4.objectForKey("pers_fname") as? String
+            let lname = user4.objectForKey("pers_lname") as? String
+            customer.full_name_4 = "\n\(prefix!)\(fname!) \(lname!)"
+        }
+        
         
         let prefix = userInfo.objectForKey("pers_prefix") as? String
         let fname = userInfo.objectForKey("pers_fname") as? String
@@ -789,7 +840,9 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             name = "\(prefix!)\(fname!) \(lname!)"
         }
         
-        row4.detailInfo1 = name
+        row4.detailInfo1 = name + customer.full_name_2 + customer.full_name_3 + customer.full_name_4
+
+
         if let email = pers_email {
             row4.detailInfo2 = email
         }

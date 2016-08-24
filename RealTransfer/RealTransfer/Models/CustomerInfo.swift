@@ -22,6 +22,11 @@ class CustomerInfo: Model {
     var pers_email:String = "N/A"
     
     
+    var full_name_2:String = ""
+    var full_name_3:String = ""
+    var full_name_4:String = ""
+    
+    
     //REF
     var building:String = "N/A"
     var room:String = "N/A"

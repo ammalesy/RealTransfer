@@ -61,6 +61,8 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
         self.filterSelected = "ALL"
         self.filterTypeSelected = "ALL"
         self.setNumberOfDefect()
+        
+        self.setTapEventOnContainer()
     }
     func initialDropDownList(){
         let firstModel:DropDownModel = DropDownModel(text: "เลือกดูทั้งหมด")

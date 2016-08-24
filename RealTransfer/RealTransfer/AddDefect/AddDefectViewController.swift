@@ -25,7 +25,7 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
         
         splitController = (self.splitViewController as! NZSplitViewController)
 
-        splitController!.nzNavigationController?.delegate = self
+        
         
         // Do any additional setup after loading the view.
         
@@ -38,6 +38,8 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
             
             
         }
+        
+        self.setTapEventOnContainer()
        
     }
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -50,6 +52,7 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        splitController?.nzNavigationController?.delegate = self
         
         if self.isModeGanrantee() {
             let controller:GaranteeListViewController =  self.getGuaranteeDefectListController()
@@ -154,7 +157,7 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
         let mediaType = info[UIImagePickerControllerMediaType] as! String
-        let image = (info[UIImagePickerControllerOriginalImage] as! UIImage)
+        let image = (info[UIImagePickerControllerOriginalImage] as! UIImage).normalizedImage()
         CameraRoll.sharedInstance.saveImage(image)
         if mediaType == (kUTTypeImage as String) {
             
@@ -195,12 +198,14 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
                         
                         navigationController.popViewController({
                             navigationController.hideRightInfo(true)
+                            PROJECT = nil
                         })
                         
                     })
                 }else{
                     self.splitController?.nzNavigationController?.popViewController({
                         self.splitController?.nzNavigationController?.hideRightInfo(true)
+                        PROJECT = nil
                     })
                 }
                 

@@ -125,6 +125,8 @@ class DefectCell: UITableViewCell,NZPopoverViewDelegate {
     }
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.hideMenuPopoverIfViewIsShowing()
+        let noti = NSNotification(name: "HIDE_MENU_ON_NAV", object: nil)
+        NSNotificationCenter.defaultCenter().postNotification(noti)
         
         if (self.delegate != nil) {
             

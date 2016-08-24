@@ -98,6 +98,7 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
         self.initialData()
         self.verifyButtonColor()
         self.verifyButtonEnable()
+        self.setTapEventOnContainer()
     }
 
     func initialData(){

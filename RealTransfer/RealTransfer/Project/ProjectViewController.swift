@@ -22,6 +22,7 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.setTapEventOnContainer()
         
         ProjectModel().getProject({ (list) in
             
@@ -59,6 +60,9 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
         
         
         self.nzNavigationController?.hideRightInfo(true)
+        
+        
+        
     }
     override func stateConfigData() {
        

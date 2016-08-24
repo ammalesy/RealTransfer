@@ -53,8 +53,24 @@ class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
         self.subTitleLb.text = "\(user.pm_name!) : \(user.user_pers_fname!) \(user.user_pers_lname!)"
         
         self.setIconImage()
+        self.addObServerHidePopupEditting()
         
     }
+    func addObServerHidePopupEditting(){
+        
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: #selector(hideMenuPopoverIfViewIsShowing),
+            name: "HIDE_MENU_ON_NAV",
+            object: nil)
+        
+    }
+    deinit {
+        
+        NSNotificationCenter.defaultCenter().removeObserver("HIDE_MENU_ON_NAV")
+        
+    }
+    
     func setIconProjectImage(projectModel:ProjectModel){
     
         let url:NSURL = NSURL(string: "\(PathUtil.sharedInstance.getWebPath())/\(projectModel.pj_image!)")! //
@@ -349,6 +365,9 @@ class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
         self.roomNoLb.hidden = flag
         self.roomNoCaptionLb.hidden = flag
         self.cusNameCaptionLb.hidden = flag
+        
+        CustomerInfo.sharedInstance.canShow = false
+        
     }
     func assignRightInfovalue(customer:CustomerInfo!, roomNo:String!){
         Queue.mainQueue { 

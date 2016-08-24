@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import TTTAttributedLabel
 
 class CellInfoLabel: UITableViewCell {
 
-    @IBOutlet weak var leftLabel1: UILabel!
+    @IBOutlet weak var leftLabel1: TTTAttributedLabel!
     @IBOutlet weak var leftLabel2: UILabel!
     @IBOutlet weak var leftLabel3: UILabel!
     @IBOutlet weak var leftLabel4: UILabel!
@@ -19,7 +20,7 @@ class CellInfoLabel: UITableViewCell {
     @IBOutlet weak var leftLabel7: UILabel!
     @IBOutlet weak var leftLabel8: UILabel!
     
-    @IBOutlet weak var rightLabel1: UILabel!
+    @IBOutlet weak var rightLabel1: TTTAttributedLabel!
     @IBOutlet weak var rightLabel2: UILabel!
     @IBOutlet weak var rightLabel3: UILabel!
     @IBOutlet weak var rightLabel4: UILabel!
@@ -27,4 +28,18 @@ class CellInfoLabel: UITableViewCell {
     @IBOutlet weak var rightLabel6: UILabel!
     @IBOutlet weak var rightLabel7: UILabel!
     @IBOutlet weak var rightLabel8: UILabel!
+    
+    @IBOutlet weak var height_leftLabel7: NSLayoutConstraint!
+    @IBOutlet weak var height_leftLabel8: NSLayoutConstraint!
+    
+    @IBOutlet weak var height_rightLabel7: NSLayoutConstraint!
+    @IBOutlet weak var height_rightLabel8: NSLayoutConstraint!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        leftLabel1.verticalAlignment = TTTAttributedLabelVerticalAlignment.Top
+        rightLabel1.verticalAlignment = TTTAttributedLabelVerticalAlignment.Top
+        
+    }
 }

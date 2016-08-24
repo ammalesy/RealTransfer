@@ -23,9 +23,9 @@ class PathUtil: NSObject {
     static let sharedInstance = PathUtil()
     
     var urlProtocol:String = "https://"
-    var domainName:String = "xxx.xx.xx"
-    var webDir:String = "/xxx"
-    var apiDir:String = "/xxx/xxx"
+    var domainName:String = "xx.xx.xx.xx"
+    var webDir:String = "/xx"
+    var apiDir:String = "/xx/xx"
     let userDefault:NSUserDefaults = NSUserDefaults.standardUserDefaults()
     
     override init(){
