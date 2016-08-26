@@ -474,7 +474,11 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
     }
     func verifyButtonEnable() {
         if self.categorySelected == nil || self.subCategorySelected == nil || self.listSubCategorySelected == nil {
-            self.saveBtn.enabled = false
+            if self.categorySelected != nil && self.subCategorySelected == kOTHER_IDENTIFIER {
+                self.saveBtn.enabled = true
+            }else{
+                self.saveBtn.enabled = false
+            }
         }else{
             self.saveBtn.enabled = true
         }

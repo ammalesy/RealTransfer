@@ -400,10 +400,10 @@ class DefectRoom: Model,NSCoding {
                                 
                                 if let unitDefect:NSDictionary = JSON.objectForKey("data") as? NSDictionary {
                                     
-                                    let id:NSNumber = NSNumber(integer: (unitDefect.objectForKey("df_room_id") as? Int)!)
+//                                    let id:NSNumber = NSNumber(integer: (unitDefect.objectForKey("df_room_id") as? Int)!)
                                     
                                     self.df_check_date = unitDefect.objectForKey("df_check_date") as? String
-                                    self.df_room_id = id.stringValue
+                                    self.df_room_id = unitDefect.objectForKey("df_room_id") as? String
                                     self.df_sync_status = unitDefect.objectForKey("df_sync_status") as? String
                                     self.df_un_id = unitDefect.objectForKey("df_un_id") as? String
                                     self.df_user_id = unitDefect.objectForKey("df_user_id") as? String

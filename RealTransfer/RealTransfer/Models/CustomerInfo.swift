@@ -70,6 +70,10 @@ class CustomerInfo: Model {
         cs = "N/A"
         
         canShow = false
+        
+        full_name_2 = ""
+        full_name_3 = ""
+        full_name_4 = ""
     }
     
     

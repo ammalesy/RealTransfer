@@ -400,7 +400,7 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         
     }
     @IBAction func exitAction(sender: AnyObject) {
-        
+        CustomerInfo.sharedInstance.clear()
         self.hideView()
         self.nzSplitViewController?.nzNavigationController?.popViewController({ 
             
@@ -674,7 +674,7 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             self.alertWhenRoomHasNotOwner()
             return
         }
-        
+        CustomerInfo.sharedInstance.clear()
         let indexPath:NSIndexPath =  self.tableView.indexPathForCell(cell)!
         let model:RowModel = components.objectAtIndex(indexPath.row) as! RowModel
         model.colorNextbutton = UIColor.blackColor()

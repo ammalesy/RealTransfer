@@ -535,6 +535,7 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
                     let completedAction:UIAlertAction = UIAlertAction(title: "ตกลง", style: UIAlertActionStyle.Default, handler: { (action) in
                         
                         if (completion != nil) {
+                            PROJECT = nil
                             completion!()
                         }
                     })
