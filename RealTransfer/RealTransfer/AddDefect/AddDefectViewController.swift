@@ -90,11 +90,6 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
 
     @IBAction func addAction(sender: AnyObject) {
         
-        self.defectRoom = DefectRoom.getCache(self.defectRoom?.df_room_id!)
-        let detailController:AddDefectDetailViewController = AddDefectDetailViewController.instance(UIImage(named: "defectImg"), defectRoom: self.defectRoom, state: DefectViewState.New)
-        self.navigationController?.pushViewController(detailController, animated: true)
-        return;
-        
         if UIImagePickerController.isSourceTypeAvailable(
             UIImagePickerControllerSourceType.Camera) {
                 
