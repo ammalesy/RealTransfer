@@ -568,7 +568,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Replace this with the GOOGLE_APP_ID from your GoogleService-Info.plist file\nGOOGLE_APP_ID=1:1050023509107:ios:4d6375d0bc58014f\n\n# Replace the /Path/To/ServiceAccount.json with the path to the key you just downloaded\n\"${PODS_ROOT}\"/FirebaseCrash/upload-sym \"RealTransfer/ServiceAccount.json\"";
+			shellScript = "# Replace this with the GOOGLE_APP_ID from your GoogleService-Info.plist file\nGOOGLE_APP_ID=1:393297175099:ios:0b4647eeab7f0460\n\n# Replace the /Path/To/ServiceAccount.json with the path to the key you just downloaded\n\"${PODS_ROOT}\"/FirebaseCrash/upload-sym \"RealTransfer/ServiceAccount.json\"";
 		};
 		306D828509B3C26AB0B44397 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
