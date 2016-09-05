@@ -21,6 +21,20 @@ extension UIViewController{
         NSNotificationCenter.defaultCenter().postNotification(noti)
         
     }
+    
+    class func topViewController() -> UIViewController? {
+        
+        if var topController = UIApplication.sharedApplication().keyWindow?.rootViewController {
+            while let presentedViewController = topController.presentedViewController {
+                topController = presentedViewController
+            }
+            
+            return topController
+        }
+        
+        return nil
+        
+    }
 }
 extension NZViewController {
 

@@ -90,6 +90,12 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
 
     @IBAction func addAction(sender: AnyObject) {
         
+        //HARDCODE
+//        self.defectRoom = DefectRoom.getCache(self.defectRoom?.df_room_id!)
+//        let detailController:AddDefectDetailViewController = AddDefectDetailViewController.instance(UIImage(named: "defectImg"), defectRoom: self.defectRoom, state: DefectViewState.New)
+//        self.navigationController?.pushViewController(detailController, animated: true)
+//        return;
+        
         if UIImagePickerController.isSourceTypeAvailable(
             UIImagePickerControllerSourceType.Camera) {
                 
@@ -199,6 +205,7 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
                         navigationController.popViewController({
                             navigationController.hideRightInfo(true)
                             PROJECT = nil
+                            Session.destroySession("")
                         })
                         
                     })
@@ -206,6 +213,7 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
                     self.splitController?.nzNavigationController?.popViewController({
                         self.splitController?.nzNavigationController?.hideRightInfo(true)
                         PROJECT = nil
+                        Session.destroySession("")
                     })
                 }
                 

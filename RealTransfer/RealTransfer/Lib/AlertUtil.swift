@@ -34,6 +34,26 @@ class AlertUtil: NSObject {
         })
         
     }
+    class func alert(title:String!,
+                     message:String!,
+                     okButton:String!,
+                     cancleButton:String!,
+                     atController:UIViewController!,
+                     okHandler: ((UIAlertAction) -> Void)?,
+                    cancelHandler: ((UIAlertAction) -> Void)?)
+    {
+        
+        let alert = UIAlertController(title: title, message:message, preferredStyle: UIAlertControllerStyle.Alert)
+        let cancelAction:UIAlertAction = UIAlertAction(title: cancleButton, style: UIAlertActionStyle.Cancel, handler: cancelHandler)
+        let okAction:UIAlertAction = UIAlertAction(title: okButton, style: UIAlertActionStyle.Default, handler: okHandler)
+        alert.addAction(cancelAction)
+        alert.addAction(okAction)
+        
+        atController.presentViewController(alert, animated: true, completion: {
+            
+        })
+        
+    }
     
     class func alertNetworkFail(atController:UIViewController!){
     

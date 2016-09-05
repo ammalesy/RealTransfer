@@ -22,7 +22,10 @@
 		18521DFD1D16B64D00B9622C /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18521DFC1D16B64D00B9622C /* UIImageExtension.swift */; };
 		1854F69C1D12FC54003B9FE0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1854F69B1D12FC54003B9FE0 /* User.swift */; };
 		1854F6AD1D130865003B9FE0 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1854F6AC1D130865003B9FE0 /* Model.swift */; };
+		1855570E1D77CDAB00F58906 /* Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1855570D1D77CDAB00F58906 /* Pin.swift */; };
+		185557101D79547B00F58906 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1855570F1D79547B00F58906 /* Session.swift */; };
 		185E07401D202B510049F30B /* CustomerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185E073F1D202B510049F30B /* CustomerInfo.swift */; };
+		185F145C1D7D9BF4005B457A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 185F145B1D7D9BF4005B457A /* GoogleService-Info.plist */; };
 		186537131D22E28B00A11F49 /* DefectListCheckingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186537121D22E28B00A11F49 /* DefectListCheckingViewController.swift */; };
 		186AB4211D55C19F00DEEBFA /* URLConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186AB4201D55C19F00DEEBFA /* URLConfigViewController.swift */; };
 		1876D5131D3E372300B6FAA1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1876D5121D3E372300B6FAA1 /* QuartzCore.framework */; };
@@ -106,7 +109,10 @@
 		18521DFC1D16B64D00B9622C /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		1854F69B1D12FC54003B9FE0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1854F6AC1D130865003B9FE0 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		1855570D1D77CDAB00F58906 /* Pin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
+		1855570F1D79547B00F58906 /* Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		185E073F1D202B510049F30B /* CustomerInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomerInfo.swift; sourceTree = "<group>"; };
+		185F145B1D7D9BF4005B457A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		186537121D22E28B00A11F49 /* DefectListCheckingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefectListCheckingViewController.swift; sourceTree = "<group>"; };
 		186AB4201D55C19F00DEEBFA /* URLConfigViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLConfigViewController.swift; sourceTree = "<group>"; };
 		1876D5121D3E372300B6FAA1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -215,6 +221,7 @@
 				18DF989F1D155AFF004BE990 /* DefectModel.swift */,
 				180098201D164A4C00BB11FD /* Sync.swift */,
 				185E073F1D202B510049F30B /* CustomerInfo.swift */,
+				1855570D1D77CDAB00F58906 /* Pin.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -241,6 +248,7 @@
 				182290211D43968100F94652 /* NetworkDetection.swift */,
 				188606291D43A4C600B2CD7C /* CameraRoll.swift */,
 				18EC63981D4C7B4D005E6A54 /* CallService.swift */,
+				1855570F1D79547B00F58906 /* Session.swift */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -406,6 +414,7 @@
 				529055F11D0518DE00B7D28C /* Main.storyboard */,
 				529055F71D0518DE00B7D28C /* Assets.xcassets */,
 				529055F91D0518DE00B7D28C /* LaunchScreen.storyboard */,
+				185F145B1D7D9BF4005B457A /* GoogleService-Info.plist */,
 				529055FC1D0518DE00B7D28C /* Info.plist */,
 				529055F41D0518DE00B7D28C /* RealTransfer.xcdatamodeld */,
 				521A7B291D05349B00971B7B /* SukhumvitSet.ttc */,
@@ -485,6 +494,7 @@
 				529055E81D0518DE00B7D28C /* Resources */,
 				306D828509B3C26AB0B44397 /* Embed Pods Frameworks */,
 				DDFD2E74F37D2763B16BD205 /* Copy Pods Resources */,
+				185F14581D7D7C9F005B457A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -534,6 +544,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				520AC6731D094C3C000A8754 /* NZAutoComplete.storyboard in Resources */,
+				185F145C1D7D9BF4005B457A /* GoogleService-Info.plist in Resources */,
 				521A7B2A1D0534FD00971B7B /* SukhumvitSet.ttc in Resources */,
 				5290560A1D0519EE00B7D28C /* NZNav.storyboard in Resources */,
 				529055FB1D0518DE00B7D28C /* LaunchScreen.storyboard in Resources */,
@@ -546,6 +557,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		185F14581D7D7C9F005B457A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Replace this with the GOOGLE_APP_ID from your GoogleService-Info.plist file\nGOOGLE_APP_ID=1:1050023509107:ios:4d6375d0bc58014f\n\n# Replace the /Path/To/ServiceAccount.json with the path to the key you just downloaded\n\"${PODS_ROOT}\"/FirebaseCrash/upload-sym \"RealTransfer/ServiceAccount.json\"";
+		};
 		306D828509B3C26AB0B44397 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -611,6 +635,7 @@
 				188606531D44CCD200B2CD7C /* NZSwitch.swift in Sources */,
 				5218E5751D09123C008B5402 /* NZDropDowCell.swift in Sources */,
 				18CA73111D1C13120021712B /* AlertUtil.swift in Sources */,
+				1855570E1D77CDAB00F58906 /* Pin.swift in Sources */,
 				52499B0F1D06BA410003F6D5 /* CellDropDown.swift in Sources */,
 				5204FF441D06D55E00A3991B /* NZSplitViewController.swift in Sources */,
 				5299C3CE1D066C810021DD97 /* GettingStartViewController.swift in Sources */,
@@ -649,6 +674,7 @@
 				186AB4211D55C19F00DEEBFA /* URLConfigViewController.swift in Sources */,
 				18F589F71D1804AA00F06813 /* NSStringExtension.swift in Sources */,
 				1876D5151D3E6D3E00B6FAA1 /* GalleryImagePickerController.swift in Sources */,
+				185557101D79547B00F58906 /* Session.swift in Sources */,
 				52499B151D06C7CF0003F6D5 /* RowInfoModel.swift in Sources */,
 				181D5C531D1CE5D5000DD110 /* PathUtil.swift in Sources */,
 				184E42601D0C4BFD0073CF60 /* NZDropDownIconColorCell.swift in Sources */,

@@ -536,6 +536,7 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
                         
                         if (completion != nil) {
                             PROJECT = nil
+                            Session.destroySession("")
                             completion!()
                         }
                     })

@@ -46,7 +46,7 @@ class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
         
         self.titleLb.font = UIFont.fontSemiBold(22)
         self.subTitleLb.font = UIFont.fontNormal(18)
-        self.roomNoCaptionLb.text = "Room No. "
+        self.roomNoCaptionLb.text = "Unit No. "
         self.cusNameCaptionLb.text = "Client : "
         
         let user:User = User().getOnCache()!
@@ -265,7 +265,8 @@ class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
             popover = NZPopoverView.standardSize()
             
             popover.delegate = self
-            if CustomerInfo.sharedInstance.canShow {
+            let customer = CustomerInfo.sharedInstance
+            if customer.canShow == true {
                 popover.addRow(NZRow(text: "ข้อมูลลูกค้า", imageName:"Info-97", tintColor: UIColor.darkGrayColor(),  identifier: "info"))
             }
             if PROJECT != nil {
@@ -328,26 +329,68 @@ class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
         if menu.identifier == "logout" {
             self.dismissViewControllerAnimated(true, completion: { () -> Void in
                 PROJECT = nil
+                Session.destroySession(menu.identifier!)
                 Building.buldings.removeAllObjects()
                 CSRoleModel.csUSers.removeAllObjects()
                 CustomerInfo.sharedInstance.clear()
                 GaranteeListViewController.desTroyShareInstance()
                 NZSplitViewController.desTroyShareInstance()
             })
+            if self.delegate != nil {
+                self.delegate?.nzNavigation!(self, didClickMenu: view, menu: menu)
+            }
         }
         else if menu.identifier == "sync" {
             if PROJECT == nil {
                 AlertUtil.alert("Warning", message: "กรุณาเลือก Project/Room", cancleButton: "OK", atController: self)
             }
+            
+            self.showEnterPinAlert({ (result) in
+                if result == true {
+                    if self.delegate != nil {
+                        self.delegate?.nzNavigation!(self, didClickMenu: view, menu: menu)
+                    }
+                }else{
+                    AlertUtil.alert("Warning", message: "รหัสผ่านไม่ถูกต้อง", cancleButton: "OK", atController: self)
+                }
+            })
+            
         }
          else if menu.identifier == "info" {
             showCustomerInfoView()
+            if self.delegate != nil {
+                self.delegate?.nzNavigation!(self, didClickMenu: view, menu: menu)
+            }
         }
-        
-        if self.delegate != nil {
-            self.delegate?.nzNavigation!(self, didClickMenu: view, menu: menu)
-        }
-        
+    }
+    func showEnterPinAlert(handler : (Bool)->Void){
+        ///TEXTFIELD
+        let alert = UIAlertController(title: "ตรวจสอบสิทธิ์การเข้าถึง", message:"กรุณาระบุรหัสผ่าน", preferredStyle: UIAlertControllerStyle.Alert)
+        let action:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) in
+            
+            let pin = alert.textFields?.first?.text!
+            Pin(pinId: "", pinValue: pin!).validatePin({ (result) in
+                
+                handler(result);
+                
+            }, networkFail: {
+                    AlertUtil.alertNetworkFail(self)
+            })
+            
+        })
+        let actionCancel:UIAlertAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { (action) in
+            
+        })
+        alert.addTextFieldWithConfigurationHandler({ (textField) in
+            textField.secureTextEntry = true
+            textField.keyboardType = UIKeyboardType.NumberPad
+        })
+        alert.addAction(actionCancel)
+        alert.addAction(action)
+        self.presentViewController(alert, animated: true, completion: {
+            
+        })
+        //////////
     }
     func showCustomerInfoView(){
         let sb:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)

@@ -83,6 +83,9 @@ class DefectRoom: Model,NSCoding {
             userDefault.synchronize()
         }
         
+        Session.shareInstance.defectRoomSelected = self
+        Session.shareInstance.doCache()
+        
         
     }
     
@@ -148,36 +151,51 @@ class DefectRoom: Model,NSCoding {
                 
                 if (isNeedSync == true) {
                     
-                    Queue.mainQueue({
-                        //PUSH
-                        let timeStamp = NSDateFormatter.dateFormater().stringFromDate(NSDate())
-                        Sync.syncToServer(defectRoom, db_name: PROJECT!.pj_datebase_name!, timeStamp: timeStamp, defect: (defectRoom.listDefect)!)
-                        { (result) in
-                            
-                            Queue.mainQueue({
-                                if  result == "NETWORK_FAIL" {
-                                    SwiftSpinner.hide()
-                                    handler(success: false)
-                                    
-                                    
-                                }else if result == "TRUE" {
-                                    self.df_check_date = timeStamp
-                                    self.getListDefectOnServer({
-                                        
-                                        self.doCache()
-                                        SwiftSpinner.hide()
-                                        handler(success: true)
-                                        
-                                        }, networkFail: {
-                                            SwiftSpinner.hide()
-                                            handler(success: false)
-                                    })
-                                }
+                    AlertUtil.alert("แจ้งเตือน",
+                        message: "ข้อมูลบน Server มีการอัพเดท กรุณาอัพเดทข้อมูล",
+                        okButton: "อัพเดท",
+                        cancleButton: "ยกเลิก",
+                        atController: UIViewController.topViewController(),
+                    okHandler: { (okHander) in
+                        
+                        Queue.mainQueue({
+                            //PUSH
+                            let timeStamp = NSDateFormatter.dateFormater().stringFromDate(NSDate())
+                            Sync.syncToServer(defectRoom, db_name: PROJECT!.pj_datebase_name!, timeStamp: timeStamp, defect: (defectRoom.listDefect)!)
+                            { (result) in
                                 
-                            })
+                                Queue.mainQueue({
+                                    if  result == "NETWORK_FAIL" {
+                                        SwiftSpinner.hide()
+                                        handler(success: false)
+                                        
+                                        
+                                    }else if result == "TRUE" {
+                                        self.df_check_date = timeStamp
+                                        self.getListDefectOnServer({
+                                            
+                                            self.doCache()
+                                            SwiftSpinner.hide()
+                                            handler(success: true)
+                                            
+                                            }, networkFail: {
+                                                SwiftSpinner.hide()
+                                                handler(success: false)
+                                        })
+                                    }
+                                    
+                                })
+                                
+                            }
+                        })
+                        
+                    }, cancelHandler: { (cancelHandler) in
+                        
+                        SwiftSpinner.hide()
                             
-                        }
                     })
+                    
+                    
                     
                 }else{
                     self.listDefect?.removeAllObjects()
@@ -215,9 +233,11 @@ class DefectRoom: Model,NSCoding {
             }else{
             
                 let url = "\(PathUtil.sharedInstance.getApiPath())/Defect/isSync.php?ransom=\(NSString.randomStringWithLength(10))"
-                Alamofire.request(.POST, url, parameters: ["db_name":PROJECT!.pj_datebase_name!,
+                let postParam = ["db_name":PROJECT!.pj_datebase_name!,
                     "df_room_id":self.df_room_id!,
-                    "time_stamp":self.df_check_date!])
+                    "time_stamp":self.df_check_date!,
+                    "count_defect":String(self.listDefect!.count)]
+                Alamofire.request(.POST, url, parameters:postParam)
                     .responseJSON { response in
                         
                         if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {

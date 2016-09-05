@@ -251,6 +251,9 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
                 customer.cs = csName
                 customer.room = room!
                 
+                Session.shareInstance.customerInfo = customer
+                Session.shareInstance.doCache()
+                
                 var needUpdateCS:Bool = false
                 if self.csSelected != nil {
                     if self.user_id_before != self.csSelected?.user_id {
@@ -364,11 +367,19 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         let nav:UINavigationController = self.nzSplitViewController?.viewControllers.last as! UINavigationController
         let addDefectViewController:AddDefectViewController = nav.viewControllers[0] as! AddDefectViewController
         addDefectViewController.defectRoom = defectRoom
+        
+        
+        //KEEP SESSION
+        self.keepSession(defectRoom)
     }
     func initialRoomCheckingPart2(defectRoom:DefectRoom!){
         
         let controller:DefectListCheckingViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DefectListCheckingViewController") as! DefectListCheckingViewController
         controller.defectRoomRef = defectRoom
+        
+        //KEEP SESSION
+        self.keepSession(defectRoom)
+        //////
         
         self.nzNavigationController?.popViewControllerWithOutAnimate({ (navigationController) in
             
@@ -399,8 +410,23 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         
         
     }
+    func keepSession(defectRoom:DefectRoom!){
+        //KEEP SESSION
+        Session.shareInstance.roomSelected = self.roomSelected!
+        Session.shareInstance.buildingSelected = self.buldingSelected!
+        Session.shareInstance.defectRoomSelected = defectRoom
+        Session.shareInstance.doCache()
+    }
     @IBAction func exitAction(sender: AnyObject) {
+        PROJECT = nil
+        Session.destroySession("")
         CustomerInfo.sharedInstance.clear()
+        Building.buldings.removeAllObjects()
+        CSRoleModel.csUSers.removeAllObjects()
+        CustomerInfo.sharedInstance.clear()
+        GaranteeListViewController.desTroyShareInstance()
+        NZSplitViewController.desTroyShareInstance()
+        self.nzSplitViewController?.nzNavigationController?.hideRightInfo(true)
         self.hideView()
         self.nzSplitViewController?.nzNavigationController?.popViewController({ 
             
@@ -935,7 +961,14 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             let row:Int = self.components.indexOfObject((dropDownController!.userInfo as! RowModel))
             let indexPath:NSIndexPath = NSIndexPath(forRow: row, inSection: 0)
             let rect:CGRect = self.tableView.rectForRowAtIndexPath(indexPath)
-            return rect.origin.y - (height - 78)
+            let y = rect.origin.y - (height - 78)
+            
+                if y < 0 {
+                    return 0
+                }else{
+                    return y
+                }
+            
             
         }
         return NZ_DROPDOWN_NOT_NEED_CUSTOM_POSITION_Y

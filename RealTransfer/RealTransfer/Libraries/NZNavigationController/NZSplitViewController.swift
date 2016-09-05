@@ -51,7 +51,26 @@ class NZSplitViewController: UISplitViewController {
         }
         self.stateAfterSetfont()
         
+        
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: #selector(dismiss),
+            name: "CLOSE_SPLITVIEW",
+            object: nil)
     }
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver("CLOSE_SPLITVIEW")
+    }
+    func dismiss(){
+        self.dismissViewControllerAnimated(true) { 
+            
+        }
+    }
+    class func close() {
+        let noti = NSNotification(name: "CLOSE_SPLITVIEW", object: nil)
+        NSNotificationCenter.defaultCenter().postNotification(noti)
+    }
+    
     internal func configLayout(){
         
     }

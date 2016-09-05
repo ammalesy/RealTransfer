@@ -20,6 +20,32 @@ class Building: Model {
     var building_name:String?
     var rooms:NSMutableArray = NSMutableArray()
     
+    override init() {
+        
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        self.project  = aDecoder.decodeObjectForKey("project") as? ProjectModel
+        self.building_id  = aDecoder.decodeObjectForKey("building_id") as? String
+        self.building_name  = aDecoder.decodeObjectForKey("building_name") as? String
+        self.rooms  = (aDecoder.decodeObjectForKey("rooms") as? NSMutableArray)!
+    }
+    
+    func encodeWithCoder(aCoder: NSCoder) {
+        if let val = self.project{
+            aCoder.encodeObject(val, forKey: "project")
+        }
+        if let val = self.building_id{
+            aCoder.encodeObject(val, forKey: "building_id")
+        }
+        if let val = self.building_name{
+            aCoder.encodeObject(val, forKey: "building_name")
+        }
+        //if let val = self.rooms{
+            aCoder.encodeObject(self.rooms, forKey: "rooms")
+        //}
+    }
+    
     convenience init(project:ProjectModel!) {
         self.init()
         self.project = project
@@ -59,4 +85,5 @@ class Building: Model {
         
         handler(returnList)
     }
+    
 }

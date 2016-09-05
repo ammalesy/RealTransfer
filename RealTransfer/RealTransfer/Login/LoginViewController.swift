@@ -24,6 +24,12 @@ class LoginViewController: NZViewController,URLConfigViewControllerDelegate {
     var user:User?
     
     override func viewDidLoad() {
+        
+//        let vvv = NSMutableDictionary()
+//        var fff:String? = "asd"
+//        fff = nil
+//        vvv.setObject(fff!, forKey: "MMM");
+
         super.viewDidLoad()
         self.setIconImage()
         
@@ -32,6 +38,22 @@ class LoginViewController: NZViewController,URLConfigViewControllerDelegate {
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginViewController.keyboardWasShown(_:)), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginViewController.keyboardWasHide(_:)), name:UIKeyboardWillHideNotification, object: nil);
+        
+        
+        
+        NetworkDetection.manager.isConected { (result) in
+            if result == false {
+                let user = User().getOnCache()
+                let isOnSession = Session.shareInstance.isOnSession()
+                
+                if user != nil && isOnSession == true {
+                    
+                    Category.sharedInstance
+                    self.openPageWhenLoginsuccess()
+                    
+                }
+            }
+        }
     }
     func tapAnyWhere(){
         self.usernameTxt.resignFirstResponder()
@@ -119,40 +141,7 @@ class LoginViewController: NZViewController,URLConfigViewControllerDelegate {
         
         user?.login({ (result) in
             
-            SwiftSpinner.show("Retriving data..", animated: true)
-            
-            
-            Category.syncCategory({
-                
-                SwiftSpinner.hide()
-                
-                if result == true {
-                    
-                    let nzNavController:NZNavigationViewController = UIStoryboard(name: "NZNav", bundle: nil).instantiateViewControllerWithIdentifier("NZNavigationViewController") as! NZNavigationViewController
-                    let rootView:NZViewController = self.storyboard?.instantiateViewControllerWithIdentifier(ROOT_VIEW_CONTROLLER) as! NZViewController
-                    
-                    
-                    self.presentViewController(nzNavController, animated: true) { () -> Void in
-                        
-                        
-                        
-                        nzNavController.setRootViewController(rootView)
-                        nzNavController.containerView.alpha = 0
-                        
-                        UIView.animateWithDuration(0.7, animations: { () -> Void in
-                            
-                            nzNavController.containerView.alpha = 1
-                            
-                            }, completion: { (result) -> Void in
-                                
-                        })
-                        
-                        
-                    }
-                }else{
-                    AlertUtil.alert("Warning", message: "Login fail", cancleButton: "OK", atController: self)
-                }
-            })
+            self.haldlerAfterLogin(result!)
             
         }, networkFail: { 
             SwiftSpinner.hide()
@@ -164,6 +153,46 @@ class LoginViewController: NZViewController,URLConfigViewControllerDelegate {
         
     }
     
+    func haldlerAfterLogin(result:Bool){
+        SwiftSpinner.show("Retriving data..", animated: true)
+        
+        
+        Category.syncCategory({
+            
+            SwiftSpinner.hide()
+            
+            if result == true {
+                
+                self.openPageWhenLoginsuccess()
+                
+            }else{
+                AlertUtil.alert("Warning", message: "Login fail", cancleButton: "OK", atController: self)
+            }
+        })
+    }
+    func openPageWhenLoginsuccess() {
+        let nzNavController:NZNavigationViewController = UIStoryboard(name: "NZNav", bundle: nil).instantiateViewControllerWithIdentifier("NZNavigationViewController") as! NZNavigationViewController
+        let rootView:NZViewController = self.storyboard?.instantiateViewControllerWithIdentifier(ROOT_VIEW_CONTROLLER) as! NZViewController
+        
+        
+        self.presentViewController(nzNavController, animated: true) { () -> Void in
+            
+            
+            
+            nzNavController.setRootViewController(rootView)
+            nzNavController.containerView.alpha = 0
+            
+            UIView.animateWithDuration(0.7, animations: { () -> Void in
+                
+                nzNavController.containerView.alpha = 1
+                
+                }, completion: { (result) -> Void in
+                    
+            })
+            
+            
+        }
+    }
     override func shouldAutorotate() -> Bool {
         return true
     }

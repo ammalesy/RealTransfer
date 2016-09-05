@@ -24,28 +24,73 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
         super.viewDidLoad()
         self.setTapEventOnContainer()
         
+        NetworkDetection.manager.isConected { (result) in
+            
+            if result == false {
+                
+                let project = Session.shareInstance.projectSelected
+                let isOnSession = Session.shareInstance.isOnSession()
+                
+                if project != nil && isOnSession == true {
+                    self.FroceToDetailPage(project!)
+                }
+            
+            }else{
+                
+                self.fetchData()
+            
+            }
+            
+        }
+        
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: #selector(ProjectViewController.fetchData),
+            name: "FETCH_PROJECT",
+            object: nil)
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver("FETCH_PROJECT")
+    }
+    class func postNotificationFetchProject(){
+        let noti = NSNotification(name: "FETCH_PROJECT", object: nil);
+        NSNotificationCenter.defaultCenter().postNotification(noti)
+    }
+    
+    func fetchData() {
         ProjectModel().getProject({ (list) in
             
-            self.projects = list!
+            var theList = list
+            if list == nil {
+                theList = NSMutableArray()
+            }
+            
+            self.projects = theList!
             
             self.collectionView.reloadData()
             
             let user:User = User().getOnCache()!
             
-            self.nzNavigationController?.titleLb.text = "Dash Board"
+            self.nzNavigationController?.titleLb.text = "Dashboard"
             self.nzNavigationController?.subTitleLb.text = "\(user.user_work_position!) : \(user.user_pers_fname!) \(user.user_pers_lname!)"
             
             Queue.mainQueue {
                 self.nzNavigationController?.hideRightInfo(true)
             }
             
-        }) { 
             
+        }, networkFail: {
+                
             AlertUtil.alertNetworkFail(self)
-            
-        }
-        
+                
+        }, froceToDetailIfCached: { (projectModel) in
+                
+            self.FroceToDetailPage(projectModel)
+                
+        })
     }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -127,9 +172,13 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         self.nzNavigationController?.hideMenuPopoverIfViewIsShowing()
         let model:ProjectModel = projects.objectAtIndex(indexPath.row) as! ProjectModel
+        self.didSelectItem(model)
+        
+    }
+    func didSelectItem(model:ProjectModel!){
         Queue.mainQueue({ () -> Void in
             
-
+            
             if(BuildingCaching.sharedInstance.isNeedUpdate()){
                 
                 SwiftSpinner.show("Retriving projects..", animated: true)
@@ -179,6 +228,8 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
             let addDefectViewController:AddDefectViewController = subsNav[0] as! AddDefectViewController
             addDefectViewController.project = model
             PROJECT = model
+            Session.shareInstance.projectSelected = PROJECT
+            Session.shareInstance.doCache()
         }
         
         split.minimumPrimaryColumnWidth = 400
@@ -187,6 +238,77 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
             
         })
     }
+    func FroceToDetailPage(model:ProjectModel){
+        Queue.mainQueue { 
+            let split:NZSplitViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("NZSplitViewController") as! NZSplitViewController
+            let controllers:[UIViewController] = split.viewControllers;
+            let nav:UINavigationController = controllers[1] as! UINavigationController
+            let subsNav:[UIViewController] = nav.viewControllers
+            if subsNav[0] is AddDefectViewController {
+                let addDefectViewController:AddDefectViewController = subsNav[0] as! AddDefectViewController
+                addDefectViewController.project = model
+                addDefectViewController.needShowGettingStart = false
+                PROJECT = model
+                Session.shareInstance.projectSelected = PROJECT
+                Session.shareInstance.doCache()
+            }
+            
+            split.minimumPrimaryColumnWidth = 400
+            split.maximumPrimaryColumnWidth = 400
+            self.nzNavigationController?.pushViewController(split, completion: { () -> Void in
+                
+                
+                let defectRoom = Session.shareInstance.defectRoomSelected!
+//                
+//                let customer:CustomerInfo = CustomerInfo.sharedInstance
+//                let buildingName = buldingSelected?.building_name!
+//                let csName = (self.components.lastObject as! RowModel).detail!
+//                let room = self.roomSelected?.un_name!
+//                customer.building = buildingName!
+//                customer.cs = csName
+//                customer.room = room!
+                
+                if let instance = Session.shareInstance.customerInfo {
+                    CustomerInfo.assignInstance(instance)
+                    
+                    let roomSelected = Session.shareInstance.roomSelected!
+                    self.nzNavigationController!.assignRightInfovalue(instance, roomNo: roomSelected.un_name!)
+                }
+                Queue.mainQueue({ 
+                    CustomerInfo.sharedInstance.canShow = true
+                })
+                
+                if defectRoom.df_sync_status == "0" {
+                    
+                    let defectListController:DefectListViewController = split.viewControllers.first as! DefectListViewController
+                    defectListController.reloadData(defectRoom)
+                    
+                    
+                    let nav:UINavigationController = split.viewControllers.last as! UINavigationController
+                    let addDefectViewController:AddDefectViewController = nav.viewControllers[0] as! AddDefectViewController
+                    addDefectViewController.defectRoom = defectRoom
+                    
+                }else{
+                    
+                    
+                    let controller:DefectListCheckingViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DefectListCheckingViewController") as! DefectListCheckingViewController
+                    controller.defectRoomRef = defectRoom
+                    
+                    self.nzNavigationController!.pushViewControllerWithOutAnimate(controller, completion: {
+                        
+                        
+                        
+                    })
+
+                
+                }
+                
+            })
+        }
+        
+        
+    }
+    
 
     func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true

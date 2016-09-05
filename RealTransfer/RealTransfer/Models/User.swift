@@ -80,7 +80,16 @@ class User: Model,NSCoding {
         NetworkDetection.manager.isConected { (isConected) in
             
             if isConected == false {
-                networkFail()
+                let user = User().getOnCache()
+                let isOnSession = Session.shareInstance.isOnSession()
+                
+                if user != nil && isOnSession == true {
+                    handler(true)
+                }else{
+                    networkFail()
+                }
+                
+                
             }else{
                 SwiftSpinner.show("Loging in..", animated: true)
                 var path = "\(PathUtil.sharedInstance.getApiPath())/User/login.php?username=\(self.username!)&password=\(self.password!)"
@@ -126,11 +135,19 @@ class User: Model,NSCoding {
         
        
     }
+    class func removeCache() {
+        let uDefault:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+        uDefault.removeObjectForKey("USER")
+    }
     func getOnCache()->User?{
     
         let uDefault:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        return NSKeyedUnarchiver.unarchiveObjectWithData(uDefault.objectForKey("USER") as! NSData) as? User;
         
+        if let data  = uDefault.objectForKey("USER") as? NSData {
+            return NSKeyedUnarchiver.unarchiveObjectWithData(data) as? User;
+        }else{
+            return nil
+        }
     }
     func doCacheUSer(){
         let data:NSData = NSKeyedArchiver.archivedDataWithRootObject(self)

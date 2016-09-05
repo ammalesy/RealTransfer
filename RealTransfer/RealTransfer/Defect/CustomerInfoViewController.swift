@@ -47,7 +47,10 @@ class CustomerInfoViewController: UIViewController,UITableViewDataSource,UITable
         listData.addObject(RowModel(head: "Last Update : ", detail: customer.checkDate))
         listData.addObject(RowModel(head: "Check Date : ", detail: NSDateFormatter.dateDisplayFormat().stringFromDate(NSDate())))
         listData.addObject(RowModel(head: "Defect No.: ", detail: customer.defectNo))
-        listData.addObject(RowModel(head: "QC Checker : ", detail: customer.qcChecker))
+        if(customer.qcChecker != "N/A") {
+            listData.addObject(RowModel(head: "Last QC Checker : ", detail: customer.qcChecker))
+        }
+        
         listData.addObject(RowModel(head: "CS : ", detail: customer.cs))
 
         // Do any additional setup after loading the view.

@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import Alamofire
+import Firebase
 
 let SUPER_ADMIN_USERNAME = "superadmin"
 let SUPER_ADMIN_PASSWORD = "RealTransfer1234"
@@ -69,6 +70,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             return (disposition, credential)
         }
+        
+        FIRApp.configure()
         
         return true
     }

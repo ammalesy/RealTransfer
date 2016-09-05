@@ -15,5 +15,7 @@ pod 'KMPlaceholderTextView', '~> 1.2.0'
 pod 'TTTAttributedLabel'
 pod 'ToggleView', '~> 0.0.1'
 pod 'ReachabilitySwift'
+pod 'Firebase'
+pod 'Firebase/Crash'
 end
 

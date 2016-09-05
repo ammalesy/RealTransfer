@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '8414B967343638642DB5C930'
+               BlueprintIdentifier = '72D020E0171A5008C319CBAB'
                BlueprintName = 'ToggleView'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'ToggleView.framework'>

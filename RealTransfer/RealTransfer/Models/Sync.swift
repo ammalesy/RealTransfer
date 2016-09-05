@@ -86,8 +86,9 @@ class Sync: Model {
                     needUpdateFlagOnly = "1"
                 }
                 
-                
+                let qcChecker = User().getOnCache()!
                 let postParam = ["data":param,
+                    "df_user_id":qcChecker.user_id!,
                     "db_name":db_name,
                     "timestamp":timeStamp,
                     "df_room_id":defectRoom.df_room_id!,
