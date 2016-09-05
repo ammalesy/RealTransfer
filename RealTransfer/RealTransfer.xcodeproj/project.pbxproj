@@ -814,7 +814,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mintedimages.realsmart;
 				PRODUCT_NAME = "Real Transfer";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "3d281be8-619f-41fe-89e6-ce7b986dbac6";
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "RealTransfer-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 2;
@@ -839,7 +839,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mintedimages.realsmart;
 				PRODUCT_NAME = "Real Transfer";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "3d281be8-619f-41fe-89e6-ce7b986dbac6";
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "RealTransfer-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 2;
