@@ -814,7 +814,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mint.RealTransfer;
 				PRODUCT_NAME = "Real Transfer";
-				PROVISIONING_PROFILE = "209d4667-e7ef-4508-a172-07c5080d9357";
+				PROVISIONING_PROFILE = "";
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "RealTransfer-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 2;
@@ -839,7 +839,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mint.RealTransfer;
 				PRODUCT_NAME = "Real Transfer";
-				PROVISIONING_PROFILE = "209d4667-e7ef-4508-a172-07c5080d9357";
+				PROVISIONING_PROFILE = "";
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "RealTransfer-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 2;
