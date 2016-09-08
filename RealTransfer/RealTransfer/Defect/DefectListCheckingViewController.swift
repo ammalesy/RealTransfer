@@ -9,6 +9,7 @@
 import UIKit
 import SwiftSpinner
 import Alamofire
+import SDWebImage
 
 class DefectListCheckingViewController: NZViewController,UITableViewDataSource,UITableViewDelegate,DefectCellViewDelegate,NZNavigationViewControllerDelegate,NZDropDownViewDelegate {
 
@@ -177,34 +178,46 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
         ///*===== IMAGE =======*//
         print(defectModel.df_image_path)
         cell.defectImageView.image = UIImage(named: "p1")
+        
+        cell.defectModelRef = defectModel
         if defectModel.realImage != nil {
             cell.defectImageView.image = defectModel.realImage
         }else{
-            Queue.globalQueue({
-                let imageOnCache = ImageCaching.sharedInstance.getImageByName(defectModel.df_image_path)
-                
-                Queue.mainQueue({
-                    
-                    if imageOnCache != nil {
-                        cell.defectImageView.image = imageOnCache!
-                        defectModel.realImage = imageOnCache!
-                    }else{
+            
+            //})
+
+            
+            
+//            Queue.globalQueue({
+//                let imageOnCache = ImageCaching.sharedInstance.getImageByName(defectModel.df_image_path)
+//                
+//                Queue.mainQueue({
+//                    
+//                    if imageOnCache != nil {
+//                        cell.defectImageView.image = imageOnCache!
+//                        defectModel.realImage = imageOnCache!
+//                    }else{
                         let url:NSURL = NSURL(string: "\(PathUtil.sharedInstance.getApiPath())/images/\(PROJECT!.pj_datebase_name!)/\(self.defectRoomRef!.df_un_id!)/\(defectModel.df_image_path!).jpg")!
 
                         cell.defectImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "p1"), options: .AllowInvalidSSLCertificates, completed: { (imageReturn, error, sdImageCacheType, url) in
+                            Queue.serialQueue({ 
+                                if imageReturn != nil
+                                {
+                                    
+                                    defectModel.realImage = UIImage.resizeImage(imageReturn, newWidth: 60)
+                                    if sdImageCacheType == SDImageCacheType.None {
+                                        ImageCaching.sharedInstance.setImageByName(defectModel.df_image_path!, image: imageReturn!, isFromServer: true)
+                                        ImageCaching.sharedInstance.save()
+                                    }
+                                }
+                            })
                             
-                            if imageReturn != nil
-                            {
-                                defectModel.realImage = imageReturn
-                                ImageCaching.sharedInstance.setImageByName(defectModel.df_image_path!, image: imageReturn!, isFromServer: true)
-                                ImageCaching.sharedInstance.save()
-                            }
                             
                         })
-                    }
-                    
-                })
-            })
+//                    }
+//                    
+//                })
+//            })
         }
         //////////////////////////
         
@@ -608,12 +621,14 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
              detail = cell.detailTextLb.text!
         }
         
+        let nameImage = Session.shareInstance.getImageCacheKey(cell.defectModelRef!.df_image_path!)
         
+        let imageShow = ImageCaching.sharedInstance.getImageByName(nameImage)
         let model:ImageViewerModel = ImageViewerModel(iconColor:color!,
                                                       category:category,
                                                       subCategory: subCategory,
                                                       detail: detail)
-        self.nzNavigationController!.showImageViwer(image, model: model)
+        self.nzNavigationController!.showImageViwer(imageShow, model: model)
         
     }
     func touchBeganCell(cell: DefectCell) {

@@ -12,6 +12,6 @@ import UIKit
 class CachingManager: NSObject {
     
     
-    var holder:AnyObject?
+    let holder:NSMutableDictionary? = NSMutableDictionary()
 
 }

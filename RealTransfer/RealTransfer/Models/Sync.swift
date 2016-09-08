@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftSpinner
+import SDWebImage
 
 class ImageSync : Model {
     var image:UIImage?
@@ -33,7 +34,7 @@ class Sync: Model {
     {
         
         NetworkDetection.manager.isConected { (isConedted) in
-            
+            SDImageCache.sharedImageCache().clearMemory()
             if isConedted == false {
             
                 handler("NETWORK_FAIL")
@@ -44,10 +45,11 @@ class Sync: Model {
                 
                 var i:Int = 0
                 for sync:DefectModel in ((defect as NSArray) as! [DefectModel]) {
+                    SDImageCache.sharedImageCache().clearMemory()
                     
                     if sync.df_status == "0" {
                         let imagePathName = UIImage.uniqNameBySeq(String(i))
-                        if let img:UIImage = ImageCaching.sharedInstance.getImageByName(sync.df_image_path) {
+                        if let img:UIImage = ImageCaching.sharedInstance.getImageByName(Session.shareInstance.getImageCacheKey(sync.df_image_path)) {// {
                             sync.realImage = img
                             sync.df_image_path = imagePathName
                             sync.complete_status = "0"
@@ -65,7 +67,7 @@ class Sync: Model {
                         param.addObject(sync.toJson())
                         
                         if ImageCaching.sharedInstance.isImageDidSyncServer(sync.df_image_path!) == false {
-                            if let image:UIImage = ImageCaching.sharedInstance.getImageByName(sync.df_image_path!) {
+                            if let image:UIImage = ImageCaching.sharedInstance.getImageByName(Session.shareInstance.getImageCacheKey(sync.df_image_path!)) {
                                 sync.realImage = image
                                 images.addObject(ImageSync(image: sync.realImage!, imagePath: sync.df_image_path!))
                             }
@@ -110,7 +112,7 @@ class Sync: Model {
                                 defectRoom.df_check_date = timeStamp
                                 
                                 if images.count > 0 {
-                                    
+                                    SwiftSpinner.show("Please wait syncing..")
                                     self.uploadImages(images, defectRoom: defectRoom!, handler: { (flag) in
                                         handler(flag)
                                     })

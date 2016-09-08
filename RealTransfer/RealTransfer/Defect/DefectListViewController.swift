@@ -63,6 +63,12 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
         }
         self.setNumberOfDefect()
         self.setTapEventOnContainer()
+        
+        SDImageCache.sharedImageCache().shouldDecompressImages = false
+        SDWebImageDownloader.sharedDownloader().shouldDecompressImages = false
+        
+        
+        NSUserDefaults.standardUserDefaults().synchronize()
     }
     func className() -> String {
         return "DefectListViewController"
@@ -290,34 +296,74 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
         ///*===== IMAGE =======*//
         print(defectModel.df_image_path)
         cell.defectImageView.image = UIImage(named: "p1")
+        cell.defectModelRef = defectModel
         if defectModel.realImage != nil {
             cell.defectImageView.image = defectModel.realImage
         }else{
-            Queue.globalQueue({ 
-                let imageOnCache = ImageCaching.sharedInstance.getImageByName(defectModel.df_image_path)
+//            Queue.serialQueue({
+//                SDImageCache.sharedImageCache().queryDiskCacheForKey(defectModel.df_image_path, done: { (imageOnCache, cacheType) in
                 
-                Queue.mainQueue({ 
                     
-                    if imageOnCache != nil {
-                        cell.defectImageView.image = imageOnCache!
-                        defectModel.realImage = imageOnCache!
-                    }else{
-                        let url:NSURL = NSURL(string: "\(PathUtil.sharedInstance.getApiPath())/images/\(PROJECT!.pj_datebase_name!)/\(self.defectRoomRef!.df_un_id!)/\(defectModel.df_image_path!).jpg")! //
-                        
-                        cell.defectImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "p1"), options: .AllowInvalidSSLCertificates, completed: { (imageReturn, error, sdImageCacheType, url) in
+//                        let imageOnCache = ImageCaching.sharedInstance.getImageByName(defectModel.df_image_path)
+//                        if imageOnCache != nil {
+//                            let img = UIImage.resizeImage(imageOnCache!, newWidth: 80)
+//                            
+//                            Queue.mainQueue({
+//                                cell.defectImageView.image = img
+//                                defectModel.realImage = cell.defectImageView.image
+//                            })
+//                        }else{
+                            let url:NSURL = NSURL(string: "\(PathUtil.sharedInstance.getApiPath())/images/\(PROJECT!.pj_datebase_name!)/\(self.defectRoomRef!.df_un_id!)/\(defectModel.df_image_path!).jpg")! //
                             
-                            if imageReturn != nil
-                            {
-                                defectModel.realImage = imageReturn
-                                ImageCaching.sharedInstance.setImageByName(defectModel.df_image_path!, image: imageReturn!, isFromServer: true)
-                                ImageCaching.sharedInstance.save()
-                            }
-                            
-                        })
-                    }
+                            //Queue.mainQueue({
+                                cell.defectImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "p1"), options: .AllowInvalidSSLCertificates, completed: { (imageReturn, error, sdImageCacheType, url) in
+                                    Queue.serialQueue({ 
+                                        if (imageReturn != nil)
+                                        {
+                                            defectModel.realImage = UIImage.resizeImage(imageReturn, newWidth: 60)
+                                            
+                                            if sdImageCacheType == SDImageCacheType.None {
+                                                ImageCaching.sharedInstance.setImageByName(defectModel.df_image_path!, image: defectModel.realImage!, isFromServer: true)
+                                                ImageCaching.sharedInstance.save()
+                                                //SDImageCache.sharedImageCache().storeImage(imageReturn!, forKey: defectModel.df_image_path!)
+                                            }
+                                        }
+                                    })
+                                    
+                                    
+                                })
+                            //})
+                
+//                        }
+                
                     
-                })
-            })
+
+                    
+//                })
+//                let imageOnCache = ImageCaching.sharedInstance.getImageByName(defectModel.df_image_path)
+                
+//                Queue.mainQueue({ 
+//                    
+//                    if imageOnCache != nil {
+//                        cell.defectImageView.image = imageOnCache!
+//                        defectModel.realImage = imageOnCache!
+//                    }else{
+//                        let url:NSURL = NSURL(string: "\(PathUtil.sharedInstance.getApiPath())/images/\(PROJECT!.pj_datebase_name!)/\(self.defectRoomRef!.df_un_id!)/\(defectModel.df_image_path!).jpg")! //
+//                        
+//                        cell.defectImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "p1"), options: .AllowInvalidSSLCertificates, completed: { (imageReturn, error, sdImageCacheType, url) in
+//                            
+//                            if imageReturn != nil
+//                            {
+//                                defectModel.realImage = imageReturn
+//                                ImageCaching.sharedInstance.setImageByName(defectModel.df_image_path!, image: imageReturn!, isFromServer: true)
+//                                ImageCaching.sharedInstance.save()
+//                            }
+//                            
+//                        })
+//                    }
+//                    
+//                })
+//            })
             
             
             
@@ -357,6 +403,11 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
         cell.statusIconImageView.backgroundColor = dropDownModel.iconColor
         
         return cell
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        
+        SDImageCache.sharedImageCache().clearMemory()
     }
     func tableViewTouch(){
         self.closeDropDown()
@@ -478,12 +529,14 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
             detail = cell.detailTextLb.text!
         }
         
+        let nameImage = Session.shareInstance.getImageCacheKey(cell.defectModelRef!.df_image_path!)
         
+        let imageShow = ImageCaching.sharedInstance.getImageByName(nameImage) //SDImageCache.sharedImageCache().imageFromDiskCacheForKey(cell.defectModelRef?.df_image_path!)
         let model:ImageViewerModel = ImageViewerModel(iconColor:color!,
                                                       category:category,
                                                       subCategory: subCategory,
                                                       detail: detail)
-        (self.splitViewController as! NZSplitViewController).nzNavigationController!.showImageViwer(image, model: model)
+        (self.splitViewController as! NZSplitViewController).nzNavigationController!.showImageViwer(imageShow, model: model)
         
     }
     

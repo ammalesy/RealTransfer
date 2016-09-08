@@ -26,6 +26,9 @@ class PathUtil: NSObject {
     var domainName:String = "xx.xx.xx.xx"
     var webDir:String = "/xx"
     var apiDir:String = "/xx/xx"
+//    var domainName:String = "demo.realsmart.in.th"
+//    var webDir:String = "/kpnland"
+//    var apiDir:String = "/kpnland/Service"
     let userDefault:NSUserDefaults = NSUserDefaults.standardUserDefaults()
     
     override init(){

@@ -34,12 +34,18 @@ class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
     @IBOutlet weak var subTitleLb: UILabel!
     @IBOutlet weak var menuBtn: UIButton!
     
+    @IBOutlet weak var versionLabel: UILabel!
     var popover:NZPopoverView!
     var storyBoard:UIStoryboard = UIStoryboard(name: "NZNav", bundle: nil)
     var viewControllers:NSMutableArray = NSMutableArray()
     let animationDuration:NSTimeInterval = 0.7
 
     @IBOutlet weak var containerView: UIView!
+    
+    func setVersion(version:String){
+        self.versionLabel.text = "Real Transfer version \(version)"
+    }
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -54,6 +60,11 @@ class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
         
         self.setIconImage()
         self.addObServerHidePopupEditting()
+        
+        if let version = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] {
+            self.setVersion(version as! String)
+        }
+        
         
     }
     func addObServerHidePopupEditting(){

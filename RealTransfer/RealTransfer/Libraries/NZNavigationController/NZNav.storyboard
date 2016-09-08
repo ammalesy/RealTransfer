@@ -279,6 +279,7 @@
                         <outlet property="subTitleLb" destination="Bqd-pT-lln" id="6sb-UO-Ddo"/>
                         <outlet property="titleCenterY" destination="CrF-NQ-xZ9" id="9aU-rK-lxv"/>
                         <outlet property="titleLb" destination="wxz-vn-oto" id="dKL-se-yOc"/>
+                        <outlet property="versionLabel" destination="Rw6-hv-u1H" id="3ym-LV-7q3"/>
                         <outlet property="widthLogoView" destination="7Ti-ch-dOS" id="ACD-XX-37s"/>
                     </connections>
                 </viewController>

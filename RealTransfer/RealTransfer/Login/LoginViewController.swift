@@ -100,6 +100,7 @@ class LoginViewController: NZViewController,URLConfigViewControllerDelegate {
         self.usernameTxt.backgroundColor = UIColor.RGB(240, G: 240, B: 240)
         self.passwordTxt.backgroundColor = UIColor.RGB(240, G: 240, B: 240)
         self.loginBtn.assignCornerRadius(5)
+        
 
     }
 
@@ -169,6 +170,24 @@ class LoginViewController: NZViewController,URLConfigViewControllerDelegate {
                 AlertUtil.alert("Warning", message: "Login fail", cancleButton: "OK", atController: self)
             }
         })
+        
+        /*
+         if result == true {
+         
+         SwiftSpinner.show("Retriving data..", animated: true)
+         
+         Category.syncCategory({
+         
+         SwiftSpinner.hide()
+         
+         self.openPageWhenLoginsuccess()
+         
+         })
+         
+         }else{
+         AlertUtil.alert("Warning", message: "Login fail", cancleButton: "OK", atController: self)
+         }
+         */
     }
     func openPageWhenLoginsuccess() {
         let nzNavController:NZNavigationViewController = UIStoryboard(name: "NZNav", bundle: nil).instantiateViewControllerWithIdentifier("NZNavigationViewController") as! NZNavigationViewController

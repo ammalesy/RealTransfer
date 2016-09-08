@@ -160,6 +160,8 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+        
+        SDImageCache.sharedImageCache().clearMemory()
     }
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
@@ -246,9 +248,11 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
             defect.df_id = "waiting"
             let imgName = UIImage.uniqNameBySeq("0")
             defect.df_image_path = imgName
-            defect.realImage = UIImage(data: (UIImage(data: (self.imageView.image?.lowerQualityJPEGNSData)!)?.mediumQualityJPEGNSData)!)
-            ImageCaching.sharedInstance.setImageByName(imgName, image: defect.realImage, isFromServer: false)
-            SDImageCache.sharedImageCache().storeImage(defect.realImage, forKey: imgName, toDisk: true)
+            
+            let image = UIImage(data: (UIImage(data: (self.imageView.image?.lowerQualityJPEGNSData)!)?.mediumQualityJPEGNSData)!)
+            defect.realImage = UIImage.resizeImage(image!, newWidth: 60)
+            ImageCaching.sharedInstance.setImageByName(imgName, image: image, isFromServer: false)
+            SDImageCache.sharedImageCache().storeImage(image, forKey: Session.shareInstance.getImageCacheKey(imgName), toDisk: true)
             ImageCaching.sharedInstance.save()
             defect.df_room_id_ref = self.defectRoom?.df_room_id
             defect.df_status = "0"
@@ -280,9 +284,11 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
             
             let imgName = UIImage.uniqNameBySeq("0")
             self.defectModel!.df_image_path = imgName
-            self.defectModel!.realImage = UIImage(data: (UIImage(data: (self.imageView.image?.lowerQualityJPEGNSData)!)?.mediumQualityJPEGNSData)!)
-            ImageCaching.sharedInstance.setImageByName(imgName, image: self.defectModel!.realImage, isFromServer: false)
-            SDImageCache.sharedImageCache().storeImage(self.defectModel!.realImage, forKey: imgName, toDisk: true)
+            
+            let image = UIImage(data: (UIImage(data: (self.imageView.image?.lowerQualityJPEGNSData)!)?.mediumQualityJPEGNSData)!)
+            self.defectModel!.realImage = UIImage.resizeImage(image!, newWidth: 60)
+            ImageCaching.sharedInstance.setImageByName(imgName, image: image, isFromServer: false)
+            SDImageCache.sharedImageCache().storeImage(image, forKey: Session.shareInstance.getImageCacheKey(imgName), toDisk: true)
             ImageCaching.sharedInstance.save()
             
             if self.isModeGanrantee() {

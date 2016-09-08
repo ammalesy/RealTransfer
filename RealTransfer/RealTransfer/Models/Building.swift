@@ -74,7 +74,7 @@ class Building: Model {
     func getBuildings(handler: (NSMutableArray?) -> Void){
         
         let returnList:NSMutableArray = NSMutableArray()
-        let buildings:NSMutableArray = (BuildingCaching.sharedInstance.holder as! NSMutableArray)
+        let buildings:NSMutableArray = (BuildingCaching.sharedInstance.holder )
         for project:NSDictionary in (buildings as NSArray) as! [NSDictionary] {
                 let bd:Building = Building()
                 bd.building_id = project.objectForKey("building_id") as? String

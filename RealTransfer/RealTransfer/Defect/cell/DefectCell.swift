@@ -27,6 +27,8 @@ class DefectCell: UITableViewCell,NZPopoverViewDelegate {
 
     var popover:NZPopoverView!
     
+    var defectModelRef:DefectModel? = nil
+    
     @IBOutlet weak var detailTextLb: TTTAttributedLabel!
     @IBOutlet weak var middleTextLb: TTTAttributedLabel!
     @IBOutlet weak var titleLb: UILabel!

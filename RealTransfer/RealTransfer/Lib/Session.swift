@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import Foundation
+import SDWebImage
 
 class Session: Model,NSCoding {
     
@@ -27,7 +28,13 @@ class Session: Model,NSCoding {
         self.refresh()
     }
     
-    
+    func getImageCacheKey(imageName:String!) -> String {
+        
+        let key = "\(PathUtil.sharedInstance.getApiPath())/images/\(PROJECT!.pj_datebase_name!)/\(self.defectRoomSelected!.df_un_id!)/\(imageName).jpg"
+        
+        return key
+        
+    }
     
     func isOnSession()->Bool{
         if projectSelected != nil &&
@@ -95,6 +102,7 @@ class Session: Model,NSCoding {
     
     class func destroySession(type:String) {
         Session.shareInstance.clear()
+        SDImageCache.sharedImageCache().clearMemory()
         
         let uDefault:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         uDefault.removeObjectForKey(Session().kSessionCache)
@@ -108,6 +116,8 @@ class Session: Model,NSCoding {
                 }
             }
         }
+        
+        
     }
 
 }

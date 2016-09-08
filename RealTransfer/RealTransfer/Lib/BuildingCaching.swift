@@ -10,13 +10,14 @@ import UIKit
 
 let kBuildingCache = "BUILDINGS_CACHE"
 
-class BuildingCaching: CachingManager {
+class BuildingCaching: NSObject {
     
     static let sharedInstance = BuildingCaching()
+    var holder = NSMutableArray()
     
     override init(){
         super.init()
-        self.holder = NSMutableArray()
+        
         self.refresh()
     }
     func isNeedUpdate() -> Bool {
@@ -32,7 +33,7 @@ class BuildingCaching: CachingManager {
     }
     func getBuildingDataByID(id:String!) -> NSDictionary? {
         
-        for building:NSDictionary in (((self.holder as! NSMutableArray) as NSArray) as! [NSDictionary]) {
+        for building:NSDictionary in ((self.holder as NSArray) as! [NSDictionary]) {
             
             if building.objectForKey("building_id") as! String == id {
                 return building
@@ -49,7 +50,7 @@ class BuildingCaching: CachingManager {
     func save() {
         
         let userdefault:NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        userdefault.setObject(NSKeyedArchiver.archivedDataWithRootObject(self.holder!), forKey: kBuildingCache)
+        userdefault.setObject(NSKeyedArchiver.archivedDataWithRootObject(self.holder), forKey: kBuildingCache)
         userdefault.synchronize()
         
     }

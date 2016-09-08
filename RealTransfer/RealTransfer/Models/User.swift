@@ -144,7 +144,10 @@ class User: Model,NSCoding {
         let uDefault:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         
         if let data  = uDefault.objectForKey("USER") as? NSData {
-            return NSKeyedUnarchiver.unarchiveObjectWithData(data) as? User;
+            
+            let user = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? User
+            
+            return user;
         }else{
             return nil
         }

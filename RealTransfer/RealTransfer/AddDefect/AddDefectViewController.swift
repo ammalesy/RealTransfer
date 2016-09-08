@@ -9,6 +9,8 @@
 import UIKit
 import MobileCoreServices
 import SwiftSpinner
+import FirebaseCrash
+import SDWebImage
 
 class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,NZNavigationViewControllerDelegate {
 
@@ -85,6 +87,9 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+        
+        SDImageCache.sharedImageCache().clearMemory()
+        ImageCaching.sharedInstance.refresh()
     }
     
 
@@ -168,7 +173,8 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
         if mediaType == (kUTTypeImage as String) {
             
             
-            self.defectRoom = DefectRoom.getCache(self.defectRoom?.df_room_id!)
+            let dRoom = DefectRoom.getCache(self.defectRoom?.df_room_id!)
+            self.defectRoom = dRoom
             let detailController:AddDefectDetailViewController = AddDefectDetailViewController.instance(image, defectRoom: self.defectRoom, state: DefectViewState.New)
             self.navigationController?.pushViewController(detailController, animated: true)
             
@@ -227,17 +233,21 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
             let alert = UIAlertController(title: "ยืนยันการตรวจสอบ", message:"กรุณาเลือกประเภทการบันทึก", preferredStyle: UIAlertControllerStyle.Alert)
             let noneCompleteAction:UIAlertAction = UIAlertAction(title: "บันทึกและรอตรวจสอบเพิ่มภายหลัง", style: UIAlertActionStyle.Default, handler: { (action) in
                 
-                self.sync(false, completion: { 
-                    self.goProjectPage()
+                self.sync(false, completion: { (result) in
+                    if(result){
+                        self.goProjectPage()
+                    }
                 })
                 
             })
             let completedAction:UIAlertAction = UIAlertAction(title: "บันทึกและยืนยัน", style: UIAlertActionStyle.Default, handler: { (action) in
                 Queue.serialQueue({
                     Queue.mainQueue({ 
-                         self.sync(true, completion: { 
-                            self.goProjectPage()
-                         })
+                        self.sync(true, completion: { (result) in
+                            if(result){
+                                self.goProjectPage()
+                            }
+                        })
                     })
                 })
                 
@@ -263,7 +273,7 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
             
         }
     }
-    func sync(isFinally:Bool!, completion: (() -> Void)?) {
+    func sync(isFinally:Bool!, completion: ((result:Bool) -> Void)?) {
         
         SwiftSpinner.show("Uploading ..", animated: true)
         let cache:DefectRoom = DefectRoom.getCache(self.defectRoom?.df_room_id)!
@@ -275,6 +285,7 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
         }
         
         Sync.controllerReferer = self
+
         Sync.syncToServer(cache ,db_name: PROJECT?.pj_datebase_name!, timeStamp: NSDateFormatter.dateFormater().stringFromDate(NSDate()), defect: (cache.listDefect)!)
         { (result) in
             
@@ -296,7 +307,7 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
                     let completedAction:UIAlertAction = UIAlertAction(title: "ตกลง", style: UIAlertActionStyle.Default, handler: { (action) in
                         
                         if (completion != nil) {
-                            completion!()
+                            completion!(result: true)
                         }
                     })
                     alert.addAction(completedAction)
@@ -311,11 +322,11 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
                 })
                 
             }else if result == "FALSE"{
-                let alert = UIAlertController(title: "แจ้งเตือน", message: "ซิงค์กับเซริฟเวอร์เรียบร้อยแล้ว", preferredStyle: UIAlertControllerStyle.Alert)
+                let alert = UIAlertController(title: "แจ้งเตือน", message: "ซิงค์กับเซริฟเวอร์ไม่สำเร็จ", preferredStyle: UIAlertControllerStyle.Alert)
                 let action:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: { (action) in
                     
                     if (completion != nil) {
-                        completion!()
+                        completion!(result: false)
                     }
                 })
                 alert.addAction(action)
@@ -336,7 +347,7 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
                     let action:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: { (action) in
                         
                         if (completion != nil) {
-                            completion!()
+                            completion!(result: false)
                         }
                         
                     })

@@ -10,6 +10,7 @@ import UIKit
 import SDWebImage
 import Alamofire
 import SwiftSpinner
+import SDWebImage
 
 let NUMBER_OF_COLLUMN = 3
 var PROJECT:ProjectModel?
@@ -259,14 +260,7 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
                 
                 
                 let defectRoom = Session.shareInstance.defectRoomSelected!
-//                
-//                let customer:CustomerInfo = CustomerInfo.sharedInstance
-//                let buildingName = buldingSelected?.building_name!
-//                let csName = (self.components.lastObject as! RowModel).detail!
-//                let room = self.roomSelected?.un_name!
-//                customer.building = buildingName!
-//                customer.cs = csName
-//                customer.room = room!
+
                 
                 if let instance = Session.shareInstance.customerInfo {
                     CustomerInfo.assignInstance(instance)
@@ -316,6 +310,7 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+        SDImageCache.sharedImageCache().clearMemory()
     }
     
 
