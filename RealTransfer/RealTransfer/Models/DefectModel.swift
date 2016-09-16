@@ -28,6 +28,8 @@ class DefectModel: NSObject,NSCoding {
     var subCategoryName_displayText: String!
     var listSubCategory_displayText: String!
     
+    var before_complete_status:String?
+    
     //temp ref
     var mode:String!
 
@@ -47,6 +49,7 @@ class DefectModel: NSObject,NSCoding {
         json.setObject(self.df_status!, forKey: "df_status")
         json.setObject(self.df_type!, forKey: "df_type")
         json.setObject(self.complete_status!, forKey: "complete_status")
+        //json.setObject(self.before_complete_status!, forKey: "before_complete_status")
        // json.setObject(self.canEdit!, forKey: "canEdit")
         json.setObject(self.mode!, forKey: "mode")
         

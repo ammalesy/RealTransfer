@@ -37,6 +37,7 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
     @IBOutlet weak var passLb: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        SDImageCache.sharedImageCache().clearMemory()
         let tap = UITapGestureRecognizer(target: self, action: #selector(DefectListViewController.tableViewTouch))
         tap.cancelsTouchesInView = false
         self.tableView.userInteractionEnabled = true
@@ -103,7 +104,16 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
             self.defectRoomRef = defectRoom
             
             self.list.removeAllObjects()
+            Session.shareInstance.beforeDefectList.removeAll()
             for model:DefectModel in ((defectRoom.listDefect! as NSArray) as! [DefectModel]) {
+                
+                var comStatus = model.complete_status
+                if comStatus == nil {
+                    comStatus = "0"
+                }
+                
+                Session.shareInstance.beforeDefectList.append(["df_id":model.df_id!,
+                    "before_complete_status":comStatus!])
                 
                 if model.df_type == type {
                     model.needDisplayText()
@@ -184,40 +194,28 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
             cell.defectImageView.image = defectModel.realImage
         }else{
             
-            //})
-
+            /**/
             
+            let url:NSURL = NSURL(string: "\(PathUtil.sharedInstance.getApiPath())/images/\(PROJECT!.pj_datebase_name!)/\(self.defectRoomRef!.df_un_id!)/\(defectModel.df_image_path!).jpg")!
             
-//            Queue.globalQueue({
-//                let imageOnCache = ImageCaching.sharedInstance.getImageByName(defectModel.df_image_path)
-//                
-//                Queue.mainQueue({
-//                    
-//                    if imageOnCache != nil {
-//                        cell.defectImageView.image = imageOnCache!
-//                        defectModel.realImage = imageOnCache!
-//                    }else{
-                        let url:NSURL = NSURL(string: "\(PathUtil.sharedInstance.getApiPath())/images/\(PROJECT!.pj_datebase_name!)/\(self.defectRoomRef!.df_un_id!)/\(defectModel.df_image_path!).jpg")!
-
-                        cell.defectImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "p1"), options: .AllowInvalidSSLCertificates, completed: { (imageReturn, error, sdImageCacheType, url) in
-                            Queue.serialQueue({ 
-                                if imageReturn != nil
-                                {
-                                    
-                                    defectModel.realImage = UIImage.resizeImage(imageReturn, newWidth: 60)
-                                    if sdImageCacheType == SDImageCacheType.None {
-                                        ImageCaching.sharedInstance.setImageByName(defectModel.df_image_path!, image: imageReturn!, isFromServer: true)
-                                        ImageCaching.sharedInstance.save()
-                                    }
+            cell.defectImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "p1"), options: .AllowInvalidSSLCertificates, completed: { (imageReturn, error, sdImageCacheType, url) in
+                Queue.serialQueue({
+                    autoreleasepool({
+                        if imageReturn != nil
+                        {
+                            Queue.mainQueue({
+                                let img = UIImage.resizeImage(imageReturn, scaledToWidth: 80)
+                                defectModel.realImage = img
+                                if sdImageCacheType == SDImageCacheType.None {
+                                    ImageCaching.sharedInstance.setImageByName(defectModel.df_image_path!, image: imageReturn!, isFromServer: true)
+                                    ImageCaching.sharedInstance.save()
                                 }
+                                cell.defectImageView.image = defectModel.realImage
                             })
-                            
-                            
-                        })
-//                    }
-//                    
-//                })
-//            })
+                        }
+                    })
+                })
+            })
         }
         //////////////////////////
         
@@ -263,7 +261,7 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
 //        }
         
         if defectModel.complete_status == "0" {
-            cell.nzSwitch.setOn(false, text: "รอการตรวจสอบ")
+            cell.nzSwitch.setOn(false, text: "รอการ\nตรวจสอบ")
             cell.nzSwitch.userInteractionEnabled = true
         }else{
             
@@ -454,8 +452,14 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
 //            defectModel.complete_status = "1"
 //            defectModel.df_date = NSDateFormatter.dateFormater().stringFromDate(NSDate())
 //        }
-        
-        
+        var loopIndex = 0
+        for defect in (((self.defectRoomRef?.listDefect)! as NSArray) as! [DefectModel]) {
+            
+            if defect.df_id == defectModel.df_id {
+                self.defectRoomRef?.listDefect?.replaceObjectAtIndex(loopIndex, withObject: defectModel)
+            }
+            loopIndex = loopIndex + 1
+        }
         self.defectRoomRef?.doCache()
         self.tableView.reloadData()
         
@@ -487,18 +491,21 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
             let completedAction:UIAlertAction = UIAlertAction(title: "อัพเดทสถานะการตรวจรับทั้งหมด", style: UIAlertActionStyle.Default, handler: { (action) in
                 Queue.serialQueue({
                     Queue.mainQueue({
-                        self.sync({ 
-                            Queue.serialQueue({
-                                Queue.mainQueue({
-                                    
-                                    self.nzNavigationController?.popViewController({
-                                        popover.hide()
-                                        self.nzNavigationController?.hideRightInfo(true)
+                        self.sync({ (result) in
+                            
+                            if(result){
+                                Queue.serialQueue({
+                                    Queue.mainQueue({
+                                        
+                                        self.nzNavigationController?.popViewController({
+                                            popover.hide()
+                                            self.nzNavigationController?.hideRightInfo(true)
+                                        })
+                                        
                                     })
-                                    
                                 })
-                            })
-
+                            }
+                            
                         })
                     })
                 })
@@ -520,7 +527,7 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
         
     }
     
-    func sync(completion: (() -> Void)?) {
+    func sync(completion: ((result:Bool) -> Void)?) {
         
         SwiftSpinner.show("Uploading ..", animated: true)
         let cache:DefectRoom = DefectRoom.getCache(self.defectRoomRef?.df_room_id)!
@@ -550,7 +557,7 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
                         if (completion != nil) {
                             PROJECT = nil
                             Session.destroySession("")
-                            completion!()
+                            completion!(result: true)
                         }
                     })
                     alert.addAction(completedAction)
@@ -562,11 +569,12 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
                     AlertUtil.alertNetworkFail(self)
                 })
                 
-            }else if result == "FALSE"{
-                let alert = UIAlertController(title: "แจ้งเตือน", message: "ซิงค์กับเซริฟเวอร์เรียบร้อยแล้ว", preferredStyle: UIAlertControllerStyle.Alert)
+//            }else if result == "FALSE"{
+            }else{
+                let alert = UIAlertController(title: "บันทึกข้อมูลไม่สำเร็จ", message: "กรุณากดบันทึกอีกครั้งหนึ่งและตรวจสอบการเชื่อมต่ออินเทอร์เน็ต", preferredStyle: UIAlertControllerStyle.Alert)
                 let action:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: { (action) in
                     if (completion != nil) {
-                        completion!()
+                        completion!(result: false)
                     }
 
                 })
@@ -575,36 +583,37 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
                 self.presentViewController(alert, animated: true, completion: {
                     SwiftSpinner.hide()
                 })
-            }else {
-                
-                cache.getListDefectOnServer({
-                    
-                    cache.doCache()
-                    self.defectRoomRef = cache
-                    self.reloadData(self.defectRoomRef, type: "0")
-                    
-                    SwiftSpinner.hide()
-                    let alert = UIAlertController(title: "บันทึกข้อมูลไม่สำเร็จ", message: "กรุณากดบันทึกอีกครั้งหนึ่งและตรวจสอบการเชื่อมต่ออินเทอร์เน็ต", preferredStyle: UIAlertControllerStyle.Alert)
-                    let action:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: { (action) in
-                        
-                        if (completion != nil) {
-                            completion!()
-                        }
-                        
-                        
-                    })
-                    alert.addAction(action)
-                    
-                    self.presentViewController(alert, animated: true, completion: {
-                        
-                    })
-                    
-                }, networkFail: { 
-                    AlertUtil.alertNetworkFail(self)
-                })
-                
-                
             }
+//            else {
+//                
+//                cache.getListDefectOnServer({
+//                    
+//                    cache.doCache()
+//                    self.defectRoomRef = cache
+//                    self.reloadData(self.defectRoomRef, type: "0")
+//                    
+//                    SwiftSpinner.hide()
+//                    let alert = UIAlertController(title: "บันทึกข้อมูลไม่สำเร็จ", message: "กรุณากดบันทึกอีกครั้งหนึ่งและตรวจสอบการเชื่อมต่ออินเทอร์เน็ต", preferredStyle: UIAlertControllerStyle.Alert)
+//                    let action:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: { (action) in
+//                        
+//                        if (completion != nil) {
+//                            completion!()
+//                        }
+//                        
+//                        
+//                    })
+//                    alert.addAction(action)
+//                    
+//                    self.presentViewController(alert, animated: true, completion: {
+//                        
+//                    })
+//                    
+//                }, networkFail: { 
+//                    AlertUtil.alertNetworkFail(self)
+//                })
+//                
+//                
+//            }
             
         }
         

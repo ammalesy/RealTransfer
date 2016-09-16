@@ -32,15 +32,26 @@ extension UIImage {
         
         return "\(seq)\(name)"
     }
-    class func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
+    class func resizeImage(sourceImage: UIImage, scaledToWidth: CGFloat) -> UIImage {
         
-        let scale = newWidth / image.size.width
-        let newHeight = image.size.height * scale
-        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
-        image.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
+        let oldWidth = sourceImage.size.width
+        let scaleFactor = scaledToWidth / oldWidth
+        
+        var newHeight = sourceImage.size.height * scaleFactor
+        var newWidth = oldWidth * scaleFactor
+        
+        var imgRatio = sourceImage.size.width / sourceImage.size.height
+        if (sourceImage.size.height > sourceImage.size.width) {
+            imgRatio = sourceImage.size.height / sourceImage.size.width
+        }
+        
+        newWidth = round(imgRatio * newWidth);
+        newHeight = round(imgRatio * newHeight);
+        
+        UIGraphicsBeginImageContext(CGSizeMake(floor(newWidth), floor(newHeight)))
+        sourceImage.drawInRect(CGRectMake(0, 0, newWidth, newHeight))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        
         return newImage
     }
     

@@ -263,8 +263,10 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
                 
                 
                 let defectRoom:DefectRoom = DefectRoom(room: self.roomSelected, user: user, userCS: self.csSelected, project: self.project)
+                
                 defectRoom.checkDuplicate(needUpdateCS, handler: { (defectRoomDup, isDuplicate) in
                     
+                    Session.shareInstance.defectRoomSelected = defectRoomDup
                     if isDuplicate == false {
                         
                         defectRoom.add({ (resultFlag, message, status) in

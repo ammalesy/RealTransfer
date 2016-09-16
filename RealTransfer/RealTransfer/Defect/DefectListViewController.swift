@@ -32,7 +32,7 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        SDImageCache.sharedImageCache().clearMemory()
         let tap = UITapGestureRecognizer(target: self, action: #selector(DefectListViewController.tableViewTouch))
         tap.cancelsTouchesInView = false
         self.tableView.userInteractionEnabled = true
@@ -94,7 +94,16 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
             self.defectRoomRef = defectRoom
             
             self.list.removeAllObjects()
+            Session.shareInstance.beforeDefectList.removeAll()
             for model:DefectModel in ((defectRoom.listDefect! as NSArray) as! [DefectModel]) {
+                
+                var comStatus = model.complete_status
+                if comStatus == nil {
+                    comStatus = "0"
+                }
+                
+                Session.shareInstance.beforeDefectList.append(["df_id":model.df_id!,
+                    "before_complete_status":comStatus!])
                 
                 if model.df_type == type {
                     model.needDisplayText()
@@ -317,17 +326,25 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
                             
                             //Queue.mainQueue({
                                 cell.defectImageView.sd_setImageWithURL(url, placeholderImage: UIImage(named: "p1"), options: .AllowInvalidSSLCertificates, completed: { (imageReturn, error, sdImageCacheType, url) in
-                                    Queue.serialQueue({ 
-                                        if (imageReturn != nil)
-                                        {
-                                            defectModel.realImage = UIImage.resizeImage(imageReturn, newWidth: 60)
-                                            
-                                            if sdImageCacheType == SDImageCacheType.None {
-                                                ImageCaching.sharedInstance.setImageByName(defectModel.df_image_path!, image: defectModel.realImage!, isFromServer: true)
-                                                ImageCaching.sharedInstance.save()
-                                                //SDImageCache.sharedImageCache().storeImage(imageReturn!, forKey: defectModel.df_image_path!)
+                                    Queue.serialQueue({
+                                        autoreleasepool({ 
+                                            if (imageReturn != nil)
+                                            {
+                                                Queue.mainQueue({ 
+                                                    let img = UIImage.resizeImage(imageReturn, scaledToWidth: 80)
+                                                    defectModel.realImage = img
+                                                    
+                                                    if sdImageCacheType == SDImageCacheType.None {
+                                                        ImageCaching.sharedInstance.setImageByName(defectModel.df_image_path!, image: defectModel.realImage!, isFromServer: true)
+                                                        ImageCaching.sharedInstance.save()
+                                                    }
+                                                    
+                                                    cell.defectImageView.image = defectModel.realImage
+                                                })
+                                                
                                             }
-                                        }
+                                        })
+                                        
                                     })
                                     
                                     
@@ -403,6 +420,9 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
         cell.statusIconImageView.backgroundColor = dropDownModel.iconColor
         
         return cell
+    }
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        SDImageCache.sharedImageCache().clearMemory()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -517,6 +537,7 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
         
     }
     func defectCell(cell: DefectCell, didClickImage image: UIImage) {
+        SDImageCache.sharedImageCache().clearMemory()
         
         let color = cell.statusIconImageView.backgroundColor
         let category = cell.titleLb.text

@@ -11,6 +11,7 @@ import MobileCoreServices
 import Alamofire
 import SDWebImage
 import KMPlaceholderTextView
+import SwiftSpinner
 
 let kOTHER_IDENTIFIER = "99999999"
 
@@ -233,72 +234,147 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
     @IBAction func cancle(sender: AnyObject) {
         self.popViewController()
     }
+    
+     @IBAction func generateMock(sender: AnyObject){
+        
+        if self.saveBtn.enabled == false {
+            AlertUtil.alert("Warning", message: "กรุณาเลือกข้อมูลให้ครบถ้วน", cancleButton: "OK", atController: self)
+            return;
+        }
+        
+        SwiftSpinner.show("Adding 30 defect")
+        Queue.globalQueue { 
+            let listDefect:NSMutableArray = (self.defectRoom?.listDefect)!
+            let timeStamp  =  NSDateFormatter.dateFormater().stringFromDate(NSDate())
+            autoreleasepool {
+                for _ in 1...30 {
+                
+                    let defect:DefectModel = DefectModel()
+                    defect.categoryName = self.categorySelected
+                    defect.df_date = timeStamp
+                    defect.listSubCategory = self.listSubCategorySelected
+                    defect.df_id = "waiting"
+                    let imgName = UIImage.uniqNameBySeq("0")
+                    defect.df_image_path = imgName
+                    
+                    var image = UIImage(data: (UIImage(data: (self.imageView.image?.lowerQualityJPEGNSData)!)?.mediumQualityJPEGNSData)!)
+                    image = UIImage.resizeImage(image!, scaledToWidth: ((image?.size.width)! * 30) / 100)
+                    let thumImage = UIImage.resizeImage(image!, scaledToWidth: 80)
+                    defect.realImage = thumImage
+                    ImageCaching.sharedInstance.setImageByName(imgName, image: nil, isFromServer: false)
+                    SDImageCache.sharedImageCache().storeImage(image, forKey: Session.shareInstance.getImageCacheKey(imgName), toDisk: true)
+                    ImageCaching.sharedInstance.save()
+                    defect.df_room_id_ref = self.defectRoom?.df_room_id
+                    defect.df_status = "0"
+                    defect.subCategoryName = self.subCategorySelected
+                    
+                    if self.isModeGanrantee() {
+                        self.increaseGuaranteeValue()
+                        defect.df_type = "1"
+                        
+                    }else{
+                        defect.df_type = "0"
+                    }
+                    
+                    
+                    listDefect.addObject(defect)
+//                    image = nil
+                }
+            
+            
+            
+            let roomID = self.defectRoom!.df_room_id!
+            self.defectRoom?.doCache()
+            self.defectRoom = DefectRoom.getCache(roomID)
+            
+            Queue.mainQueue({
+                SwiftSpinner.hide()
+                self.reloadDefectList({ 
+                    self.didReceiveMemoryWarning()
+                })
+                
+            })
+                
+            }
+            
+        }
+        
+        
+    }
+    
     @IBAction func save(sender: AnyObject) {
         if self.subCategorySelected == kOTHER_IDENTIFIER
         {
             self.listSubCategorySelected = self.listSubtypeTextView.text
         }
         
-        let timeStamp  =  NSDateFormatter.dateFormater().stringFromDate(NSDate())
-        if self.state == DefectViewState.New {
-            let defect:DefectModel = DefectModel()
-            defect.categoryName = self.categorySelected
-            defect.df_date = timeStamp
-            defect.listSubCategory = self.listSubCategorySelected
-            defect.df_id = "waiting"
-            let imgName = UIImage.uniqNameBySeq("0")
-            defect.df_image_path = imgName
-            
-            let image = UIImage(data: (UIImage(data: (self.imageView.image?.lowerQualityJPEGNSData)!)?.mediumQualityJPEGNSData)!)
-            defect.realImage = UIImage.resizeImage(image!, newWidth: 60)
-            ImageCaching.sharedInstance.setImageByName(imgName, image: image, isFromServer: false)
-            SDImageCache.sharedImageCache().storeImage(image, forKey: Session.shareInstance.getImageCacheKey(imgName), toDisk: true)
-            ImageCaching.sharedInstance.save()
-            defect.df_room_id_ref = self.defectRoom?.df_room_id
-            defect.df_status = "0"
-            defect.subCategoryName = self.subCategorySelected
-            
-            if self.isModeGanrantee() {
-                self.increaseGuaranteeValue()
-                defect.df_type = "1"
+        autoreleasepool {
+            let timeStamp  =  NSDateFormatter.dateFormater().stringFromDate(NSDate())
+            if self.state == DefectViewState.New {
+                let defect:DefectModel = DefectModel()
+                defect.categoryName = self.categorySelected
+                defect.df_date = timeStamp
+                defect.listSubCategory = self.listSubCategorySelected
+                defect.df_id = "waiting"
+                let imgName = UIImage.uniqNameBySeq("0")
+                defect.df_image_path = imgName
                 
+                var image = UIImage(data: (UIImage(data: (self.imageView.image?.lowerQualityJPEGNSData)!)?.mediumQualityJPEGNSData)!)
+                image = UIImage.resizeImage(image!, scaledToWidth: ((image?.size.width)! * 30) / 100)
+                let thumImage = UIImage.resizeImage(image!, scaledToWidth: 80)
+                defect.realImage = thumImage
+                ImageCaching.sharedInstance.setImageByName(imgName, image: nil, isFromServer: false)
+                SDImageCache.sharedImageCache().storeImage(image, forKey: Session.shareInstance.getImageCacheKey(imgName), toDisk: true)
+                ImageCaching.sharedInstance.save()
+                defect.df_room_id_ref = self.defectRoom?.df_room_id
+                defect.df_status = "0"
+                defect.subCategoryName = self.subCategorySelected
+                
+                if self.isModeGanrantee() {
+                    self.increaseGuaranteeValue()
+                    defect.df_type = "1"
+                    
+                }else{
+                    defect.df_type = "0"
+                }
+                
+                self.saveAndKeepToDisk(defect)
             }else{
-                defect.df_type = "0"
+                //EDIT
+                
+                
+                
+                self.defectModel!.categoryName = self.categorySelected
+                self.defectModel!.subCategoryName = self.subCategorySelected
+                self.defectModel!.df_date = timeStamp
+                if self.defectModel!.subCategoryName == kOTHER_IDENTIFIER
+                {
+                    self.defectModel!.listSubCategory = self.listSubtypeTextView.text
+                }else{
+                    self.defectModel!.listSubCategory = self.listSubCategorySelected
+                }
+                
+                let imgName = UIImage.uniqNameBySeq("0")
+                self.defectModel!.df_image_path = imgName
+                
+                var image = UIImage(data: (UIImage(data: (self.imageView.image?.lowerQualityJPEGNSData)!)?.mediumQualityJPEGNSData)!)
+                image = UIImage.resizeImage(image!, scaledToWidth: ((image?.size.width)! * 30) / 100)
+                let thumImage = UIImage.resizeImage(image!, scaledToWidth: 80)
+                self.defectModel!.realImage = thumImage
+                ImageCaching.sharedInstance.setImageByName(imgName, image: nil, isFromServer: false)
+                SDImageCache.sharedImageCache().storeImage(image, forKey: Session.shareInstance.getImageCacheKey(imgName), toDisk: true)
+                ImageCaching.sharedInstance.save()
+                
+                if self.isModeGanrantee() {
+                    self.defectModel!.df_type = "1"
+                }else{
+                    self.defectModel!.df_type = "0"
+                }
+                
+                self.saveAndKeepToDisk(self.defectModel!)
+                print(self.defectRoom?.listDefect)
+                
             }
-            
-            self.saveAndKeepToDisk(defect)
-        }else{
-            //EDIT
-            
-            
-            
-            self.defectModel!.categoryName = self.categorySelected
-            self.defectModel!.subCategoryName = self.subCategorySelected
-            self.defectModel!.df_date = timeStamp
-            if self.defectModel!.subCategoryName == kOTHER_IDENTIFIER
-            {
-                self.defectModel!.listSubCategory = self.listSubtypeTextView.text
-            }else{
-                self.defectModel!.listSubCategory = self.listSubCategorySelected
-            }
-            
-            let imgName = UIImage.uniqNameBySeq("0")
-            self.defectModel!.df_image_path = imgName
-            
-            let image = UIImage(data: (UIImage(data: (self.imageView.image?.lowerQualityJPEGNSData)!)?.mediumQualityJPEGNSData)!)
-            self.defectModel!.realImage = UIImage.resizeImage(image!, newWidth: 60)
-            ImageCaching.sharedInstance.setImageByName(imgName, image: image, isFromServer: false)
-            SDImageCache.sharedImageCache().storeImage(image, forKey: Session.shareInstance.getImageCacheKey(imgName), toDisk: true)
-            ImageCaching.sharedInstance.save()
-            
-            if self.isModeGanrantee() {
-                self.defectModel!.df_type = "1"
-            }else{
-                self.defectModel!.df_type = "0"
-            }
-            
-            self.saveAndKeepToDisk(self.defectModel!)
-            print(self.defectRoom?.listDefect)
         }
     }
     func saveAndKeepToDisk(defect:DefectModel!){
@@ -316,7 +392,9 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
             self.defectRoom?.doCache()
             self.defectRoom = DefectRoom.getCache(roomID)
             
-            self.reloadDefectList()
+            self.reloadDefectList({ 
+                SDImageCache.sharedImageCache().clearMemory()
+            })
             
             self.popViewController()
         }
@@ -328,7 +406,7 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
 
     }
     
-    func reloadDefectList()
+    func reloadDefectList(completion:()->Void)
     {
         let defectModel:DefectModel = self.defectRoom!.listDefect?.lastObject as! DefectModel
         var key:String! = defectModel.categoryName
@@ -347,6 +425,8 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
                 
                 Queue.mainQueue({ 
                     controller.filterWithKey(key)
+                    
+                    completion()
                 })
             })
             
@@ -364,6 +444,8 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
                     controller.filterWithKey(key)
                     self.getDefectListCheckingController().defectRoomRef = self.defectRoom
                     self.getDefectListCheckingController().setNumberOfDefect()
+                    
+                    completion()
                 })
             })
             

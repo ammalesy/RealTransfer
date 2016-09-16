@@ -94,7 +94,7 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
     
 
     @IBAction func addAction(sender: AnyObject) {
-        
+        SDImageCache.sharedImageCache().clearMemory()
         //HARDCODE
 //        self.defectRoom = DefectRoom.getCache(self.defectRoom?.df_room_id!)
 //        let detailController:AddDefectDetailViewController = AddDefectDetailViewController.instance(UIImage(named: "defectImg"), defectRoom: self.defectRoom, state: DefectViewState.New)
@@ -321,8 +321,9 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
                     
                 })
                 
-            }else if result == "FALSE"{
-                let alert = UIAlertController(title: "แจ้งเตือน", message: "ซิงค์กับเซริฟเวอร์ไม่สำเร็จ", preferredStyle: UIAlertControllerStyle.Alert)
+//            }else if result == "FALSE"{
+            }else{
+                let alert = UIAlertController(title: "บันทึกข้อมูลไม่สำเร็จ", message: "กรุณากดบันทึกอีกครั้งหนึ่งและตรวจสอบการเชื่อมต่ออินเทอร์เน็ต", preferredStyle: UIAlertControllerStyle.Alert)
                 let action:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: { (action) in
                     
                     if (completion != nil) {
@@ -334,35 +335,36 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
                 self.presentViewController(alert, animated: true, completion: {
                     SwiftSpinner.hide()
                 })
-            }else {
-                
-                cache.getListDefectOnServer({
-                    
-                    cache.doCache()
-                    self.defectRoom = cache
-                    self.refresh()
-                    
-                    SwiftSpinner.hide()
-                    let alert = UIAlertController(title: "บันทึกข้อมูลไม่สำเร็จ", message: "กรุณากดบันทึกอีกครั้งหนึ่งและตรวจสอบการเชื่อมต่ออินเทอร์เน็ต", preferredStyle: UIAlertControllerStyle.Alert)
-                    let action:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: { (action) in
-                        
-                        if (completion != nil) {
-                            completion!(result: false)
-                        }
-                        
-                    })
-                    alert.addAction(action)
-                    
-                    self.presentViewController(alert, animated: true, completion: {
-                        
-                    })
-                    
-                }, networkFail: { 
-                    AlertUtil.alertNetworkFail(self)
-                })
-                
-                
             }
+//            else {
+//                
+//                cache.getListDefectOnServer({
+//                    
+//                    cache.doCache()
+//                    self.defectRoom = cache
+//                    self.refresh()
+//                    
+//                    SwiftSpinner.hide()
+//                    let alert = UIAlertController(title: "บันทึกข้อมูลไม่สำเร็จ", message: "กรุณากดบันทึกอีกครั้งหนึ่งและตรวจสอบการเชื่อมต่ออินเทอร์เน็ต", preferredStyle: UIAlertControllerStyle.Alert)
+//                    let action:UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: { (action) in
+//                        
+//                        if (completion != nil) {
+//                            completion!(result: false)
+//                        }
+//                        
+//                    })
+//                    alert.addAction(action)
+//                    
+//                    self.presentViewController(alert, animated: true, completion: {
+//                        
+//                    })
+//                    
+//                }, networkFail: { 
+//                    AlertUtil.alertNetworkFail(self)
+//                })
+//                
+//                
+//            }
             
         }
         
@@ -399,10 +401,10 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
     }
     
     func getGuaranteeDefectListController()->GaranteeListViewController {
-        let controllers:NSMutableArray = self.splitController!.nzNavigationController!.viewControllers
-        let split:NZSplitViewController = controllers[2] as! NZSplitViewController
+//        let controllers:NSMutableArray = self.splitController!.nzNavigationController!.viewControllers
+//        let split:NZSplitViewController = controllers[2] as! NZSplitViewController
         
-        
+        let split:NZSplitViewController = NZSplitViewController.shareInstance!
         return split.viewControllers.first as! GaranteeListViewController
     }
     

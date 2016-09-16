@@ -60,12 +60,12 @@ class ImageCaching: CachingManager {
 //        return nil
     }
     
-    func setImageByName(named:String!, image:UIImage!, isFromServer:Bool!) {
+    func setImageByName(named:String!, image:UIImage?, isFromServer:Bool!) {
         var flagSync:String = "0"
         if isFromServer == true {
             flagSync = "1"
         }
-        (self.holder)!.setObject([image,"0",flagSync], forKey: named)
+        (self.holder)!.setObject(["","0",flagSync], forKey: named)
         
         let userdefault:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         if userdefault.objectForKey(kImageNameCache) as? NSData == nil {
@@ -164,7 +164,9 @@ class ImageCaching: CachingManager {
         
         
     }
-    
+    func clear() {
+        self.holder?.removeAllObjects()
+    }
     func refresh() {
         let userdefault:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         if let data = (userdefault.objectForKey(kImageNameCache)){

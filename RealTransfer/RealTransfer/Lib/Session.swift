@@ -22,6 +22,8 @@ class Session: Model,NSCoding {
     var defectRoomSelected:DefectRoom? = nil
     var customerInfo:CustomerInfo? = nil
     
+    var beforeDefectList:Array<NSDictionary> = []
+    
     override init() {
         
         super.init()
@@ -31,7 +33,7 @@ class Session: Model,NSCoding {
     func getImageCacheKey(imageName:String!) -> String {
         
         let key = "\(PathUtil.sharedInstance.getApiPath())/images/\(PROJECT!.pj_datebase_name!)/\(self.defectRoomSelected!.df_un_id!)/\(imageName).jpg"
-        
+
         return key
         
     }
@@ -43,6 +45,7 @@ class Session: Model,NSCoding {
             defectRoomSelected != nil &&
             customerInfo != nil
         {
+            
             return true
         }
         return false;
@@ -63,7 +66,7 @@ class Session: Model,NSCoding {
         let data:NSData = NSKeyedArchiver.archivedDataWithRootObject(self)
         let uDefault:NSUserDefaults = NSUserDefaults.standardUserDefaults()
         uDefault.setObject(data, forKey: kSessionCache)
-        uDefault.synchronize()
+        //uDefault.synchronize()
     }
 
     

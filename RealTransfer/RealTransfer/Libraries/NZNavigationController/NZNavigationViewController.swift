@@ -335,7 +335,7 @@ class NZNavigationViewController: UIViewController,NZPopoverViewDelegate {
         }
     }
     func popoverView(view: NZPopoverView, didClickRow menu: NZRow) {
-        
+        SDImageCache.sharedImageCache().clearMemory()
         
         if menu.identifier == "logout" {
             self.dismissViewControllerAnimated(true, completion: { () -> Void in

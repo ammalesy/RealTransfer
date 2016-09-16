@@ -26,13 +26,38 @@ class Sync: Model {
 
     static var controllerReferer:UIViewController?
     
+    class func shouldKeepLog(defects:NSMutableArray!) -> Bool {
+        
+        for defect in ((defects as NSArray) as! [DefectModel]) {
+            
+            if defect.df_id == "waiting" {
+                return true
+            }
+            
+        }
+        for defect in ((defects as NSArray) as! [DefectModel]) {
+            
+            for defectDict in Session.shareInstance.beforeDefectList {
+                
+                if (defectDict["df_id"] as! String) == defect.df_id {
+                    
+                    if defect.complete_status != (defectDict["before_complete_status"] as! String) {
+                        return true
+                    }
+                    break;
+                }
+            }
+        }
+        
+        return false
+    }
+    
     class func syncToServer(defectRoom:DefectRoom!,
                             db_name:String!,
                             timeStamp:String! ,
                             defect:NSMutableArray!,
                             handler: (String!) -> Void)
     {
-        
         NetworkDetection.manager.isConected { (isConedted) in
             SDImageCache.sharedImageCache().clearMemory()
             if isConedted == false {
@@ -114,12 +139,39 @@ class Sync: Model {
                                 if images.count > 0 {
                                     SwiftSpinner.show("Please wait syncing..")
                                     self.uploadImages(images, defectRoom: defectRoom!, handler: { (flag) in
-                                        handler(flag)
+                                        if(flag == "TRUE"){
+                                            
+                                            if(self.shouldKeepLog(defect)){
+                                                
+                                                Sync.keepLog(postParam, completion: {
+                                                    SwiftSpinner.hide()
+                                                    handler(flag)
+                                                })
+                                                
+                                            }else{
+                                                SwiftSpinner.hide()
+                                                handler(flag)
+                                            }
+                                            
+                                           
+                                        }else{
+                                            SwiftSpinner.hide()
+                                            handler(flag)
+                                        }
                                     })
                                     
                                 }else{
-                                    SwiftSpinner.hide()
-                                    handler("TRUE")
+                                    SwiftSpinner.show("Please wait syncing..")
+                                    if(self.shouldKeepLog(defect)){
+                                        Sync.keepLog(postParam, completion: {
+                                            handler("TRUE")
+                                            SwiftSpinner.hide()
+                                        })
+                                    }else{
+                                        handler("TRUE")
+                                        SwiftSpinner.hide()
+                                    }
+                                    
                                 }
                                 
                             }else{
@@ -137,8 +189,29 @@ class Sync: Model {
         }
     }
     
+    class func keepLog(postParam:[String: AnyObject]!, completion:()->Void){
+        let path = "\(PathUtil.sharedInstance.getApiPath())/Defect/keepLog.php?ransom=\(NSString.randomStringWithLength(10))"
+        Alamofire.request(.POST, path,
+            parameters: postParam,
+            encoding: ParameterEncoding.JSON)
+            .responseJSON { response in
+                print(response.request)  // original URL request
+                print(response.response) // URL response
+                print(response.data)     // server data
+                print(response.result)   // result of response serialization
+                
+                completion()
+                
+        }
+    }
     class func uploadImages(images:NSMutableArray, defectRoom:DefectRoom!, handler: (String!) -> Void){
         ////UPLOAD IMAGES
+        
+//        SwiftSpinner.hide()
+//        handler("UPLOAD_IMAGE_FAIL")
+//
+//        return;
+        
         Alamofire.upload(
             .POST,
             "\(PathUtil.sharedInstance.getApiPath())/Defect/uploadImage.php?ransom=\(NSString.randomStringWithLength(10))",
@@ -166,7 +239,7 @@ class Sync: Model {
                         if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
                             if JSON.objectForKey("status") as! String == "200" {
                                 SwiftSpinner.hide()
-                                debugPrint(response)
+//                                debugPrint(response)
                                 
                                 //DID SYNC FLAG
                                 for image:ImageSync in ((images as NSArray) as! [ImageSync]) {

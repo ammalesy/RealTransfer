@@ -62,7 +62,7 @@ class DefectRoom: Model,NSCoding {
             let array:NSMutableArray = NSMutableArray()
             array.addObject(self)
             userDefault.setObject(NSKeyedArchiver.archivedDataWithRootObject(array), forKey: kLIST_DEFECT_ROOM)
-            userDefault.synchronize()
+            //userDefault.synchronize()
         }else{
             var addNew:Bool = true
             let array = NSKeyedUnarchiver.unarchiveObjectWithData(listData!) as! NSMutableArray
@@ -80,7 +80,7 @@ class DefectRoom: Model,NSCoding {
             
             
             userDefault.setObject(NSKeyedArchiver.archivedDataWithRootObject(array), forKey: kLIST_DEFECT_ROOM)
-            userDefault.synchronize()
+            //userDefault.synchronize()
         }
         
         Session.shareInstance.defectRoomSelected = self

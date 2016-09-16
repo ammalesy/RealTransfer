@@ -188,9 +188,9 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
                     .responseJSON { response in
                         
                         if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
-                            //print("JSON: \(JSON)")
+                            print("JSON: \(JSON.objectForKey("buildingList"))")
                             if JSON.objectForKey("status") as! String == "200" {
-                                
+                            
                                 let buildings:NSMutableArray = JSON.objectForKey("buildingList") as! NSMutableArray
                                 
                                 BuildingCaching.sharedInstance.setBuildings(buildings)

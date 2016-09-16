@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "529055E91D0518DE00B7D28C"
-               BuildableName = "Real Transfer.app"
+               BuildableName = "RealTransfer.app"
                BlueprintName = "RealTransfer"
                ReferencedContainer = "container:RealTransfer.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "529055E91D0518DE00B7D28C"
-            BuildableName = "Real Transfer.app"
+            BuildableName = "RealTransfer.app"
             BlueprintName = "RealTransfer"
             ReferencedContainer = "container:RealTransfer.xcodeproj">
          </BuildableReference>
@@ -56,7 +56,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "529055E91D0518DE00B7D28C"
-            BuildableName = "Real Transfer.app"
+            BuildableName = "RealTransfer.app"
             BlueprintName = "RealTransfer"
             ReferencedContainer = "container:RealTransfer.xcodeproj">
          </BuildableReference>
@@ -75,7 +75,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "529055E91D0518DE00B7D28C"
-            BuildableName = "Real Transfer.app"
+            BuildableName = "RealTransfer.app"
             BlueprintName = "RealTransfer"
             ReferencedContainer = "container:RealTransfer.xcodeproj">
          </BuildableReference>
