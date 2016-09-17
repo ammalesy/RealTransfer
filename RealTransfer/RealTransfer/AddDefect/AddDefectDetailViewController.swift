@@ -49,6 +49,9 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
     
     @IBOutlet weak var listSubTypeCaptionLabel: UILabel!
     
+    
+    var isTakePhoto:Bool = false
+    
     func keyboardWasShown(notification: NSNotification) {
         var info = notification.userInfo!
         let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
@@ -165,12 +168,15 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
         SDImageCache.sharedImageCache().clearMemory()
     }
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        
+        self.isTakePhoto = true
         let mediaType = info[UIImagePickerControllerMediaType] as! String
         
         if mediaType == (kUTTypeImage as String) {
             let image = info[UIImagePickerControllerOriginalImage] as! UIImage
-            CameraRoll.sharedInstance.saveImage(image)
+            
+           
+            let session = Session.shareInstance
+            CameraRoll.sharedInstance.saveImage(image, albumName: "(\(session.buildingSelected!.building_name!))\(session.roomSelected!.un_name!)")
             
             self.imageView.image = image
             
@@ -324,7 +330,10 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
                 let thumImage = UIImage.resizeImage(image!, scaledToWidth: 80)
                 defect.realImage = thumImage
                 ImageCaching.sharedInstance.setImageByName(imgName, image: nil, isFromServer: false)
+                
+                
                 SDImageCache.sharedImageCache().storeImage(image, forKey: Session.shareInstance.getImageCacheKey(imgName), toDisk: true)
+                
                 ImageCaching.sharedInstance.save()
                 defect.df_room_id_ref = self.defectRoom?.df_room_id
                 defect.df_status = "0"
@@ -357,9 +366,13 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
                 let imgName = UIImage.uniqNameBySeq("0")
                 self.defectModel!.df_image_path = imgName
                 
-                var image = UIImage(data: (UIImage(data: (self.imageView.image?.lowerQualityJPEGNSData)!)?.mediumQualityJPEGNSData)!)
-                image = UIImage.resizeImage(image!, scaledToWidth: ((image?.size.width)! * 30) / 100)
-                let thumImage = UIImage.resizeImage(image!, scaledToWidth: 80)
+                var image = self.imageView.image!
+                if isTakePhoto {
+                    image = UIImage(data: (UIImage(data: (self.imageView.image?.lowerQualityJPEGNSData)!)?.mediumQualityJPEGNSData)!)!
+                    image = UIImage.resizeImage(image, scaledToWidth: ((image.size.width) * 30) / 100)
+                }
+                
+                let thumImage = UIImage.resizeImage(image, scaledToWidth: 80)
                 self.defectModel!.realImage = thumImage
                 ImageCaching.sharedInstance.setImageByName(imgName, image: nil, isFromServer: false)
                 SDImageCache.sharedImageCache().storeImage(image, forKey: Session.shareInstance.getImageCacheKey(imgName), toDisk: true)

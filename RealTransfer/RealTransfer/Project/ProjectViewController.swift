@@ -187,11 +187,11 @@ class ProjectViewController: NZViewController,UICollectionViewDelegate,UICollect
                 Alamofire.request(.GET, path, parameters: [:])
                     .responseJSON { response in
                         
-                        if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
+                        if let JSON:NSDictionary = response.result.value as? NSDictionary {
                             print("JSON: \(JSON.objectForKey("buildingList"))")
                             if JSON.objectForKey("status") as! String == "200" {
                             
-                                let buildings:NSMutableArray = JSON.objectForKey("buildingList") as! NSMutableArray
+                                let buildings:[NSDictionary] = JSON.objectForKey("buildingList") as! [NSDictionary]
                                 
                                 BuildingCaching.sharedInstance.setBuildings(buildings)
                                 BuildingCaching.sharedInstance.save()

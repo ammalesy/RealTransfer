@@ -109,13 +109,13 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             Alamofire.request(.GET, "\(PathUtil.sharedInstance.getApiPath())/Defect/getDefectRoomInfo.php?db_name=\(self.project!.pj_datebase_name!)&un_id=\(self.roomSelected!.un_id!)&ransom=\(NSString.randomStringWithLength(10))", parameters: [:])
                 .responseJSON { response in
                     
-                    if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
+                    if let JSON:NSDictionary = response.result.value as? NSDictionary {
                         print("JSON: \(JSON)")
                         
                         let status:String = JSON.objectForKey("status") as! String
                         
                         if status == "200" {
-                            handler(JSON)
+                            handler(NSMutableDictionary(dictionary: JSON))
                             SwiftSpinner.hide()
                         }else{
                             handler(nil)

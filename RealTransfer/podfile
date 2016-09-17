@@ -8,14 +8,12 @@ platform :ios, '9.0'
 use_frameworks!
 
 target 'RealTransfer' do
-pod 'Alamofire', '~> 3.4'
+pod 'Alamofire', '~> 3.5.0'
 pod 'SwiftSpinner'
 pod 'SDWebImage', '~>3.8'
 pod 'KMPlaceholderTextView', '~> 1.2.0'
 pod 'TTTAttributedLabel'
-pod 'ToggleView', '~> 0.0.1'
-pod 'ReachabilitySwift'
-pod 'Firebase'
-pod 'Firebase/Crash'
+pod 'ReachabilitySwift', '~> 2.3.3'
+
 end
 

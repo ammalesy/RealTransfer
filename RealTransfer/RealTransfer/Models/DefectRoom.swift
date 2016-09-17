@@ -240,7 +240,7 @@ class DefectRoom: Model,NSCoding {
                 Alamofire.request(.POST, url, parameters:postParam)
                     .responseJSON { response in
                         
-                        if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
+                        if let JSON:NSDictionary = response.result.value as? NSDictionary {
                             print("JSON: \(JSON)")
                             let status:String = JSON.objectForKey("status") as! String
                             if status == "200" {
@@ -282,7 +282,7 @@ class DefectRoom: Model,NSCoding {
                 Alamofire.request(.GET, "\(PathUtil.sharedInstance.getApiPath())/Defect/getListDefect.php?db_name=\(PROJECT!.pj_datebase_name!)&df_room_id=\(self.df_room_id!)&ransom=\(NSString.randomStringWithLength(10))", parameters: [:])
                     .responseJSON { response in
                         
-                        if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
+                        if let JSON:NSDictionary = response.result.value as? NSDictionary {
                             print("JSON: \(JSON)")
                             let status:String = JSON.objectForKey("status") as! String
                             if status == "200" {
@@ -345,7 +345,7 @@ class DefectRoom: Model,NSCoding {
                 Alamofire.request(.GET, path, parameters: [:])
                     .responseJSON { response in
                         
-                        if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
+                        if let JSON:NSDictionary = response.result.value as? NSDictionary {
                             print("JSON: \(JSON)")
                             let status:String = JSON.objectForKey("status") as! String
                             
@@ -410,7 +410,7 @@ class DefectRoom: Model,NSCoding {
                 Alamofire.request(.POST, path, parameters: param)
                     .responseJSON { response in
                         
-                        if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
+                        if let JSON:NSDictionary = response.result.value as? NSDictionary {
                             print("JSON: \(JSON)")
                             
                             let status:String = JSON.objectForKey("status") as! String

@@ -38,7 +38,7 @@ class CSRoleModel: Model {
                     Alamofire.request(.GET, "\(PathUtil.sharedInstance.getApiPath())/User/getCSRole.php?ransom=\(NSString.randomStringWithLength(10))", parameters: [:])
                         .responseJSON { response in
                             
-                            if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
+                            if let JSON:NSDictionary = response.result.value as? NSDictionary {
                                 print("JSON: \(JSON)")
                                 if JSON.objectForKey("status") as! String == "200" {
                                     

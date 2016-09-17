@@ -22,7 +22,6 @@ class LoginViewController: NZViewController,URLConfigViewControllerDelegate {
     var textFieldActive:UITextField?
     
     var user:User?
-    
     override func viewDidLoad() {
         
 //        let vvv = NSMutableDictionary()

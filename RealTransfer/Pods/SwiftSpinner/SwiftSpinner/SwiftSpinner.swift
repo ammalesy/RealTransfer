@@ -33,10 +33,12 @@ public class SwiftSpinner: UIView {
         super.init(frame: frame)
         
         blurEffect = UIBlurEffect(style: blurEffectStyle)
-        blurView = UIVisualEffectView(effect: blurEffect)
+        blurView = UIVisualEffectView()
+
         addSubview(blurView)
         
         vibrancyView = UIVisualEffectView(effect: UIVibrancyEffect(forBlurEffect: blurEffect))
+        
         addSubview(vibrancyView)
         
         let titleScale: CGFloat = 0.85
@@ -84,6 +86,10 @@ public class SwiftSpinner: UIView {
         vibrancyView.contentView.addSubview(innerCircleView)
         
         userInteractionEnabled = true
+        
+        
+        vibrancyView.contentView.backgroundColor = UIColor.clearColor()
+        blurView.contentView.backgroundColor = UIColor.clearColor()
     }
     
     public override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
@@ -119,26 +125,28 @@ public class SwiftSpinner: UIView {
         
         if spinner.superview == nil {
             //show the spinner
-            spinner.alpha = 0.0
+            spinner.alpha = 1.0
             
             guard let containerView = containerView() else {
                 fatalError("\n`UIApplication.keyWindow` is `nil`. If you're trying to show a spinner from your view controller's `viewDidLoad` method, do that from `viewWillAppear` instead. Alternatively use `useContainerView` to set a view where the spinner should show")
             }
-            
             containerView.addSubview(spinner)
-
-            UIView.animateWithDuration(0.33, delay: 0.0, options: .CurveEaseOut, animations: {
+            
+            UIView.animateWithDuration(0.33, delay: 0.0, options: .CurveEaseInOut, animations: {
                 spinner.alpha = 1.0
-                }, completion: nil)
+                spinner.blurView.effect = spinner.blurEffect
+            }, completion: nil)
             
             #if os(iOS)
-            // Orientation change observer
-            NSNotificationCenter.defaultCenter().addObserver(
-                spinner,
-                selector: #selector(SwiftSpinner.updateFrame),
-                name: UIApplicationDidChangeStatusBarOrientationNotification,
-                object: nil)
+                // Orientation change observer
+                NSNotificationCenter.defaultCenter().addObserver(
+                    spinner,
+                    selector: #selector(SwiftSpinner.updateFrame),
+                    name: UIApplicationDidChangeStatusBarOrientationNotification,
+                    object: nil)
             #endif
+            
+            
         }
         
         spinner.title = title
@@ -192,19 +200,25 @@ public class SwiftSpinner: UIView {
             if spinner.superview == nil {
                 return
             }
-            
             UIView.animateWithDuration(0.33, delay: 0.0, options: .CurveEaseOut, animations: {
-                spinner.alpha = 0.0
-                }, completion: {_ in
+                spinner.outerCircleView.alpha = 0.0
+                spinner.innerCircleView.alpha = 0.0
+                spinner.blurView.alpha = 0
+            }, completion: {_ in
                     spinner.alpha = 1.0
+                    spinner.blurView.alpha = 1.0
+                    spinner.outerCircleView.alpha = 1.0
+                    spinner.innerCircleView.alpha = 1.0
+                
                     spinner.removeFromSuperview()
                     spinner.titleLabel.font = spinner.defaultTitleFont
                     spinner.titleLabel.text = nil
                     
                     completion?()
+                    spinner.animating = false
             })
             
-            spinner.animating = false
+            
         })
     }
     
@@ -250,8 +264,15 @@ public class SwiftSpinner: UIView {
             if frame == CGRect.zero {
                 return
             }
-            blurView.frame = bounds
-            vibrancyView.frame = blurView.bounds
+            dispatch_async(dispatch_get_main_queue()) { 
+                self.blurView.frame = self.bounds
+                self.vibrancyView.frame = self.blurView.bounds
+                
+                self.blurView.setNeedsDisplay()
+                self.vibrancyView.setNeedsDisplay()
+            }
+            
+            
             titleLabel.center = vibrancyView.center
             outerCircleView.center = vibrancyView.center
             innerCircleView.center = vibrancyView.center

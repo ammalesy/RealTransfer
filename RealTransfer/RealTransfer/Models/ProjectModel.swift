@@ -118,7 +118,7 @@ class ProjectModel: NSObject, NSCoding {
                 Alamofire.request(.GET, "\(PathUtil.sharedInstance.getApiPath())/User/getProject.php?user_id=\(user.user_id!)&ransom=\(NSString.randomStringWithLength(10))", parameters: [:])
                     .responseJSON { response in
                         
-                        if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
+                        if let JSON:NSDictionary = response.result.value as? NSDictionary {
                             print("JSON: \(JSON)")
                             if JSON.objectForKey("status") as! String == "200" {
                                 

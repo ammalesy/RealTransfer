@@ -42,7 +42,7 @@ class BuildingCaching: NSObject {
         }
         return nil
     }
-    func setBuildings(buildings:NSMutableArray!) {
+    func setBuildings(buildings:[NSDictionary]!) {
         
         self.holder = NSMutableArray(array: buildings)
         

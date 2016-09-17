@@ -39,30 +39,20 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>ToggleView.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0F6E1CA87B8D0E29AAF917B38378D4A9</key>
+		<key>02245E8A7D162C6F0FFABC95F16A7A9A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>40B1AB6DB315B691EB3B0C7BA3D6FAA5</key>
+		<key>1F06513B3273938F61ADC985C31CFBC4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4497AA8FA7834B1172D8E87B6D72D158</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>6C88DCE57E42812C309BD01A19558734</key>
+		<key>3D68AC67AA1FC67EE8426B6AED153544</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -72,12 +62,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B4172E6BDB328A23DFAB637054E950AC</key>
+		<key>C7D13287E9F68910D1050ACACA1D6EDF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E5BA3B080F4E6CA4E1241F5FAFD77F92</key>
+		<key>C9FCC04508FC4A3475BCCA534E85071F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

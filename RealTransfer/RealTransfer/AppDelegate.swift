@@ -9,7 +9,6 @@
 import UIKit
 import CoreData
 import Alamofire
-import Firebase
 import SDWebImage
 
 let SUPER_ADMIN_USERNAME = "superadmin"
@@ -71,8 +70,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             return (disposition, credential)
         }
-        
-        FIRApp.configure()
         
         return true
     }

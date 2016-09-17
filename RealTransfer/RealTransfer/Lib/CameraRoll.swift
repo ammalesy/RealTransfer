@@ -11,7 +11,7 @@ import Photos
 
 class CameraRoll {
     
-    static let albumName = "Real Transfer"
+//    static var albumName = "Real Transfer"
     static let sharedInstance = CameraRoll()
     
     var assetCollection: PHAssetCollection!
@@ -20,10 +20,15 @@ class CameraRoll {
     
     init() {
         
+        //self.fetchAlbum(CameraRoll.albumName)
+        
+    }
+    
+    func fetchAlbum(named:String!){
         func fetchAssetCollectionForAlbum() -> PHAssetCollection! {
             
             let fetchOptions = PHFetchOptions()
-            fetchOptions.predicate = NSPredicate(format: "title = %@", CameraRoll.albumName)
+            fetchOptions.predicate = NSPredicate(format: "title = %@", named)
             let collection = PHAssetCollection.fetchAssetCollectionsWithType(.Album, subtype: .Any, options: fetchOptions)
             
             if let firstObject: AnyObject = collection.firstObject {
@@ -35,11 +40,12 @@ class CameraRoll {
         
         if let assetCollection = fetchAssetCollectionForAlbum() {
             self.assetCollection = assetCollection
+            self.didCollectionCreateSuccess()
             return
         }
         
         PHPhotoLibrary.sharedPhotoLibrary().performChanges({
-            PHAssetCollectionChangeRequest.creationRequestForAssetCollectionWithTitle(CameraRoll.albumName)
+            PHAssetCollectionChangeRequest.creationRequestForAssetCollectionWithTitle(named)
         }) { success, _ in
             if success {
                 self.assetCollection = fetchAssetCollectionForAlbum()
@@ -48,15 +54,19 @@ class CameraRoll {
         }
     }
     
-    func saveImage(image: UIImage) {
+    func saveImage(image: UIImage, albumName:String!) {
        
+        
+        
         if assetCollection == nil {
             self.didCollectionCreateSuccess = {
-            
+                
                 self.saveRawImage(image)
                 
             }
-            return   // If there was an error upstream, skip the save.
+            self.fetchAlbum(albumName)
+            
+            return;
         }
         self.saveRawImage(image)
     }

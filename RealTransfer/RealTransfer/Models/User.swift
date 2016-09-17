@@ -91,7 +91,8 @@ class User: Model,NSCoding {
                 
                 
             }else{
-                SwiftSpinner.show("Loging in..", animated: true)
+                SwiftSpinner.show("Waiting..")
+                
                 var path = "\(PathUtil.sharedInstance.getApiPath())/User/login.php?username=\(self.username!)&password=\(self.password!)"
                 
                 path = "\(path)&random=\(NSString.randomStringWithLength(10))"
@@ -102,8 +103,30 @@ class User: Model,NSCoding {
                         print(response.data)     // server data
                         print(response.result)   // result of response serialization
                         
-                        if let JSON:NSMutableDictionary = response.result.value as? NSMutableDictionary {
-                            print("JSON: \(JSON)")
+//                        let topController = UIViewController.topViewController()
+//      
+//                        AlertUtil.alert("", message: "\(response.response?.statusCode)", cancleButton: "OK", atController: topController, handler: { (action) in
+//                            AlertUtil.alert("", message: "\(response.result.value)", cancleButton: "OK", atController: topController, handler: { (action) in
+//                                AlertUtil.alert("", message: "\(response.request)", cancleButton: "OK", atController: topController, handler: { (action) in
+//                                    AlertUtil.alert("", message: "\(response.response)", cancleButton: "OK", atController: topController, handler: { (action) in
+//                                        AlertUtil.alert("", message: "\(response.data)", cancleButton: "OK", atController: topController, handler: { (action) in
+//                                            AlertUtil.alert("", message: "\(response.result)", cancleButton: "OK", atController: topController, handler: { (action) in
+//                                                
+//                                            })
+//                                        })
+//                                    })
+//                                })
+//                            })
+//                        })
+//                        
+//                        print("JSON: \(response.result.value)")
+//                        
+//                        
+//                        
+//                        
+                        if let JSON:NSDictionary = response.result.value as? NSDictionary {
+                            
+                            
                             if JSON.objectForKey("status") as! String == "200" {
                                 self.pm_name = JSON.objectForKey("pm_name") as? String
                                 self.user_id = JSON.objectForKey("user_id") as? String
@@ -115,15 +138,19 @@ class User: Model,NSCoding {
                                 self.user_work_position = JSON.objectForKey("user_work_position") as? String
                                 self.user_work_user_id = JSON.objectForKey("user_work_user_id") as? String
                                 self.doCacheUSer()
+                                
+            
                                 handler(true)
                                 SwiftSpinner.hide()
                             }else{
+                                
                                 handler(false)
                                 SwiftSpinner.hide()
                                 debugPrint(response)
                             }
                             
                         }else{
+//                            AlertUtil.alert("", message: "FALSE EXTERNAL", cancleButton: "OK", atController: UIViewController.topViewController())
                             handler(false)
                             SwiftSpinner.hide()
                             debugPrint(response)

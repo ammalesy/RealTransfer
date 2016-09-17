@@ -9,7 +9,6 @@
 import UIKit
 import MobileCoreServices
 import SwiftSpinner
-import FirebaseCrash
 import SDWebImage
 
 class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,UINavigationControllerDelegate,NZNavigationViewControllerDelegate {
@@ -169,7 +168,9 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
         
         let mediaType = info[UIImagePickerControllerMediaType] as! String
         let image = (info[UIImagePickerControllerOriginalImage] as! UIImage).normalizedImage()
-        CameraRoll.sharedInstance.saveImage(image)
+        
+        let session = Session.shareInstance
+        CameraRoll.sharedInstance.saveImage(image, albumName: "(\(session.buildingSelected!.building_name!))\(session.roomSelected!.un_name!)")
         if mediaType == (kUTTypeImage as String) {
             
             

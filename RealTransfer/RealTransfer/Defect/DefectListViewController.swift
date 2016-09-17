@@ -525,7 +525,8 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
             let nav:UINavigationController = controllers[1] as! UINavigationController
             nav.popToRootViewControllerAnimated(true)
             
-            let detailController:AddDefectDetailViewController = AddDefectDetailViewController.instance(cell.defectImageView.image!, defectRoom: self.defectRoomRef, state: DefectViewState.Edit)
+            let cacheImage = ImageCaching.sharedInstance.getImageByName(Session.shareInstance.getImageCacheKey(defectModel.df_image_path!))
+            let detailController:AddDefectDetailViewController = AddDefectDetailViewController.instance(cacheImage, defectRoom: self.defectRoomRef, state: DefectViewState.Edit)
             detailController.defectModel = defectModel
             detailController.textsForDisplayEditing = [cell.titleLb.text!,cell.middleTextLb.text!,cell.detailTextLb.text!]
             nav.pushViewController(detailController, animated: true)
