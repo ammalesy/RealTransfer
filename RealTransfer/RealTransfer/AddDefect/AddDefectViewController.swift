@@ -170,7 +170,11 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
         let image = (info[UIImagePickerControllerOriginalImage] as! UIImage).normalizedImage()
         
         let session = Session.shareInstance
-        CameraRoll.sharedInstance.saveImage(image, albumName: "(\(session.buildingSelected!.building_name!))\(session.roomSelected!.un_name!)")
+        var buildingName = (session.buildingSelected!.building_name! as NSString)
+        if buildingName.length > LENGTH_OF_ALBUM_NAME_IN_CAMERA_ROLL {
+            buildingName = buildingName.substringToIndex(LENGTH_OF_ALBUM_NAME_IN_CAMERA_ROLL)
+        }
+        CameraRoll.sharedInstance.saveImage(image, albumName: "(\(buildingName))\(session.roomSelected!.un_name!)")
         if mediaType == (kUTTypeImage as String) {
             
             

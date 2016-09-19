@@ -101,7 +101,7 @@ class Session: Model,NSCoding {
         roomSelected = nil
         defectRoomSelected = nil
         customerInfo = nil
-        CameraRoll.sharedInstance.assetCollection = nil
+        CameraRoll.sharedInstance.clear()
     }
     
     class func destroySession(type:String) {

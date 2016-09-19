@@ -9,6 +9,8 @@
 import UIKit
 import Photos
 
+let LENGTH_OF_ALBUM_NAME_IN_CAMERA_ROLL = 12
+
 class CameraRoll {
     
 //    static var albumName = "Real Transfer"
@@ -17,6 +19,12 @@ class CameraRoll {
     var assetCollection: PHAssetCollection!
     var didCollectionCreateSuccess: ()->Void = {}
     var currentImage:UIImage?
+    
+    func clear() {
+        self.assetCollection = nil
+        self.didCollectionCreateSuccess = {}
+        self.currentImage = nil
+    }
     
     init() {
         

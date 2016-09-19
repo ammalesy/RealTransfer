@@ -47,7 +47,10 @@ class GaranteeListViewController: DefectListViewController {
     override func setNumberOfDefect(number:Int, title:String!){
         self.garanteeBtn.setTitle("\(title) (\(number))", forState: UIControlState.Normal)
     }
-    
+    func minusCountGuaranteeDefectValue() {
+        garanteeDefect -= 1
+        self.setGuaranteeCount(garanteeDefect)
+    }
     func plusCountGuaranteeDefectValue() {
         garanteeDefect += 1
         self.setGuaranteeCount(garanteeDefect)
@@ -124,8 +127,10 @@ class GaranteeListViewController: DefectListViewController {
         
         super.defectCell(cell, didClickMenu: model, popover: popover)
         
-        if model.identifier != "delete" {
-            
+        if model.identifier == "delete" {
+            self.getDefectListCheckingController().minusCountGuaranteeDefectValue()
+            self.minusCountGuaranteeDefectValue()
+        }else{
             self.needFullCellMode(false)
         }
         
@@ -140,6 +145,14 @@ class GaranteeListViewController: DefectListViewController {
             , 230
             , self.tableView.frame.size.height / 2
         )
+    }
+    override func reloadData(defectRoom:DefectRoom!) {
+        self.reloadData(defectRoom, type: "1");
+    }
+    
+    func getDefectListCheckingController()->DefectListCheckingViewController {
+        let controllers:NSMutableArray = self.splitController!.nzNavigationController!.viewControllers
+        return controllers[1] as! DefectListCheckingViewController
     }
     
 }

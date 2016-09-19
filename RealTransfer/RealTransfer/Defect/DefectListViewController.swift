@@ -69,6 +69,8 @@ class DefectListViewController: UIViewController,UITableViewDelegate,UITableView
         
         
         NSUserDefaults.standardUserDefaults().synchronize()
+        
+        
     }
     func className() -> String {
         return "DefectListViewController"

@@ -89,7 +89,7 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         
         self.tableView.reloadData()
     }
-    func queryInfo(handler: (NSMutableDictionary?) -> Void)
+    func queryInfo(handler: (NSDictionary?) -> Void)
     {
         
         if self.roomSelected == nil || self.project == nil {
@@ -115,7 +115,7 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
                         let status:String = JSON.objectForKey("status") as! String
                         
                         if status == "200" {
-                            handler(NSMutableDictionary(dictionary: JSON))
+                            handler(JSON)
                             SwiftSpinner.hide()
                         }else{
                             handler(nil)
@@ -418,6 +418,13 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         Session.shareInstance.buildingSelected = self.buldingSelected!
         Session.shareInstance.defectRoomSelected = defectRoom
         Session.shareInstance.doCache()
+        
+        let session = Session.shareInstance
+        var buildingName = (session.buildingSelected!.building_name! as NSString)
+        if buildingName.length > LENGTH_OF_ALBUM_NAME_IN_CAMERA_ROLL {
+            buildingName = buildingName.substringToIndex(LENGTH_OF_ALBUM_NAME_IN_CAMERA_ROLL)
+        }
+        CameraRoll.sharedInstance.fetchAlbum("(\(buildingName))\(session.roomSelected!.un_name!)")
     }
     @IBAction func exitAction(sender: AnyObject) {
         PROJECT = nil
@@ -738,19 +745,19 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             
         }
     }
-    func assignUserInformationData(list:NSMutableDictionary?, row4:RowInfoModel, row5:RowModel){
+    func assignUserInformationData(list:NSDictionary?, row4:RowInfoModel, row5:RowModel){
         
         let customer:CustomerInfo = CustomerInfo.sharedInstance
         
-        var defectInfo:NSMutableDictionary
-        var roomInfo:NSMutableDictionary
-        var qcCheckerInfo:NSMutableDictionary
-        var csInfo:NSMutableDictionary
+        var defectInfo:NSDictionary
+        var roomInfo:NSDictionary
+        var qcCheckerInfo:NSDictionary
+        var csInfo:NSDictionary
         
         let userInfo:NSDictionary = (list?.objectForKey("userInfo")!)! as! NSDictionary
         
-        if ((list?.objectForKey("roomInfo") as? NSMutableDictionary) != nil) {
-            roomInfo = (list?.objectForKey("roomInfo") as? NSMutableDictionary)!
+        if ((list?.objectForKey("roomInfo") as? NSDictionary) != nil) {
+            roomInfo = (list?.objectForKey("roomInfo") as? NSDictionary)!
             
             row4.headInfo4 = "Room Type : "
             row4.headInfo5 = "Unit Type : "
@@ -766,8 +773,8 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             
         }
         
-        if ((list?.objectForKey("defectInfo") as? NSMutableDictionary) != nil) {
-            defectInfo = (list?.objectForKey("defectInfo") as? NSMutableDictionary)!
+        if ((list?.objectForKey("defectInfo") as? NSDictionary) != nil) {
+            defectInfo = (list?.objectForKey("defectInfo") as? NSDictionary)!
             row4.headInfo6 = "Last update : "
             //row4.headInfo7 = "Defect No : "
             if let date = defectInfo.objectForKey("df_check_date") as? String {
@@ -784,8 +791,8 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
             
         }
         
-        if ((list?.objectForKey("qcCheckerInfo") as? NSMutableDictionary) != nil) {
-            qcCheckerInfo = (list?.objectForKey("qcCheckerInfo") as? NSMutableDictionary)!
+        if ((list?.objectForKey("qcCheckerInfo") as? NSDictionary) != nil) {
+            qcCheckerInfo = (list?.objectForKey("qcCheckerInfo") as? NSDictionary)!
             let qcChecker = "\(qcCheckerInfo.objectForKey("user_pers_fname") as! String) \(qcCheckerInfo.objectForKey("user_pers_lname") as! String)"
             //                row4.headInfo8 = "QC Checker : "
             //                row4.detailInfo8 = qcChecker
@@ -883,8 +890,8 @@ class GettingStartViewController: UIViewController,UITableViewDelegate,UITableVi
         self.components.addObject(row4);
         
         
-        if ((list?.objectForKey("csInfo") as? NSMutableDictionary) != nil) {
-            csInfo = (list?.objectForKey("csInfo") as? NSMutableDictionary)!
+        if ((list?.objectForKey("csInfo") as? NSDictionary) != nil) {
+            csInfo = (list?.objectForKey("csInfo") as? NSDictionary)!
             row5.detail = "\(csInfo.objectForKey("user_pers_fname") as! String) \(csInfo.objectForKey("user_pers_lname") as! String)"
             //row5.enable = false
             

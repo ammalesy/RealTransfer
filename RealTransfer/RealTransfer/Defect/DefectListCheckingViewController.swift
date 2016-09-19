@@ -65,6 +65,8 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
         self.setNumberOfDefect()
         
         self.setTapEventOnContainer()
+        
+        
     }
     func initialDropDownList(){
         let firstModel:DropDownModel = DropDownModel(text: "เลือกดูทั้งหมด")
@@ -642,6 +644,10 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
     }
     func touchBeganCell(cell: DefectCell) {
         
+    }
+    func minusCountGuaranteeDefectValue() {
+        garanteeDefect -= 1
+        self.setGuaranteeCount(garanteeDefect)
     }
     func plusCountGuaranteeDefectValue() {
         garanteeDefect += 1

@@ -60,7 +60,7 @@ class Category: Model {
     func getCategory()->NSDictionary {
         return self.category
     }
-    func update(handler: (NSMutableDictionary?) -> Void) {
+    func update(handler: (NSDictionary?) -> Void) {
         SwiftSpinner.show("Update category..", animated: true)
         
         Alamofire.request(.GET, "\(PathUtil.sharedInstance.getApiPath())/Category/read.php?version=\(self.version!)&ransom=\(NSString.randomStringWithLength(10))", parameters: [:])
@@ -70,7 +70,7 @@ class Category: Model {
                     print("JSON: \(JSON)")
                     if JSON.objectForKey("status") as! String == "200" {//Update
                         
-                        handler(NSMutableDictionary(dictionary: JSON))
+                        handler(JSON)
                         SwiftSpinner.hide()
                     }else{                                              //Not Update
                         handler(nil)
