@@ -181,11 +181,11 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
                 buildingName = buildingName.substringToIndex(LENGTH_OF_ALBUM_NAME_IN_CAMERA_ROLL)
             }
             
-            let drawController:DrawingViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DrawingViewController") as! DrawingViewController
+            let drawController:DrawingViewController = UIStoryboard(name: "Draw", bundle: nil).instantiateViewControllerWithIdentifier("DrawingViewController") as! DrawingViewController
             drawController.image = image
             
             if self.imagePicker != nil {
-                self.imagePicker?.presentViewController(drawController.navigationController!, animated: true, completion: {
+                self.imagePicker?.presentViewController(drawController, animated: true, completion: {
                     
                 })
             }
@@ -195,7 +195,7 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
             drawController.didClickDone = {(modifyImage) in
                 CameraRoll.sharedInstance.saveImage(modifyImage, albumName: "(\(buildingName))\(session.roomSelected!.un_name!)")
                 self.imageView.image = modifyImage
-                drawController.navigationController!.dismissViewControllerAnimated(true, completion: {
+                drawController.dismissViewControllerAnimated(true, completion: {
                     self.closePickerView()
                 })
             
