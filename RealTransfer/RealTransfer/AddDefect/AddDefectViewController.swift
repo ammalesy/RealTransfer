@@ -174,18 +174,48 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
         if buildingName.length > LENGTH_OF_ALBUM_NAME_IN_CAMERA_ROLL {
             buildingName = buildingName.substringToIndex(LENGTH_OF_ALBUM_NAME_IN_CAMERA_ROLL)
         }
-        CameraRoll.sharedInstance.saveImage(image, albumName: "(\(buildingName))\(session.roomSelected!.un_name!)")
-        if mediaType == (kUTTypeImage as String) {
+        
+        
+        
+        let drawController:DrawingViewController = UIStoryboard(name: "Draw", bundle: nil).instantiateViewControllerWithIdentifier("DrawingViewController") as! DrawingViewController
+        drawController.image = image
+        
+        if self.imagePicker != nil {
+            self.imagePicker?.presentViewController(drawController, animated: true, completion: {
             
+            })
+        }
+        if self.imagePickerGallery != nil {
+            self.imagePickerGallery?.presentViewController(drawController, animated: true, completion: {
+                
+            })
+        }
+        
+        drawController.didClickClear = {
+        
+        }
+        drawController.didClickDone = {(modifyImage) in
             
-            let dRoom = DefectRoom.getCache(self.defectRoom?.df_room_id!)
-            self.defectRoom = dRoom
-            let detailController:AddDefectDetailViewController = AddDefectDetailViewController.instance(image, defectRoom: self.defectRoom, state: DefectViewState.New)
-            self.navigationController?.pushViewController(detailController, animated: true)
-            
+            CameraRoll.sharedInstance.saveImage(modifyImage, albumName: "(\(buildingName))\(session.roomSelected!.un_name!)")
+            if mediaType == (kUTTypeImage as String) {
+                
+                
+                let dRoom = DefectRoom.getCache(self.defectRoom?.df_room_id!)
+                self.defectRoom = dRoom
+                let detailController:AddDefectDetailViewController = AddDefectDetailViewController.instance(modifyImage, defectRoom: self.defectRoom, state: DefectViewState.New)
+                self.navigationController?.pushViewController(detailController, animated: true)
+                
+                
+            }
+            drawController.dismissViewControllerAnimated(true, completion: {
+                self.closePickerView()
+            })
             
         }
         
+        
+    }
+    func closePickerView() {
         Queue.mainQueue { () -> Void in
             if self.imagePickerGallery != nil {
                 self.imagePickerGallery?.dismissViewControllerAnimated(true, completion: { () -> Void in
@@ -204,7 +234,7 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
                 })
             }
         }
-        
+
     }
     func goProjectPage(){
         Queue.serialQueue({

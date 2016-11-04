@@ -180,16 +180,36 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
             if buildingName.length > LENGTH_OF_ALBUM_NAME_IN_CAMERA_ROLL {
                 buildingName = buildingName.substringToIndex(LENGTH_OF_ALBUM_NAME_IN_CAMERA_ROLL)
             }
-            CameraRoll.sharedInstance.saveImage(image, albumName: "(\(buildingName))\(session.roomSelected!.un_name!)")
             
-            self.imageView.image = image
+            let drawController:DrawingViewController = self.storyboard?.instantiateViewControllerWithIdentifier("DrawingViewController") as! DrawingViewController
+            drawController.image = image
             
-            self.imagePicker?.dismissViewControllerAnimated(true, completion: { 
+            if self.imagePicker != nil {
+                self.imagePicker?.presentViewController(drawController.navigationController!, animated: true, completion: {
+                    
+                })
+            }
+            drawController.didClickClear = {
                 
-                
-                
-            })
+            }
+            drawController.didClickDone = {(modifyImage) in
+                CameraRoll.sharedInstance.saveImage(modifyImage, albumName: "(\(buildingName))\(session.roomSelected!.un_name!)")
+                self.imageView.image = modifyImage
+                drawController.navigationController!.dismissViewControllerAnimated(true, completion: {
+                    self.closePickerView()
+                })
+            
+            }
+
+
         }
+    }
+    func closePickerView(){
+        self.imagePicker?.dismissViewControllerAnimated(true, completion: {
+            
+            
+            
+        })
     }
     @IBAction func openTypeDropDown(sender: AnyObject) {
         
