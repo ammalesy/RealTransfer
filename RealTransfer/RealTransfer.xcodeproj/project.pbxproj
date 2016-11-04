@@ -28,6 +28,9 @@
 		185F145C1D7D9BF4005B457A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 185F145B1D7D9BF4005B457A /* GoogleService-Info.plist */; };
 		186537131D22E28B00A11F49 /* DefectListCheckingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186537121D22E28B00A11F49 /* DefectListCheckingViewController.swift */; };
 		186AB4211D55C19F00DEEBFA /* URLConfigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186AB4201D55C19F00DEEBFA /* URLConfigViewController.swift */; };
+		18713D471DCD108A00A7F97F /* Draw.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18713D461DCD108A00A7F97F /* Draw.storyboard */; };
+		18713D4A1DCD109400A7F97F /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18713D481DCD109400A7F97F /* SettingsViewController.swift */; };
+		18713D4B1DCD109400A7F97F /* DrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18713D491DCD109400A7F97F /* DrawingViewController.swift */; };
 		1876D5131D3E372300B6FAA1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1876D5121D3E372300B6FAA1 /* QuartzCore.framework */; };
 		1876D5151D3E6D3E00B6FAA1 /* GalleryImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1876D5141D3E6D3E00B6FAA1 /* GalleryImagePickerController.swift */; };
 		187F40571D6D8B9E0022EB01 /* CellCusInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187F40561D6D8B9E0022EB01 /* CellCusInfo.swift */; };
@@ -115,6 +118,9 @@
 		185F145B1D7D9BF4005B457A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		186537121D22E28B00A11F49 /* DefectListCheckingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefectListCheckingViewController.swift; sourceTree = "<group>"; };
 		186AB4201D55C19F00DEEBFA /* URLConfigViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLConfigViewController.swift; sourceTree = "<group>"; };
+		18713D461DCD108A00A7F97F /* Draw.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Draw.storyboard; sourceTree = "<group>"; };
+		18713D481DCD109400A7F97F /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		18713D491DCD109400A7F97F /* DrawingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingViewController.swift; sourceTree = "<group>"; };
 		1876D5121D3E372300B6FAA1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		1876D5141D3E6D3E00B6FAA1 /* GalleryImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryImagePickerController.swift; sourceTree = "<group>"; };
 		187F40561D6D8B9E0022EB01 /* CellCusInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CellCusInfo.swift; path = Model/CellCusInfo.swift; sourceTree = "<group>"; };
@@ -224,6 +230,16 @@
 				1855570D1D77CDAB00F58906 /* Pin.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		18713D451DCD108000A7F97F /* Drawing */ = {
+			isa = PBXGroup;
+			children = (
+				18713D461DCD108A00A7F97F /* Draw.storyboard */,
+				18713D481DCD109400A7F97F /* SettingsViewController.swift */,
+				18713D491DCD109400A7F97F /* DrawingViewController.swift */,
+			);
+			path = Drawing;
 			sourceTree = "<group>";
 		};
 		18F1215F1D27D6B60046326F /* ImageViwer */ = {
@@ -426,6 +442,7 @@
 		529056021D0519EE00B7D28C /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				18713D451DCD108000A7F97F /* Drawing */,
 				520AC6711D094C25000A8754 /* NZAutoCompleteTextField */,
 				5240DA021D0809E20071D287 /* NZDropDown */,
 				521A7B2F1D05503100971B7B /* Queue */,
@@ -518,6 +535,11 @@
 					529055E91D0518DE00B7D28C = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = T827QP7R38;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -549,6 +571,7 @@
 				521A7B2A1D0534FD00971B7B /* SukhumvitSet.ttc in Resources */,
 				5290560A1D0519EE00B7D28C /* NZNav.storyboard in Resources */,
 				529055FB1D0518DE00B7D28C /* LaunchScreen.storyboard in Resources */,
+				18713D471DCD108A00A7F97F /* Draw.storyboard in Resources */,
 				529055F81D0518DE00B7D28C /* Assets.xcassets in Resources */,
 				529055F31D0518DE00B7D28C /* Main.storyboard in Resources */,
 				5240DA041D0809F20071D287 /* NZDropDown.storyboard in Resources */,
@@ -646,6 +669,7 @@
 				1800981F1D159DF700BB11FD /* NSDateFormaterExtension.swift in Sources */,
 				5240D9FD1D07F6CC0071D287 /* DefectListViewController.swift in Sources */,
 				5290560E1D0519EE00B7D28C /* NZRow.swift in Sources */,
+				18713D4A1DCD109400A7F97F /* SettingsViewController.swift in Sources */,
 				18DF989E1D152F2C004BE990 /* DefectRoom.swift in Sources */,
 				529056111D051B3F00B7D28C /* LoginViewController.swift in Sources */,
 				520AC6781D094D49000A8754 /* AutoCompleteModel.swift in Sources */,
@@ -682,6 +706,7 @@
 				521A7B241D05277700971B7B /* UIViewExtension.swift in Sources */,
 				521A7B261D05291900971B7B /* UIColorExtension.swift in Sources */,
 				1886062A1D43A4C600B2CD7C /* CameraRoll.swift in Sources */,
+				18713D4B1DCD109400A7F97F /* DrawingViewController.swift in Sources */,
 				18F589FC1D183AC700F06813 /* CachingManager.swift in Sources */,
 				5240D9FF1D07F7610071D287 /* DefectCell.swift in Sources */,
 				18EC63991D4C7B4D005E6A54 /* CallService.swift in Sources */,
@@ -813,9 +838,9 @@
 				INFOPLIST_FILE = RealTransfer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mintedimages.realsmart;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nui.real;
 				PRODUCT_NAME = RealTransfer;
-				PROVISIONING_PROFILE = "3d281be8-619f-41fe-89e6-ce7b986dbac6";
+				PROVISIONING_PROFILE = "";
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "RealTransfer-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 2;
@@ -827,8 +852,8 @@
 			baseConfigurationReference = E6C5D39B4B85C857D3B9D77F /* Pods-RealTransfer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Mintedimages Co., Ltd., (SYB8N6A557)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Mintedimages Co., Ltd., (SYB8N6A557)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Arnut Khummin (T827QP7R38)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Arnut Khummin (T827QP7R38)";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -838,9 +863,9 @@
 				INFOPLIST_FILE = RealTransfer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mintedimages.realsmart;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nui.real;
 				PRODUCT_NAME = RealTransfer;
-				PROVISIONING_PROFILE = "3d281be8-619f-41fe-89e6-ce7b986dbac6";
+				PROVISIONING_PROFILE = "";
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "RealTransfer-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 2;
