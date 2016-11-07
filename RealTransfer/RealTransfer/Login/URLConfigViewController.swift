@@ -23,6 +23,9 @@ class URLConfigViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var txtWebDir: UITextField!
     @IBOutlet weak var txtApiDir: UITextField!
     
+    @IBOutlet weak var switchDisplayDrawingMode: UISwitch!
+    @IBOutlet weak var switchDisplayGuaranteeMode: UISwitch!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.txtDomainName.delegate = self
@@ -74,6 +77,8 @@ class URLConfigViewController: UIViewController,UITextFieldDelegate {
     }
 
     @IBAction func okAction(sender: AnyObject) {
+        SettingUtil.sharedInstance.set_isDisplayDrawingMode(self.switchDisplayDrawingMode.on)
+        SettingUtil.sharedInstance.set_isDisplayGuarantee(self.switchDisplayGuaranteeMode.on)
         
         if self.validateTxt() {
             
@@ -149,6 +154,18 @@ class URLConfigViewController: UIViewController,UITextFieldDelegate {
         self.txtDomainName.text = domainNameStr
         self.txtWebDir.text = webDirStr
         self.txtApiDir.text = apiDirStr
+        
+        
+        self.switchDisplayDrawingMode.setOn(SettingUtil.sharedInstance.isDisplayDrawingMode, animated: true)
+        self.switchDisplayGuaranteeMode.setOn(SettingUtil.sharedInstance.isDisplayGuarantee, animated: true)
+        
+        
+    }
+    @IBAction func drawingModeAction(sender: AnyObject) {
+        //SettingUtil.sharedInstance.set_isDisplayDrawingMode(self.switchDisplayDrawingMode.on)
+    }
+    @IBAction func guaranteeModeAction(sender: AnyObject) {
+        //SettingUtil.sharedInstance.set_isDisplayGuarantee(self.switchDisplayGuaranteeMode.on)
     }
 
 }

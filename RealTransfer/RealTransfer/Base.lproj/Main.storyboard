@@ -89,6 +89,8 @@
             <string>SukhumvitSet-Bold</string>
             <string>SukhumvitSet-Thin</string>
             <string>SukhumvitSet-Bold</string>
+            <string>SukhumvitSet-Thin</string>
+            <string>SukhumvitSet-Thin</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -1462,6 +1464,7 @@
                         <outlet property="alldefectBtn" destination="5Uj-Le-Tmn" id="wxh-JA-66x"/>
                         <outlet property="filterTypeBtn" destination="T4q-zW-nco" id="k7m-0I-ixa"/>
                         <outlet property="garanteeBtn" destination="9CM-kh-ai2" id="aeg-h3-hJe"/>
+                        <outlet property="garanteeBtnExpandIcon" destination="Wiu-t6-vJ5" id="GhH-YR-tm4"/>
                         <outlet property="passLb" destination="sum-x2-Vua" id="xGF-ok-fjJ"/>
                         <outlet property="tableView" destination="X4Z-BI-gUO" id="ua8-NS-WXq"/>
                     </connections>
@@ -2788,6 +2791,7 @@
                         <outlet property="allDefectBtn" destination="CW9-Az-E4T" id="xAR-Td-Yqz"/>
                         <outlet property="filterButton" destination="Ycv-cn-XYM" id="Y07-mn-9XF"/>
                         <outlet property="garanteeBtn" destination="Ycv-cn-XYM" id="Faw-MC-Qhk"/>
+                        <outlet property="garanteeBtnExpandIcon" destination="WX7-cC-Da9" id="Ke4-2t-Sd6"/>
                         <outlet property="tableView" destination="xxt-4t-TAR" id="9pG-fO-Zhk"/>
                     </connections>
                 </viewController>
@@ -2897,11 +2901,11 @@
                         <viewControllerLayoutGuide type="bottom" id="cHX-Mr-5Nf"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="IGy-0O-BXo">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="odt-Yf-AjE">
-                                <rect key="frame" x="100" y="30" width="400" height="540"/>
+                                <rect key="frame" x="100" y="60" width="400" height="1080"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="URL Configuration" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4DP-S2-TcD">
                                         <rect key="frame" x="0.0" y="10" width="370" height="70"/>
@@ -2912,7 +2916,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1oU-jU-vDu" userLabel="FotterView">
-                                        <rect key="frame" x="0.0" y="450" width="400" height="80"/>
+                                        <rect key="frame" x="0.0" y="990" width="400" height="80"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eCL-lz-ZAl">
                                                 <rect key="frame" x="290" y="15" width="100" height="50"/>
@@ -2963,7 +2967,7 @@
                                         </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="84i-mL-4zd">
-                                        <rect key="frame" x="0.0" y="80" width="400" height="370"/>
+                                        <rect key="frame" x="0.0" y="80" width="400" height="910"/>
                                         <subviews>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="eOv-tC-gQ6">
                                                 <rect key="frame" x="20" y="55" width="360" height="41"/>
@@ -3051,9 +3055,40 @@
                                                 <fontDescription key="fontDescription" name="SukhumvitSet-Bold" family="Sukhumvit Set" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NTz-EH-Uo7">
+                                                <rect key="frame" x="328" y="360" width="51" height="31"/>
+                                                <connections>
+                                                    <action selector="drawingModeAction:" destination="n5E-2Z-mxs" eventType="valueChanged" id="tO2-go-aY8"/>
+                                                </connections>
+                                            </switch>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Display Drawing Mode " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oVS-Kc-pCV">
+                                                <rect key="frame" x="20" y="360" width="300" height="25"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="25" id="8l6-Kf-mz7"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SukhumvitSet-Thin" family="Sukhumvit Set" pointSize="23"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Display Guarantee Mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLo-qq-VNX">
+                                                <rect key="frame" x="20" y="405" width="300" height="25"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="25" id="fPX-HT-eUw"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="SukhumvitSet-Thin" family="Sukhumvit Set" pointSize="23"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eDk-Kz-oYA">
+                                                <rect key="frame" x="328" y="401" width="51" height="31"/>
+                                                <connections>
+                                                    <action selector="guaranteeModeAction:" destination="n5E-2Z-mxs" eventType="valueChanged" id="N0e-y7-M3d"/>
+                                                </connections>
+                                            </switch>
                                         </subviews>
                                         <color key="backgroundColor" red="0.97647058819999999" green="0.98039215690000003" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
+                                            <constraint firstItem="NTz-EH-Uo7" firstAttribute="top" secondItem="NcO-49-q7O" secondAttribute="bottom" constant="10" id="34g-Zy-f98"/>
                                             <constraint firstItem="KOJ-rZ-49F" firstAttribute="top" secondItem="HvE-NM-ybn" secondAttribute="bottom" constant="10" id="5xf-v1-jrJ"/>
                                             <constraint firstItem="NcO-49-q7O" firstAttribute="leading" secondItem="84i-mL-4zd" secondAttribute="leading" constant="20" id="8Rk-Y6-u3H"/>
                                             <constraint firstItem="eOv-tC-gQ6" firstAttribute="leading" secondItem="84i-mL-4zd" secondAttribute="leading" constant="20" id="8mn-Xy-zHu"/>
@@ -3063,20 +3098,29 @@
                                             <constraint firstAttribute="trailing" secondItem="HvE-NM-ybn" secondAttribute="trailing" constant="20" id="H03-EG-q79"/>
                                             <constraint firstAttribute="trailing" secondItem="eM3-Fp-aPr" secondAttribute="trailing" constant="20" id="HXy-Jp-qsP"/>
                                             <constraint firstItem="eOv-tC-gQ6" firstAttribute="top" secondItem="84i-mL-4zd" secondAttribute="top" constant="20" id="IFA-yk-jR9"/>
+                                            <constraint firstAttribute="trailing" secondItem="oVS-Kc-pCV" secondAttribute="trailing" constant="80" id="JhM-Vv-XZ4"/>
                                             <constraint firstItem="gWe-5L-euC" firstAttribute="leading" secondItem="84i-mL-4zd" secondAttribute="leading" constant="20" id="MlF-ev-btf"/>
+                                            <constraint firstAttribute="trailing" secondItem="gLo-qq-VNX" secondAttribute="trailing" constant="80" id="Mo1-uV-qaq"/>
                                             <constraint firstAttribute="trailing" secondItem="ZCu-Wl-d7R" secondAttribute="trailing" constant="20" id="Oxx-A0-Gkm"/>
                                             <constraint firstItem="kNW-Ju-qr4" firstAttribute="leading" secondItem="84i-mL-4zd" secondAttribute="leading" constant="20" id="Paa-2S-Qac"/>
+                                            <constraint firstItem="eDk-Kz-oYA" firstAttribute="top" secondItem="NTz-EH-Uo7" secondAttribute="bottom" constant="10" id="Ptw-ZZ-BUJ"/>
                                             <constraint firstItem="HvE-NM-ybn" firstAttribute="leading" secondItem="84i-mL-4zd" secondAttribute="leading" constant="20" id="QuE-Ms-bhJ"/>
                                             <constraint firstAttribute="trailing" secondItem="kNW-Ju-qr4" secondAttribute="trailing" constant="20" id="RVB-RH-lo6"/>
+                                            <constraint firstAttribute="trailing" secondItem="NTz-EH-Uo7" secondAttribute="trailing" constant="23" id="VId-nB-UHp"/>
                                             <constraint firstItem="eM3-Fp-aPr" firstAttribute="leading" secondItem="84i-mL-4zd" secondAttribute="leading" constant="20" id="cqd-qu-WAm"/>
                                             <constraint firstAttribute="trailing" secondItem="gWe-5L-euC" secondAttribute="trailing" constant="20" id="h2Y-oi-m4s"/>
+                                            <constraint firstAttribute="trailing" secondItem="eDk-Kz-oYA" secondAttribute="trailing" constant="23" id="hdQ-1Y-Ote"/>
                                             <constraint firstItem="ZCu-Wl-d7R" firstAttribute="leading" secondItem="84i-mL-4zd" secondAttribute="leading" constant="20" id="jq3-xs-3wM"/>
                                             <constraint firstItem="eOv-tC-gQ6" firstAttribute="top" secondItem="gWe-5L-euC" secondAttribute="bottom" constant="10" id="lSy-gx-rK9"/>
                                             <constraint firstItem="HvE-NM-ybn" firstAttribute="top" secondItem="kNW-Ju-qr4" secondAttribute="bottom" constant="10" id="lWI-Bl-bWj"/>
                                             <constraint firstItem="KOJ-rZ-49F" firstAttribute="leading" secondItem="84i-mL-4zd" secondAttribute="leading" constant="20" id="mKV-uM-yai"/>
+                                            <constraint firstItem="gLo-qq-VNX" firstAttribute="top" secondItem="oVS-Kc-pCV" secondAttribute="bottom" constant="20" id="orr-Xx-Wfo"/>
+                                            <constraint firstItem="gLo-qq-VNX" firstAttribute="leading" secondItem="84i-mL-4zd" secondAttribute="leading" constant="20" id="pOc-8W-Mg4"/>
                                             <constraint firstAttribute="trailing" secondItem="eOv-tC-gQ6" secondAttribute="trailing" constant="20" id="qXF-hH-2uO"/>
+                                            <constraint firstItem="oVS-Kc-pCV" firstAttribute="leading" secondItem="84i-mL-4zd" secondAttribute="leading" constant="20" id="qfy-o7-c6F"/>
                                             <constraint firstItem="NcO-49-q7O" firstAttribute="top" secondItem="eM3-Fp-aPr" secondAttribute="bottom" constant="10" id="tS8-o6-fMS"/>
                                             <constraint firstAttribute="trailing" secondItem="NcO-49-q7O" secondAttribute="trailing" constant="20" id="vRB-6x-y7A"/>
+                                            <constraint firstItem="oVS-Kc-pCV" firstAttribute="top" secondItem="NcO-49-q7O" secondAttribute="bottom" constant="10" id="xE6-3R-jST"/>
                                             <constraint firstAttribute="trailing" secondItem="KOJ-rZ-49F" secondAttribute="trailing" constant="20" id="yqU-GJ-a0e"/>
                                             <constraint firstItem="kNW-Ju-qr4" firstAttribute="top" secondItem="ZCu-Wl-d7R" secondAttribute="bottom" constant="10" id="zpK-85-D7J"/>
                                         </constraints>
@@ -3124,9 +3168,13 @@
                             </mask>
                         </variation>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="600" height="1200"/>
                     <connections>
                         <outlet property="panelView" destination="odt-Yf-AjE" id="BUx-Py-Mlj"/>
                         <outlet property="protocolSegment" destination="eOv-tC-gQ6" id="dTB-sg-sHe"/>
+                        <outlet property="switchDisplayDrawingMode" destination="NTz-EH-Uo7" id="2ae-dT-Zjy"/>
+                        <outlet property="switchDisplayGuaranteeMode" destination="eDk-Kz-oYA" id="tWo-Eu-VWW"/>
                         <outlet property="txtApiDir" destination="NcO-49-q7O" id="rS2-gj-G7O"/>
                         <outlet property="txtDomainName" destination="kNW-Ju-qr4" id="5oa-Sn-ceh"/>
                         <outlet property="txtWebDir" destination="KOJ-rZ-49F" id="JgT-ef-WdH"/>

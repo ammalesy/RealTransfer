@@ -17,6 +17,8 @@ class GaranteeListViewController: DefectListViewController {
     
     @IBOutlet weak var allDefectBtn: UIButton!
     @IBOutlet weak var garanteeBtn: UIButton!
+    @IBOutlet weak var garanteeBtnExpandIcon: UIImageView!
+    
     var splitController:NZSplitViewController?
     var fullCellMode:Bool = true
     
@@ -72,7 +74,11 @@ class GaranteeListViewController: DefectListViewController {
         garanteeBtn.titleLabel?.adjustsFontSizeToFitWidth = true
         garanteeBtn.titleLabel?.numberOfLines = 2
         
-       
+        if SettingUtil.sharedInstance.isDisplayGuarantee == false {
+            garanteeBtn.alpha = 0.0
+            garanteeBtnExpandIcon.alpha = 0.0
+            garanteeBtn.userInteractionEnabled = false
+        }
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)

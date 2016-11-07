@@ -177,44 +177,53 @@ class AddDefectViewController: UIViewController,UIImagePickerControllerDelegate,
         
         
         
-        let drawController:DrawingViewController = UIStoryboard(name: "Draw", bundle: nil).instantiateViewControllerWithIdentifier("DrawingViewController") as! DrawingViewController
-        drawController.image = image
-        
-        if self.imagePicker != nil {
-            self.imagePicker?.presentViewController(drawController, animated: true, completion: {
+        if SettingUtil.sharedInstance.isDisplayDrawingMode {
+            let drawController:DrawingViewController = UIStoryboard(name: "Draw", bundle: nil).instantiateViewControllerWithIdentifier("DrawingViewController") as! DrawingViewController
+            drawController.image = image
             
-            })
-        }
-        if self.imagePickerGallery != nil {
-            self.imagePickerGallery?.presentViewController(drawController, animated: true, completion: {
-                
-            })
-        }
-        
-        drawController.didClickClear = {
-        
-        }
-        drawController.didClickDone = {(modifyImage) in
+            if self.imagePicker != nil {
+                self.imagePicker?.presentViewController(drawController, animated: true, completion: {
+                    
+                })
+            }
+            if self.imagePickerGallery != nil {
+                self.imagePickerGallery?.presentViewController(drawController, animated: true, completion: {
+                    
+                })
+            }
             
-            CameraRoll.sharedInstance.saveImage(modifyImage, albumName: "(\(buildingName))\(session.roomSelected!.un_name!)")
-            if mediaType == (kUTTypeImage as String) {
-                
-                
-                let dRoom = DefectRoom.getCache(self.defectRoom?.df_room_id!)
-                self.defectRoom = dRoom
-                let detailController:AddDefectDetailViewController = AddDefectDetailViewController.instance(modifyImage, defectRoom: self.defectRoom, state: DefectViewState.New)
-                self.navigationController?.pushViewController(detailController, animated: true)
-                
+            drawController.didClickClear = {
                 
             }
-            drawController.dismissViewControllerAnimated(true, completion: {
-                self.closePickerView()
-            })
-            
+            drawController.didClickDone = {(modifyImage) in
+                
+                self.imageSelected(modifyImage, mediaType: mediaType, buildingName: buildingName as String)
+                drawController.dismissViewControllerAnimated(true, completion: {
+                    self.closePickerView()
+                })
+            }
+        }else{
+            self.imageSelected(image, mediaType: mediaType, buildingName: buildingName as String)
+            self.closePickerView()
         }
         
         
     }
+    func imageSelected(image:UIImage!, mediaType:String!, buildingName:String!){
+        CameraRoll.sharedInstance.saveImage(image, albumName: "(\(buildingName))\(Session.shareInstance.roomSelected!.un_name!)")
+        if mediaType == (kUTTypeImage as String) {
+            
+            
+            let dRoom = DefectRoom.getCache(self.defectRoom?.df_room_id!)
+            self.defectRoom = dRoom
+            let detailController:AddDefectDetailViewController = AddDefectDetailViewController.instance(image, defectRoom: self.defectRoom, state: DefectViewState.New)
+            self.navigationController?.pushViewController(detailController, animated: true)
+            
+            
+        }
+        
+    }
+    
     func closePickerView() {
         Queue.mainQueue { () -> Void in
             if self.imagePickerGallery != nil {

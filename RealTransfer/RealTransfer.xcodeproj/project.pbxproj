@@ -41,6 +41,7 @@
 		1889D9E11D1451FC0095507F /* SwiftSpinner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1889D9E01D1451FC0095507F /* SwiftSpinner.framework */; };
 		18AACE171D145ACA0098F5BA /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AACE161D145ACA0098F5BA /* ProjectModel.swift */; };
 		18C0C20E1D21881B00B079BB /* GaranteeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C0C20D1D21881B00B079BB /* GaranteeListViewController.swift */; };
+		18C451BA1DD0C8A5002A81B7 /* SettingUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C451B91DD0C8A5002A81B7 /* SettingUtil.swift */; };
 		18CA73111D1C13120021712B /* AlertUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CA73101D1C13120021712B /* AlertUtil.swift */; };
 		18DF98961D146280004BE990 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18DF98951D146280004BE990 /* SDWebImage.framework */; };
 		18DF98981D14F31E004BE990 /* Building.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DF98971D14F31E004BE990 /* Building.swift */; };
@@ -133,6 +134,7 @@
 		18AACE161D145ACA0098F5BA /* ProjectModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectModel.swift; sourceTree = "<group>"; };
 		18AACE181D1461880098F5BA /* RealTransfer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RealTransfer-Bridging-Header.h"; sourceTree = "<group>"; };
 		18C0C20D1D21881B00B079BB /* GaranteeListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GaranteeListViewController.swift; sourceTree = "<group>"; };
+		18C451B91DD0C8A5002A81B7 /* SettingUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingUtil.swift; sourceTree = "<group>"; };
 		18CA73101D1C13120021712B /* AlertUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertUtil.swift; sourceTree = "<group>"; };
 		18DF98951D146280004BE990 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = "Pods/../build/Debug-iphoneos/SDWebImage.framework"; sourceTree = "<group>"; };
 		18DF98971D14F31E004BE990 /* Building.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Building.swift; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				188606291D43A4C600B2CD7C /* CameraRoll.swift */,
 				18EC63981D4C7B4D005E6A54 /* CallService.swift */,
 				1855570F1D79547B00F58906 /* Session.swift */,
+				18C451B91DD0C8A5002A81B7 /* SettingUtil.swift */,
 			);
 			path = Lib;
 			sourceTree = "<group>";
@@ -667,6 +670,7 @@
 				184E42661D0DB7DC0073CF60 /* CustomerInfoViewController.swift in Sources */,
 				520AC67D1D096236000A8754 /* AddDefectViewController.swift in Sources */,
 				1800981F1D159DF700BB11FD /* NSDateFormaterExtension.swift in Sources */,
+				18C451BA1DD0C8A5002A81B7 /* SettingUtil.swift in Sources */,
 				5240D9FD1D07F6CC0071D287 /* DefectListViewController.swift in Sources */,
 				5290560E1D0519EE00B7D28C /* NZRow.swift in Sources */,
 				18713D4A1DCD109400A7F97F /* SettingsViewController.swift in Sources */,
@@ -838,9 +842,9 @@
 				INFOPLIST_FILE = RealTransfer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nui.real;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mint.RealTransfer;
 				PRODUCT_NAME = RealTransfer;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "cf4c1944-8f05-4d63-bbbf-991a41add15b";
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "RealTransfer-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 2;
@@ -863,9 +867,9 @@
 				INFOPLIST_FILE = RealTransfer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nui.real;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mint.RealTransfer;
 				PRODUCT_NAME = RealTransfer;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "cf4c1944-8f05-4d63-bbbf-991a41add15b";
 				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "RealTransfer-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 2;

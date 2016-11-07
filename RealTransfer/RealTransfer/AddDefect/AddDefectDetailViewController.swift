@@ -181,28 +181,39 @@ class AddDefectDetailViewController: UIViewController,UIImagePickerControllerDel
                 buildingName = buildingName.substringToIndex(LENGTH_OF_ALBUM_NAME_IN_CAMERA_ROLL)
             }
             
-            let drawController:DrawingViewController = UIStoryboard(name: "Draw", bundle: nil).instantiateViewControllerWithIdentifier("DrawingViewController") as! DrawingViewController
-            drawController.image = image
             
-            if self.imagePicker != nil {
-                self.imagePicker?.presentViewController(drawController, animated: true, completion: {
-                    
-                })
-            }
-            drawController.didClickClear = {
+            if SettingUtil.sharedInstance.isDisplayDrawingMode {
+                let drawController:DrawingViewController = UIStoryboard(name: "Draw", bundle: nil).instantiateViewControllerWithIdentifier("DrawingViewController") as! DrawingViewController
+                drawController.image = image
                 
-            }
-            drawController.didClickDone = {(modifyImage) in
-                CameraRoll.sharedInstance.saveImage(modifyImage, albumName: "(\(buildingName))\(session.roomSelected!.un_name!)")
-                self.imageView.image = modifyImage
-                drawController.dismissViewControllerAnimated(true, completion: {
-                    self.closePickerView()
-                })
-            
+                if self.imagePicker != nil {
+                    self.imagePicker?.presentViewController(drawController, animated: true, completion: {
+                        
+                    })
+                }
+                drawController.didClickClear = {
+                    
+                }
+                drawController.didClickDone = {(modifyImage) in
+                    
+                    self.imageSelected(modifyImage, buildingName: buildingName as String)
+                    drawController.dismissViewControllerAnimated(true, completion: {
+                        self.closePickerView()
+                    })
+                    
+                }
+            }else{
+                self.imageSelected(image, buildingName: buildingName as String)
+                self.closePickerView()
             }
 
 
         }
+    }
+    func imageSelected(image:UIImage!, buildingName:String!){
+        CameraRoll.sharedInstance.saveImage(image, albumName: "(\(buildingName))\(Session.shareInstance.roomSelected!.un_name!)")
+        self.imageView.image = image
+        
     }
     func closePickerView(){
         self.imagePicker?.dismissViewControllerAnimated(true, completion: {

@@ -22,6 +22,8 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
     @IBOutlet weak var alldefectBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var garanteeBtn: UIButton!
+    @IBOutlet weak var garanteeBtnExpandIcon: UIImageView!
+    
     @IBOutlet weak var filterTypeBtn: UIButton!
     
      var dropDownController:NZDropDownViewController?
@@ -66,7 +68,11 @@ class DefectListCheckingViewController: NZViewController,UITableViewDataSource,U
         
         self.setTapEventOnContainer()
         
-        
+        if SettingUtil.sharedInstance.isDisplayGuarantee == false {
+            self.garanteeBtn.alpha = 0.0
+            self.garanteeBtn.userInteractionEnabled = false
+            self.garanteeBtnExpandIcon.alpha = 0.0
+        }
     }
     func initialDropDownList(){
         let firstModel:DropDownModel = DropDownModel(text: "เลือกดูทั้งหมด")
